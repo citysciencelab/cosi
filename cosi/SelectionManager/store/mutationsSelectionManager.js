@@ -25,7 +25,14 @@ const mutations = {
     toggleVisualizationState (state) {
         state.visualizationState = !state.visualizationState;
     },
-
+    inputActiveSelection: (state, payload) => {
+        if (payload !== null & state.activeSelection === payload) {
+            state.activeSelection = null;
+        }
+        else {
+            state.activeSelection = payload;
+        }
+    },
     /**
      * @param {object} state of this component
      * @param {string} payload selection object that has been created through the addNewSelection action

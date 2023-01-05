@@ -108,6 +108,7 @@ export default {
         ...mapGetters("Tools/DistrictSelector", ["boundingGeometry"]),
         ...mapGetters("Tools/FeaturesList", ["activeVectorLayerList", "isFeatureActive"]),
         ...mapGetters("Tools/AreaSelector", {areaSelectorGeom: "geometry"}),
+        ...mapGetters("Tools/SelectionManager", ["activeSelection"]),
         ...mapGetters("Tools/ScenarioBuilder", ["scenarioUpdated"]),
         ...mapGetters("Tools/Routing/Directions", ["directionsRouteSource", "directionsRouteLayer", "routingDirections"]),
         ...mapGetters("Tools/Routing", {routingActive: "active", activeRoutingToolOption: "activeRoutingToolOption"}),
@@ -255,7 +256,7 @@ export default {
         mode () {
             this.setSetByFeature(false);
 
-            if (this.mode === "region") {
+            if (this.mode === "region" && this.activeSelection === null) {
                 this.resetIsochroneBBox();
             }
 
@@ -494,7 +495,7 @@ export default {
             }
 
             this.dataSets[this.activeSet].geojson = this.exportAsGeoJson(this.mapLayer);
-            this.addNewSelection({selection: analysisSet.results, source: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.title"), id: this._mode + ", " + this._transportType + ", [...]"});
+            this.addNewSelection({selection: analysisSet.results, source: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.title"), id: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.transportTypes." + this._transportType) + ", " + this.$t("additional:modules.tools.cosi.accessibilityAnalysis.scaleUnits." + this._scaleUnit) + ", [...]"});
         },
         exportAsGeoJson,
         // pagination features

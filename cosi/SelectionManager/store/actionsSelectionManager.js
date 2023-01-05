@@ -10,7 +10,7 @@ import GeoJSON from "ol/format/GeoJSON";
      * @returns {void}
      */
 const actions = {
-    addNewSelection ({commit}, {selection, source, id}) {
+    addNewSelection ({state, commit}, {selection, source, id}) {
         let collection;
         const format = new GeoJSON(),
             selectionObject = {
@@ -18,6 +18,7 @@ const actions = {
                 bufferedSelection: Array,
                 source: String,
                 id: String,
+                abv: String,
                 storedLayers: [],
                 filterSettings: [],
                 settings: {
@@ -26,7 +27,6 @@ const actions = {
                 }
             },
             mergedPolygons = [];
-
 
         for (let i = 0; i < selection.length; i++) {
 
@@ -53,6 +53,7 @@ const actions = {
         selectionObject.selection = mergedPolygons;
         selectionObject.source = source;
         selectionObject.id = id;
+        selectionObject.abv = state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? id.match(/\b([A-Z0-9])/g).join("") + "-" + state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length : id.match(/\b([A-Z0-9])/g).join("");
 
         commit("addSelection", selectionObject);
     }
