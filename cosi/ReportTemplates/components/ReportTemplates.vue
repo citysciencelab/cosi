@@ -569,6 +569,7 @@ export default {
                                     v-model="uploadedTemplate"
                                     accept="application/JSON"
                                     label="Datei wählen.."
+                                    solo-filled
                                     dense
                                 />
                                 <v-btn
@@ -751,8 +752,9 @@ export default {
                                     dense
                                     small
                                     tile
+                                    class="ml-5"
                                     width="100px"
-                                    color="light green"
+                                    color="grey lighten-1"
                                     @click="exportTemplate"
                                 >
                                     <div v-if="!exportLoading">
