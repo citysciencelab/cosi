@@ -27,7 +27,6 @@ export default {
         </v-card-text>
         <v-card-actions>
             <v-btn
-                id="reporttemplate-editing-done-finish"
                 dense
                 small
                 tile
@@ -37,7 +36,6 @@ export default {
                 abbrechen
             </v-btn>
             <v-btn
-                id="reporttemplate-editing-done-abort"
                 dense
                 small
                 tile

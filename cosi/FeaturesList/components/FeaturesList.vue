@@ -325,6 +325,7 @@ export default {
          * Reads the active vector layers, constructs the list of table items and writes them to the store.
          * Finds the containing district from districtSelector for each feature
          * @todo connect to other features and statistics to build location score
+         * @param {string} senderName name of component trying to update the featuresList (optional, passed to updateFeaturesList event)
          * @returns {void}
          */
         updateFeaturesList (senderName) {

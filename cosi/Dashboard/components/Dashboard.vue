@@ -177,8 +177,6 @@ export default {
         calculations: "calculateAll",
 
         toolBridgeIn (newRequest) {
-            console.log("running dashboard..");
-            console.log(newRequest);
             /** 0. Check if request is valid */
             const requestSettingsValid = ("statsFeatureFilter" in newRequest.settings) & ("calculations" in newRequest.settings),
                 /**
