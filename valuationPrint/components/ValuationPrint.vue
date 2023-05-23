@@ -43,7 +43,8 @@ export default {
                 documentNumber: false
             },
             specificAddress: "",
-            documentNumber: ""
+            documentNumber: "",
+            autofill: false
         };
     },
     computed: {
@@ -126,6 +127,19 @@ export default {
         documentNumber (newValue) {
             if (newValue.length) {
                 this.errors.documentNumber = false;
+            }
+        },
+        /**
+         * If the input text is not empty, sets the autofill flag true and vice versa.
+         * @param {String} val The value of specificAddress
+         * @returns {void}
+         */
+        specificAddress (val) {
+            if (val !== "") {
+                this.autofill = true;
+            }
+            else {
+                this.autofill = false;
             }
         }
     },
@@ -699,7 +713,7 @@ export default {
                                 ref="addressInput"
                                 :class="`form-control ${errors.address ? 'is-invalid' : ''}`"
                                 list="addresslistOptions"
-                                :placeholder="$t('additional:modules.tools.valuationPrint.placeholder')"
+                                :placeholder="!autofill ? $t('additional:modules.tools.valuationPrint.placeholder') : ''"
                                 @change="setSpecificAddress"
                             >
                             <datalist id="addresslistOptions">

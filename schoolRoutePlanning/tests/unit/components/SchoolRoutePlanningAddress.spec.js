@@ -64,7 +64,7 @@ describe("addons/SchoolRoutePlanning/components/SchoolRoutePlanningAddressList.v
         let wrapper = null;
 
         store.commit("Tools/SchoolRoutePlanning/setStreetNames", ["Superman", "Batman"]);
-        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonderwoman");
+        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonder Woman");
         wrapper = shallowMount(SchoolRoutePlanningAddressComponent, wrapperElements);
 
         expect(wrapper.find(".address-list").exists()).to.be.true;
@@ -75,9 +75,24 @@ describe("addons/SchoolRoutePlanning/components/SchoolRoutePlanningAddressList.v
         let wrapper = null;
 
         store.commit("Tools/SchoolRoutePlanning/setStreetNames", streetNames);
-        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonderwoman");
+        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonder Woman");
         wrapper = shallowMount(SchoolRoutePlanningAddressComponent, wrapperElements);
 
+        wrapper.findAll("li").wrappers.forEach((li, index) => {
+            expect(li.text()).to.be.equal(streetNames[index]);
+            expect(li.classes()).to.include("list-group-item", "street");
+        });
+    });
+
+    it("renders all streetnames if the streetnameList > 5", () => {
+        const streetNames = ["Superman", "Batman", "Spider-Man", "Iron Man", "Captain Marvel", "Wonder Woman", "Hulk"];
+        let wrapper = null;
+
+        store.commit("Tools/SchoolRoutePlanning/setStreetNames", streetNames);
+        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonder Woman");
+        wrapper = shallowMount(SchoolRoutePlanningAddressComponent, wrapperElements);
+
+        expect(wrapper.findAll("li").length).to.equals(7);
         wrapper.findAll("li").wrappers.forEach((li, index) => {
             expect(li.text()).to.be.equal(streetNames[index]);
             expect(li.classes()).to.include("list-group-item", "street");
@@ -90,7 +105,7 @@ describe("addons/SchoolRoutePlanning/components/SchoolRoutePlanningAddressList.v
         let wrapper = null;
 
         store.commit("Tools/SchoolRoutePlanning/setStreetNames", streetNames);
-        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonderwoman");
+        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonder Woman");
         wrapper = shallowMount(SchoolRoutePlanningAddressComponent, wrapperElements);
 
         await wrapper.findAll("li").at(0).trigger("click");
@@ -115,7 +130,7 @@ describe("addons/SchoolRoutePlanning/components/SchoolRoutePlanningAddressList.v
 
         store.commit("Tools/SchoolRoutePlanning/setStreetNames", streetNames);
         store.commit("Tools/SchoolRoutePlanning/setFilteredHouseNumbers", filteredHouseNumbers);
-        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonderwoman");
+        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonder Woman");
         wrapper = shallowMount(SchoolRoutePlanningAddressComponent, wrapperElements);
 
         wrapper.findAll("li").wrappers.forEach((li, index) => {
@@ -142,7 +157,7 @@ describe("addons/SchoolRoutePlanning/components/SchoolRoutePlanningAddressList.v
 
         store.commit("Tools/SchoolRoutePlanning/setStreetNames", streetNames);
         store.commit("Tools/SchoolRoutePlanning/setFilteredHouseNumbers", filteredHouseNumbers);
-        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonderwoman");
+        store.commit("Tools/SchoolRoutePlanning/setInputAddress", "Wonder Woman");
         wrapper = shallowMount(SchoolRoutePlanningAddressComponent, wrapperElements);
 
         await wrapper.findAll("li").at(0).trigger("click");

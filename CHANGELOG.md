@@ -17,6 +17,13 @@
 ### Fixed
 
 ---
+## v2.32.0 - 2023-04-05
+### Changed
+- In schoolRoutePlanning all streets and house numbers are now listed as results with an overflow.
+- The version of node was updated, must be `>= 16.13.2 <= 16.18.1`
+- The version of npm was updated, must be `>= 8.1.2 <= 8.19.3`
+
+---
 ## v2.31.0 - 2023-03-01
 ### __Breaking Changes__
 Time library `moment.js` was replaced with [day.js](https://day.js.org/). Please consider to use `day.js` in your future pull requests.

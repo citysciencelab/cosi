@@ -1,0 +1,19 @@
+{
+  "modules": {
+      "tools": {
+          "mietenspiegelFormular": {
+              "title": "Wohnlagen",
+              "errorMessages": {
+                "noDataFound": "Für diese Adresse wurden keine Daten gefunden.",
+                "noUrl": "Es konnte keine Abfrage an die Koordinaten geschickt werden."
+              },
+              "street": "Straße",
+              "cityDistrict": "Stadtteil",
+              "pleaseSelect": "Bitte wählen",
+              "editor": "Herausgeber:",
+              "collectionStatus": "Erhebungsstand:",
+              "notice": "Hinweise:"
+          }
+      }
+  }
+}

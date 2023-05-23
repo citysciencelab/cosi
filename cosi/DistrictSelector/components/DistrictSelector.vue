@@ -110,7 +110,6 @@ export default {
          */
         layerList: function (newLayerList) {
             prepareDistrictLevels(this.districtLevels, newLayerList);
-            this.$forceUpdate();
         },
 
         selectedDistrictsCollection: "transferFeatures",
@@ -157,6 +156,7 @@ export default {
             if (!this.districtLevelLayersLoaded && this.selectedLevelId === layerId) {
                 styleSelectedDistrictLevels(this.districtLevels, this.selectedLevelId, this.selectedDistrictLevel.activeStyle);
                 this.districtLevelLayersLoaded = true;
+                this.$forceUpdate();
             }
         });
 

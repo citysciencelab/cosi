@@ -75,8 +75,8 @@ export default {
      * @returns {void}
      */
     createIsochronesRegion: async function () {
-        const allActviceFeatures = filterAllFeatures(this.activeVectorLayerList, this.isFeatureActive),
-            coordinates = this.getCoordinates(allActviceFeatures, this.setByFeature),
+        const allActiveFeatures = filterAllFeatures(this.selectedFacilityLayer, this.isFeatureActive),
+            coordinates = this.getCoordinates(allActiveFeatures, this.setByFeature),
             {distance, maxDistance, minDistance, steps} = this.getDistances();
 
         if (
@@ -145,9 +145,7 @@ export default {
         this.mapLayer.getSource().clear();
 
         if (newFeatures.length === 0) {
-            if (this.mode !== "region") {
-                setBBoxToGeom.call(this, this.areaSelectorGeom || this.boundingGeometry);
-            }
+            setBBoxToGeom.call(this, this.areaSelectorGeom || this.boundingGeometry);
             return;
         }
 
@@ -251,6 +249,7 @@ export default {
 
         setBBoxToGeom.call(this, geometryCollection);
     },
+
     /**
     * resets facility layers' bbox
     * @returns {void}

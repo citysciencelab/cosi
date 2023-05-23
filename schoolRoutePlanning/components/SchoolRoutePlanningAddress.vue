@@ -72,7 +72,7 @@ export default {
             >
                 <template v-if="streetNames.length > 1">
                     <li
-                        v-for="streetName in streetNames.slice(0, 5)"
+                        v-for="streetName in streetNames"
                         :key="streetName"
                         tabindex="0"
                         class="list-group-item"
@@ -84,7 +84,7 @@ export default {
                 </template>
                 <template v-else>
                     <li
-                        v-for="houseNumber in filteredHouseNumbers.slice(0, 5)"
+                        v-for="houseNumber in filteredHouseNumbers"
                         :key="houseNumber.name"
                         tabindex="0"
                         class="list-group-item"
@@ -105,6 +105,9 @@ export default {
 .address-list {
     position: absolute;
     z-index: 3;
+    overflow-y: auto;
+    max-height: calc((18px + 16px) * 5 + 6px); // height and padding of five <li> and six borders
+
     li {
         &:hover, &:focus {
             cursor: pointer;

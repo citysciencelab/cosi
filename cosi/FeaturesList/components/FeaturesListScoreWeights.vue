@@ -1,12 +1,12 @@
 <script>
 export default {
-    name: "LocationScoreWeights",
+    name: "FeaturesListScoreWeights",
     props: {
         isVisible: {
             type: Boolean,
             required: true
         },
-        layers: {
+        layerList: {
             type: Array,
             required: true
         }
@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         updateIsVisible () {
-            this.$emit("updateShowWeightsDialog", false);
+            this.$emit("toggleWeightsDialog", false);
         }
     }
 };
@@ -36,7 +36,7 @@ export default {
                 </v-card-title>
 
                 <div
-                    v-for="layer in layers"
+                    v-for="layer in layerList"
                     :key="layer.layerId"
                 >
                     <v-subheader>

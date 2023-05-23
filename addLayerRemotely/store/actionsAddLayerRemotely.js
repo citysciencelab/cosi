@@ -17,7 +17,7 @@ export default {
      * @param {String} mouseHoverField name of the field to be shown on mouse hover
      * @returns {void}
      */
-    addGeoJson ({state}, {name, id, geoJSON, styleId, folderName, gfiAttributes, zoomTo = true, clusterDistance = undefined, gfiTheme = "default", mouseHoverField = undefined}) {
+    addGeoJson ({rootState}, {name, id, geoJSON, styleId, folderName, gfiAttributes, zoomTo = true, clusterDistance = undefined, gfiTheme = "default", mouseHoverField = undefined}) {
         const treeType = Radio.request("Parser", "getTreeType"),
             map = mapCollection.getMap("2D"),
             layer = map ? map.getLayers().getArray().find(l => {
@@ -59,8 +59,8 @@ export default {
         Radio.trigger("ModelList", "renderTree");
 
         if (mouseHoverField) {
-            state.MouseHover.mouseHoverLayers.push(geojsonLayer);
-            state.MouseHover.mouseHoverInfos.push({id: geojsonLayer.id, mouseHoverField: geojsonLayer.mouseHoverField});
+            rootState.MouseHover.mouseHoverLayers.push(geojsonLayer);
+            rootState.MouseHover.mouseHoverInfos.push({id: geojsonLayer.id, mouseHoverField: geojsonLayer.mouseHoverField});
         }
 
         if (treeType === "light") {

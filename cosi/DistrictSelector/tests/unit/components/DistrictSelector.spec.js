@@ -35,7 +35,7 @@ describe("addons/cosi/DistrictSelector/components/DistrictSelector.vue", () => {
         layerOne = new Layer({id: "123", source: new Source()}),
         layerTwo = new Layer({id: "456", source: new Source()}),
         layerList = [layerOne, layerTwo],
-        districtLevels = [{layerId: "123", label: "Stube", stats: {}}, {layerId: "456", label: "Kueche", stats: {}}],
+        districtLevels = [{layerId: "123", label: "Stube", stats: {}, districts: [], nameList: []}, {layerId: "456", label: "Kueche", stats: {}}],
         additionalInfoLayers = {
             "Sozialräume": [
                 "20179"

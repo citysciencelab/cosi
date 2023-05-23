@@ -6,7 +6,6 @@ import {
     getNameList,
     getPropertyNameList,
     prepareDistrictLevels,
-    setProperties,
     mapDistrictNames
 } from "../../../utils/prepareDistrictLevels.js";
 import {expect} from "chai";
@@ -309,76 +308,6 @@ describe("addons/DistrictSelector/utils/prepareDistrictLevels.js", () => {
         });
     });
 
-
-    describe("setProperties", () => {
-        const bindObj = {
-                districts: [],
-                keyOfAttrName: "name",
-                label: "Stadtteile",
-                layer: new Layer({
-                    source: new Source({
-                        features: [
-                            new Feature({
-                                name: "Altona",
-                                id: "123"
-                            }),
-                            new Feature({
-                                name: "Ottensen",
-                                id: "456"
-                            })
-                        ]
-                    })
-                })
-            },
-            eventDummy = {
-                target: {
-                    getFeatures: () => ["", ""]
-                }
-            },
-            eventDummyEmpty = {
-                target: {
-                    getFeatures: () => []
-                }
-            },
-            copySetProperties = setProperties.bind(bindObj);
-
-        it("should return an object without the property 'nameList'", () => {
-            copySetProperties(eventDummyEmpty);
-
-            expect(bindObj).to.have.not.property("nameList");
-        });
-
-        it("should return an object without districts", () => {
-            copySetProperties(eventDummyEmpty);
-
-            expect(bindObj.districts).to.be.empty;
-        });
-
-        it("should return an object with the property 'nameList'", () => {
-            copySetProperties(eventDummy);
-
-            expect(bindObj).to.have.property("nameList");
-        });
-
-        it("should return an object with two districts", () => {
-            copySetProperties(eventDummy);
-
-            expect(bindObj.districts).to.have.lengthOf(2);
-        });
-
-        it("should return an array for the property 'nameList'", () => {
-            copySetProperties(eventDummy);
-
-            expect(bindObj.nameList).to.be.an("array");
-        });
-
-        it("should return ['Altona', 'Ottensen'] for the property 'nameList'", () => {
-            copySetProperties(eventDummy);
-
-            expect(bindObj.nameList).to.deep.equal(["Altona", "Ottensen"]);
-        });
-    });
-
     describe("prepareDistrictLevels", () => {
         it("should call on listener", async () => {
             const testArray = [{layerId: "123", stats: {}}],
@@ -391,7 +320,7 @@ describe("addons/DistrictSelector/utils/prepareDistrictLevels.js", () => {
         });
 
         it("should return an object with the properties 'nameList', 'layer' , 'propertyNameList', 'referenceLevel' and 'districts'", async () => {
-            const testArray = [{layerId: "123", stats: {}}],
+            const testArray = [{layerId: "123", stats: {}, nameList: [], districts: []}],
                 layerOne = new Layer({id: "123", source: new Source()}),
                 layerList = [layerOne];
 

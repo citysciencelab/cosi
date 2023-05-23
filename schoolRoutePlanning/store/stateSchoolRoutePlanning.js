@@ -45,13 +45,8 @@ const state = {
     layerId: "8712",
     serviceId: "8",
     wpsId: "1001",
-    wpsTimeout: {
-        "tm_ttl": {
-            "dataType": "integer",
-            "value": 50
-        }
-    },
-    fmwProcess: "schulwegrouting_wps.fmw",
+    wpsTimeout: "",
+    fmwProcess: "schulwegrouting_portal.fmw",
     renderToWindow: false,
     resizableWindow: true,
     deactivateGFI: false,

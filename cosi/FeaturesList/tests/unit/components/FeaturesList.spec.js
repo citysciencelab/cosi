@@ -5,7 +5,7 @@ import {
     createLocalVue
 } from "@vue/test-utils";
 import FeaturesList from "../../../components/FeaturesList.vue";
-import LocationScore from "../../../components/LocationScore.vue";
+import LocationScore from "../../../components/FeaturesListScore.vue";
 import FeaturesListStore from "../../../store/indexFeaturesList";
 import chai from "chai";
 import sinon from "sinon";
@@ -101,13 +101,15 @@ describe("addons/cosi/FeaturesList/components/FeaturesList.vue", () => {
                     "adresse_ort"
                 ],
                 categoryField: "kapitelbezeichnung",
+                group: "Bildung und Wissenschaft",
                 id: "Mein Layer",
                 keyOfAttrName: "schulname",
                 layerId: "1234",
                 numericalValues: [{
                     id: "anzahl_schueler",
                     name: "Schülerzahl"
-                }]
+                }],
+                weighting: 1
             }]
         }],
         expCols = [

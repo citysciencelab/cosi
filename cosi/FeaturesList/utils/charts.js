@@ -8,8 +8,8 @@ import ChartDataset from "../../ChartGenerator/classes/ChartDataset";
 export function createHistogram (items) {
     let
         allScores = items
-            .filter(i=>!isNaN(parseInt(i.distanceScore, 10)))
-            .map(i=>parseInt(i.distanceScore, 10));
+            .filter(i=>!isNaN(parseInt(i.score.value, 10)))
+            .map(i=>parseInt(i.score.value, 10));
 
     const
         maxVal = Math.max(...allScores),
@@ -46,19 +46,18 @@ export default {
      * @returns {void}
      */
     showDistanceScoreForItem (item) {
-        // Object.keys(this.selected[0].weightedDistanceScores),
         const
-            type = Object.keys(item.weightedDistanceScores).length > 2 ? "RadarChart" : "BarChart",
+            type = Object.keys(item.score.distance).length > 3 ? "RadarChart" : "BarChart",
             data = {
-                labels: Object.keys(item.weightedDistanceScores),
+                labels: Object.keys(item.score.distance.facilities).map(l => item.score.distance.facilities[l].layerName),
                 datasets: [{
                     label: item.name,
-                    data: Object.keys(item.weightedDistanceScores).map(l => item.weightedDistanceScores[l].value?.toFixed(1))
+                    data: Object.keys(item.score.distance.facilities).map(l => item.score.distance.facilities[l].value?.toFixed(1))
                 }]
             },
             chartDataset = new ChartDataset({
                 id: "sb-" + item.key,
-                name: `${this.$t("additional:modules.tools.cosi.featuresList.scoresDialogTitle")} - Gewichteter Durchschnitt: ${item.distanceScore.toLocaleString(this.currentLocale)} (Standortanalyse)`,
+                name: `${this.$t("additional:modules.tools.cosi.featuresList.scoresDialogTitle")} - Gewichteter Durchschnitt: ${item.score.distance.average.toLocaleString(this.currentLocale)} (Standortanalyse)`,
                 type,
                 color: "rainbow",
                 source: "Standortanalyse",
@@ -81,8 +80,8 @@ export default {
                 labels: selectedFeatureLayers.map(l => l.id),
                 datasets: this.getActiveItems().map(item => ({
                     label: item.name,
-                    data: selectedFeatureLayers.map(l => item.weightedDistanceScores[l.layerId].value),
-                    tooltip: `Gewichteter Durchschnitt: ${item.distanceScore.toLocaleString("de-DE")}`
+                    data: selectedFeatureLayers.map(l => item.score.distance.facilities[l.layerId].value),
+                    tooltip: `Gewichteter Durchschnitt: ${item.score.distance.average.toLocaleString("de-DE")}`
                 }))
             },
             chartDataset = new ChartDataset({

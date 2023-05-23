@@ -1,18 +1,25 @@
-import * as Proj from "ol/proj.js";
+import {transform} from "ol/proj";
 import {fetchDistances} from "./fetchDistances";
 import {findNearestFeatures} from "../../utils/features/findNearestFeatures";
 import {getFeatureInfos} from "./getFeatureInfo";
 import rawLayerList from "@masterportal/masterportalapi/src/rawLayerList";
 import {getConverter} from "../utils/converters";
+import {getFlatCoordinates} from "../../utils/geometry/getFlatCoordinates";
 
 /**
- *
- * @param {module:ol/Feature[]} features features
- * @param {String} sourceCrs current CRS
- * @return {Number[]} transformed feature coordinates
+ * Transforms the coordinate of each feature from the source projection to the destination projection.
+ * Returns a new array of coordinates and does not modify the original.
+ * @param {ol/Feature[]} features - An array of features.
+ * @param {String} source - The current projection as crs identifier string.
+ * @param {String} destination - The desired projection as crs identifier string.
+ * @returns {ol/coordinate[]} An array of coordinates([x, y]).
  */
-function transformedCoordinates (features, sourceCrs) {
-    return features.map(f => Proj.transform(f.getGeometry().flatCoordinates, sourceCrs, "EPSG:4326").slice(0, 2));
+function getTransformedCoordinates (features, source, destination = "EPSG:4326") {
+    return features.map(feature => {
+        const flatCoordinate = getFlatCoordinates(feature.getGeometry())[0];
+
+        return transform(flatCoordinate, source, destination);
+    });
 }
 
 /**
@@ -28,10 +35,10 @@ function transformedCoordinates (features, sourceCrs) {
  * @return {Number} score
  */
 async function layerScore (feature, layerId, initialBuffer, bufferIncrement, portalCrs, serviceId, fallbackId) {
-    const featureCoords = transformedCoordinates([feature], portalCrs),
+    const sourceCoordinates = getTransformedCoordinates([feature], portalCrs),
         features = await findNearestFeatures(layerId, feature, initialBuffer, bufferIncrement, 10, portalCrs),
-        coords = transformedCoordinates(features, portalCrs),
-        dists = (await fetchDistances(featureCoords, coords, undefined, serviceId, fallbackId))[0];
+        destinationCoordinates = getTransformedCoordinates(features, portalCrs),
+        dists = (await fetchDistances(sourceCoordinates, destinationCoordinates, undefined, serviceId, fallbackId))[0];
 
     if (dists === null) {
         return null;
@@ -58,23 +65,21 @@ async function layerScore (feature, layerId, initialBuffer, bufferIncrement, por
  * @param {*} weights weights
  * @return {*} score
  */
-async function distanceScore ({getters, commit, rootGetters}, {feature, weights, layerIds, extent}) {
-    if (weights === undefined || weights.length !== layerIds.length) {
-        throw Error("invalid argument: weights");
-    }
-
+async function distanceScore ({getters, commit, rootGetters}, {feature, layers}) {
     let vsum = 0,
         wsum = 0;
 
-    const ret = {};
+    const ret = {
+        facilities: {}
+    };
 
-    for (let j = 0; j < layerIds.length; j++) {
-        const id = feature.getId().toString() + layerIds[j].toString() + (extent && getters.useUserExtent ? extent.toString() : "");
+    for (let j = 0; j < layers.length; j++) {
+        const id = feature.getId().toString() + layers[j].layerId.toString();
 
         let mindist = getters.mindists[id];
 
         if (!mindist) {
-            mindist = await layerScore(feature, layerIds[j], getters.initialBuffer, getters.bufferIncrement, rootGetters["Maps/projectionCode"], getters.serviceId, getters.fallbackServiceId);
+            mindist = await layerScore(feature, layers[j].layerId, getters.initialBuffer, getters.bufferIncrement, rootGetters["Maps/projectionCode"], getters.serviceId, getters.fallbackServiceId);
             commit("setMindists", {...getters.mindists, [id]: mindist});
         }
 
@@ -87,15 +92,21 @@ async function distanceScore ({getters, commit, rootGetters}, {feature, weights,
         }
 
         // eslint-disable-next-line one-var
-        const value = weights[j] * mindist.dist;
+        const value = layers[j].weighting * mindist.dist;
 
-        ret[layerIds[j]] = {value, feature: mindist.feature};
+        ret.facilities[layers[j].layerId] = {
+            value,
+            feature: mindist.feature,
+            layerName: layers[j].id,
+            featureName: mindist.feature.get(layers[j].keyOfAttrName),
+            weighting: layers[j].weighting
+        };
 
         vsum += value;
-        wsum += weights[j];
+        wsum += layers[j].weighting;
     }
 
-    ret.score = vsum / wsum;
+    ret.average = (vsum / wsum).toFixed(1);
 
     return ret;
 }

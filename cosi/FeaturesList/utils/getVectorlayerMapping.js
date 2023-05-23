@@ -2,9 +2,10 @@
 /**
  * @description creates a new layer mapping object
  * @param {Object[]} layer the layer to map
+ * @param {String} title - The title of the layer group
  * @returns {Object} the mapped and filtered vectorlayer
  */
-export function createVectorLayerMappingObject (layer) {
+export function createVectorLayerMappingObject (layer, title) {
     const keyOfAttrName = layer.mouseHoverField || "name",
         addressField = layer.addressField || "adresse";
 
@@ -12,6 +13,8 @@ export function createVectorLayerMappingObject (layer) {
         // hier die group erweitern und default für weighting?
         layerId: layer.id,
         id: layer.name,
+        group: title,
+        weighting: 1,
         numericalValues: layer.numericalValues || [],
         addressField: Array.isArray(addressField) // the address can be a single or multiple fields that will be combined for the table view
             ? addressField
@@ -29,12 +32,13 @@ export function createVectorLayerMappingObject (layer) {
  * @description Reducer function for the layers in a folder
  * @param {Object[]} layers the layers in the folder
  * @param {String} condition the condition to filter by
+ * @param {String} title - The title of the folder
  * @returns {Object[]} the mapped and filtered vectorlayers
  */
-function mapVectorLayersInFolder (layers, condition) {
+function mapVectorLayersInFolder (layers, condition, title) {
     return layers.reduce((layerlist, layer) => {
         if (layer[condition]) {
-            layerlist.push(createVectorLayerMappingObject(layer));
+            layerlist.push(createVectorLayerMappingObject(layer, title));
         }
         return layerlist;
     }, []);
@@ -49,7 +53,7 @@ function mapVectorLayersInFolder (layers, condition) {
 function flattenFolderLayers (folder, condition) {
     return (folder.Ordner || []).reduce((layers, subFolder) => {
         return [...layers, ...flattenFolderLayers(subFolder, condition)];
-    }, mapVectorLayersInFolder(folder.Layer || [], condition));
+    }, mapVectorLayersInFolder(folder.Layer || [], condition, folder.Titel));
 }
 
 

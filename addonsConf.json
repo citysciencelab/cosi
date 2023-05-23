@@ -192,5 +192,8 @@
   "ReportTemplates": {
     "path": "cosi/ReportTemplates",
     "type": "tool"
+  },
+  "mietenspiegelFormular": {
+    "type": "tool"
   }
 }

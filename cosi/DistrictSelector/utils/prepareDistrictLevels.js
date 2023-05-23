@@ -1,9 +1,6 @@
-import {unByKey} from "ol/Observable";
 import {describeFeatureType, getFeatureDescription} from "../../../../src/api/wfs/describeFeatureType.js";
 import rawLayerList from "@masterportal/masterportalapi/src/rawLayerList";
 import {getContainingDistrictForExtent} from "../../utils/geomUtils.js";
-
-const eventKeys = {};
 
 /**
  * Prepares the district level objects for the district selector.
@@ -24,8 +21,12 @@ export async function prepareDistrictLevels (districtLevels, layerList) {
             districtLevel.layer = getLayerById(layerList, districtLevel.layerId);
             // the stats layer for the district level
             districtLevel.stats.layers = getRawLayersById(districtLevel.stats.layerIds);
-            // the names of all avaible districts
-            districtLevel.nameList = getNameList(districtLevel.layer, districtLevel.keyOfAttrName);
+            districtLevel.layer.getSource().on("featuresloadend", () => {
+                // all districts at this level
+                districtLevel.districts = getDistricts(districtLevel);
+                // the names of all avaible districts
+                districtLevel.nameList = getNameList(districtLevel.layer, districtLevel.keyOfAttrName);
+            });
             // property names for the WFS GetFeature request for the stats features, without geometry
             if (!districtLevel.propertyNameList) {
                 const propertyNameList = await getPropertyNameList(districtLevel.stats.layers);
@@ -34,11 +35,6 @@ export async function prepareDistrictLevels (districtLevels, layerList) {
                     districtLevel.propertyNameList = propertyNameList;
                 }
             }
-            // all districts at this level
-            districtLevel.districts = getDistricts(districtLevel);
-            // at this point the features of the layer are probably not yet loaded,
-            // therefore the listener on the layer source to set the 'nameList' and the 'districts' property
-            eventKeys[districtLevel.layerId] = districtLevel.layer.getSource().on("change", setProperties.bind(districtLevel));
         });
     }
 }
@@ -227,22 +223,6 @@ export async function getPropertyNameList (layers) {
     }
 
     return propertyNameList;
-}
-
-/**
- * Sets the districts and the names of all districts to the district level.
- * Removes the event listener using the key returned by on() for this callback.
- * @this districtLevel
- * @param {module:ol/events/Event~BaseEvent} evt - Change event of a source.
- * @returns {void}
- */
-export function setProperties (evt) {
-    if (evt.target.getFeatures().length > 0 && this.districts.length === 0) {
-        this.districts = getDistricts(this);
-        this.nameList = getNameList(this.layer, this.keyOfAttrName);
-        // unbind the listener
-        unByKey(eventKeys[this.layerId]);
-    }
 }
 
 /**
