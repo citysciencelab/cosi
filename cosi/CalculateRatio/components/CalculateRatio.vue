@@ -72,6 +72,10 @@ export default {
             perCalc_A: 1,
             // Modifier "berechnen pro" for Field B
             perCalc_B: 1,
+            // operation to perform on field A values
+            operation_A: "sum",
+            // operation to perform on field A values
+            operation_B: "sum",
             // Helper Array to use selected values beyond function scope
             featureVals: [],
             // Object that helps calculating the data in prepareCoverage function
@@ -221,7 +225,6 @@ export default {
         ...mapMutations("Tools/CalculateRatio", Object.keys(mutations)),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapActions("Tools/ChartGenerator", ["channelGraphData"]),
-        ...mapMutations("Tools/ChartGenerator", ["setNewDataset"]),
         /**
          * @description Updates theme layer selection and sorting/ grouping it for display in multiselect.
          * @todo triggers too often!!! refactor
@@ -471,7 +474,7 @@ export default {
                 allData.push(combined);
             });
 
-            this.setResults(utils.calculateRatio(allData, this.selectedYear));
+            this.setResults(utils.calculateRatio(allData, this.selectedYear, [this.operation_A, this.operation_B]));
             this.setResultHeaders({
                 typeA: resultHeader_A,
                 typeB: resultHeader_B,
@@ -656,7 +659,7 @@ export default {
                 dataArray.push(result.data);
             });
 
-            this.setResults(utils.calculateRatio(dataArray, this.selectedYear));
+            this.setResults(utils.calculateRatio(dataArray, this.selectedYear, [this.operation_A, this.operation_B]));
             this.dataSets[this.activeSet].results = this.results;
         },
         /**
@@ -753,7 +756,7 @@ export default {
             });
 
             this.availableYears.forEach(year => {
-                const dataPerYear = utils.calculateRatio(dataArray, year)
+                const dataPerYear = utils.calculateRatio(dataArray, year, [this.operation_A, this.operation_B])
                     .filter(dataset => dataset.scope);
 
                 dataPerYear.forEach(dataset => {
@@ -947,6 +950,19 @@ export default {
                                         return-object
                                         :disabled="facilityPropertyList_A.length < 2"
                                     />
+                                    <v-select
+                                        v-if="facilityList.length"
+                                        v-model="operation_A"
+                                        class="feature_selection selection"
+                                        :items="[
+                                            {name: 'Summe', value: 'sum'},
+                                            {name: 'Durchschnitt', value: 'avg'},
+                                        ]"
+                                        item-text="name"
+                                        item-value="value"
+                                        dense
+                                        outlined
+                                    />
                                 </div>
                             </template>
                             <template v-else>
@@ -1062,6 +1078,19 @@ export default {
                                         outlined
                                         return-object
                                         :disabled="facilityPropertyList_B.length < 2"
+                                    />
+                                    <v-select
+                                        v-if="facilityList.length"
+                                        v-model="operation_B"
+                                        class="feature_selection selection"
+                                        :items="[
+                                            {name: 'Summe', value: 'sum'},
+                                            {name: 'Durchschnitt', value: 'avg'},
+                                        ]"
+                                        item-text="name"
+                                        item-value="value"
+                                        dense
+                                        outlined
                                     />
                                 </div>
                             </template>

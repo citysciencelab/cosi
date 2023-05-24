@@ -1,9 +1,10 @@
 /** Calculates the ratio of a set of features.
 * @param {Object[]} dataArray Of Objects containing data to be calculated.
 * @param {String} year Year from which data is to be selected.
+* @param {String[]} [operations=["sum", "sum"]] the operation to apply to the params
 * @returns {Object[]} Array of calculated Data.
 */
-export default function calculateRatio (dataArray, year) {
+export default function calculateRatio (dataArray, year, operations = ["sum", "sum"]) {
     const results = [];
 
     dataArray.forEach(dataset => {
@@ -12,7 +13,7 @@ export default function calculateRatio (dataArray, year) {
                 paramA_val: typeof dataset.paramA_calc === "object" ? dataset.paramA_calc[year] : dataset.paramA_calc,
                 paramB_val: typeof dataset.paramB_calc === "object" ? dataset.paramB_calc[year] : dataset.paramB_calc
             },
-            calculation = calculateSingle(calcObj, dataset);
+            calculation = calculateSingle(calcObj, dataset, operations);
 
         results.push(calculation);
     });
@@ -22,9 +23,10 @@ export default function calculateRatio (dataArray, year) {
 /** Calculates the extent of a set of features.
 * @param {Object} calcObj pre-transformed dataset.
 * @param {Object} dataset Original dataset from dataArray.
+* @param {String[]} [operations=["sum", "sum"]] the operation to apply to the params
 * @returns {Object} calculated single dataset.
 */
-function calculateSingle (calcObj, dataset) {
+function calculateSingle (calcObj, dataset, operations = ["sum", "sum"]) {
     if (isNaN(calcObj.paramA_val) || isNaN(calcObj.paramB_val)) {
         calcObj.relation = 0;
         calcObj.capacity = 0;
@@ -35,8 +37,18 @@ function calculateSingle (calcObj, dataset) {
 
         return calcObj;
     }
+    if (!calcObj.paramA_count) {
+        calcObj.paramA_count = calcObj.paramA_val;
+    }
+    if (!calcObj.paramB_count) {
+        calcObj.paramB_count = calcObj.paramB_val;
+    }
 
-    const relation = calcObj.paramA_val / calcObj.paramB_val,
+    calcObj.paramA_val = operations[0] === "avg" ? calcObj.paramA_val / calcObj.paramA_count : calcObj.paramA_val;
+    calcObj.paramB_val = operations[0] === "avg" ? calcObj.paramB_val / calcObj.paramB_count : calcObj.paramB_val;
+
+    const
+        relation = calcObj.paramA_val / calcObj.paramB_val,
         capacity = calcObj.paramA_val * (dataset.faktorf_B / dataset.faktorf_A),
         need = calcObj.paramB_val * (dataset.faktorf_A / dataset.faktorf_B),
         coverageA = ((calcObj.paramA_val / need) * dataset.perCalc_B) * 100,
