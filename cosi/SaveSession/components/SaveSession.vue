@@ -7,8 +7,8 @@ import mutations from "../store/mutationsSaveSession";
 import actions from "../store/actionsSaveSession";
 import {downloadJsonToFile} from "../../utils/download";
 import {Point, Polygon, MultiPoint, MultiPolygon} from "ol/geom";
-import serializeState from "./serializeState";
-import parseState from "./parseState";
+import {serializeState} from "../utils/serializeState.js";
+import parseState from "../utils/parseState";
 import ToolInfo from "../../components/ToolInfo.vue";
 import openDB from "../utils/indexedDb";
 import {addModelsByAttributes, getModelByAttributes} from "../../utils/radioBridge.js";
@@ -27,9 +27,10 @@ export default {
                 // The order matters for loading
                 Maps: [
                     "layerIds",
+                    "loadedLayers",
                     // "view"
                     "center",
-                    "zoomLevel"
+                    "zoom"
                 ],
                 Tools: {
                     ChartGenerator: [
@@ -181,32 +182,45 @@ export default {
         this.checkLastSession();
     },
     methods: {
-        ...mapActions("Maps", ["addNewLayerIfNotExists"]),
+        ...mapActions("Maps", ["addNewLayerIfNotExists", "registerListener", "unregisterListener"]),
         ...mapMutations("Tools/SaveSession", Object.keys(mutations)),
         ...mapActions("Tools/SaveSession", Object.keys(actions)),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapActions("Tools/DistrictSelector", ["setDistrictsByName"]),
         ...parseState,
-        ...serializeState,
         downloadJsonToFile,
-
+        /**
+         * Saving the data
+         * @returns {void}
+        */
         save () {
             this.saveDialog = false;
-            this.serializeState();
+            this.state = serializeState(this.storePaths, this.$store, this.deepFeatures);
 
             this.session.state = JSON.stringify(this.state);
             this.session.meta.created = new Date().toLocaleString();
             this.session.meta.date = new Date();
         },
+        /**
+         * Saving the data in local storage
+         * @returns {void}
+         */
         quickSave () {
             this.save();
             this.storeToLocalStorage();
         },
+        /**
+         * Saving the data in extra file
+         * @returns {void}
+         */
         saveAs () {
             this.save();
             this.downloadJsonToFile(this.session, this.session.meta.title + ".json");
         },
-
+        /**
+         * Clearing the data in local storage
+         * @returns {void}
+         */
         clear () {
             if (this.db) {
                 const
@@ -222,7 +236,10 @@ export default {
             }
             this.localStorage.removeItem("cosi-state");
         },
-
+        /**
+         * Saving the data in local storage
+         * @returns {void}
+         */
         storeToLocalStorage () {
             if (this.db) {
                 const
@@ -232,7 +249,7 @@ export default {
                 request.onerror = (err) => {
                     console.error(err);
                     this.addSingleAlert({
-                        content: "Die Sitzung konnte nicht gespeichert werden. Die Fehlermeldung finden Sie, indem Sie die Taste F12 drücken. Wenden Sie sich bitte damit an Ihren Administrator.",
+                        content: this.$t("additional:modules.tools.cosi.saveSession.saveToLocalStorageError"),
                         category: "Error",
                         displayClass: "error"
                     });
@@ -250,12 +267,18 @@ export default {
                 this.latestDate = this.session.meta?.created;
             }
         },
-
+        /**
+         * Loading the last session
+         * @returns {void}
+         */
         loadLastSession () {
             this.loadFromLocalStorage();
             this.loadDialog = false;
         },
-
+        /**
+         * Checking the last session
+         * @returns {void}
+         */
         checkLastSession () {
             let
                 lastSession = this.db ? undefined : JSON.parse(this.localStorage.getItem("cosi-state"));
@@ -276,7 +299,10 @@ export default {
                 }
             };
         },
-
+        /**
+         * Loading the session from local storage
+         * @returns {void}
+         */
         async loadFromLocalStorage () {
             try {
                 const session = new Promise((res, rej) => {
@@ -302,18 +328,25 @@ export default {
             catch (e) {
                 console.error(e);
                 this.addSingleAlert({
-                    content: "Die letzte Sitzung konnte nicht geladen werden. Die Fehlermeldung finden Sie, indem Sie die Taste F12 drücken. Wenden Sie sich bitte damit an Ihren Administrator.",
+                    content: this.$t("additional:modules.tools.cosi.saveSession.loadFromLocalStorageError"),
                     category: "Error",
                     displayClass: "error"
                 });
             }
         },
-
+        /**
+         * Loading the data from file
+         * @returns {void}
+         */
         loadFromFile () {
             this.$refs["file-prompt"].click();
             this.loadDialog = false;
         },
-
+        /**
+         * Loading the data from file
+         * @param {Object[]} evt The target of current change event.
+         * @returns {void}
+         */
         handleFile (evt) {
             const file = evt.target.files[0],
                 reader = new FileReader();
@@ -337,10 +370,13 @@ export default {
             };
             reader.readAsText(file);
         },
-
+        /**
+         * Loading function
+         * @param {Object} session The saved session
+         * @returns {void}
+         */
         load (session) {
-            const
-                state = session.state || session; // fallback for old saves
+            const state = session.state || session; // fallback for old saves
 
             this.session.meta.title = session.meta?.title || this.session.meta.title;
             this.setActive(false);
@@ -351,7 +387,11 @@ export default {
                 displayClass: "success"
             });
         },
-
+        /**
+         * Getting the saved layers from id
+         * @param {String} layerId The layer Id
+         * @returns {module:ol/Layer} the layer
+         */
         getTopicsLayer (layerId) {
             let layer = this.getLayerById({layerId: layerId});
 
@@ -390,17 +430,28 @@ export default {
             this.saveDialog = false;
             this[this.saveMode]();
         },
-
+        /**
+         * Enable auto save regularly
+         * @returns {void}
+         */
         enableAutoSave () {
             this.autoSaveInterval = setInterval(() => {
                 this.quickSave();
             }, 600000);
         },
-
+        /**
+         * Disable auto save
+         * @returns {void}
+         */
         disableAutoSave () {
             clearInterval(this.autoSaveInterval);
         },
-
+        /**
+         * Check if it has deep features
+         * @param {String} key - the key in deep features
+         * @param {String} attr - the attribute
+         * @returns {void}
+         */
         hasDeepFeatures (key, attr) {
             const tool = Object.keys(this.deepFeatures).find(id => key.includes(id));
 
@@ -432,12 +483,12 @@ export default {
                     />
                     <v-container class="flex btn-grid">
                         <v-card-title secondary-title>
-                            Schnelles Speichern
+                            {{ $t('additional:modules.tools.cosi.saveSession.quickSave') }}
                         </v-card-title>
-                        <div class="mb-2">
-                            Sitzungen im Browser (z.B. Edge, Firefox) speichern. Diese können beim Start von CoSI über den Button 'Letzte Laden' wieder geladen werden. <br>
-                            Wenn Browserverlauf oder Cache geleert werden, geht dieser Speicherstand verloren! Es kann immer nur eine Sitzung vorgehalten werden.
-                        </div>
+                        <div
+                            class="mb-2"
+                            v-html="$t('additional:modules.tools.cosi.saveSession.quickSaveDescription')"
+                        />
                         <v-row class="flex">
                             <v-col
                                 cols="6"
@@ -509,11 +560,12 @@ export default {
                         </v-row>
                         <v-divider />
                         <v-card-title secondary-title>
-                            Lokales Speichern
+                            {{ $t('additional:modules.tools.cosi.saveSession.localSave') }}
                         </v-card-title>
-                        <div class="mb-2">
-                            Sitzungen als Datei auf dem Rechner speichern und über den Button 'Datei laden' wieder laden. Diese können jederzeit wieder geladen oder mit anderen CoSI Nutzer:innen geteilt werden.
-                        </div>
+                        <div
+                            class="mb-2"
+                            v-html="$t('additional:modules.tools.cosi.saveSession.localSaveDescription')"
+                        />
                         <v-row class="flex">
                             <v-col
                                 cols="6"
@@ -569,7 +621,7 @@ export default {
                             dense
                         >
                             <small>
-                                Bitte beachten Sie, dass nicht alle Daten und Aktionen gespeichert werden können. Grundsätzlich bezieht sich das Speichern auf die Gebiets- und Themenauswahl, Analyse- und Simulationsergebnisse. Welche Daten gespeichert werden können entnehmen Sie bitte der Anleitung.
+                                {{ $t('additional:modules.tools.cosi.saveSession.sessionHint') }}
                             </small>
                         </v-row>
                     </v-container>
