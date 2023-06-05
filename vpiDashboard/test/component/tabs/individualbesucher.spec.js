@@ -15,15 +15,7 @@ describe("individual visitor tab component", () => {
             state: {},
             modules: {
                 "Tools/VpiDashboard": {
-                    namespaced: true,
-                    getters: {
-                        getBarChartData () {
-                            return {};
-                        },
-                        getLineChartData () {
-                            return {};
-                        }
-                    }
+                    namespaced: true
                 }
             }
         });

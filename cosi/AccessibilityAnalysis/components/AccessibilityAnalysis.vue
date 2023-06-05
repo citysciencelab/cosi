@@ -596,16 +596,6 @@ export default {
                 downloadGeoJson(set.geojson);
             });
         },
-        /**
-         * @description Selects the next or the previous supply analysis in the Tool Window.
-         * @param {Integer} value +1 or -1.
-         * @returns {Void} Function returns nothing.
-         */
-        setPrevNext (value) {
-            const l = this.dataSets.length;
-
-            this.setActiveSet((((this.activeSet + value) % l) + l) % l); // modulo with negative handling
-        },
 
         async updateAnalysisSet () {
             await this.createIsochrones();
@@ -846,29 +836,23 @@ export default {
                                     </v-btn>
                                 </v-col>
                             </v-row>
-                            <v-row>
-                                <v-col>
-                                    <AnalysisPagination
-                                        :sets="dataSets"
-                                        :active-set="activeSet"
-                                        :downloads="['GEOJSON']"
-                                        :titles="{
-                                            downloads: [$t('additional:modules.tools.cosi.accessibilityAnalysis.download.title')],
-                                            downloadAll: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationDownloadAll'),
-                                            remove: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationRemove'),
-                                            removeAll: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationRemoveAll'),
-                                            next: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationNext'),
-                                            prev: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationPrev'),
-                                        }"
-                                        @setActiveSet="(n) => setActiveSet(n)"
-                                        @setPrevNext="(n) => setPrevNext(n)"
-                                        @removeSingle="(n) => removeSet(n)"
-                                        @removeAll="removeAll"
-                                        @downloadGEOJSON="(n) => downloadSet(n)"
-                                        @downloadAll="downloadAll"
-                                    />
-                                </v-col>
-                            </v-row>
+                            <v-divider />
+                            <AnalysisPagination
+                                :sets="dataSets"
+                                :active-set="activeSet"
+                                :downloads="['GEOJSON']"
+                                :titles="{
+                                    downloads: [$t('additional:modules.tools.cosi.accessibilityAnalysis.download.title')],
+                                    downloadAll: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationDownloadAll'),
+                                    remove: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationRemove'),
+                                    removeAll: $t('additional:modules.tools.cosi.accessibilityAnalysis.paginationRemoveAll')
+                                }"
+                                @setActiveSet="(n) => setActiveSet(n)"
+                                @removeSingle="(n) => removeSet(n)"
+                                @removeAll="removeAll"
+                                @downloadGEOJSON="(n) => downloadSet(n)"
+                                @downloadAll="downloadAll"
+                            />
                         </template>
                     </div>
                 </v-app>

@@ -1,5 +1,5 @@
 <script>
-import {mapGetters, mapActions} from "vuex";
+import {mapGetters, mapActions, mapState} from "vuex";
 import getters from "../../store/gettersVpiDashboard";
 import actions from "../../store/actionsVpiDashboard";
 import dayjs from "dayjs";
@@ -70,11 +70,22 @@ export default {
                 }
             ],
             selectedChartData: "overview",
-            chartSubTitle: ""
+            chartSubTitle: "",
+            renderKey: 0
         };
     },
     computed: {
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
+        ...mapState("Tools/VpiDashboard", [
+            "allLocationsArray",
+            "barChartDailyData",
+            "lineChartDailyData",
+            "barChartMonthlyData",
+            "lineChartMonthlyData",
+            "barChartData",
+            "lineChartData",
+            "selectedLocationId"
+        ]),
         selectedChartDataComputed: {
             /**
              * define, which data shall be the base of the chart
@@ -124,10 +135,15 @@ export default {
             if (value !== "") {
                 this.dayDatepickerValueChanged(value);
             }
+        },
+        async selectedLocationId () {
+            await this.getIndividualVisitors();
+            await this.fillInitialChartData();
         }
     },
     async created () {
         this.$on("close", this.close);
+        await this.getIndividualVisitors();
         await this.fillInitialChartData();
     },
     methods: {
@@ -137,8 +153,8 @@ export default {
          * @returns {void}
         */
         async fillInitialChartData () {
-            this.chartdata.bar = this.getBarChartData;
-            this.chartdata.line = this.getLineChartData;
+            this.chartdata.bar = this.barChartData;
+            this.chartdata.line = this.lineChartData;
         },
         /**
          * define, which charttype shall be displayed
@@ -147,19 +163,6 @@ export default {
         */
         setChartType (chartType) {
             this.chartType = chartType;
-        },
-        /**
-         * function called on close of the tool
-         * @returns {void}
-        */
-        close () {
-            this.setActive(false);
-            // eslint-disable-next-line
-            const model = getComponent(this.$store.state.Tools.VpiDashboard.id);
-
-            if (model) {
-                model.set("isActive", false);
-            }
         },
         /**
          * prepares the change of the data base of the shown chart
@@ -171,11 +174,6 @@ export default {
             this.showDatepicker = false;
             if (this.isIndividualChartType) {
                 // erst Datum und dann Daten abfragen, dann das Chart generieren
-                /* this.chartSubTitle = "";
-                this.showDatepicker = true;
-                this.chartdata.bar = {};
-                this.chartdata.line = {};
-                this.dates = "";*/
                 this.resetDates();
             }
             else {
@@ -190,16 +188,16 @@ export default {
         getCurrentBarChartData () {
             switch (this.selectedChartData) {
                 case "overview":
-                    this.chartdata.bar = this.getBarChartData;
-                    this.chartdata.line = this.getLineChartData;
+                    this.chartdata.bar = this.barChartData;
+                    this.chartdata.line = this.lineChartData;
                     break;
                 case "dailyoverview":
-                    this.chartdata.bar = this.getBarChartDailyData;
-                    this.chartdata.line = this.getLineChartDailyData;
+                    this.chartdata.bar = this.barChartDailyData;
+                    this.chartdata.line = this.lineChartDailyData;
                     break;
                 case "monthlyoverview":
-                    this.chartdata.bar = this.getBarChartMonthlyData;
-                    this.chartdata.line = this.getLineChartMonthlyData;
+                    this.chartdata.bar = this.barChartMonthlyData;
+                    this.chartdata.line = this.lineChartMonthlyData;
                     break;
                 default:
                     this.chartdata.bar = {};
@@ -315,6 +313,7 @@ export default {
             this.chartdata.line = {};
             this.dates = "";
         }
+
     }
 };
 </script>
@@ -326,13 +325,6 @@ export default {
             role="tabpanel"
         >
             <div class="tab-content h100">
-                <div class="row">
-                    <div class="headline">
-                        <h3>
-                            Mönckebergstrasse 3, 20095 Hamburg
-                        </h3>
-                    </div>
-                </div>
                 <div class="row cards">
                     <DataCard
                         :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsYear')"
@@ -469,6 +461,10 @@ export default {
 <style scoped>
 .cards {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
   width: 100%;
   flex-wrap: wrap;
   gap: 1rem;

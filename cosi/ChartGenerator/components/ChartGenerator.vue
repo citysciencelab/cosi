@@ -438,25 +438,25 @@ export default {
                             </div>
                             <div class="graph_footer">
                                 <template v-if="datasets.length > 0">
-                                    <AnalysisPagination
-                                        :sets="datasets"
-                                        :active-set="activeGraph"
-                                        :downloads="['PNG']"
-                                        :titles="{
-                                            downloads: [$t('additional:modules.tools.cosi.chartGenerator.downloadChart')],
-                                            downloadAll: $t('additional:modules.tools.cosi.chartGenerator.downloadAll'),
-                                            remove: $t('additional:modules.tools.cosi.chartGenerator.removeChart'),
-                                            removeAll: $t('additional:modules.tools.cosi.chartGenerator.deleteAll'),
-                                            next: $t('additional:modules.tools.cosi.chartGenerator.nextChart'),
-                                            prev: $t('additional:modules.tools.cosi.chartGenerator.prevChart'),
-                                        }"
-                                        @setActiveSet="(n) => selectGraph(n)"
-                                        @setPrevNext="(n) => graphPrevNext(n)"
-                                        @removeSingle="(n) => removeGraph(n)"
-                                        @removeAll="() => removeAll()"
-                                        @downloadPNG="(n) => downloadGraph()"
-                                        @downloadAll="() => downloadAll()"
-                                    />
+                                    <v-app>
+                                        <v-divider />
+                                        <AnalysisPagination
+                                            :sets="datasets"
+                                            :active-set="activeGraph"
+                                            :downloads="['PNG']"
+                                            :titles="{
+                                                downloads: [$t('additional:modules.tools.cosi.chartGenerator.downloadChart')],
+                                                downloadAll: $t('additional:modules.tools.cosi.chartGenerator.downloadAll'),
+                                                remove: $t('additional:modules.tools.cosi.chartGenerator.removeChart'),
+                                                removeAll: $t('additional:modules.tools.cosi.chartGenerator.deleteAll')
+                                            }"
+                                            @setActiveSet="(n) => selectGraph(n)"
+                                            @removeSingle="(n) => removeGraph(n)"
+                                            @removeAll="() => removeAll()"
+                                            @downloadPNG="(n) => downloadGraph()"
+                                            @downloadAll="() => downloadAll()"
+                                        />
+                                    </v-app>
                                 </template>
                             </div>
                         </div>
@@ -622,14 +622,14 @@ export default {
                             }
                         }
                     }
-                    .graph_footer {
-                        width:100%;
-                        display:flex;
-                        flex-flow:row wrap;
-                        justify-content:flex-end;
-                        margin:5px auto;
-                        padding-top: 10px;
-                    }
+                    // .graph_footer {
+                    //     width:100%;
+                    //     display:flex;
+                    //     flex-flow:row wrap;
+                    //     justify-content:flex-end;
+                    //     margin:5px auto;
+                    //     padding-top: 10px;
+                    // }
                 }
 
                 &.active {

@@ -7,13 +7,31 @@ import {mapState, mapGetters, mapActions, mapMutations} from "vuex";
 import {getComponent} from "../../../src/utils/getComponent";
 import Tabs from "./DashboardTabs.vue";
 import IndividualBesucher from "./Tabs/IndividualBesucher.vue";
+import CompareDashboard from "./Tabs/CompareDashboard.vue";
+import TabDwellTime from "./Tabs/TabDwellTime.vue";
+import TabInfo from "./Tabs/TabInfo.vue";
+import TabVisitorTypes from "./Tabs/TabVisitorTypes.vue";
+import LoaderOverlay from "../utils/loaderOverlay.js";
+import VpiLoader from "./VpiLoader.vue";
+import AgeGroups from "./Tabs/AgeGroups.vue";
+import LocationSelectMenuVue from "./LocationSelectMenu.vue";
+import CompareDatesDashboard from "./Tabs/CompareDatesDashboard.vue";
+import {highlightSelectedLocationOnMap} from "../utils/highlightSelectedLocationOnMap";
 
 export default {
     name: "VpiDashboard",
     components: {
         ToolTemplate,
         Tabs,
-        IndividualBesucher
+        IndividualBesucher,
+        CompareDashboard,
+        TabDwellTime,
+        TabInfo,
+        VpiLoader,
+        AgeGroups,
+        TabVisitorTypes,
+        LocationSelectMenuVue,
+        CompareDatesDashboard
     },
     data () {
         return {
@@ -23,41 +41,59 @@ export default {
                 {
                     index: 0,
                     name: this.translate("additional:modules.tools.vpidashboard.tabitems.individuals"),
-                    selected: true
+                    selected: true,
+                    showLocationSelectMenu: true
                 },
                 {
                     index: 1,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.gender"),
-                    selected: false
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.age"),
+                    selected: false,
+                    showLocationSelectMenu: true
                 },
                 {
                     index: 2,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.age"),
-                    selected: false
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.dwelltime"),
+                    selected: false,
+                    showLocationSelectMenu: true
                 },
                 {
                     index: 3,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.dwelltime"),
-                    selected: false
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.types"),
+                    selected: false,
+                    showLocationSelectMenu: true
                 },
                 {
                     index: 4,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.types"),
-                    selected: false
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.compare"),
+                    selected: false,
+                    showLocationSelectMenu: false
                 },
                 {
                     index: 5,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.distance"),
-                    selected: false
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.compare_dates"),
+                    selected: false,
+                    showLocationSelectMenu: false
+                },
+                {
+                    index: 6,
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.info"),
+                    selected: false,
+                    showLocationSelectMenu: false
                 }
             ],
-            renderTab: false
+            renderTab: false,
+            finishedLoading: false
         };
     },
     computed: {
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
         ...mapGetters("Language", ["currentLocale"]),
-        ...mapState("Tools/VpiDashboard", ["allLocationsGeoJson"])
+        ...mapState("Tools/VpiDashboard", ["allLocationsGeoJson", "allLocationsArray", "showLoader"]),
+        showLocationSelectMenu () {
+            const selectedTab = this.TabItems.find(tab => tab.selected === true);
+
+            return selectedTab.showLocationSelectMenu;
+        }
     },
     watch: {
         allLocationsGeoJson (val) {
@@ -99,12 +135,27 @@ export default {
             });
 
             this.$store.dispatch("AddLayerRemotely/addGeoJson", params);
+        },
+        /**
+         * Shows loader.
+         * When the showLoader value in state set to true, it shows the laoder.
+         * Otherwise hides to loader.
+         * @param {boolean} val showLoader
+         * @returns {void}
+         */
+        showLoader (val) {
+            // eslint-disable-next-line chai-friendly/no-unused-expressions
+            val ? LoaderOverlay.show() : LoaderOverlay.hide();
         }
+
     },
     async created () {
         this.$on("close", this.close);
-        await this.getWhatALocationData();
+    },
+    async mounted () {
         await this.getAllLocations();
+        await this.getWhatALocationData(this.allLocationsArray[0].id);
+        this.finishedLoading = true;
     },
     methods: {
         ...mapMutations("Tools/VpiDashboard", Object.keys(mutations)),
@@ -117,16 +168,29 @@ export default {
             this.setActive(false);
             const model = getComponent(this.$store.state.Tools.VpiDashboard.id);
 
+            // ensures that the individual visitors tabs is active after reopening
+            // the tool
+            this.TabItems.forEach((tabItem) => {
+                if (tabItem.index === 0) {
+                    tabItem.selected = true;
+                }
+                else {
+                    tabItem.selected = false;
+                }
+            });
             if (model) {
                 model.set("isActive", false);
             }
+
+            highlightSelectedLocationOnMap(undefined, "clear");
         },
         /**
          * initiates the asynchronous request for individual visitors from WhatALocation
+         * @param {String} locationId id of the location that its data going to be downloaded.
          * @returns {void}
          */
-        async getWhatALocationData () {
-            await this.getIndividualVisitors();
+        async getWhatALocationData (locationId) {
+            await this.getIndividualVisitors(locationId);
             this.renderTab = true;
         },
         /**
@@ -147,61 +211,71 @@ export default {
 </script>
 
 <template lang="html">
-    <ToolTemplate
-        :title="$t(name)"
-        :icon="icon"
-        :active="active"
-        :render-to-window="renderToWindow"
-        :resizable-window="resizableWindow"
-        :initial-width="700"
-        :deactivate-g-f-i="deactivateGFI"
-    >
-        <template #toolBody>
-            <div class="row h-100">
-                <div class="col-12 col-md-12 col-lg-12 h-100">
-                    <div class="h-100">
-                        <!-- Tabs Component (START) -->
-                        <div
-                            class="tabs horizontal"
-                            disabled="false"
-                        >
-                            <!-- <Tabs /> -->
-                            <Tabs :tab-items="TabItems">
-                                <div
-                                    v-if="renderTab"
-                                    slot="tab-content-0"
-                                >
-                                    <IndividualBesucher />
-                                </div>
-                                <div slot="tab-content-1">
-                                    <h1>Tab 2 Content</h1>
-                                    Component Here
-                                </div>
-                                <div slot="tab-content-2">
-                                    <h1>Tab 3 Content</h1>
-                                    Component Here
-                                </div>
-                                <div slot="tab-content-3">
-                                    <h1>Tab 4 Content</h1>
-                                    Component Here
-                                </div>
-                                <div slot="tab-content-4">
-                                    <h1>Tab 5 Content</h1>
-                                    Component Here
-                                </div>
-                                <div slot="tab-content-5">
-                                    <h1>Tab 6 Content</h1>
-                                    Component Here
-                                </div>
-                            </Tabs>
+    <div class="vpidashboardbasic">
+        <VpiLoader />
+        <ToolTemplate
+            :title="$t(name)"
+            :icon="icon"
+            :active="active"
+            :render-to-window="renderToWindow"
+            :resizable-window="resizableWindow"
+            :initial-width="700"
+            :deactivate-g-f-i="deactivateGFI"
+        >
+            <template #toolBody>
+                <div class="row h-100">
+                    <div class="col-12 col-md-12 col-lg-12 h-100">
+                        <div class="h-100">
+                            <div>
+                                <LocationSelectMenuVue
+                                    v-if="finishedLoading"
+                                    v-show="showLocationSelectMenu"
+                                />
+                            </div>
+                            <!-- Tabs Component (START) -->
+                            <div
+                                class="tabs horizontal"
+                                disabled="false"
+                            >
+                                <!-- <Tabs /> -->
+                                <Tabs :tab-items="TabItems">
+                                    <div
+                                        v-if="renderTab"
+                                        slot="tab-content-0"
+                                    >
+                                        <IndividualBesucher />
+                                    </div>
+                                    <div slot="tab-content-1">
+                                        <AgeGroups />
+                                    </div>
+                                    <div slot="tab-content-2">
+                                        <TabDwellTime />
+                                    </div>
+                                    <div slot="tab-content-3">
+                                        <TabVisitorTypes />
+                                    </div>
+                                    <div slot="tab-content-4">
+                                        <CompareDashboard />
+                                    </div>
+                                    <div slot="tab-content-5">
+                                        <CompareDatesDashboard />
+                                    </div>
+                                    <div slot="tab-content-6">
+                                        <TabInfo />
+                                    </div>
+                                </Tabs>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </template>
-    </ToolTemplate>
+            </template>
+        </ToolTemplate>
+    </div>
 </template>
 
 <style scoped>
+    .vpidashboardbasic {
+        height: 100%;
+    }
 
 </style>

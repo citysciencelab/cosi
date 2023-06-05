@@ -11,6 +11,7 @@ import {getLayerSource} from "../../utils/layer/getLayerSource";
 import highlightVectorFeature from "../../utils/highlightVectorFeature";
 import DetailView from "./DetailView.vue";
 import FeatureIcon from "./FeatureIcon.vue";
+import FeaturesListToolbar from "./FeaturesListToolbar.vue";
 import {prepareTableExport, prepareDetailsExport, composeFilename} from "../utils/prepareExport";
 import exportXlsx from "../../utils/exportXlsx";
 import {isEqual} from "../../utils/array/isEqual";
@@ -40,7 +41,8 @@ export default {
         ToolInfo,
         DetailView,
         FeatureIcon,
-        FeaturesScore
+        FeaturesScore,
+        FeaturesListToolbar
     },
     data () {
         return {
@@ -494,12 +496,12 @@ export default {
         /**
          * Export the table as XLSX
          * Either the simple view or incl. details
-         * @param {Boolean} exportDetails - whether to include the detailed feature data
+         * @param {Boolean} withDetails - whether to include the detailed feature data
          * @returns {void}
          */
-        exportTable () {
+        exportTable (withDetails) {
             const data = this.getActiveItems(),
-                exportData = this.exportDetails ? prepareDetailsExport(data, this.filterProps) : prepareTableExport(data),
+                exportData = withDetails ? prepareDetailsExport(data, this.filterProps) : prepareTableExport(data),
                 filename = composeFilename(this.$t("additional:modules.tools.cosi.featuresList.exportFilename"));
 
             exportXlsx(exportData, filename, {exclude: this.excludedPropsForExport});
@@ -678,6 +680,13 @@ export default {
          */
         toggleTool () {
             this.setShow(!this.show);
+        },
+
+        setLayerFilter (value) {
+            this.layerFilter = value;
+        },
+        setSearch (value) {
+            this.search = value;
         }
     }
 };
@@ -725,87 +734,16 @@ export default {
                 :locale="currentLocale"
             />
             <v-app id="features-list-wrapper">
-                <div class="mb-4">
-                    <div class="selection">
-                        <v-select
-                            v-if="groupActiveLayer.length > 0"
-                            v-model="layerFilter"
-                            class="layer_selection"
-                            :items="groupActiveLayer"
-                            multiple
-                            dense
-                            outlined
-                            small-chips
-                            deletable-chips
-                            hide-details
-                            :menu-props="{ closeOnContentClick: true }"
-                            :placeholder="$t('additional:modules.tools.cosi.featuresList.layerFilter')"
-                        />
-                    </div>
-                    <div class="selection">
-                        <v-text-field
-                            v-model="search"
-                            :placeholder="$t('additional:modules.tools.cosi.featuresList.search')"
-                            dense
-                            outlined
-                            hide-details
-                        />
-                    </div>
-                    <v-btn
-                        id="create-charts"
-                        dense
-                        small
-                        tile
-                        color="grey lighten-1"
-                        class="mb-2 ml-2"
-                        :title="$t('additional:modules.tools.cosi.featuresList.createCharts')"
-                        @click="createCharts"
-                    >
-                        <v-icon>mdi-poll</v-icon>
-                    </v-btn>
-                    <v-btn
-                        v-if="dipasInFeaturesList"
-                        id="create-dipas-charts"
-                        dense
-                        small
-                        tile
-                        color="grey lighten-1"
-                        class="mb-2 ml-2"
-                        :title="$t('additional:modules.tools.cosi.featuresList.dipas.createCharts')"
-                        @click="createDipasCharts"
-                    >
-                        <v-icon>mdi-thumbs-up-down</v-icon>
-                    </v-btn>
-                    <v-checkbox
-                        id="export-details"
-                        v-model="sumUpLayers"
-                        dense
-                        hide-details
-                        :label="$t('additional:modules.tools.cosi.featuresList.sumUpLayers')"
-                        :title="$t('additional:modules.tools.cosi.featuresList.sumUpLayersTooltip')"
-                    />
-                    <v-btn
-                        id="export-table"
-                        dense
-                        small
-                        tile
-                        color="grey lighten-1"
-                        class="mb-2 ml-2 float-right"
-                        :title="$t('additional:modules.tools.cosi.featuresList.exportTable')"
-                        @click="exportTable"
-                    >
-                        {{ $t('additional:modules.tools.cosi.featuresList.exportTable') }}
-                    </v-btn>
-                    <v-checkbox
-                        id="export-details"
-                        v-model="exportDetails"
-                        class="float-right"
-                        dense
-                        hide-details
-                        :label="$t('additional:modules.tools.cosi.featuresList.exportDetails')"
-                        :title="$t('additional:modules.tools.cosi.featuresList.exportDetails')"
-                    />
-                </div>
+                <FeaturesListToolbar
+                    :filter-items="groupActiveLayer"
+                    :show-dipas-button="dipasInFeaturesList"
+                    @setLayerFilter="setLayerFilter"
+                    @setSearch="setSearch"
+                    @createCharts="createCharts"
+                    @createDipasCharts="createDipasCharts"
+                    @exportTable="exportTable"
+                />
+                <v-divider />
                 <div id="features-list">
                     <form class="features-list-table-wrapper">
                         <div class="features-list-table">
@@ -919,25 +857,28 @@ export default {
 
 <style lang="scss">
     @import "../../utils/variables.scss";
+    @import "~variables";
 
     #features-list-wrapper {
+        font-family: $font_family_default;
         // height: 100%;
         position: relative;
 
-        .selection {
-            display: inline-block;
-            width: 20%;
-        }
-        .v-text-field {
-            input {
-                font-size: 12px;
-            }
-            label {
-               font-size: 12px;
+        .v-input {
+            border-radius: $border-radius-base;
+            font-size: 14px;
+            .v-label {
+                font-size: 14px;
             }
         }
+
+        .v-divider {
+            border-color: $light_grey;
+        }
+
         button {
             text-transform: inherit;
+            font-family: $font_family_accent;
         }
     }
     #features-list {

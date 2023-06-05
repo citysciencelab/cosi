@@ -19,7 +19,7 @@
                     "colAddress": "Adresse",
                     "inactiveFeature": "Die ausgewählte Einrichtung ist gegenwärtig inaktiv geschaltet.",
                     "exportTable": "Übersicht exportieren",
-                    "exportDetails": "Detailansicht mit exportieren",
+                    "exportDetails": "inkl. Detailansicht",
                     "exportFilename": "CoSI_Einrichtungsübersicht",
                     "weighting": "Gewichtung der Einrichtungen",
                     "distanceScoreChartTooltip": "Standortbewertung für ausgewählte visualisieren",

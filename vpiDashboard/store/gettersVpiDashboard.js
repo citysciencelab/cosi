@@ -1,5 +1,9 @@
 import {generateSimpleGetters} from "../../../src/app-store/utils/generators";
 import stateVpiDashboard from "./stateVpiDashboard";
+import tabVisitorTypesGetters from "./tab/visitor-types/getters";
+import tabCompareDatesGetters from "./tab/compare/dates/getters";
+import {changeDateFormat} from "../utils/changeDateFormat";
+import tabCompareLocationsGetters from "./tab/compare/locations/getters";
 
 const getters = {
     /**
@@ -8,15 +12,16 @@ const getters = {
      * For example, given a state object {key: value}, an object
      * {key: state => state[key]} will be returned.
      * This is useful to avoid writing basic operations.
-     * @param {object} state state to generate getters for
-     * @param {object.<string, function>} object of getters
      */
     ...generateSimpleGetters(stateVpiDashboard),
+
+    ...tabVisitorTypesGetters,
+    ...tabCompareDatesGetters,
+    ...tabCompareLocationsGetters,
 
     /**
      * Gets average data about unique visitors per weekday over all years, selected from WhatALocation data.
      * @param {Object} state the store's state object
-     * @param {String} day day that shall be requested
      * @returns {Array} array of unique visitors for the day "day" over all years
      */
     getAverageVisitorsPerDay: (state) => (day) => {
@@ -30,7 +35,6 @@ const getters = {
     /**
      * Gets average data about unique visitors per month in each year, selected from WhatALocation data.
      * @param {Object} state the store's state object
-     * @param {String} month month that shall be requested
      * @returns {Array} array of unique visitors for the month "month" in each year
      */
     getAverageVisitorsPerMonth: (state) => (month) => {
@@ -65,177 +69,7 @@ const getters = {
     getIndividualVisitorsPerYear (state) {
         return state.individualVisitorsPerYear;
     },
-    /**
-     * Gets data for a bar chart, generated from WhatALocation daily data.
-     * @param {Object} state the stores state object
-     * @returns {Object} object that can be used in chartJS to create a bar chart
-     */
-    getBarChartDailyData (state) {
-        const daily = state.averageVisitorsPerDay,
-            labels = [],
-            day_data = [],
-            translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.days", {returnObjects: true});
 
-        daily.forEach((element, index) => {
-            labels.push(translatedLabelList[index]);
-            day_data.push(element.avg);
-        });
-        // eslint-disable-next-line
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.dailyOverview"),
-                data: day_data,
-                hoverOffset: 4,
-                backgroundColor: "#FD763B"
-            }]
-        };
-
-        return data;
-    },
-    /**
-     * Gets data for a line chart, generated from WhatALocation daily data.
-     * @param {Object} state the stores state object
-     * @returns {Object} object that can be used in chartJS to create a line chart
-     */
-    getLineChartDailyData (state) {
-        const daily = state.averageVisitorsPerDay,
-            labels = [],
-            day_data = [],
-            translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.days", {returnObjects: true});
-
-        daily.forEach((element, index) => {
-            labels.push(translatedLabelList[index]);
-            day_data.push(element.avg);
-        });
-
-        // eslint-disable-next-line
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.dailyOverview"),
-                data: day_data,
-                fill: false,
-                borderColor: "rgb(75, 192, 192)",
-                tension: 0.1
-            }]
-        };
-
-        return data;
-    },
-    /**
-     * Gets data for a bar chart, generated from WhatALocation monthly data.
-     * @param {Object} state the stores state object
-     * @returns {Object} object that can be used in chartJS to create a bar chart
-     */
-    getBarChartMonthlyData (state) {
-        const monthly = state.averageVisitorsPerMonth,
-            labels = [],
-            month_data = [],
-            translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true});
-
-        monthly.forEach((element) => {
-            labels.push(translatedLabelList[element.index]);
-            month_data.push(element.avg);
-        });
-        // eslint-disable-next-line
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.monthlyOverview"),
-                data: month_data,
-                hoverOffset: 4,
-                backgroundColor: "#FD763B"
-            }]
-        };
-
-        return data;
-    },
-    /**
-     * Gets data for a line chart, generated from WhatALocation monthly data.
-     * @param {Object} state the stores state object
-     * @returns {Object} object that can be used in chartJS to create a line chart
-     */
-    getLineChartMonthlyData (state) {
-        const monthly = state.averageVisitorsPerMonth,
-            labels = [],
-            month_data = [],
-            translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true});
-
-        monthly.forEach((element) => {
-            labels.push(translatedLabelList[element.index]);
-            month_data.push(element.avg);
-        });
-
-        // eslint-disable-next-line
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.monthlyOverview"),
-                data: month_data,
-                fill: false,
-                borderColor: "rgb(75, 192, 192)",
-                tension: 0.1
-            }]
-        };
-
-        return data;
-    },
-    /**
-     * Gets data for a bar chart, generated from WhatALocation data.
-     * @param {Object} frequencyData data from WhatALocation
-     * @returns {Object} object that can be used in chartJS to create a bar chart
-     */
-    getBarChartData ({frequencyData}) {
-        const best_month = frequencyData?.unique?.best_month,
-            labels = [],
-            month_data = [];
-
-        best_month.forEach((element) => {
-            labels.push(element.date__month + "_" + element.date__year);
-            month_data.push(element.sum);
-        });
-        // eslint-disable-next-line
-        const data = {
-            labels: labels.reverse(),
-            datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.uniqueVisitors"),
-                data: month_data.reverse(),
-                hoverOffset: 4,
-                backgroundColor: "#FD763B"
-            }]
-        };
-
-        return data;
-    },
-    /**
-     * Gets data for a line chart, generated from WhatALocation data.
-     * @param {Object} frequencyData data from WhatALocation
-     * @returns {Object} object that can be used in chartJS to create a line chart
-     */
-    getLineChartData ({frequencyData}) {
-        const best_month = frequencyData?.unique?.best_month,
-            labels = [],
-            month_data = [];
-
-        best_month.forEach((element) => {
-            labels.push(element.date__month + "_" + element.date__year);
-            month_data.push(element.sum);
-        });
-        // eslint-disable-next-line
-        const data = {
-            labels: labels.reverse(),
-            datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.uniqueVisitors"),
-                data: month_data.reverse(),
-                fill: false,
-                borderColor: "rgb(75, 192, 192)",
-                tension: 0.1
-            }]
-        };
-
-        return data;
-    },
     /**
      * Gets GeoJson containing all WhatALocation locations.
      * @param {Object} state of this component
@@ -251,6 +85,126 @@ const getters = {
      */
     getAllLocationsArray (state) {
         return state.allLocationsArray;
+    },
+    /*
+     * Gets Array containing all WhatALocation dwell time data per dwell time range.
+     * @param {Object} state of this component
+     * @returns {Array} Array of dwell time data
+     */
+    getDwellTimePerTime (state) {
+        return state.dwellTimesPerTime;
+    },
+    /**
+     * Gets Array containing all WhatALocation dwell time data per date.
+     * @param {Object} state of this component
+     * @returns {Array} Array of dwell time data
+     */
+    getDwellTimePerDate (state) {
+        return state.dwellTimesPerDate;
+    },
+    /**
+     * Get a dwell time ChartJS data object for the requested chart type.
+     * @param {Object} state of this component
+     * @returns {Object} ChartJS data for given chartType
+     */
+    getDwellTimeChartJsData: (state) => (chartType) => {
+        const labels = [],
+            data_30_60 = [],
+            data_60_120 = [],
+            data_120_240 = [],
+            data_240 = [];
+
+        Object.keys(state.dwellTimesPerDate).forEach(date => {
+            const items = state.dwellTimesPerDate[date];
+
+            // Set label from date, e.g. 2023-01-01 becomes 2023-01
+            labels.push(changeDateFormat(date));
+
+            data_30_60.push(
+                items.find(i => i.DwellTime === "30-60")?.sum_num_visitors || 0
+            );
+            data_60_120.push(
+                items.find(i => i.DwellTime === "60-120")?.sum_num_visitors || 0
+            );
+            data_120_240.push(
+                items.find(i => i.DwellTime === "120-240")?.sum_num_visitors || 0
+            );
+            data_240.push(
+                items.find(i => i.DwellTime === "240+")?.sum_num_visitors || 0
+            );
+        });
+
+        let chartData;
+
+        switch (chartType) {
+            case "line":
+                chartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "30-60",
+                            data: data_30_60,
+                            fill: false,
+                            borderColor: "#00AA55",
+                            tension: 0.1
+                        },
+                        {
+                            label: "60-120",
+                            data: data_60_120,
+                            fill: false,
+                            borderColor: "#063970",
+                            tension: 0.1
+                        },
+                        {
+                            label: "120-240",
+                            data: data_120_240,
+                            fill: false,
+                            borderColor: "#B381B3",
+                            tension: 0.1
+                        },
+                        {
+                            label: "240+",
+                            data: data_240,
+                            fill: false,
+                            borderColor: "#CC3E00",
+                            tension: 0.1
+                        }]
+                };
+                break;
+            case "bar":
+            default:
+                chartData = {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "30-60",
+                            data: data_30_60,
+                            hoverOffset: 4,
+                            backgroundColor: "#00AA55"
+                        },
+                        {
+                            label: "60-120",
+                            data: data_60_120,
+                            hoverOffset: 4,
+                            backgroundColor: "#063970"
+                        },
+                        {
+                            label: "120-240",
+                            data: data_120_240,
+                            hoverOffset: 4,
+                            backgroundColor: "#B381B3"
+                        },
+                        {
+                            label: "240+",
+                            data: data_240,
+                            hoverOffset: 4,
+                            backgroundColor: "#CC3E00"
+                        }]
+                };
+                break;
+        }
+
+        return chartData;
     }
 };
 

@@ -48,26 +48,39 @@ export default {
             [
                 "averageVisitorsPerMonth",
                 "averageVisitorsPerDay",
-                "individualVisitorsPerYear"
+                "individualVisitorsPerYear",
+                "visitorTypesByTypeAndYear"
             ]),
         /**
          * returns the data for the selected card at the current page
          * @returns {String} the average or yearly number of visitors for the current parameters
          */
         statisticSet () {
-            if (this.detail === "monthly") {
+            if (this.detail === "monthly" && this.averageVisitorsPerMonth.length > 0) {
                 return this.averageVisitorsPerMonth[this.currentMonthIndex].avg.toLocaleString(this.currentLocale);
             }
-            if (this.detail === "daily") {
+            if (this.detail === "daily" && this.averageVisitorsPerDay.length > 0) {
                 return this.averageVisitorsPerDay[this.currentDayIndex].avg.toLocaleString(this.currentLocale);
             }
-            if (this.detail === "individualVisitors") {
+            if (this.detail === "individualVisitors" && this.individualVisitorsPerYear !== "") {
                 const selectedYearData = this.individualVisitorsPerYear.filter((element) => {
                     return element.date__year === this.currentYearIndex + 2019;
                 });
 
                 return selectedYearData[0].avg.toLocaleString(this.currentLocale);
             }
+
+            // Cards for Tab "Visitor Types"
+            if (this.detail === "visitorTypeCommutersPerDay") {
+                return this.visitorTypesByTypeAndYear.Pendler[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+            }
+            if (this.detail === "visitorTypeResidentsPerDay") {
+                return this.visitorTypesByTypeAndYear.Einwohner[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+            }
+            if (this.detail === "visitorTypeTouristsPerDay") {
+                return this.visitorTypesByTypeAndYear.Touristen[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+            }
+
             return null;
         },
         /**
@@ -84,6 +97,18 @@ export default {
             if (this.detail === "individualVisitors") {
                 return [2019, 2020, 2021, 2022, 2023];
             }
+
+            // Cards for Tab "Visitor Types"
+            if (this.detail === "visitorTypeCommutersPerDay") {
+                return Object.keys(this.visitorTypesByTypeAndYear.Pendler);
+            }
+            if (this.detail === "visitorTypeResidentsPerDay") {
+                return Object.keys(this.visitorTypesByTypeAndYear.Einwohner);
+            }
+            if (this.detail === "visitorTypeTouristsPerDay") {
+                return Object.keys(this.visitorTypesByTypeAndYear.Touristen);
+            }
+
             return null;
         }
     },
@@ -102,6 +127,15 @@ export default {
                 this.currentDayIndex = index;
             }
             if (this.detail === "individualVisitors") {
+                this.currentYearIndex = index;
+            }
+
+            // Cards for Tab "Visitor Types"
+            if (
+                this.detail === "visitorTypeCommutersPerDay" ||
+                this.detail === "visitorTypeResidentsPerDay" ||
+                this.detail === "visitorTypeTouristsPerDay"
+            ) {
                 this.currentYearIndex = index;
             }
         },
@@ -209,22 +243,22 @@ export default {
 
 <style lang="scss">
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 12rem;
-  max-width: 12rem;
-  height: 12rem;
-  padding: 1rem;
-  background: #f6f7f8;
-  border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 12rem;
+    max-width: 12rem;
+    height: 12rem;
+    padding: 1rem;
+    background: #f6f7f8;
+    border: none;
 }
 
 .card h4 {
-  font-size: 0.7rem;
-  text-align: center;
-  margin-bottom: 0;
+    font-size: 0.7rem;
+    text-align: center;
+    margin-bottom: 0;
 
 }
 
@@ -235,38 +269,39 @@ export default {
     gap: 1rem;
 }
 
-.buttonClicked{
-    border:0.1rem solid white !important;
-    color:white;
+.buttonClicked {
+    border: 0.1rem solid white !important;
+    color: white;
     background-color: #003063 !important;
 }
-.buttonClicked:hover{
-    color:white !important;
+
+.buttonClicked:hover {
+    color: white !important;
 }
 
 .card-text {
-  font-family: "HamburgSans-Regular", sans-serif;
-  font-style: normal;
-  font-weight: 900;
-  font-size: 16pt;
-  text-align: center;
-  letter-spacing: .2px;
-  color: #000;
-  display: block;
+    font-family: "HamburgSans-Regular", sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16pt;
+    text-align: center;
+    letter-spacing: .2px;
+    color: #000;
+    display: block;
 }
 
 
 .blue-card {
-  background-color: #003063 !important;
-  color: white;
+    background-color: #003063 !important;
+    color: white;
 }
 
 .blue-card .page-item a {
-  background-color: #003063 !important;
-  color: white;
+    background-color: #003063 !important;
+    color: white;
 }
 
 .blue-card .statistic-value-text {
-  color: white;
+    color: white;
 }
 </style>

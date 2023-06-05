@@ -677,16 +677,6 @@ export default {
             exportXlsx([headers, [], ...filters, ...data], filename, {exclude: this.excludedPropsForExport}, "aoa_to_sheet");
         },
         // pagination functions
-        /**
-         * @description Selects the next or the previous supply analysis in the Tool Window.
-         * @param {Integer} value +1 or -1.
-         * @returns {Void} Function returns nothing.
-         */
-        setPrevNext (value) {
-            const l = this.dataSets.length;
-
-            this.setActiveSet((((this.activeSet + value) % l) + l) % l); // modulo with negative handling
-        },
         downloadAll () {
             this.dataSets.forEach((set, index) => {
                 this.exportTable(index);
@@ -791,6 +781,7 @@ export default {
                     >
                         {{ $t('additional:modules.tools.cosi.queryDistricts.resetSelection') }}
                     </v-btn>
+                    <v-divider />
                     <AnalysisPagination
                         v-if="dataSets.length > 0 || layerFilterModels.length > 0"
                         :sets="dataSets"
@@ -804,12 +795,9 @@ export default {
                             downloads: [$t('additional:modules.tools.cosi.queryDistricts.exportTable')],
                             downloadAll: $t('additional:modules.tools.cosi.queryDistricts.paginationDownloadAll'),
                             remove: $t('additional:modules.tools.cosi.queryDistricts.paginationRemove'),
-                            removeAll: $t('additional:modules.tools.cosi.queryDistricts.paginationRemoveAll'),
-                            next: $t('additional:modules.tools.cosi.queryDistricts.paginationNext'),
-                            prev: $t('additional:modules.tools.cosi.queryDistricts.paginationPrev'),
+                            removeAll: $t('additional:modules.tools.cosi.queryDistricts.paginationRemoveAll')
                         }"
                         @setActiveSet="(n) => setActiveSet(n)"
-                        @setPrevNext="(n) => setPrevNext(n)"
                         @removeSingle="(n) => removeSet(n)"
                         @addSet="addSet"
                         @removeAll="removeAll"

@@ -533,7 +533,7 @@ export default {
                         step="250"
                         min="0"
                     />
-                    <div>
+                    <div v-if="Object.keys(additionalInfoLayers).length">
                         <span class="text-subtitle-2">
                             {{ $t('additional:modules.tools.cosi.districtSelector.additionalLayer') }}
                         </span>

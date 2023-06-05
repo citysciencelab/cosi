@@ -2,10 +2,11 @@ import store from "../../../src/app-store";
 
 /**
  * Registers the Observer.
+ * @param {Object} vueStore The store from the component.
  * @returns {void}
  */
-export function register () {
-    store.dispatch("Tools/SessionTool/register", {key: "Maps", getter: getCurrentExtentOfMap, setter: setExtentForMap});
+export function register (vueStore) {
+    vueStore.dispatch("Tools/SessionTool/register", {key: "Maps", getter: getCurrentExtentOfMap, setter: setExtentForMap});
 }
 
 /**

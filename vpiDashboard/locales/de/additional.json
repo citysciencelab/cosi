@@ -1,66 +1,127 @@
 {
   "modules": {
-      "tools": {
-          "vpidashboard": {
-              "name": "VPI Dashboard",
-              "tabitems": {
-                "individuals": "Individuelle Besucher",
-                "gender": "Geschlecht",
-                "age": "Altersgruppe",
-                "dwelltime": "Verweildauer",
-                "types": "Besuchertypen",
-                "distance": "Entfernung"
-              },
-              "time": {
-                "months": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
-                "days": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
-              },
-              "details": "Details",
-              "unique": {
-                "allData": "Alle Daten",
-                "uniqueVisitors": "Individuelle Besucher",
-                "dailyOverview": "Durchschnittliche tägliche individuelle Besucher",
-                "monthlyOverview": "Durchschnittliche monatliche individuelle Besucher",
-                "hourly": "Besucher eines bestimmten Tages (stündlich)",
-                "timeRange": "Besucher einer bestimmten Zeitspanne (täglich)",
-                "selectDate": "Bitte ein Datum wählen:",
-                "selectDateRange": "Bitte einen Zeitraum wählen:",
-                "noValidDate": "Kein gültiger Zeitpunkt / Zeitraum ausgewählt",
-                "numberVisitorsHour": "Anzahl Besucher pro Stunde",
-                "numberVisitorsDay": "Anzahl Besucher pro Tag",
-                "chartTitleDay": "Daten vom {{dateValue}}",
-                "chartTitleDayRange": "Daten vom {{dateValueFrom}} bis zum {{dateValueTo}}",
-                "avgVisitorsYear": "Ø Individuelle tägliche Besucher im Jahr",
-                "avgVisitorsDay": "Ø Individuelle tägliche Besucher an einem",
-                "avgVisitorsMonth": "Ø Individuelle tägliche Besucher pro Monat",
-                "selectDataBase": "Datengrundlage für Grafik auswählen:",
-                "date": "Datum",
-                "resetDate": "anderes Datum wählen"
-              },
-              "gfi": {
-                "street": "Standort",
-                "avgVisitorsMonday": "Ø Besucher montags",
-                "avgVisitorsTuesday": "Ø Besucher dienstags",
-                "avgVisitorsWednesday": "Ø Besucher mittwochs",
-                "avgVisitorsThursday": "Ø Besucher donnerstags",
-                "avgVisitorsFriday": "Ø Besucher freitags",
-                "avgVisitorsSaturday": "Ø Besucher samstags",
-                "avgVisitorsSunday": "Ø Besucher sonntags",
-                "avgVisitorsJanuary": "Ø tägliche Besucher im Januar",
-                "avgVisitorsFebruary": "Ø tägliche Besucher im Februar",
-                "avgVisitorsMarch": "Ø tägliche Besucher im März",
-                "avgVisitorsApril": "Ø tägliche Besucher im April",
-                "avgVisitorsMay": "Ø tägliche Besucher im Mai",
-                "avgVisitorsJune": "Ø tägliche Besucher im Juni",
-                "avgVisitorsJuly": "Ø tägliche Besucher im Juli",
-                "avgVisitorsAugust": "Ø tägliche Besucher im August",
-                "avgVisitorsSeptember": "Ø tägliche Besucher im September",
-                "avgVisitorsOctober": "Ø tägliche Besucher im Oktober",
-                "avgVisitorsNovember": "Ø tägliche Besucher im November",
-                "avgVisitorsDecember": "Ø tägliche Besucher im Dezember",
-                "avgVisitorYear": "Ø tägliche Besucher "
-              }
+    "tools": {
+      "vpidashboard": {
+        "name": "VPI Dashboard",
+        "tabitems": {
+          "individuals": "Individuelle Besucher",
+          "gender": "Geschlecht",
+          "age": "Altersgruppe",
+          "dwelltime": "Verweildauer",
+          "types": "Besuchertypen",
+          "distance": "Entfernung",
+          "compare": "Vergleich Standorte",
+          "info": "Informationen",
+          "compare_dates": "Vergleich Daten"
+        },
+        "time": {
+          "months": [
+            "Januar",
+            "Februar",
+            "März",
+            "April",
+            "Mai",
+            "Juni",
+            "Juli",
+            "August",
+            "September",
+            "Oktober",
+            "November",
+            "Dezember"
+          ],
+          "days": [
+            "Montag",
+            "Dienstag",
+            "Mittwoch",
+            "Donnerstag",
+            "Freitag",
+            "Samstag",
+            "Sonntag"
+          ]
+        },
+        "details": "Details",
+        "unique": {
+          "allData": "Alle Daten",
+          "uniqueVisitors": "Individuelle Besucher",
+          "dailyOverview": "Durchschnittliche tägliche individuelle Besucher",
+          "monthlyOverview": "Durchschnittliche monatliche individuelle Besucher",
+          "hourly": "Besucher eines bestimmten Tages (stündlich)",
+          "timeRange": "Besucher einer bestimmten Zeitspanne (täglich)",
+          "selectDate": "Bitte ein Datum wählen:",
+          "selectDateRange": "Bitte einen Zeitraum wählen:",
+          "noValidDate": "Kein gültiger Zeitpunkt / Zeitraum ausgewählt",
+          "numberVisitorsHour": "Anzahl Besucher pro Stunde",
+          "numberVisitorsDay": "Anzahl Besucher pro Tag",
+          "chartTitleDay": "Daten vom {{dateValue}}",
+          "chartTitleDayRange": "Daten vom {{dateValueFrom}} bis zum {{dateValueTo}}",
+          "avgVisitorsYear": "Ø Individuelle tägliche Besucher im Jahr",
+          "avgVisitorsDay": "Ø Individuelle tägliche Besucher an einem",
+          "avgVisitorsMonth": "Ø Individuelle tägliche Besucher pro Monat",
+          "selectDataBase": "Datengrundlage für Grafik auswählen:",
+          "date": "Datum",
+          "resetDate": "anderes Datum wählen"
+        },
+        "gfi": {
+          "street": "Standort",
+          "avgVisitorsMonday": "Ø Besucher montags",
+          "avgVisitorsTuesday": "Ø Besucher dienstags",
+          "avgVisitorsWednesday": "Ø Besucher mittwochs",
+          "avgVisitorsThursday": "Ø Besucher donnerstags",
+          "avgVisitorsFriday": "Ø Besucher freitags",
+          "avgVisitorsSaturday": "Ø Besucher samstags",
+          "avgVisitorsSunday": "Ø Besucher sonntags",
+          "avgVisitorsJanuary": "Ø tägliche Besucher im Januar",
+          "avgVisitorsFebruary": "Ø tägliche Besucher im Februar",
+          "avgVisitorsMarch": "Ø tägliche Besucher im März",
+          "avgVisitorsApril": "Ø tägliche Besucher im April",
+          "avgVisitorsMay": "Ø tägliche Besucher im Mai",
+          "avgVisitorsJune": "Ø tägliche Besucher im Juni",
+          "avgVisitorsJuly": "Ø tägliche Besucher im Juli",
+          "avgVisitorsAugust": "Ø tägliche Besucher im August",
+          "avgVisitorsSeptember": "Ø tägliche Besucher im September",
+          "avgVisitorsOctober": "Ø tägliche Besucher im Oktober",
+          "avgVisitorsNovember": "Ø tägliche Besucher im November",
+          "avgVisitorsDecember": "Ø tägliche Besucher im Dezember",
+          "avgVisitorYear": "Ø tägliche Besucher "
+        },
+        "compare": {
+          "location": "Ort",
+          "date": "Datum",
+          "compare": "Vergleiche",
+          "character": "Merkmal",
+          "location_comparison": "Standortvergleich",
+          "date_a": "Basisdatum",
+          "date_b": "Vergleichsdatum",
+          "date_comparison": "Vergleich Datumswerte"
+        },
+        "tab": {
+          "dwelltime": {
+            "chartTitle": "Verweildauer in Minuten"
+          },
+          "visitorTypes": {
+            "chartTitle": "Besuchertypen",
+            "chartLabels": {
+              "residents": "Einwohner",
+              "commuters": "Pendler",
+              "tourists_day": "Tagestouristen",
+              "tourists_overnight": "Übernachtungstouristen"
+            },
+            "cardLabels": {
+              "commutersPerDay": "Ø Pendler pro Tag",
+              "residentsPerDay": "Ø Einwohner pro Tag",
+              "touristsPerDay": "Ø Touristen pro Tag"
+            }
+          },
+          "ageGroup": {
+            "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat",
+            "pieChartTitle": "Altersgruppen pro Jahr",
+            "lineBarChartTitle": "Altersgruppen pro Jahr und Monat"
           }
+        },
+        "locationSelectMenu": {
+            "menuPlaceholder": "Standort auswählen"
+        }
       }
+    }
   }
 }

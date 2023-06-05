@@ -1,66 +1,127 @@
 {
   "modules": {
-      "tools": {
-          "vpidashboard": {
-              "name": "VPI Dashboard",
-              "tabitems": {
-                "individuals": "Unique Visitors",
-                "gender": "Gender",
-                "age": "Age",
-                "dwelltime": "Dwell Time",
-                "types": "Visitor Types",
-                "distance": "Distance"
-              },
-              "time": {
-                "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-              },
-              "details": "Details",
-              "unique": {
-                "allData": "All data",
-                "uniqueVisitors": "Unique visitors",
-                "dailyOverview": "Average of daily unique visitors",
-                "monthlyOverview": "Average of monthly unique visitors",
-                "hourly": "Visitors on a defined day (hourly)",
-                "timeRange": "Visitors on a defined day range (daily)",
-                "selectDate": "Please choose a date:",
-                "selectDateRange": "Please choose a date range:",
-                "noValidDate": "No valid date / date range chosen",
-                "numberVisitorsHour": "Number of visitors per hour",
-                "numberVisitorsDay": "Number of visitors per day",
-                "chartTitleDay": "Data from {{dateValue}}",
-                "chartTitleDayRange": "Data from {{dateValueFrom}} to {{dateValueTo}}",
-                "avgVisitorsYear": "Ø unique daily visitors in the year",
-                "avgVisitorsDay": "Ø unique daily visitors on a",
-                "avgVisitorsMonth": "Ø unique daily visitors per month",
-                "selectDataBase": "Choose base data for the graphic:",
-                "date": "Date",
-                "resetDate": "choose another date"
-              },
-              "gfi": {
-                "street": "Location",
-                "avgVisitorsMonday": "Ø visitors on a Monday",
-                "avgVisitorsTuesday": "Ø visitors on a Tuesday",
-                "avgVisitorsWednesday": "Ø visitors on a Wednesday",
-                "avgVisitorsThursday": "Ø visitors on a Thursday",
-                "avgVisitorsFriday": "Ø visitors on a Friday",
-                "avgVisitorsSaturday": "Ø visitors on a Saturday",
-                "avgVisitorsSunday": "Ø visitors on a Sunday",
-                "avgVisitorsJanuary": "Ø daily visitors in January",
-                "avgVisitorsFebruary": "Ø daily visitors in February",
-                "avgVisitorsMarch": "Ø daily visitors in March",
-                "avgVisitorsApril": "Ø daily visitors in April",
-                "avgVisitorsMay": "Ø daily visitors in May",
-                "avgVisitorsJune": "Ø daily visitors in June",
-                "avgVisitorsJuly": "Ø daily visitors in July",
-                "avgVisitorsAugust": "Ø daily visitors in August",
-                "avgVisitorsSeptember": "Ø daily visitors in September",
-                "avgVisitorsOctober": "Ø daily visitors in October",
-                "avgVisitorsNovember": "Ø daily visitors in November",
-                "avgVisitorsDecember": "Ø daily visitors in December",
-                "avgVisitorYear": "Ø daily visitors in "
-              }
+    "tools": {
+      "vpidashboard": {
+        "name": "VPI Dashboard",
+        "tabitems": {
+          "individuals": "Unique Visitors",
+          "gender": "Gender",
+          "age": "Age",
+          "dwelltime": "Dwell Time",
+          "types": "Visitor Types",
+          "distance": "Distance",
+          "compare": "Compare Locations",
+          "info": "Informations",
+          "compare_dates": "Compare Dates"
+        },
+        "time": {
+          "months": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ]
+        },
+        "details": "Details",
+        "unique": {
+          "allData": "All data",
+          "uniqueVisitors": "Unique visitors",
+          "dailyOverview": "Average of daily unique visitors",
+          "monthlyOverview": "Average of monthly unique visitors",
+          "hourly": "Visitors on a defined day (hourly)",
+          "timeRange": "Visitors on a defined day range (daily)",
+          "selectDate": "Please choose a date:",
+          "selectDateRange": "Please choose a date range:",
+          "noValidDate": "No valid date / date range chosen",
+          "numberVisitorsHour": "Number of visitors per hour",
+          "numberVisitorsDay": "Number of visitors per day",
+          "chartTitleDay": "Data from {{dateValue}}",
+          "chartTitleDayRange": "Data from {{dateValueFrom}} to {{dateValueTo}}",
+          "avgVisitorsYear": "Ø unique daily visitors in the year",
+          "avgVisitorsDay": "Ø unique daily visitors on a",
+          "avgVisitorsMonth": "Ø unique daily visitors per month",
+          "selectDataBase": "Choose base data for the graphic:",
+          "date": "Date",
+          "resetDate": "choose another date"
+        },
+        "gfi": {
+          "street": "Location",
+          "avgVisitorsMonday": "Ø visitors on a Monday",
+          "avgVisitorsTuesday": "Ø visitors on a Tuesday",
+          "avgVisitorsWednesday": "Ø visitors on a Wednesday",
+          "avgVisitorsThursday": "Ø visitors on a Thursday",
+          "avgVisitorsFriday": "Ø visitors on a Friday",
+          "avgVisitorsSaturday": "Ø visitors on a Saturday",
+          "avgVisitorsSunday": "Ø visitors on a Sunday",
+          "avgVisitorsJanuary": "Ø daily visitors in January",
+          "avgVisitorsFebruary": "Ø daily visitors in February",
+          "avgVisitorsMarch": "Ø daily visitors in March",
+          "avgVisitorsApril": "Ø daily visitors in April",
+          "avgVisitorsMay": "Ø daily visitors in May",
+          "avgVisitorsJune": "Ø daily visitors in June",
+          "avgVisitorsJuly": "Ø daily visitors in July",
+          "avgVisitorsAugust": "Ø daily visitors in August",
+          "avgVisitorsSeptember": "Ø daily visitors in September",
+          "avgVisitorsOctober": "Ø daily visitors in October",
+          "avgVisitorsNovember": "Ø daily visitors in November",
+          "avgVisitorsDecember": "Ø daily visitors in December",
+          "avgVisitorYear": "Ø daily visitors in "
+        },
+        "compare": {
+          "location": "Location",
+          "date": "Date",
+          "compare": "Compare",
+          "character": "Character",
+          "location_comparison": "Location Comparison",
+          "date_a": "Base date",
+          "date_b": "Compare date",
+          "date_comparison": "Date comparison"
+        },
+        "tab": {
+          "dwelltime": {
+            "chartTitle": "Dwell time in minutes"
+          },
+          "visitorTypes": {
+            "chartTitle": "Visitor Types",
+            "chartLabels": {
+              "residents": "Residents",
+              "commuters": "Commuters",
+              "tourists_day": "Day tourists",
+              "tourists_overnight": "Overnight tourists"
+            },
+            "cardLabels": {
+              "residentsPerDay": "Ø Residents per Tag",
+              "commutersPerDay": "Ø Commuters per Tag",
+              "touristsPerDay": "Ø Tourists per Tag"
+            }
+          },
+          "ageGroup": {
+            "chartTitle": "Age groups by year and by year and month",
+            "pieChartTitle": "Age groups by year",
+            "lineBarChartTitle": "Age groups by year and month"
           }
+        },
+        "locationSelectMenu": {
+            "menuPlaceholder": "Choose a location"
+        }
       }
+    }
   }
 }

@@ -23,6 +23,7 @@ import districtLevel from "./mock.districtLevel";
 // import {VChip} from "vuetify/lib";
 import Map from "ol/Map";
 
+
 Vue.use(Vuetify);
 
 const localVue = createLocalVue(),
@@ -157,7 +158,8 @@ describe("addons/cosi/FeaturesList/components/FeaturesList.vue", () => {
                             namespaced: true,
                             getters: {
                                 scenario: sinon.stub().returns(new Scenario("Scenario")),
-                                scenarioUpdated: sinon.stub().returns(new Scenario("Scenario"))
+                                scenarioUpdated: sinon.stub().returns(new Scenario("Scenario")),
+                                geomAttributes: sinon.stub()
                             }
                         },
                         DistrictSelector: {
@@ -345,8 +347,7 @@ describe("addons/cosi/FeaturesList/components/FeaturesList.vue", () => {
 
             // flatActiveLayerMapping has length 1 if 1 layer is active
             expect(wrapper.vm.flatActiveLayerMapping).to.have.lengthOf(1);
-            // first item in the layer filter dropdown has value "Mein Layer"
-            expect(wrapper.find(".layer_selection").props("items")[1].text).to.equal("Mein Layer");
+            expect(wrapper.vm.flatActiveLayerMapping[0].id).to.equal("Mein Layer");
             expect(wrapper.vm.filteredItems).to.have.lengthOf(1);
         });
 

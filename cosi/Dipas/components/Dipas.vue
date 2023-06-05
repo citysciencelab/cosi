@@ -125,8 +125,16 @@ export default {
          * @returns {void}
          */
         async initialize () {
-            const fetch = await this.fetchProjects(),
-                features = new GeoJSON().readFeatures(fetch);
+            const fetch = await this.fetchProjects();
+            let features = [];
+
+            for (let i = fetch.features.length - 1; i >= 0; i--) {
+                if (typeof fetch.features[i].geometry.type === "undefined") {
+                    fetch.features.splice(i, 1);
+                }
+            }
+
+            features = new GeoJSON().readFeatures(fetch);
 
             this.selectedStyling = "category";
             this.projectsFeatureCollection = this.transformFeatures(features);
@@ -159,8 +167,8 @@ export default {
                 this.$set(this.projectsActive, id, {layer: false, contributions: false, heatmap: false});
                 this.$set(this.contributions, id, {index: i, colors: {}, rainbowColors: {}, features: [], loading: false});
                 for (const [catIndex, category] of Object.values(feature.get("standardCategories")).entries()) {
-                    this.contributions[id].colors[category] = colorScale(catIndex);
-                    this.contributions[id].rainbowColors[category] = rainbowColorScale(catIndex);
+                    this.contributions[id].colors[category.name] = colorScale(catIndex);
+                    this.contributions[id].rainbowColors[category.name] = rainbowColorScale(catIndex);
                 }
             }
         },
@@ -752,12 +760,12 @@ export default {
                                     </div>
                                     <v-chip
                                         v-for="category in feature.get('standardCategories')"
-                                        :key="feature.get('id') + category"
+                                        :key="feature.get('id') + category.id"
                                         class="ma-1 category"
-                                        :color="handleColor(feature.get('id'), category)"
+                                        :color="handleColor(feature.get('id'), category.name)"
                                         small
                                     >
-                                        {{ category }}
+                                        {{ category.name }}
                                     </v-chip>
                                     <v-list-item>
                                         <v-list-item-action>

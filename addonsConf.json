@@ -154,6 +154,10 @@
     "path":"gfiThemes/verkehrsstaerken",
     "type": "gfiTheme"
   },
+  "wholeCity": {
+    "path":"gfiThemes/wholeCity",
+    "type": "gfiTheme"
+  },
   "AccessibilityAnalysis": {
     "path": "cosi/AccessibilityAnalysis",
     "type": "tool"
@@ -205,6 +209,9 @@
   },
   "TimeSeriesAnalyse": {
     "path": "cosi/TimeSeriesAnalyse",
+    "type": "tool"
+  },
+  "wholeCityList": {
     "type": "tool"
   }
 }
