@@ -16,7 +16,7 @@ import mapCanvasToImage, {exportMapView} from "../../utils/mapCanvasToImage";
 import AccessibilityAnalysisLegend from "./AccessibilityAnalysisLegend.vue";
 import AccessibilityAnalysisTrafficFlow from "./AccessibilityAnalysisTrafficFlow.vue";
 import {unpackCluster} from "../../utils/features/unpackCluster.js";
-import EditForReportTemplate from "../../ReportTemplates/components/editForReportTemplate.vue";
+import EditForReportTemplate from "../../components/EditForReportTemplate.vue";
 export default {
     name: "AccessibilityAnalysis",
     components: {
@@ -313,12 +313,70 @@ export default {
         // The watcher receives a request
         // It has three steps: 1. update interface based on the received settings, 2. run this addon's analysis, 3. send the results back to toolBridge
         toolBridgeIn (newRequest) {
+            console.log("erreichbarkeitsanalyse toolbridge..");
+            // eslint-disable-next-line require-jsdoc
+            function validateRequest (request) {
+                console.log("validating request..");
+                console.log(request);
+                const problems = [];
+
+                if (!request.settings.distance) {
+                    problems.push("Feld \"Entfernung\" fehlt in Erreichbarkeitsanalyse");
+                }
+                if (!(request.settings.mode === "region")) {
+                    problems.push("'Erreichbarkeit der Ausgewählten Einrichtungen' muss ausgewählt sein");
+                }
+                if (!request.settings.scaleUnit) {
+                    problems.push("'Masseinheit der Entfernung in der Erreichbarkeitsanalyse muss ausgewählt sein");
+                }
+                if (!request.settings.transportType) {
+                    problems.push("Transportmittel in Erreichbarkeitsanalysemuss ausgewählt sein");
+                }
+                if (!request.settings.selectedFacilityNames) {
+                    problems.push("'Thema' in Erreichbarkeitsanalyse muss auswgewählt sein");
+                }
+
+                if (problems.length > 0) {
+                    console.log("there are problems!");
+                    this.addSingleAlert({
+                        content: "Problem mit Tool Einstellungen: " + problems.join("\n; "),
+                        category: "Fehler",
+                        displayClass: "error"
+                    });
+
+                    return {success: false, message: problems.join("\n; ")};
+
+                }
+                return {success: true, message: null};
+
+
+            }
+
+            const requestValid = validateRequest(newRequest);
+
+            if (!requestValid.success) {
+                console.log("failed....");
+                this.$store.commit("Tools/ToolBridge/setReceivedResults", // this is where toolBridge expects requested results to arrive
+                    {
+                        // result: this.dataSets[this.activeSet].geojson, // if we ever wanted raw data (atm we dont, and toolBridge supports only single type of output)
+                        result: null,
+                        type: "error", // see toolBridge docs for supported output types
+                        request: newRequest, // we need to give back the original request as well
+                        sourceInfo: null,
+                        success: false,
+                        message: requestValid.message
+                    }
+                );
+                return null;
+            }
             /**
              * 1. update the interface based on the settings received from toolBridge
              * @param {Object} request the toolBridge request {id:..., settings:{...}}
              * @returns {Object} (run for side effects only, passes along the request)
              */
+            // eslint-disable-next-line one-var
             const updateInterface = (request) => {
+                    console.log("updateInterface....");
                     this._mode = request.settings.mode;
                     this._coordinate = request.settings.coordinate;
                     this._selectedFacilityNames = request.settings.selectedFacilityNames;
@@ -356,7 +414,8 @@ export default {
                             result: imgDataUrl,
                             type: "image", // see toolBridge docs for supported output types
                             request: newRequest, // we need to give back the original request as well
-                            sourceInfo: this.metaData ? [this.metaData] : null // return metadata as array if it exists
+                            sourceInfo: this.metaData ? [this.metaData] : null, // return metadata as array if it exists
+                            success: true
                         }
                     );
                 };
@@ -547,7 +606,6 @@ export default {
             await this.createIsochrones();
 
             analysisSet.results = this._isochroneFeatures;
-
             analysisSet.inputs = {
                 _mode: this._mode ? JSON.parse(JSON.stringify(this._mode)) : undefined,
                 _coordinate: this._coordinate ? JSON.parse(JSON.stringify(this._coordinate)) : undefined,
@@ -559,7 +617,7 @@ export default {
                 _time: this._time ? JSON.parse(JSON.stringify(this._time)) : undefined,
                 _useTravelTimeIndex: this.useTravelTimeIndex ? JSON.parse(JSON.stringify(this.useTravelTimeIndex)) : undefined,
                 _setByFeature: this._setByFeature ? JSON.parse(JSON.stringify(this._setByFeature)) : undefined,
-                _steps: this.steps ? JSON.parse(JSON.stringify(this.steps)) : undefined,
+                _steps: this.steps ? JSON.parse(JSON.stringify(this.steps)) : this.steps,
                 _selectedFacility: this.selectedFacility ? this.selectedFacility : undefined
             };
             this.dataSets.push(analysisSet);

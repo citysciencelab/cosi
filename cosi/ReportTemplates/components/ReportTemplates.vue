@@ -199,10 +199,15 @@ export default {
             dataSelected.then(()=>{
                 this.clearTemplateItemOutput(templateItemsIndex);
                 return this.updateToolOutput(templateItemsIndex);
+            }).then((result)=>{
+                console.log(result.success);
+                if (!result.success) {
+                    console.log("failed", result);
+                }
             })
             // 3. alert on failure
-                .catch(()=>{
-
+                .catch((e)=>{
+                    console.log("error:", e);
                     this.addSingleAlert({
                         content: "Analyse Kapitel " + (templateItemsIndex + 1) + " konnte eventuell nicht ausgefuehrt werden. Bitte überprüfen Sie die Tool Einstellungen.",
                         category: "Fehler",
@@ -241,6 +246,14 @@ export default {
             const outputCallback = (output)=>{
                 const itemID = templateItemsIndex;
 
+                console.log(output);
+                if (output.type === "error") {
+                    this.addSingleAlert({
+                        content: "Problem mit Tool Einstellungen: " + output.message,
+                        category: "Fehler",
+                        displayClass: "error"
+                    });
+                }
                 // ..commit the result to the store variable
                 this.$store.commit("Tools/ReportTemplates/templateItemOutput", {output, itemID});
                 // emit event that resolves the promise returned from updateToolOutput function
@@ -661,8 +674,27 @@ export default {
                                                         dense
                                                         @click="startEditingToolSettings({toolName: templateItem.tool,templateItemsIndex: index})"
                                                     >
-                                                        <v-icon>mdi-pen</v-icon>
+                                                        <!-- <v-tooltip
+                                                            activator="parent"
+                                                            position="right"
+                                                        >
+                                                            Öffnet das gewählte Tool, um die Einstellungen für die Analyse dieses Kapitels vorzunehmen
+                                                        </v-tooltip> -->
+                                                        hello!
+                                                        <v-tooltip
+                                                            activator="parent"
+                                                        >
+                                                            Tooltip
+                                                        </v-tooltip>
+                                                        <!-- <v-icon>mdi-pen</v-icon> -->
                                                     </v-btn><br><br>
+                                                    <v-tooltip text="Tooltip">
+                                                        <template #activator="{ props }">
+                                                            <v-btn v-bind="props">
+                                                                Tooltip
+                                                            </v-btn>
+                                                        </template>
+                                                    </v-tooltip>
                                                 </v-col>
                                             </v-row>
                                             <v-row v-if="!templateItem.hasToolSettings & templateItem.tool">

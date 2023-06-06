@@ -9,8 +9,7 @@ import {getTimestamps} from "../../utils/timeline";
 import beautifyKey from "../../../../src/utils/beautifyKey";
 import groupMapping from "../../utils/groupMapping";
 import TableRowMenu from "./TableRowMenu.vue";
-import EditForReportTemplate from "../../ReportTemplates/components/editForReportTemplate.vue";
-
+import EditForReportTemplate from "../../components/EditForReportTemplate.vue";
 import {
     addCalculation,
     addDivideSelectedCalculations,

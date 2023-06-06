@@ -64,7 +64,8 @@
 //                 {
 //                     result: this.analysisResults, // change to where results are stored
 //                     type: "geoJSON", // see toolBridge docs for supported output types
-//                     request: newRequest // we need to give back the original request as well, leave this as is.
+//                     request: newRequest, // we need to give back the original request as well, leave this as is.
+//                     success: true
 //                 }
 //             );
 //         };

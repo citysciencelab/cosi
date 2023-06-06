@@ -1,3 +1,4 @@
+import promisedEvent from "../../ReportTemplates/utils/promisedEvent";
 export default {
     /**
      *
@@ -17,11 +18,32 @@ export default {
         if (typeof outputCallback !== "function") {
             throw new Error(outputCallback + " must be a function");
         }
-        // commit request to the requested tool
+        const uniqueRequestID = crypto.randomUUID(), // a unique identifier for this request
+            /**
+         * @param {*} result result of the tool's analysis
+         * wraps outputCallback in function that emits event so we can resolve the promise returned by runTool
+         */
+            // eslint-disable-next-line func-style
+            outputCallbackWithEvent = function (result) {
+                outputCallback(result);
+                // emit event
+                this.$root.$emit("toolBridge-runTool-result-received" + uniqueRequestID,
+                    result
+                );
+            },
+
+            // validate settings
+            valid = this.validateToolSettings(toolName, settings);
+
+        if (valid.success === false) {
+            throw new Error(valid.message + " for " + toolName);
+        }
+        // commit request to the requested tool's store
+        // eslint-disable-next-line one-var
         const toolPath = "Tools/" + toolName + "/setToolBridgeIn",
             request = {
                 settings: settings,
-                outputCallback: outputCallback
+                outputCallback: outputCallbackWithEvent
             };
 
         if (updateInterfaceOnly) {
@@ -32,5 +54,14 @@ export default {
             request,
             {root: true} // allows commit to a different module
         );
+        return promisedEvent.call(this,
+            "toolBridge-runTool-result-received" + uniqueRequestID,
+            15000);
+    },
+    validateToolSettings (toolName, settings) {
+        if (toolName === "AccessibilityAnalysis") {
+            return {success: false, message: "problems!!"};
+        }
+        return true;
     }
 };
