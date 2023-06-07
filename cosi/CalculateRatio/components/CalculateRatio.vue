@@ -72,10 +72,6 @@ export default {
             perCalc_A: 1,
             // Modifier "berechnen pro" for Field B
             perCalc_B: 1,
-            // operation to perform on field A values
-            operation_A: "sum",
-            // operation to perform on field A values
-            operation_B: "sum",
             // Helper Array to use selected values beyond function scope
             featureVals: [],
             // Object that helps calculating the data in prepareCoverage function
@@ -225,6 +221,7 @@ export default {
         ...mapMutations("Tools/CalculateRatio", Object.keys(mutations)),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapActions("Tools/ChartGenerator", ["channelGraphData"]),
+        ...mapMutations("Tools/ChartGenerator", ["setNewDataset"]),
         /**
          * @description Updates theme layer selection and sorting/ grouping it for display in multiselect.
          * @todo triggers too often!!! refactor
@@ -474,7 +471,7 @@ export default {
                 allData.push(combined);
             });
 
-            this.setResults(utils.calculateRatio(allData, this.selectedYear, [this.operation_A, this.operation_B]));
+            this.setResults(utils.calculateRatio(allData, this.selectedYear));
             this.setResultHeaders({
                 typeA: resultHeader_A,
                 typeB: resultHeader_B,
@@ -659,7 +656,7 @@ export default {
                 dataArray.push(result.data);
             });
 
-            this.setResults(utils.calculateRatio(dataArray, this.selectedYear, [this.operation_A, this.operation_B]));
+            this.setResults(utils.calculateRatio(dataArray, this.selectedYear));
             this.dataSets[this.activeSet].results = this.results;
         },
         /**
@@ -756,7 +753,7 @@ export default {
             });
 
             this.availableYears.forEach(year => {
-                const dataPerYear = utils.calculateRatio(dataArray, year, [this.operation_A, this.operation_B])
+                const dataPerYear = utils.calculateRatio(dataArray, year)
                     .filter(dataset => dataset.scope);
 
                 dataPerYear.forEach(dataset => {
@@ -848,309 +845,6 @@ export default {
                             class="select_wrapper section first"
                             :class="{ grouped: selectedFieldA.id }"
                         >
-                            <template v-if="ASwitch">
-                                <div class="sub_wrapper">
-                                    <div
-                                        class="faktor_f"
-                                    >
-                                        <div
-                                            class="btn"
-                                            :title="$t('additional:modules.tools.cosi.calculateRatio.addFactorTooltip')"
-                                            :class="{ reduced: fActive_A }"
-                                        >
-                                            <button @click="fActive_A = !fActive_A">
-                                                <v-icon
-                                                    v-if="fActive_A"
-                                                >
-                                                    mdi-close
-                                                </v-icon>
-                                                <span v-else>{{ $t('additional:modules.tools.cosi.calculateRatio.addFactor') }}</span>
-                                            </button>
-                                        </div>
-                                        <div
-                                            v-if="fActive_A"
-                                            class="input"
-                                        >
-                                            <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
-                                            <input
-                                                v-model.number="faktorf_A"
-                                                type="number"
-                                            >
-                                        </div>
-                                    </div>
-                                    <v-select
-                                        v-if="facilityList.length"
-                                        v-model="paramFieldA"
-                                        class="feature_selection selection"
-                                        :items="facilityPropertyList_A"
-                                        item-text="name"
-                                        item-value="name"
-                                        dense
-                                        outlined
-                                        return-object
-                                        :disabled="facilityPropertyList_A.length < 2"
-                                    />
-                                    <v-select
-                                        v-if="facilityList.length"
-                                        v-model="operation_A"
-                                        class="feature_selection selection"
-                                        :items="[
-                                            {name: 'Summe', value: 'sum'},
-                                            {name: 'Durchschnitt', value: 'avg'},
-                                        ]"
-                                        item-text="name"
-                                        item-value="value"
-                                        dense
-                                        outlined
-                                    />
-                                </div>
-                            </template>
-                            <template v-else>
-                                <div class="sub_wrapper">
-                                    <div class="custom_wrapper">
-                                        <p>{{ $t("additional:modules.tools.cosi.calculateRatio.calcPer") }} </p>
-                                        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
-                                        <input
-                                            v-model.number="perCalc_A"
-                                            type="number"
-                                        >
-                                        <p><strong> {{ $t("additional:modules.tools.cosi.calculateRatio.ofData") }}</strong></p>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                    <div
-                        v-if="selectedFieldA.id.length > 0"
-                        class="select_wrapper section second"
-                        :class="{ grouped: selectedFieldB.id }"
-                    >
-                        <div
-                            class="button switch"
-                            :title="$t('additional:modules.tools.cosi.calculateRatio.switchFieldType')"
-                        >
-                            <button
-                                id="switchB"
-                                @click="switchVal('B')"
-                            >
-                                <template v-if="BSwitch">
-                                    <span>{{ $t("additional:modules.tools.cosi.calculateRatio.dataA") }}</span>
-                                </template>
-                                <template v-else>
-                                    <!-- eslint-disable-next-line -->
-                                    <span>{{ $t("additional:modules.tools.cosi.calculateRatio.dataB") }}</span>
-                                </template>
-                            </button>
-                        </div>
-                        <template v-if="BSwitch">
-                            <v-select
-                                v-if="groupActiveLayer.length > 0"
-                                v-model="selectedFieldB"
-                                class="facility_selection selection"
-                                :items="groupActiveLayer"
-                                dense
-                                outlined
-                                :placeholder="$t('additional:modules.tools.cosi.calculateRatio.placeholderB')"
-                                @input="getFacilityData('B')"
-                            />
-                        </template>
-                        <template v-else>
-                            <v-autocomplete
-                                v-if="featuresList.length"
-                                id="feature_selector_B"
-                                v-model="selectedFieldB.id"
-                                class="feature_selection selection"
-                                :items="aSumUpSwitchB ? subFeaturesList : featuresList"
-                                dense
-                                outlined
-                                :multiple="aSumUpSwitchB ? true : false"
-                                :small-chips="aSumUpSwitchB ? true : false"
-                                :deletable-chips="aSumUpSwitchB ? true : false"
-                                :placeholder="$t('additional:modules.tools.cosi.calculateRatio.placeholderB')"
-                                :menu-props="{ closeOnContentClick: true }"
-                                @input="checkSumUp('B')"
-                            />
-                        </template>
-                        <div
-                            v-if="selectedFieldB.id.length > 0"
-                            class="subsection"
-                        >
-                            <template v-if="BSwitch">
-                                <div class="sub_wrapper">
-                                    <div
-                                        class="faktor_f"
-                                    >
-                                        <div
-                                            class="btn"
-                                            :class="{ reduced: fActive_B }"
-                                        >
-                                            <button
-                                                :title="$t('additional:modules.tools.cosi.calculateRatio.addFactorTooltip')"
-                                                @click="fActive_B = !fActive_B"
-                                            >
-                                                <v-icon
-                                                    v-if="fActive_B"
-                                                >
-                                                    mdi-close
-                                                </v-icon>
-                                                <span v-else>{{ $t('additional:modules.tools.cosi.calculateRatio.addFactor') }}</span>
-                                            </button>
-                                        </div>
-                                        <div
-                                            v-if="fActive_B"
-                                            class="input"
-                                        >
-                                            <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
-                                            <input
-                                                v-model.number="faktorf_B"
-                                                type="number"
-                                            >
-                                        </div>
-                                    </div>
-                                    <v-select
-                                        v-if="facilityList.length"
-                                        v-model="paramFieldB"
-                                        class="feature_selection selection"
-                                        :items="facilityPropertyList_B"
-                                        item-text="name"
-                                        item-value="name"
-                                        dense
-                                        outlined
-                                        return-object
-                                        :disabled="facilityPropertyList_B.length < 2"
-                                    />
-                                    <v-select
-                                        v-if="facilityList.length"
-                                        v-model="operation_B"
-                                        class="feature_selection selection"
-                                        :items="[
-                                            {name: 'Summe', value: 'sum'},
-                                            {name: 'Durchschnitt', value: 'avg'},
-                                        ]"
-                                        item-text="name"
-                                        item-value="value"
-                                        dense
-                                        outlined
-                                    />
-                                </div>
-                            </template>
-                            <template v-else>
-                                <div class="sub_wrapper">
-                                    <div class="custom_wrapper">
-                                        <p>{{ $t("additional:modules.tools.cosi.calculateRatio.calcPer") }} </p>
-                                        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
-                                        <input
-                                            v-model.number="perCalc_B"
-                                            type="number"
-                                        >
-                                        <p><strong> {{ $t("additional:modules.tools.cosi.calculateRatio.ofData") }}</strong></p>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                    <div
-                        v-if="selectedFieldA.id.length > 0 && selectedFieldB.id.length > 0"
-                        class="select_wrapper section third"
-                    >
-                        <div class="btn_grp finalization">
-                            <button
-                                class="switch"
-                                :title="$t('additional:modules.tools.cosi.calculateRatio.swapFields')"
-                                @click="switchSelection"
-                            >
-                                <v-icon>
-                                    mdi-swap-horizontal
-                                </v-icon>
-                            </button>
-                            <button
-                                class="cancel"
-                                :title="$t('additional:modules.tools.cosi.calculateRatio.resetTooltip')"
-                                @click="clearAllValues"
-                            >
-                                <v-icon
-                                    left
-                                >
-                                    mdi-close-circle
-                                </v-icon>
-                                {{ $t('additional:modules.tools.cosi.calculateRatio.reset') }}
-                            </button>
-                            <button
-                                class="confirm"
-                                :title="$t('additional:modules.tools.cosi.calculateRatio.calculateTooltip')"
-                                @click="prepareCoverage"
-                            >
-                                <v-icon
-                                    left
-                                >
-                                    mdi-check-circle
-                                </v-icon>
-                                {{ $t('additional:modules.tools.cosi.calculateRatio.calculate') }}
-                            </button>
-                        </div>
-                    </div>
-                    <AnalysisPagination
-                        v-if="dataSets.length > 0"
-                        :sets="dataSets"
-                        :active-set="activeSet"
-                        :downloads="['XLS', 'GEOJSON']"
-                        :titles="{
-                            downloads: [$t('additional:modules.tools.cosi.calculateRatio.downloadXlsxTooltip'), $t('additional:modules.tools.cosi.calculateRatio.downloadGeoJsonTooltip')],
-                            downloadAll: $t('additional:modules.tools.cosi.calculateRatio.paginationDownloadAll'),
-                            remove: $t('additional:modules.tools.cosi.calculateRatio.paginationRemove'),
-                            removeAll: $t('additional:modules.tools.cosi.calculateRatio.paginationRemoveAll'),
-                            next: $t('additional:modules.tools.cosi.calculateRatio.paginationNext'),
-                            prev: $t('additional:modules.tools.cosi.calculateRatio.paginationPrev'),
-                        }"
-                        @setActiveSet="(n) => setActiveSet(n)"
-                        @setPrevNext="(n) => setPrevNext(n)"
-                        @removeSingle="(n) => removeSet(n)"
-                        @removeAll="clearAllValues"
-                        @downloadXLS="(n) => exportAsXlsx(n)"
-                        @downloadGEOJSON="(n) => exportAsGeoJson(n)"
-                        @downloadAll="downloadAll"
-                    />
-                    <div
-                        v-if="results.length > 0"
-                        class="data_table"
-                    >
-                        <div class="head_wrapper">
-                            <button
-                                class="cg"
-                                :title="$t('additional:modules.tools.cosi.calculateRatio.visualizeChart')"
-                                @click="loadToChartGenerator()"
-                            >
-                                <v-icon>
-                                    mdi-poll
-                                </v-icon>
-                            </button>
-                            <button
-                                class="ccm"
-                                :class="{ highlight: !dataToColorCodeMap}"
-                                :title="$t('additional:modules.tools.cosi.calculateRatio.visualizeMap')"
-                                @click="loadToColorCodeMap()"
-                            >
-                                <v-icon
-                                    v-if="!dataToColorCodeMap"
-                                >
-                                    mdi-eye
-                                </v-icon>
-                                <v-icon
-                                    v-else
-                                >
-                                    mdi-eye-off
-                                </v-icon>
-                            </button>
-                            <v-select
-                                v-model="columnSelector"
-                                dense
-                                outlined
-                                class="column_selection selection"
-                                :items="availableColumns"
-                                item-text="name"
-                                item-value="key"
-                                return-object
-                            />
                             <div
                                 class="button switch"
                                 :title="$t('additional:modules.tools.cosi.calculateRatio.switchFieldType')"

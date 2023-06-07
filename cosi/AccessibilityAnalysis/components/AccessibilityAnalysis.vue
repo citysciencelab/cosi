@@ -503,7 +503,7 @@ export default {
         setFacilityLayers: function (vectorLayers) {
             this.facilityNames = [];
             vectorLayers.forEach(layer => {
-                if (layer.getSource().getFeatures().length > 0) {
+                if (getLayerSource(layer).getFeatures().length > 0) {
                     this.facilityNames.push(layer.get("name"));
                 }
                 else {
