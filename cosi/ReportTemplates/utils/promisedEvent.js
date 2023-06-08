@@ -6,7 +6,7 @@
  */
 export default function promisedEvent (eventName, timeOut) {
     if (!this.$root.$on) {
-        throw new Error("$root not available; use promisedEvent.call(this,parameters...)");
+        throw new Error("$root not available; use promisedEvent.call(parameters..., this)");
     }
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line require-jsdoc

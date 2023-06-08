@@ -8,6 +8,8 @@ import getters from "../store/gettersReportTemplates";
 import mutations from "../store/mutationsReportTemplates";
 import tableify from "tableify"; // generate html tables from js objects
 import promisedEvent from "../utils/promisedEvent";
+import validateToolSettings from "../utils/validateToolSettings";
+
 export default {
     name: "ReportTemplates",
     components: {
@@ -144,6 +146,7 @@ export default {
         ...mapMutations("Tools/ReportTemplates", Object.keys(mutations)),
         ...mapActions("Tools/ToolBridge", ["runTool"]),
         ...mapActions("Maps", ["zoomToExtent"]),
+        ...mapActions("Alerting", ["addSingleAlert"]),
         ...mapActions("Tools/ExportPDF", ["reportTemplateToPDF"]),
         ...mapMutations("Tools/SelectionManager", ["addSelection", "setActiveSelection", "setAcceptSelection"]),
         // store settings from selected addon in the template
@@ -186,7 +189,26 @@ export default {
          * @return {void}
          */
         applyChapter (templateItemsIndex, finallyDo) {
-            const chapter = this.templateItems[templateItemsIndex];
+            const chapter = this.templateItems[templateItemsIndex],
+
+                // validate tool settings with validateToolSettings function
+                settingsValid = validateToolSettings(chapter.tool, chapter.settings);
+
+            this.addSingleAlert({
+                content: "kapitel anwendung!",
+                category: "Fehler",
+                displayClass: "error"
+            });
+
+            if (!settingsValid.success) {
+                this.addSingleAlert({
+                    content: "Tool Einstellungen für Kapitel " + (templateItemsIndex + 1) + " sind nicht valide:" + settingsValid.message,
+                    category: "Fehler",
+                    displayClass: "error"
+                });
+                return;
+            }
+
 
             // 1. set data selection (or give resolved promise if none)
             let dataSelected = Promise.resolve();
@@ -194,6 +216,7 @@ export default {
             if (Object.keys(chapter.dataSelection).length !== 0) {
                 dataSelected = this.setCurrentDataSelectionLayersOnly(chapter.dataSelection);
             }
+            const addSingleAlert = this.addSingleAlert;
 
             // 2. run analysis
             dataSelected.then(()=>{
@@ -208,7 +231,7 @@ export default {
             // 3. alert on failure
                 .catch((e)=>{
                     console.log("error:", e);
-                    this.addSingleAlert({
+                    addSingleAlert({
                         content: "Analyse Kapitel " + (templateItemsIndex + 1) + " konnte eventuell nicht ausgefuehrt werden. Bitte überprüfen Sie die Tool Einstellungen.",
                         category: "Fehler",
                         displayClass: "error"

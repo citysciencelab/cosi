@@ -1,6 +1,5 @@
 <script>
-import {mapMutations} from "vuex";
-
+import {mapActions, mapMutations} from "vuex";
 export default {
     name: "EditForReportTemplate",
     props: {
@@ -9,10 +8,37 @@ export default {
         "instructions": {type: String, required: false, default: "Wählen Sie die für Ihre Analyse notwendigen Datenlayer aus dem Themenbaum aus. Geben Sie dann alle gewünschten Einstellungen hier ein. Drücken Sie auf übernehmen, um die Einstellungen in das Report Template zu übernehmen."}
     },
     data () {
-        return {};
+        return {
+            settingsIssues: [] // any problems with the current settings?
+        };
+    },
+    computed: {
+        validationStatus () {
+            if (this.settingsIssues.length === 0) {
+                return "noSettingsIssues";
+            }
+            return "hasSettingsIssues";
+        }
     },
     methods: {
-        ...mapMutations("Tools/ReportTemplates", ["finishEditingToolSettings", "abortEditingToolSettings"])
+        ...mapMutations("Tools/ReportTemplates", ["finishEditingToolSettings", "abortEditingToolSettings"]),
+        ...mapActions("Tools/ReportTemplates", ["finishEditingToolSettingsAction"]),
+
+        stopEditing () {
+            const finishEditingValidationResult = this.finishEditingToolSettingsAction(this.toolName);
+
+            finishEditingValidationResult.then((validation)=>{
+                console.log(validation);
+                if (!validation.success) {
+                    this.settingsIssues = validation.individualMessages;
+                }
+                else {
+                    this.settingsIssues = [];
+                }
+            });
+
+        }
+
     }
 };
 </script>
@@ -21,12 +47,23 @@ export default {
     <v-card
         v-if="!(reportTemplateMode===null)"
         variant="tonal"
-        color="grey lighten-3"
         width="400px"
         class="mt-3 mb-3"
+        :class="validationStatus"
     >
         <v-card-title>Tool für Report Template Einstellen</v-card-title>
         {{ instructions }}
+        <br>
+
+        <ul>
+            <li
+                v-for="(issue, index) in settingsIssues"
+                :key="index"
+            >
+                here's an issue: {{ issue }}
+            </li>
+        </ul>
+        </div>
         <v-card-text />
         <v-card-actions>
             <v-btn
@@ -34,6 +71,7 @@ export default {
                 small
                 tile
                 color="grey lighten-1"
+                :class="validationStatus"
                 @click="abortEditingToolSettings(toolName)"
             >
                 abbrechen
@@ -43,7 +81,7 @@ export default {
                 small
                 tile
                 color="light green"
-                @click="finishEditingToolSettings(toolName)"
+                @click="stopEditing()"
             >
                 übernehmen
             </v-btn>
@@ -52,3 +90,11 @@ export default {
 </template>
 
 
+<style scoped>
+.hasSettingsIssues{
+    color: orange;
+}
+.noSettingsIssues{
+    color: rgb(166, 164, 164);
+}
+</style>

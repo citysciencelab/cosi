@@ -1,5 +1,7 @@
 import {generateSimpleMutations} from "../../../../src/app-store/utils/generators";
 import ReportTemplatesState from "./stateReportTemplates";
+import validateToolSettings from "../../ReportTemplates/utils/validateToolSettings";
+import gettersToolsBridge from "../../ToolBridge/store/gettersToolBridge";
 const mutations = {
     ...generateSimpleMutations(ReportTemplatesState),
     templateItemOutput (state, {output, itemID}) { // to overwrite a specific key of a specific array item
@@ -38,6 +40,16 @@ const mutations = {
         state.editingTool = {toolName: null, templateItemsIndex: null, accepted: false}; // watcher on editingTool handles rest
     },
     finishEditingToolSettings (state) {
+        console.log(gettersToolsBridge);
+        const settings = gettersToolsBridge.currentSettings(state.editingTool.toolName);
+
+        console.log("SETTINGS ", settings);
+        // check if settings are valid
+        //       console.log(currentSettings(state.editingTool.toolName));
+        //     const validation = validateToolSettings(state.editingTool.toolName, currentSettings(state.editingTool.toolName));
+
+        //   console.log("VALIDATION", validation);
+
         // stop editing mode
         this.commit("Tools/ReportTemplates/closeToolsInTemplateMode");
         // let reportTemplates know that editing is over and edits are accepted
