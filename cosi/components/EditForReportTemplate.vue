@@ -21,11 +21,10 @@ export default {
         }
     },
     methods: {
-        ...mapMutations("Tools/ReportTemplates", ["finishEditingToolSettings", "abortEditingToolSettings"]),
-        ...mapActions("Tools/ReportTemplates", ["finishEditingToolSettingsAction"]),
+        ...mapActions("Tools/ReportTemplates", ["finishEditingToolSettings", "abortEditingToolSettings"]),
 
         stopEditing () {
-            const finishEditingValidationResult = this.finishEditingToolSettingsAction(this.toolName);
+            const finishEditingValidationResult = this.finishEditingToolSettings(this.toolName);
 
             finishEditingValidationResult.then((validation)=>{
                 console.log(validation);
@@ -49,21 +48,19 @@ export default {
         variant="tonal"
         width="400px"
         class="mt-3 mb-3"
-        :class="validationStatus"
     >
         <v-card-title>Tool für Report Template Einstellen</v-card-title>
         {{ instructions }}
         <br>
 
-        <ul>
+        <ul :class="validationStatus">
             <li
                 v-for="(issue, index) in settingsIssues"
                 :key="index"
             >
-                here's an issue: {{ issue }}
+                {{ issue }}
             </li>
         </ul>
-        </div>
         <v-card-text />
         <v-card-actions>
             <v-btn
@@ -71,7 +68,6 @@ export default {
                 small
                 tile
                 color="grey lighten-1"
-                :class="validationStatus"
                 @click="abortEditingToolSettings(toolName)"
             >
                 abbrechen

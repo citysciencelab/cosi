@@ -420,8 +420,6 @@ export default {
         ...mapActions("Maps", ["addNewLayerIfNotExists"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...methods,
-
-
         /**
          * Sets all needed non reactive data.
          * @returns {void}
@@ -801,14 +799,20 @@ export default {
                                 dense
                                 hide-details
                             />
-                            <v-row dense>
+
+                            <v-row
+                                v-if="reportTemplateMode===null"
+                                dense
+                            >
                                 <v-col cols="4">
                                     <v-btn
                                         id="create-isochrones"
                                         dense
                                         small
                                         tile
+
                                         color="grey lighten-1"
+
                                         @click.native="createAnalysisSet()"
                                     >
                                         {{ $t("additional:modules.tools.cosi.accessibilityAnalysis.calculate") }}

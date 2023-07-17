@@ -21,9 +21,6 @@ export default {
             uploadedTemplate: null, // file input field for report templates. This variable is watched and used to replace `templateItems` store variable
             supportedExportFormats: ["HTML", "PDF", "Importierbares Template (json)"],
             selectedExportFormat: "HTML",
-            ui_currentTab: 0, // vuetify tab content based on v-model
-            ui_tab: null,
-            ui_items: ["Importieren", "Bearbeiten", "Anwenden", "Exportieren"],
             uiModes: {
                 startingTemplateSelected: false
             },
@@ -37,7 +34,6 @@ export default {
         ...mapGetters("Maps", {getMapView: "getView"}),
         ...mapGetters("Tools/SelectionManager", ["lastSelectionWithCurrentDataLayers"]),
         ...mapGetters("Tools/DistrictSelector", ["selectedDistrictNames"])
-
 
     },
     watch: {
@@ -142,6 +138,7 @@ export default {
         // ...
     },
     methods: {
+        ...mapActions("Tools/ReportTemplates", ["startEditingToolSettings", "finishEditingToolSettings", "abortEditingToolSettings"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapMutations("Tools/ReportTemplates", Object.keys(mutations)),
         ...mapActions("Tools/ToolBridge", ["runTool"]),
@@ -163,8 +160,8 @@ export default {
         },
         /**
          * Apply all template chapters sequentially
-         * @param {*} callback runs after all chapters were applied (no input and return value not returned)
-         * @param {*} startIndex from which chapter to start (parameter needed for recursion)
+         * @param {function} callback runs after all chapters were applied (no input and return value not returned)
+         * @param {number} startIndex from which chapter to start (parameter needed for recursion)
          * @return {void}
          */
         runTemplate (callback, startIndex = 0) {
@@ -184,8 +181,8 @@ export default {
         },
         /**
          * apply chapter data selection, wait for data, run analysis
-         * @param {*} templateItemsIndex index of chapter in templateItems
-         * @param {*} finallyDo what to do in the end, no matter if applying the chapter worked or not (no input expected)
+         * @param {number} templateItemsIndex index of chapter in templateItems
+         * @param {function} finallyDo what to do in the end, no matter if applying the chapter worked or not (no input expected)
          * @return {void}
          */
         applyChapter (templateItemsIndex, finallyDo) {
@@ -220,15 +217,22 @@ export default {
 
             // 2. run analysis
             dataSelected.then(()=>{
-                this.clearTemplateItemOutput(templateItemsIndex);
-                return this.updateToolOutput(templateItemsIndex);
-            }).then((result)=>{
-                console.log(result.success);
-                if (!result.success) {
-                    console.log("failed", result);
-                }
+                console.log("data selected.");
             })
             // 3. alert on failure
+                .catch((e)=>{
+                    console.log("error:", e);
+                    addSingleAlert({
+                        content: "Daten Kapitel " + (templateItemsIndex + 1) + " konnten nicht geladen werden.",
+                        category: "Fehler",
+                        displayClass: "error"
+                    });
+                    console.log("error:", e);
+                }).finally(()=>{ // after trying to load data is finished, run analysis
+                    console.log("data selected now run script");
+                    this.clearTemplateItemOutput(templateItemsIndex);
+                    return this.updateToolOutput(templateItemsIndex);
+                })
                 .catch((e)=>{
                     console.log("error:", e);
                     addSingleAlert({
@@ -246,8 +250,8 @@ export default {
         },
         /**
          * run a different addon based on templateItem, store results
-         * @param {integer} templateItemsIndex array index of the templateItem to run
-         * @param {*} callbackAfterOutputReceived what to do after the results are commited back from the external tool to the reportTemplate store (receives no input)
+         * @param {number} templateItemsIndex array index of the templateItem to run
+         * @param {function} callbackAfterOutputReceived what to do after the results are commited back from the external tool to the reportTemplate store (receives no input)
          * @returns {Promise} a promise that resolves once the output is received, or is rejected after a timeOut
          */
         updateToolOutput (templateItemsIndex) {
@@ -286,6 +290,7 @@ export default {
 
             // calls toolBridge to run the selected tool with the given settings
             // outputCallback then saves the results to this.templateItems
+            console.log("running tool on", this.templateItems[templateItemsIndex]);
             this.runTool({
                 toolName: this.templateItems[templateItemsIndex].tool, // the selected tool
                 settings: this.templateItems[templateItemsIndex].settings, // the settings stored previously via the `updateToolSeetings()` method
@@ -402,7 +407,7 @@ export default {
             downloadAnchorNode.remove();
         },
         emptyTemplate () {
-            this.$store.state.Tools.ReportTemplates.templateItems = [];
+            this.setTemplateItems([]);
             this.uploadedTemplate = null;
             this.addEmptyTemplateItem();
         },
@@ -438,7 +443,7 @@ export default {
         // add stored selection to  SelectionManager
         /**
          *
-         * @param {*} dataSelection the data selection as retreived from selectionManager
+         * @param {Object} dataSelection the data selection as retreived from selectionManager
          * @return {Promise} a promise that resolves when data is loaded, or gets rejected after a timeout
          */
         setCurrentDataSelection (dataSelection) {
@@ -459,6 +464,11 @@ export default {
                 15000);
 
         },
+        /**
+         * Set layers of dataSelection without changing the area boundary (via selectionManager)
+         * @param {Object} dataSelection data selection as retreived by selectionManager
+         * @returns {Promise} resolved when data selection loaded
+         */
         setCurrentDataSelectionLayersOnly (dataSelection) {
             // get the current data selection from selectionmanager for the geometry..
             const lastSelection = this.lastSelectionWithCurrentDataLayers,
@@ -527,10 +537,16 @@ export default {
             return true;
 
         },
+        /**
+         * Open a tool's interface
+         * @param {character} toolName name of the tool that should be opened
+         * @param {boolean} closeReportTemplates true if reportTempates tool should be closed
+         * @returns {void}
+         */
         openToolInterface (toolName, closeReportTemplates = true) {
             this.$store.commit("Tools/" + toolName + "/setActive", true);
             if (closeReportTemplates) {
-                this.$store.commit("Tools/ReportTemplates/setActive", false);
+                this.setActive(false);
             }
         },
         close () {
@@ -690,6 +706,7 @@ export default {
                                                         :items="supportedTools"
                                                         item-text="title"
                                                         item-value="value"
+                                                        @change="startEditingToolSettings({toolName: templateItem.tool,templateItemsIndex: index})"
                                                     />
                                                 </v-col>
                                                 <v-col cols="4">

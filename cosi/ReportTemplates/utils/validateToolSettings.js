@@ -4,7 +4,7 @@
  * @param {string} toolName name of the tool
  * @param {*} settings settings as received from toolBridgeOut getter in requested tool
  * @param {function} onIssue callback function if there is an issue with the settings, receiving the issue as string
- * @returns
+ * @returns {object} {success: boolean, message: string, individualMessages: string[]}‚
  */
 function validateToolSettings (toolName, settings) {
     // check if valid tool name
@@ -45,7 +45,7 @@ function validateToolSettings (toolName, settings) {
         if (!settings.transportType) {
             problems.push("Transportmittel muss ausgewählt sein");
         }
-        if (!settings.selectedFacilityNames) {
+        if (!settings.selectedFacilityNames || settings.selectedFacilityNames.length === 0) {
             problems.push("'Thema' muss ausgewählt sein");
         }
 

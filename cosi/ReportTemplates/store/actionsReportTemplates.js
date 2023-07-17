@@ -1,7 +1,22 @@
 import validateToolSettings from "../utils/validateToolSettings";
 const actions = {
+    startEditingToolSettings (context, payload) {
+        if (!payload.toolName) {
+            throw new Error("Kein tool zum bearbeiten gewählt");
 
-    finishEditingToolSettingsAction (context) {
+        }
+        // close all other tools and stop their editing mode
+        this.commit("Tools/ReportTemplates/closeToolsInTemplateMode");
+        // open selected tool in editing mode
+        this.commit("Tools/" + payload.toolName + "/setReportTemplateMode", payload.templateItemsIndex);
+        this.commit("Tools/" + payload.toolName + "/setActive", true);
+        // remember which tool we are editing for which chapter
+        context.state.editingTool = {toolName: payload.toolName, templateItemsIndex: payload.templateItemsIndex};
+        // close report templates window
+        context.state.active = false;
+    },
+    finishEditingToolSettings (context) {
+        console.log("FINISH - ACTION");
 
         // get current settings via toolbridge
         const currentSettings = context.rootGetters["Tools/ToolBridge/currentSettings"],
@@ -21,6 +36,14 @@ const actions = {
         // let reportTemplates know that editing is over and edits are accepted
         context.state.editingTool = {toolName: null, templateItemsIndex: null, accepted: true}; // watcher on editingTool handles rest
         return validation;
+    },
+    abortEditingToolSettings (context) {
+        console.log("ABORT - ACTION");
+
+        // stop editing mode
+        this.commit("Tools/ReportTemplates/closeToolsInTemplateMode");
+        // let reportTemplates know that editing is over but edits are not accepted
+        context.state.editingTool = {toolName: null, templateItemsIndex: null, accepted: false}; // watcher on editingTool handles rest
     }
 };
 
