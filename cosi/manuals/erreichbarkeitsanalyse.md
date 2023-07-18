@@ -1,10 +1,12 @@
 ### Erreichbarkeitsanalyse
-Eine Erreichbarkeitsanalyse kann auf zwei Arten durchgeführt werden:  
-1. [Ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-Referenzpunkt)  
-2. [Im Planungsgebiet](#markdown-header-erreichbarkeit-im-gebiet) 
-3. [Entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
+Die "Erreichbarkeitsanalyse" erreichen Sie über den Bereich "Analyse". 
+Eine Erreichbarkeitsanalyse kann auf drei Arten durchgeführt werden:  
+1. [Ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-Referenzpunkt)
+2. Ab einer ausgewählten Einrichtung
+3. [Im Planungsgebiet](#markdown-header-erreichbarkeit-im-gebiet) 
+4. [Entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
 
-Der Modus der Analyse kann im Dropdown Menü ausgewÃ¤hlt werden.
+Der Modus der Analyse kann im Dropdown Menü ausgewählt werden.
 
 **Wichtige Informationen:**
 Dieses Werkzeug wurde realisiert unter Verwendung von OpenRouteService, einem Dienst, der von der *Heidelberg Institute for Geoinformation Technology* entwickelt wird. Der verwendete Dienst wird vom *Bundesamt für Kartografie und Geodäsie (BKG)* bereitgestellt und betrieben.
@@ -52,9 +54,12 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 
 *Für **Tageszeit**, **Verkehrsfluss berücksichtigen**, und **Von Flächenaußengrenzen berechnen** siehe im folgenden "Erreichbarkeit im Gebiet"*
 
+#### Erreichbarkeit ab einer ausgewählten Einrichtung
+
+Diese Analyse wird genauso hergestellt, wie ab einem Referenzpunkt. Nur wird hier statt einem Referenzpunkt auf der Karte eine Einrichtung auf der Karte angeklickt.
 
 #### Erreichbarkeit im Gebiet
-Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungsart (z.B. Kindergärten) in dem festgelegten Einzugsbereich (Planungsgebiet). Der Einzugsbereich ist die Entfernung von der jeweiligen Einrichtung und kann angegeben werden in Zeit oder in Metern. Die Erreichbarkeit ist abhÃ¤ngig von dem festgelegten Verkehrsmittel.
+Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungsart (z.B. Kindergärten) in dem festgelegten Einzugsbereich (Planungsgebiet). Der Einzugsbereich ist die Entfernung von der jeweiligen Einrichtung und kann angegeben werden in Zeit oder in Metern. Die Erreichbarkeit ist abhängig von dem festgelegten Verkehrsmittel.
 
 ![Abbildung 2: Erreichbarkeit ausgewÃ¤hlter Einrichtungen im Gebiet](https://user-images.githubusercontent.com/43250699/157067851-a2c165c4-894c-4b3f-80a9-4bc626516771.png)
 
@@ -65,7 +70,7 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 2. **Thema auswählen**
    > Damit dieses Modul verwendet werden kann muss mindestens ein Thema aktiv sein.
 3. **Verkehrsmittel festlegen**
-   > Das Verkehrsmittel wird ausgewählt aus einer Liste. Folgende Verkehrsmittel stehen aktuell zur Verfügung: Auto, Rad, Gehen, Rollstuhl / Kinderwagen.
+   > Das Verkehrsmittel wird ausgewählt aus einer Liste. Folgende Verkehrsmittel stehen aktuell zur Verfügung: Auto, Rad, Gehen, Rollstuhl.
 4. **Maßeinheit der Entfernung festlegen**
    > Festlegen, ob die Entfernung in Minuten oder in Metern angegeben wird.
 5. **Entfernung**

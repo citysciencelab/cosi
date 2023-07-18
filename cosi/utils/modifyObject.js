@@ -1,20 +1,4 @@
 /**
- * replaces the names of object keys with the values provided.
- * @param {object} obj - the original object
- * @param {object} keysMap - keys mapping object
- * @returns {object} the renamed object
- */
-export function renameKeys (obj, keysMap) {
-    return Object.keys(obj).reduce((acc, key) => {
-        return {
-            ...acc,
-            ...{[keysMap[key] || key]: obj[key]}
-        };
-    },
-    {});
-}
-
-/**
  * replaces the values of an object with the values provided.
  * @param {object} obj - the original object
  * @param {object} valuesMap - values mapping object

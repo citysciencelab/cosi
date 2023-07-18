@@ -443,5 +443,99 @@ describe("addons/mietenspiegelFormular/components/MietenspiegelFormular.vue", ()
                 expect(wrapper.vm.convertDateFormat(date)).to.deep.equal(expected);
             });
         });
+        describe("getRentPrice", () => {
+            it("should return empty object if first param is not a string", () => {
+                const wrapper = factory.getShallowMount({}, true);
+
+                expect(wrapper.vm.getRentPrice(undefined)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice(null)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice(true)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice(false)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice(1234)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice([])).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice({})).to.deep.equal({});
+            });
+            it("should return empty object if second param is not a string", () => {
+                const wrapper = factory.getShallowMount({}, true);
+
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", undefined)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", null)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", true)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", false)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", 1234)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", [])).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", {})).to.deep.equal({});
+            });
+            it("should return empty object if third param is not an array or is an empty array", () => {
+                const wrapper = factory.getShallowMount({}, true);
+
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "25m² bis unter 41m²", undefined)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "25m² bis unter 41m²", null)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "25m² bis unter 41m²", true)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "25m² bis unter 41m²", false)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "25m² bis unter 41m²", 1234)).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "25m² bis unter 41m²", [])).to.deep.equal({});
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "25m² bis unter 41m²", {})).to.deep.equal({});
+            });
+            it("should return an object with min, max and middle value for the rent price", () => {
+                const wrapper = factory.getShallowMount({}, true),
+                    calcData = [
+                        {
+                            "mittelwert": "12.12",
+                            "spanne_min": "9.06",
+                            "spanne_max": "14.81",
+                            "merkmale": "bis 31.12.1918|mit Bad und Sammelheizung|Normale Wohnlage|25m² bis unter 41m²",
+                            "Baualtersklasse/Bezugsfertigkeit": "bis 31.12.1918",
+                            "Ausstattung": "mit Bad und Sammelheizung",
+                            "Kategorie": "Normale Wohnlage",
+                            "Wohnfläche": "25m² bis unter 41m²"
+                        },
+                        {
+                            "mittelwert": "9.76",
+                            "spanne_min": "8.25",
+                            "spanne_max": "11.86",
+                            "merkmale": "01.01.1919 bis 20.06.1948|mit Bad und Sammelheizung|Normale Wohnlage|25m² bis unter 41m²",
+                            "Baualtersklasse/Bezugsfertigkeit": "2011 bis 2015",
+                            "Ausstattung": "mit Bad und Sammelheizung",
+                            "Kategorie": "Normale Wohnlage",
+                            "Wohnfläche": "ab 131m²"
+                        }
+                    ],
+                    expected = {
+                        "rangeMin": "8.25",
+                        "rangeMax": "11.86",
+                        "averageValue": "9.76"
+                    };
+
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "ab 131m²", calcData)).to.deep.equal(expected);
+            });
+        });
+        describe("getNoticeText", () => {
+            it("should return notice text from metadata", () => {
+                const wrapper = factory.getShallowMount({}, true);
+
+                expect(wrapper.vm.getNoticeText(undefined, "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText("", "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText(null, "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText(true, "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText([], "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText(0, "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText({}, "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText({"text": ""}, "metadata Notice")).to.equal("metadata Notice");
+                expect(wrapper.vm.getNoticeText({"link": ""}, "metadata Notice")).to.equal("metadata Notice");
+            });
+
+            it("should return notice text from noticePdf in configuration", () => {
+                const wrapper = factory.getShallowMount({}, true);
+
+                expect(wrapper.vm.getNoticeText({"text": "noticePdf", "link": "link"}, "metadata Notice")).to.equal("modules.tools.mietenspiegelFormular.noticeText");
+                expect(wrapper.vm.getNoticeText({"text": "noticePdf", "link": "link"}, undefined)).to.equal("modules.tools.mietenspiegelFormular.noticeText");
+                expect(wrapper.vm.getNoticeText({"text": "noticePdf", "link": "link"}, null)).to.equal("modules.tools.mietenspiegelFormular.noticeText");
+                expect(wrapper.vm.getNoticeText({"text": "noticePdf", "link": "link"}, [])).to.equal("modules.tools.mietenspiegelFormular.noticeText");
+                expect(wrapper.vm.getNoticeText({"text": "noticePdf", "link": "link"}, {})).to.equal("modules.tools.mietenspiegelFormular.noticeText");
+                expect(wrapper.vm.getNoticeText({"text": "noticePdf", "link": "link"}, 0)).to.equal("modules.tools.mietenspiegelFormular.noticeText");
+                expect(wrapper.vm.getNoticeText({"text": "noticePdf", "link": "link"}, false)).to.equal("modules.tools.mietenspiegelFormular.noticeText");
+            });
+        });
     });
 });

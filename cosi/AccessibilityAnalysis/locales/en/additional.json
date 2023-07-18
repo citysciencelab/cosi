@@ -4,6 +4,7 @@
             "cosi": {
                 "accessibilityAnalysis": {
                     "title": "Accessibility Analysis",
+                    "description": "Displays an area on the map that can be reached from a selected point, along a route or from a facility within a specified distance. The distance can be specified in time or in meters. The accessibility is calculated depending on the means of transport.",
                     "dropdownInfo": "Please choose the mode you want to work with:",
                     "mode": {
                       "point": "Accessibility from a reference point",

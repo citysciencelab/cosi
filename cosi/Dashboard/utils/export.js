@@ -1,4 +1,5 @@
-import {renameKeys, replaceValues} from "../../utils/modifyObject.js";
+import {replaceValues} from "../../utils/modifyObject.js";
+import renameKeys from "../../../../src/utils/renameKeys.js";
 
 const
     keyMap = {
@@ -29,7 +30,7 @@ export function prepareTableExport (data, districtNames, timestamp, timestampPre
         return null;
     }
     const exportData = data.map(item => {
-        const _item = replaceValues(renameKeys(item, keyMap), valuesMap);
+        const _item = replaceValues(renameKeys(keyMap, item), valuesMap);
 
         for (const col in _item) {
             if (typeof _item[col] === "object") {
@@ -69,7 +70,7 @@ export function prepareTableExportWithTimeline (data, districtNames, timestamps,
     const
         ctimestamps = timestamps.slice().reverse(),
         exportData = data.reduce((items, item) => {
-            const _item = replaceValues(renameKeys(item, keyMap), valuesMap),
+            const _item = replaceValues(renameKeys(keyMap, item), valuesMap),
                 categoryRows = ctimestamps.map(timestamp => {
                     const el = {..._item};
 

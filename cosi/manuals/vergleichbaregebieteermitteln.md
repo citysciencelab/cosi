@@ -1,5 +1,7 @@
 ## Vergleichbare Gebiete ermitteln
 ___
+Über den Bereich der "Analyse" gelangen Sie zu "Vergleichbare Gebiete ermitteln".
+
 Das Werkzeug erlaubt die Ermittlung aller Gebiete (Stadtteile oder statistische Gebiete), in denen die ausgewählten Parameter vorherrschen, bzw. solcher, die dem gewählten Referenzgebiet in diesen Parametern ähneln.
 Wählen sie unter Filter die gewünschten Parameter für den Vergleich, sowie ein Referenzgebiet (optional).  
 

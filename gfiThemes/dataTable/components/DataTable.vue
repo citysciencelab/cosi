@@ -8,6 +8,7 @@ import isObject from "../../../../src/utils/isObject";
 import Multiselect from "vue-multiselect";
 import localeCompare from "../../../../src/utils/localeCompare";
 import {getCenter as getCenterOfExtent} from "ol/extent";
+import getUniqueValuesByName from "../../../../src/utils/getUniqueValuesByName";
 
 export default {
     name: "DataTable",
@@ -42,8 +43,12 @@ export default {
             return this.feature.getFeatures().map(singleFeature => singleFeature.getMappedProperties());
         },
 
+        /**
+         * Returns whether download Button is enabled.
+         * @returns {Boolean} True if the download Buttion is enabled.
+         */
         enableDownload: function () {
-            return this.feature?.getTheme()?.params?.enableDownload;
+            return this.feature?.getTheme()?.params?.enableDownload || false;
         },
 
         /**
@@ -53,6 +58,7 @@ export default {
         isSortable: function () {
             return this.feature.getTheme()?.params?.isSortable || false;
         },
+
         /**
          * Returns whether the table is filterable.
          * @returns {Boolean} True if the table is filterable otherwise false.
@@ -60,6 +66,15 @@ export default {
         isFilterable: function () {
             return this.feature.getTheme()?.params?.isFilterable || false;
         },
+
+        /**
+         * Returns the value of parameter shownCount
+         * @returns {String|undefined} the value of parameter shownCount
+         */
+        showCount: function () {
+            return this.feature.getTheme()?.params?.showCount;
+        },
+
         /**
          * Returns the column which has an other order than 'origin'.
          * @returns {Object|undefined} The column or undefined if no column is found.
@@ -79,7 +94,8 @@ export default {
             result.forEach(row => {
                 const obj = {
                     EPSG: epsg,
-                    Coordinates: coordinates
+                    Rechtswert: coordinates[0],
+                    Hochwert: coordinates[1]
                 };
 
                 Object.assign(row, obj);
@@ -109,6 +125,7 @@ export default {
     methods: {
         isWebLink,
         isObject,
+        getUniqueValuesByName,
         /**
          * Creates and returns the columns for the table.
          * @param {Object} gfiAttributes - The attributes to be displayed.
@@ -207,23 +224,15 @@ export default {
         },
 
         /**
-         * Gets the unique values for given column name.
+         * Gets the unique values sorted for given column name.
          * @param {String} columnName The column name.
          * @param {Object[]} originRows The rows to iterate.
-         * @returns {String[]} the unique values.
+         * @returns {String[]} the sorted unique values.
          */
-        getUniqueValuesByColumnName (columnName, originRows) {
-            if (typeof columnName !== "string" || !Array.isArray(originRows) || !originRows.length) {
-                return [];
-            }
-            const result = {};
+        getSortedUniqueValues (columnName, originRows) {
+            const uniqueValues = getUniqueValuesByName(columnName, originRows);
 
-            originRows.forEach(row => {
-                if (typeof row[columnName] !== "undefined" && !result[row[columnName]]) {
-                    result[row[columnName]] = true;
-                }
-            });
-            return Object.keys(result).sort((a, b) => localeCompare(a, b, this.currentLocale, {ignorePunctuation: true}));
+            return uniqueValues.sort((a, b) => localeCompare(a, b, this.currentLocale, {ignorePunctuation: true}));
         },
 
         /**
@@ -296,6 +305,21 @@ export default {
                 });
                 return filterHit;
             });
+        },
+        /**
+         * Resets the table data to original data and also reset the stored filtered parameter
+         * @returns {void}
+         */
+        resetAll () {
+            this.filterObject = {};
+            this.dropdownSelected = {};
+            if (this.sortingColumn) {
+                this.columns.forEach(col => {
+                    col.order = "origin";
+                });
+            }
+            this.rows = this.originRows;
+            this.columns = this.getColumns(this.feature.getAttributesToShow());
         }
     }
 };
@@ -306,6 +330,12 @@ export default {
         id="table-data-container"
         :class="enableDownload ? 'enable-download' : ''"
     >
+        <div
+            v-if="typeof showCount !== 'undefined'"
+            class="count"
+        >
+            <b>{{ $t(showCount) }}</b> {{ rows.length }}
+        </div>
         <table
             class="table table-hover"
         >
@@ -314,6 +344,7 @@ export default {
                     v-for="col in columns"
                     :key="col.index"
                     class="filter-select-box-container"
+                    :class="typeof showCount !== 'undefined' ? 'more-sticky' : ''"
                 >
                     <span
                         v-if="isFilterable"
@@ -321,7 +352,7 @@ export default {
                     >
                         <Multiselect
                             v-model="dropdownSelected[col.name]"
-                            :options="getUniqueValuesByColumnName(col.name, originRows)"
+                            :options="getSortedUniqueValues(col.name, originRows)"
                             :multiple="true"
                             :show-labels="false"
                             open-direction="auto"
@@ -377,7 +408,7 @@ export default {
             </tbody>
         </table>
         <div
-            v-if="enableDownload === true"
+            v-if="enableDownload"
             class="download"
         >
             <ExportButtonCSV
@@ -387,6 +418,19 @@ export default {
                 :use-semicolon="true"
                 :title="$t('modules.tools.filter.download.labelBtn')"
             />
+        </div>
+        <div
+            v-if="isFilterable || isSortable"
+            class="reset-all"
+        >
+            <button
+                type="button"
+                class="btn btn-primary reset"
+                @click="resetAll"
+                @keypress="resetAll"
+            >
+                {{ $t('additional:addons.gfiThemes.dataTable.reset') }}
+            </button>
         </div>
     </div>
 </template>
@@ -415,6 +459,14 @@ export default {
         }
     }
 
+    .count {
+        padding-top: 25px;
+        padding-left: 6px;
+        position: sticky;
+        top: 0px;
+        background-color: #ffffff;
+    }
+
     table {
         margin: 0;
         table-layout: fixed;
@@ -424,6 +476,9 @@ export default {
             top: 0px;
             background: $white;
             vertical-align: top;
+            &.more-sticky {
+                top: 37px;
+            }
             span {
                 cursor: pointer;
                 padding: 0;
@@ -437,6 +492,12 @@ export default {
         }
     }
     .download {
+        position: sticky;
+        bottom: 22px;
+        float: right;
+        margin-left: 20px;
+    }
+    .reset-all {
         position: sticky;
         bottom: 22px;
         float: right;

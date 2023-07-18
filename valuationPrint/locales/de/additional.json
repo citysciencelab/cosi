@@ -22,7 +22,7 @@
               "cancel": "Abbrechen",
               "number": "Geschäfszeichen:",
               "address": "Adresse:",
-              "modalTitle": "Angaben zum A1 Karten Anlagenverzeichnis",
+              "modalTitle": "Anlagen zum A1 Karten Anlagenverzeichnis",
               "specificationReport": "A1 Karten Anlagenverzeichnis",
               "placeholder": "Bitte auswählen",
               "formError": {

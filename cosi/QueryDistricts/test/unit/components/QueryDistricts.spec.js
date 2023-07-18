@@ -135,6 +135,11 @@ describe("addons/cosi/QueryDistricts/", () => {
                                 selectedDistrictLevel: () => ({
                                     districts: districtsMock,
                                     stats: {
+                                        layers: [{
+                                            id: "19034",
+                                            featureType: "de.hh.up:v_hh_statistik_bev_insgesamt",
+                                            url: "https://geodienste.hamburg.de/HH_WFS_Regionalstatistische_Daten_Stadtteile"
+                                        }],
                                         baseUrl: ["https://geodienste.hamburg.de/HH_WFS_Regionalstatistische_Daten_Stadtteile"]
                                     }
                                 }),

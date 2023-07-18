@@ -1,5 +1,5 @@
 <script>
-import {mapActions, mapMutations} from "vuex";
+import {mapMutations} from "vuex";
 import mutations from "../store/mutationsBoris";
 
 export default {
@@ -47,7 +47,6 @@ export default {
         }
     },
     methods: {
-        ...mapActions("Tools/Boris", ["updateSelectedBrwFeature"]),
         ...mapMutations("Tools/Boris", Object.keys(mutations)),
         /**
          * Check if 'Einzelhäuser' or 'Doppelhäuser' are selected to change the option name to singular
@@ -57,6 +56,7 @@ export default {
         checkForBuildingMatch (option) {
 
             let zBauweise = this.selectedBrwFeature.get("zBauweise");
+            const zStrassenLage = this.selectedBrwFeature.get("zStrassenLage");
 
             if (this.selectedBrwFeature.get("zBauweise") === "eh Einzelhäuser") {
                 zBauweise = "eh Einzelhaus (freistehend)";
@@ -64,7 +64,8 @@ export default {
             else if (this.selectedBrwFeature.get("zBauweise") === "dh Doppelhaushälften") {
                 zBauweise = "dh Doppelhaushälfte";
             }
-            return option === zBauweise;
+
+            return option === zBauweise || option === zStrassenLage;
         }
     }
 

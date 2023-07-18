@@ -6,6 +6,9 @@
                     "featuresList": {
                         "name": "translate#additional:modules.tools.cosi.featuresList.title",
                         "icon": "bi-apple"
+                    },
+                    "timeSeriesAnalyse": {
+                        "name": "translate#additional:modules.tools.cosi.featuresList.title"
                     }
                 }
             }

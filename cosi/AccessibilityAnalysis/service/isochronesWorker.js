@@ -1,10 +1,8 @@
-import {writeFeatures, registerProjections} from "../components/util.js";
+import {writeFeatures} from "../components/util.js";
 import {createIsochrones, getFilterPoly, setFilterPoly} from "./createIsochrones";
 import "regenerator-runtime/runtime";
 import axios from "axios";
-
-
-registerProjections();
+import {registerProjections} from "../../utils/registerProjections.js";
 
 /**
  * @param {*} self self
@@ -28,6 +26,9 @@ async function onmessage (self, event) {
         }
         else if (event.data.type === "getFilterPoly") {
             self.postMessage({type, result: getFilterPoly()});
+        }
+        else if (event.data.type === "register") {
+            registerProjections(event.data.projections);
         }
     }
     catch (error) {

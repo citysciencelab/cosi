@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "gfiThemes": {
+      "dataTable": {
+        "reset": "Alles zurücksetzen",
+        "countLabel": {
+          "artenKataster": "Anzahl Arten: "
+        }
+      }
+    }
+  }
+}

@@ -57,6 +57,10 @@
     "path":"cosi/FeaturesList",
     "type": "tool"
   },
+  "PolygonStyler": {
+    "path":"cosi/PolygonStyler",
+    "type": "tool"
+  },
   "ScenarioBuilder": {
     "path": "cosi/ScenarioBuilder",
     "type": "tool"
@@ -150,6 +154,14 @@
     "path":"gfiThemes/verkehrsstaerken",
     "type": "gfiTheme"
   },
+  "wholeCity": {
+    "path":"gfiThemes/wholeCity",
+    "type": "gfiTheme"
+  },
+  "vpi": {
+       "path": "gfiThemes/vpi",
+       "type": "gfiTheme"
+  },
   "AccessibilityAnalysis": {
     "path": "cosi/AccessibilityAnalysis",
     "type": "tool"
@@ -194,6 +206,16 @@
     "type": "tool"
   },
   "mietenspiegelFormular": {
+    "type": "tool"
+  },
+  "vpiDashboard": {
+    "type": "tool"
+  },
+  "TimeSeriesAnalyse": {
+    "path": "cosi/TimeSeriesAnalyse",
+    "type": "tool"
+  },
+  "wholeCityList": {
     "type": "tool"
   }
 }

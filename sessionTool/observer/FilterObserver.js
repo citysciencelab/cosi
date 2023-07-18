@@ -3,10 +3,11 @@ import isObject from "../../../src/utils/isObject";
 
 /**
  * Registers the Observer.
+ * @param {Object} vueStore The store from the component.
  * @returns {void}
  */
-function register () {
-    store.dispatch("Tools/SessionTool/register", {key: "Filter", getter: getFilterState, setter: setFilter});
+function register (vueStore) {
+    vueStore.dispatch("Tools/SessionTool/register", {key: "Filter", getter: getFilterState, setter: setFilter});
 }
 /**
  * Gets the current filter state.

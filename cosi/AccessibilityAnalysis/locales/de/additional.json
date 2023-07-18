@@ -4,6 +4,7 @@
             "cosi": {
                 "accessibilityAnalysis": {
                     "title": "Erreichbarkeitsanalyse",
+                    "description": "Zeigt ein Gebiet auf der Karte an, welches von einem ausgewählten Punkt, entlang einer Route oder ab einer Einrichtung innerhalb einer festgelegten Entfernung erreichbar ist. Die Entfernung kann in Zeit oder in Metern angegeben werden. Die Erreichbarkeit wird abhängig vom Verkehrsmittel berechnet.",
                     "dropdownInfo": "Bitte wählen Sie den Modus, in dem Sie arbeiten möchten",
                     "mode": {
                       "point": "Erreichbarkeit ab einem Referenzpunkt",

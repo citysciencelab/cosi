@@ -25,7 +25,7 @@ const state = {
     chartConfigs: [],
     readmeUrl: {
         "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/chartgenerator_en.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/chartgenerator.md"
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/graphenvisualisierung.md"
     }
 };
 

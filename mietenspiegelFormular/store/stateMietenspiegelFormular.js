@@ -22,7 +22,9 @@ const state = {
     deactivateGFI: false,
     layerIdMetadata: null,
     rentIndexLayerId: undefined,
-    layerIdCalculation: null
+    layerIdCalculation: null,
+    collectionStatus: undefined,
+    noticePdf: undefined
 };
 
 export default state;

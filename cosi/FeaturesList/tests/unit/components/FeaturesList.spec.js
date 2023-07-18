@@ -23,6 +23,7 @@ import districtLevel from "./mock.districtLevel";
 // import {VChip} from "vuetify/lib";
 import Map from "ol/Map";
 
+
 Vue.use(Vuetify);
 
 const localVue = createLocalVue(),
@@ -157,7 +158,8 @@ describe("addons/cosi/FeaturesList/components/FeaturesList.vue", () => {
                             namespaced: true,
                             getters: {
                                 scenario: sinon.stub().returns(new Scenario("Scenario")),
-                                scenarioUpdated: sinon.stub().returns(new Scenario("Scenario"))
+                                scenarioUpdated: sinon.stub().returns(new Scenario("Scenario")),
+                                geomAttributes: sinon.stub()
                             }
                         },
                         DistrictSelector: {
@@ -267,6 +269,18 @@ describe("addons/cosi/FeaturesList/components/FeaturesList.vue", () => {
             expect(wrapper.find("form").exists()).to.be.false;
         });
 
+        it("should display time-series button", async () => {
+            const wrapper = await mountComponent(true);
+
+            expect(wrapper.find(".time-series").exists()).to.be.true;
+        });
+
+        it("should display toggle component", async () => {
+            const wrapper = await mountComponent(true);
+
+            expect(wrapper.find(".toggle").exists()).to.be.true;
+        });
+
         it("should return false for null on isFeaturedDisabled", async () => {
             const wrapper = await mountComponent(false);
 
@@ -333,8 +347,7 @@ describe("addons/cosi/FeaturesList/components/FeaturesList.vue", () => {
 
             // flatActiveLayerMapping has length 1 if 1 layer is active
             expect(wrapper.vm.flatActiveLayerMapping).to.have.lengthOf(1);
-            // first item in the layer filter dropdown has value "Mein Layer"
-            expect(wrapper.find(".layer_selection").props("items")[1].text).to.equal("Mein Layer");
+            expect(wrapper.vm.flatActiveLayerMapping[0].id).to.equal("Mein Layer");
             expect(wrapper.vm.filteredItems).to.have.lengthOf(1);
         });
 
@@ -523,7 +536,7 @@ describe("addons/cosi/FeaturesList/components/FeaturesList.vue", () => {
         });
 
         it("expect download prompt to open when table is exported", async () => {
-            const spyExportTable = sinon.spy(FeaturesList.methods, "exportTable"),
+            const spyExportTable = sinon.stub(FeaturesList.methods, "exportTable"),
                 wrapper = await mountComponent(true, [addNewLayerIfNotExists()]);
 
             await wrapper.vm.$nextTick();

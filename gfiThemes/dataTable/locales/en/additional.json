@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "gfiThemes": {
+      "dataTable": {
+        "reset": "Reset All",
+        "countLabel": {
+          "artenKataster": "Count of types: "
+        }
+      }
+    }
+  }
+}

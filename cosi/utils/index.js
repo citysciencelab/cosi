@@ -15,7 +15,7 @@ import downloadUtils from "./download";
 import geomUtils from "./geomUtils";
 import math from "./math";
 import {addPolyfills} from "./polyfills";
-import {renameKeys, replaceValues} from "./modifyObject";
+import {replaceValues} from "./modifyObject";
 import {getTimestamps, getTimestampRange} from "./timeline";
 import translateFeature from "./translateFeature";
 
@@ -46,7 +46,6 @@ export default {
     describeFeatureTypeByLayerId,
     getTimestamps,
     getTimestampRange,
-    renameKeys,
     replaceValues,
     translateFeature,
     math,

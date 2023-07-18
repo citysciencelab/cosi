@@ -46,7 +46,12 @@
                         "commentsVotingText": " number of comments by voting",
                         "voting": "voting",
                         "allProjects": "All projects"
-                    }
+                    },
+                    "show": "Show",
+                    "hide": "Hide"
+                },
+                "timeSeriesAnalyse": {
+                  "title": "Time Series analyse"
                 }
             }
         }

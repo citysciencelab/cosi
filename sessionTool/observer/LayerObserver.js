@@ -1,4 +1,3 @@
-import store from "../../../src/app-store";
 import {
     getLayerByAttributes,
     getLayersByAttributes,
@@ -7,10 +6,11 @@ import {
 
 /**
  * Registers the Observer.
+ * @param {Object} vueStore The store from the component.
  * @returns {void}
  */
-function register () {
-    store.dispatch("Tools/SessionTool/register", {key: "Layers", getter: getCurrentLayerList, setter: setLayers});
+function register (vueStore) {
+    vueStore.dispatch("Tools/SessionTool/register", {key: "Layers", getter: getCurrentLayerList, setter: setLayers});
 }
 
 /**

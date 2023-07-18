@@ -116,8 +116,8 @@ export default {
                 <thead>
                     <tr>
                         <th
-                            v-for="header in props.headers"
-                            :key="header.text"
+                            v-for="(header, index) in props.headers"
+                            :key="`${header.text}_${index}`"
                         >
                             <p>
                                 <strong>{{ header.text }}</strong>

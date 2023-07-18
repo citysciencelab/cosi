@@ -19,7 +19,7 @@ export default {
         FloorComponent
     },
     computed: {
-        ...mapGetters("Tools/BorisComponent", ["active", "id", "icon", "renderToWindow", "resizableWindow", "initialWidth", "initialWidthMobile", "keepOpen", "filteredLayerList", "isAreaLayer", "isStripesLayer", "textIds", "selectedPolygon", "selectedLayerName", "selectedLanduse", "selectedBrwFeature", "convertedBrw", "buttonValue", "buildingDesigns", "positionsToStreet", "options", "isProcessFromParametricUrl", "paramUrlParams"]),
+        ...mapGetters("Tools/BorisComponent", ["active", "id", "icon", "renderToWindow", "resizableWindow", "initialWidth", "initialWidthMobile", "keepOpen", "filteredLayerList", "isAreaLayer", "isStripesLayer", "textIds", "selectedPolygon", "selectedLayerName", "selectedLanduse", "selectedBrwFeature", "convertedBrw", "buttonValue", "buildingDesigns", "positionsToStreet", "selectedOption", "isProcessFromParametricUrl", "paramUrlParams"]),
         ...mapGetters("Tools/Print", ["printFileReady", "fileDownloadUrl", "filename", "printStarted", "progressWidth"]),
         /**
          * Gets a list of layers without the stripes-layers
@@ -126,6 +126,10 @@ export default {
                 link.href = this.fileDownloadUrl;
                 link.click();
             }
+        },
+        selectedLayerName () {
+            this.setBuildingDesigns(["eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)", "rm Reihenmittelhaus", "rm Reihenmittelhäuser", "re Reihenendhaus", "g geschlossene Bauweise", "a abweichende Bauweise (Gartenhofhaus)"]);
+            this.setPositionsToStreet(["F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück", "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"]);
         }
     },
     created () {

@@ -58,63 +58,6 @@ const BauforumGUIModeler = Backbone.Model.extend(/** @lends BauforumGUIModeler.p
     },
 
     /**
-     * Handler to activate Planing
-     * @param   {integer} conceptId conceptId of config.json
-     * @fires VirtualCity#RadioRequestVirtualCityActivatePlanning
-     * @returns {void}
-     */
-    triggerShowConcept: function (conceptId) {
-        this.triggerStopFlight();
-        this.triggerHideConcept();
-
-        if (conceptId) {
-            this.setConceptId(conceptId);
-            Radio.request("VirtualCity", "activatePlanning", conceptId);
-        }
-    },
-
-    /**
-     * Handler to deactivate Planing
-     * @fires VirtualCity#RadioRequestVirtualCityDeactivatePlanning
-     * @returns {void}
-     */
-    triggerHideConcept: function () {
-        const id = this.get("conceptId");
-
-        if (id) {
-            Radio.request("VirtualCity", "deactivatePlanning", id);
-            this.setConceptId(null);
-        }
-    },
-
-    /**
-     * Handler to start flight
-     * @param   {integer} conceptId conceptId of config.json
-     * @fires VirtualCity#RadioRequestVirtualCityGetFlightsForPlanning
-     * @fires FlightPlayer#RadioRequestFlightPlayerPlay
-     * @returns {void}
-     */
-    triggerStartFlight: function (conceptId) {
-        Radio.request("VirtualCity", "getFlightsForPlanning", conceptId).then((flights) => {
-            if (flights[0]) {
-                Radio.request("FlightPlayer", "play", flights[0]);
-            }
-            else {
-                console.warn("No flight for " + conceptId + " available.");
-            }
-        });
-    },
-
-    /**
-     * Handler to stop flight
-     * @fires FlightPlayer#RadioRequestFlightPlayerStop
-     * @returns {void}
-     */
-    triggerStopFlight: function () {
-        Radio.request("FlightPlayer", "stop");
-    },
-
-    /**
      * Toggles the Stadtmodell according to value
      * @param   {boolean} value layer visibility to set
      * @returns {void}

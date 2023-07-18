@@ -1,0 +1,13 @@
+{
+    "modules": {
+        "tools": {
+            "cosi": {
+                "timeSeriesAnalyse": {
+                    "title": "Zeitreihenanalyse",
+                    "count": "Anzahl",
+                    "countLabel": "Anzahl der "
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,1 @@
+cat *.md > ../manuals_komplett.md

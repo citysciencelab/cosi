@@ -12,7 +12,12 @@
               "pleaseSelect": "Bitte wählen",
               "editor": "Herausgeber:",
               "collectionStatus": "Erhebungsstand:",
-              "notice": "Hinweise:"
+              "notice": "Hinweise:",
+              "middle": "Mittelwert:",
+              "min": "Spanne Min.:",
+              "max": "Spanne Max.:",
+              "rentPriceTitle": "Nettokaltmiete ohne Heizung und ohne Betriebskosten (in EUR/m²)",
+              "noticeText": "Diese Tabelle lässt sich nur richtig anwenden, wenn die Erläuterungen in der Broschüre <a target=\"_blank\" href=\"{{link}}\">{{text}}</a> genau beachtet werden."
           }
       }
   }

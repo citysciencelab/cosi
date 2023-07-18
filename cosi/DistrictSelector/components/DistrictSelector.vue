@@ -169,6 +169,7 @@ export default {
 
     methods: {
         ...mapMutations("Tools/DistrictSelector", Object.keys(mutations)),
+        ...mapMutations("Tools/Filter", ["setFilterGeometry"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapActions("Tools/DistrictSelector", ["loadStatFeatures", "loadMapping"]),
         ...mapActions("Maps", ["addInteraction", "removeInteraction", "zoomToExtent", "resetView"]),
@@ -372,6 +373,7 @@ export default {
                 this.setExtent(extent);
                 this.setBoundingGeometry(bboxGeom);
                 setBBoxToGeom.call(this, this.areaSelectorGeom || bboxGeom);
+                this.setFilterGeometry(this.areaSelectorGeom || bboxGeom);
 
                 if (zoomToExtent) {
                     this.zoomToExtent({extent, options: {}});
@@ -388,6 +390,7 @@ export default {
                 this.resetView();
                 this.setBoundingGeometry(undefined);
                 setBBoxToGeom.call(this, this.areaSelectorGeom || undefined);
+                this.setFilterGeometry(this.areaSelectorGeom || false);
                 this.showAlert(this.$t("additional:modules.tools.cosi.districtSelector.warning"), "Warnung", "warning");
             }
         },
@@ -533,8 +536,7 @@ export default {
                         step="250"
                         min="0"
                     />
-                    <v-divider />
-                    <div>
+                    <div v-if="Object.keys(additionalInfoLayers).length">
                         <span class="text-subtitle-2">
                             {{ $t('additional:modules.tools.cosi.districtSelector.additionalLayer') }}
                         </span>
@@ -563,24 +565,24 @@ export default {
                     </v-row>
                     <v-divider />
                     <v-btn
-                        small
                         tile
+                        depressed
                         color="grey lighten-1"
                         @click="setActive(false);"
                     >
                         {{ $t('additional:modules.tools.cosi.districtSelector.buttonConfirm') }}
                     </v-btn>
                     <v-btn
-                        small
                         tile
+                        depressed
                         color="grey lighten-1"
                         @click="clearFeatures"
                     >
                         {{ $t('additional:modules.tools.cosi.districtSelector.buttonReset') }}
                     </v-btn>
                     <v-btn
-                        small
                         tile
+                        depressed
                         :color="dragBoxButtonColor"
                         @click="toggleDragBox"
                     >
@@ -596,7 +598,8 @@ export default {
     @import "~variables";
 
     #district-selector {
-        max-width: 430px;
+        font-family: $font_family_default;
+        max-width: 460px;
         .v-input {
             border-radius: $border-radius-base;
             font-size: 14px;
@@ -606,6 +609,7 @@ export default {
         }
         button {
             text-transform: inherit;
+            font-family: $font_family_accent;
         }
     }
 

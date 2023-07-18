@@ -1,4 +1,5 @@
-import {renameKeys, replaceValues} from "../../utils/modifyObject.js";
+import {replaceValues} from "../../utils/modifyObject.js";
+import renameKeys from "../../../../src/utils/renameKeys.js";
 
 const keyMap = {
         name: "Einrichtung",
@@ -39,7 +40,7 @@ export function prepareTableExport (data) {
         console.error("prepareTableExport: data must be an array");
         return null;
     }
-    const exportData = data.map(item => replaceValues(renameKeys(item, keyMap), valuesMap, true, false));
+    const exportData = data.map(item => replaceValues(renameKeys(keyMap, item), valuesMap, true, false));
 
     return exportData;
 }
@@ -67,7 +68,7 @@ export function prepareDetailsExport (data, filterProps) {
                 return filterProps[item.layerId].includes(prop[0]);
             });
 
-        return replaceValues(renameKeys({...item, ...Object.fromEntries(properties)}, keyMap), valuesMap, true, false);
+        return replaceValues(renameKeys({...Object.fromEntries(properties), ...item}, keyMap), valuesMap, true, false);
     });
 
     return exportData;

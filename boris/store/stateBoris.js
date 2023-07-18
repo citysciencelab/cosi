@@ -28,9 +28,8 @@
  * @property {String} buttonValue - html value of button that indicates which further information are displayed
  * @property {Object} buildingDesigns - list of building designs that are options for the Conversion to Individual Property
  * @property {Object} positionsToStreet - list of positions to streets that are options for the Conversion to Individual Property
- * @property {String} selectedOption - is the selected option of building designs oder positions to street
+ * @property {String} selectedOption - is the selected option of building designs or positions to street
  * @property {String} wpsId - the id of the used web processing service
- * @property {Object} wpsTimeout - timeout attribute for wps which is used in the fme process
  * @property {String} fmwProcess - the FME process triggered via the WPS
  */
 
@@ -65,12 +64,6 @@ const state = {
     positionsToStreet: ["F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück", "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"],
     selectedOption: "",
     wpsId: "1001",
-    wpsTimeout: {
-        "tm_ttl": {
-            "dataType": "integer",
-            "value": 50
-        }
-    },
     fmwProcess: "BRWConvert.fmw"
 };
 

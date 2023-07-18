@@ -22,7 +22,12 @@ export default {
             errorMessage: "",
             formKeys: [],
             METADATA: [],
-            calculationData: {}
+            calculationData: {},
+            buildingAgeClass: "",
+            livingSpace: "",
+            rangeMin: "",
+            rangeMax: "",
+            averageValue: ""
         };
     },
     computed: {
@@ -38,9 +43,19 @@ export default {
             },
             deep: true
         },
-
+        buildingAgeClass (newVal) {
+            if (newVal && this.livingSpace) {
+                this.setRentPrice(this.getRentPrice(newVal, this.livingSpace, this.calculationData));
+            }
+        },
+        livingSpace (newVal) {
+            if (newVal && this.buildingAgeClass) {
+                this.setRentPrice(this.getRentPrice(this.buildingAgeClass, newVal, this.calculationData));
+            }
+        },
         clickCoordinate (coord) {
             this.residentialInformationByCoordinate(coord, this.rentIndexLayerId, this.resolution);
+            this.reset();
         }
     },
     async created () {
@@ -56,12 +71,76 @@ export default {
             this.setActive(true);
             this.residentialInformationByCoordinate(result?.coordinate, this.rentIndexLayerId, resolutions[0]);
         });
+
+        if (typeof this.collectionStatus === "undefined") {
+            this.setCollectionStatus(this.convertDateFormat(this.METADATA?.erhebungsstand));
+        }
+
+        this.noticeText = this.getNoticeText(this.noticePdf, this.METADATA?.hinweis);
     },
     methods: {
         ...mapMutations("Tools/MietenspiegelFormular", Object.keys(mutations)),
         ...mapActions("MapMarker", ["placingPointMarker", "removePointMarker"]),
         onSearchbar,
         requestGfi,
+
+        /**
+         * Returns the min, max and middle value price for the rent from calculation data with given attributes.
+         * @param {String} buildingAgeClass - the buildingAgeClass attribute to looking for in calculationData.
+         * @param {String} livingSpace - the livingSpace attribute to looking for in calculationData.
+         * @param {Object[]} calculationData - The calculated data array.
+         * @returns {Object} - The Object with min, max and middle value for the rent price.
+         */
+        getRentPrice (buildingAgeClass, livingSpace, calculationData) {
+            const result = {};
+
+            if (!Array.isArray(calculationData) || !calculationData.length || typeof buildingAgeClass !== "string" || typeof livingSpace !== "string") {
+                return result;
+            }
+
+            for (let i = 0; i < calculationData?.length; i++) {
+                if (Object.prototype.hasOwnProperty.call(calculationData[i], "Baualtersklasse/Bezugsfertigkeit") &&
+                    Object.prototype.hasOwnProperty.call(calculationData[i], "Wohnfläche") &&
+                    calculationData[i]["Baualtersklasse/Bezugsfertigkeit"] === buildingAgeClass &&
+                    calculationData[i]["Wohnfläche"] === livingSpace) {
+                    result.rangeMin = calculationData[i].spanne_min;
+                    result.rangeMax = calculationData[i].spanne_max;
+                    result.averageValue = calculationData[i].mittelwert;
+                    break;
+                }
+            }
+
+            return result;
+        },
+
+        /**
+         * Sets the rent price.
+         * @param {Object} calculatedRent - Object with min, max and middle value for the rent.
+         * @returns {void}
+         */
+        setRentPrice (calculatedRent) {
+            this.rangeMin = "";
+            this.rangeMax = "";
+            this.averageValue = "";
+
+            if (typeof calculatedRent?.rangeMin !== "undefined" && calculatedRent?.rangeMax !== "undefined" && calculatedRent?.averageValue !== "undefined") {
+                this.rangeMin = calculatedRent.rangeMin;
+                this.rangeMax = calculatedRent.rangeMax;
+                this.averageValue = calculatedRent.averageValue;
+            }
+        },
+
+        /**
+         * Resets the rent price and drop down.
+         * @returns {void}
+         */
+        reset () {
+            this.buildingAgeClass = "";
+            this.livingSpace = "";
+            this.rangeMin = "";
+            this.rangeMax = "";
+            this.averageValue = "";
+        },
 
         /**
          * Closing the tool and sets the error message default.
@@ -249,6 +328,19 @@ export default {
             const dateFormat = dayjs(date).format("DD.MM.YYYY");
 
             return dateFormat;
+        },
+        /**
+         * Gets the notice text
+         * @param {Object} noticePdf - The noticePdf from configuration.
+         * @param {String} metaNotice - The notice text from metadata.
+         * @return {String} - The notice text.
+         */
+        getNoticeText (noticePdf, metaNotice) {
+            if (isObject(noticePdf) && typeof noticePdf.text === "string" && typeof noticePdf.link === "string") {
+                return i18next.t("additional:modules.tools.mietenspiegelFormular.noticeText", {text: noticePdf.text, link: noticePdf.link, interpolation: {escapeValue: false}});
+            }
+
+            return metaNotice;
         }
     }
 };
@@ -306,26 +398,16 @@ export default {
                         </div>
                         <div class="my-3">
                             <label
-                                for="mietenspiegel-baualterklasse-select"
+                                for="kategorie"
                                 class="form-label mb-0 py-0"
+                            >{{ formKeys[2] }} </label>
+                            <input
+                                id="kategorie"
+                                type="text"
+                                readonly
+                                class="form-control-plaintext py-0"
+                                :value="`${residentialInformation.bezeichnung}`"
                             >
-                                {{ formKeys[0] }}
-                            </label>
-                            <select
-                                id="mietenspiegel-baualtersklasse-select"
-                                class="select-baualtersklasse form-select select-style"
-                            >
-                                <option selected>
-                                    {{ $t('additional:modules.tools.mietenspiegelFormular.pleaseSelect') }}
-                                </option>
-                                <option
-                                    v-for="(data, key) in getUniqueValuesByAttributes('Baualtersklasse/Bezugsfertigkeit', calculationData)"
-                                    :key="key"
-                                    :value="data"
-                                >
-                                    {{ data }}
-                                </option>
-                            </select>
                         </div>
                         <div class="mb-3">
                             <label
@@ -342,16 +424,31 @@ export default {
                         </div>
                         <div class="my-3">
                             <label
-                                for="kategorie"
+                                for="mietenspiegel-baualterklasse-select"
                                 class="form-label mb-0 py-0"
-                            >{{ formKeys[2] }} </label>
-                            <input
-                                id="kategorie"
-                                type="text"
-                                readonly
-                                class="form-control-plaintext py-0"
-                                :value="`${residentialInformation.bezeichnung}`"
                             >
+                                {{ formKeys[0] }}
+                            </label>
+                            <select
+                                id="mietenspiegel-baualtersklasse-select"
+                                v-model="buildingAgeClass"
+                                class="select-baualtersklasse form-select select-style"
+                            >
+                                <option
+                                    value=""
+                                    disabled
+                                    selected
+                                >
+                                    {{ $t('additional:modules.tools.mietenspiegelFormular.pleaseSelect') }}
+                                </option>
+                                <option
+                                    v-for="(data, key) in getUniqueValuesByAttributes('Baualtersklasse/Bezugsfertigkeit', calculationData)"
+                                    :key="key"
+                                    :value="data"
+                                >
+                                    {{ data }}
+                                </option>
+                            </select>
                         </div>
                         <div class="my-3">
                             <label
@@ -362,9 +459,14 @@ export default {
                             </label>
                             <select
                                 id="mietenspiegel-wohnflaeche-select"
+                                v-model="livingSpace"
                                 class="select-wohnflaeche form-select select-style"
                             >
-                                <option selected>
+                                <option
+                                    value=""
+                                    disabled
+                                    selected
+                                >
                                     {{ $t('additional:modules.tools.mietenspiegelFormular.pleaseSelect') }}
                                 </option>
                                 <option
@@ -379,6 +481,46 @@ export default {
                         <div
                             class="notes border-top p-2 position-absolute"
                         >
+                            <div class="calculated-rent border-bottom">
+                                <div
+                                    class="def-text calculated-rentprice-title"
+                                >
+                                    {{ $t('additional:modules.tools.mietenspiegelFormular.rentPriceTitle') }}
+                                </div>
+                                <div>
+                                    <span class="def-text">
+                                        {{ $t('additional:modules.tools.mietenspiegelFormular.middle') }}
+                                    </span>
+                                    <span v-if="averageValue">
+                                        {{ averageValue }}
+                                    </span>
+                                    <span v-else>
+                                        ---
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="def-text">
+                                        {{ $t('additional:modules.tools.mietenspiegelFormular.min') }}
+                                    </span>
+                                    <span v-if="rangeMin">
+                                        {{ rangeMin }}
+                                    </span>
+                                    <span v-else>
+                                        ---
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="def-text">
+                                        {{ $t('additional:modules.tools.mietenspiegelFormular.max') }}
+                                    </span>
+                                    <span v-if="rangeMax">
+                                        {{ rangeMax }}
+                                    </span>
+                                    <span v-else>
+                                        ---
+                                    </span>
+                                </div>
+                            </div>
                             <div class="mt-3 def-text">
                                 {{ $t('additional:modules.tools.mietenspiegelFormular.editor') }}
                             </div>
@@ -389,14 +531,15 @@ export default {
                                 {{ $t('additional:modules.tools.mietenspiegelFormular.collectionStatus') }}
                             </div>
                             <div>
-                                {{ convertDateFormat(METADATA?.erhebungsstand) }}
+                                {{ collectionStatus }}
                             </div>
                             <div class="def-text">
                                 {{ $t('additional:modules.tools.mietenspiegelFormular.notice') }}
                             </div>
-                            <div class="mb-3">
-                                {{ METADATA?.hinweis }}
-                            </div>
+                            <div
+                                class="mb-3"
+                                v-html="noticeText"
+                            />
                         </div>
                     </form>
                 </div>
@@ -405,12 +548,18 @@ export default {
     </ToolTemplate>
 </template>
 
-<style>
+<style lang="scss">
 input[readonly], .select-style {
   font-size: 14px;
 }
 
 .form-label, .def-text {
     font-weight: bold;
+    &.calculated-rentprice-title {
+        margin: 0 0 12px 0;
+    }
+}
+.calculated-rent {
+    height: 112px;
 }
 </style>

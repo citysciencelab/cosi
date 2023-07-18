@@ -17,6 +17,12 @@
 ### Fixed
 
 ---
+## v2.34.0 - 2023-06-07
+### Changed
+- The version of node was updated, must be `>= 16.13.2 <= 16.20.0`
+- The version of npm was updated, must be `>= 8.1.2 <= 8.19.4`
+
+---
 ## v2.32.0 - 2023-04-05
 ### Changed
 - In schoolRoutePlanning all streets and house numbers are now listed as results with an overflow.

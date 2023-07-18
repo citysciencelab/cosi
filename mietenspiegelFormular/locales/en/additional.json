@@ -12,7 +12,12 @@
               "pleaseSelect": "Please select",
               "editor": "Editor:",
               "collectionStatus": "Collection Status:",
-              "notice": "Notice:"
+              "notice": "Notice:",
+              "middle": "Average:",
+              "min": "Tension Min.:",
+              "max": "Tension Max.:",
+              "rentPriceTitle": "Net base rent without heating and without operating costs (in EUR/m²) ",
+              "noticeText": "Diese Tabelle lässt sich nur richtig anwenden, wenn die Erläuterungen in der Broschüre <a target=\"_blank\" href=\"{{link}}\">{{text}}</a> genau beachtet werden."
           }
         }
     }

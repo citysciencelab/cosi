@@ -47,8 +47,6 @@ function returnGeoJSONLayerObject (name, id, geojson, styleId, parentId, gfiAttr
         typ: "GeoJSON",
         geojson: geojson,
         transparent: true,
-        minScale: null,
-        maxScale: null,
         gfiAttributes: gfiAttributes,
         layerAttribution: "nicht vorhanden",
         legendURL: "",

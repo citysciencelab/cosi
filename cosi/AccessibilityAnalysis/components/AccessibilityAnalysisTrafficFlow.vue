@@ -51,51 +51,52 @@ export default {
 </script>
 
 <template lang="html">
-    <div
-        id="travel-time-container"
-        class="mb-4"
-    >
-        <v-checkbox
-            v-model="isChecked"
-            dense
-            hide-details
-            :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.toggle')"
-            :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.tooltip')"
-        />
-        <v-btn
-            class="float-end pt-1"
-            depressed
-            icon
-            x-small
-            @click="showInfo"
+    <v-col class="mb-3">
+        <div
+            id="travel-time-container"
         >
-            <v-icon>mdi-help-circle</v-icon>
-        </v-btn>
-        <v-slider
-            v-model="dayTime"
-            class="time-slider"
-            :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.time')"
-            :hint="`${travelTimeIndex[dayTime]} ${$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.title')}`"
-            :disabled="!isChecked"
-            :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.tooltip')"
-            step="1"
-            ticks="always"
-            tick-size="4"
-            min="0"
-            max="23"
-            dense
-            hide-details="auto"
-        >
-            <template #append>
-                <div class="append-text-field">
-                    {{ dayTime }}:00
-                    <v-icon small>
-                        mdi-clock
-                    </v-icon>
-                </div>
-            </template>
-        </v-slider>
-    </div>
+            <v-checkbox
+                v-model="isChecked"
+                dense
+                hide-details
+                :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.toggle')"
+                :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.tooltip')"
+            />
+            <v-btn
+                class="float-end pt-1"
+                depressed
+                icon
+                x-small
+                @click="showInfo"
+            >
+                <v-icon>mdi-help-circle</v-icon>
+            </v-btn>
+            <v-slider
+                v-model="dayTime"
+                class="time-slider"
+                :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.time')"
+                :hint="`${travelTimeIndex[dayTime]} ${$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.title')}`"
+                :disabled="!isChecked"
+                :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.travelTimeIndex.tooltip')"
+                step="1"
+                ticks="always"
+                tick-size="4"
+                min="0"
+                max="23"
+                dense
+                hide-details="auto"
+            >
+                <template #append>
+                    <div class="append-text-field">
+                        {{ dayTime }}:00
+                        <v-icon small>
+                            mdi-clock
+                        </v-icon>
+                    </div>
+                </template>
+            </v-slider>
+        </div>
+    </v-col>
 </template>
 
 <style lang="scss">

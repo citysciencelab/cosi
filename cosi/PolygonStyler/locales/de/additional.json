@@ -1,0 +1,25 @@
+{
+  "modules": {
+    "tools": {
+      "cosi": {
+        "polygonStyler": {
+          "columnTopic": "Thema",
+          "columnAttribute": "Attribut",
+          "columnEdit": "Bearbeiten",
+          "labelTopicSelection": "Themenauswahl",
+          "editButton": "Editieren",
+          "removeButton": "Zurücksetzen",
+          "noData": "Keine Daten vorhanden",
+          "settings": {
+            "title": "Farbeinstellungen",
+            "applyButton": "Übernehmen",
+            "abortButton": "Abbrechen",
+            "columnValue": "Wert",
+            "columnFill": "Füllfarbe",
+            "columnStroke": "Umrissfarbe"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "modules": {
+    "tools": {
+      "vpidashboard": {
+        "name": "VPI Dashboard",
+        "tabitems": {
+          "activities": "Activities",
+          "gender": "Gender",
+          "age": "Age",
+          "dwelltime": "Dwell Time",
+          "types": "Visitor Types",
+          "distance": "Distance",
+          "compare": "Locations Comparison",
+          "info": "Informations",
+          "compare_dates": "Time Period Comparison"
+        },
+        "time": {
+          "months": [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+          ],
+          "days": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ]
+        },
+        "details": "Details",
+        "unique": {
+          "allData": "Activities",
+          "uniqueVisitors": "Activities",
+          "dailyOverview": "Average of daily activities in {{ month }} in {{ year }}",
+          "monthlyOverview": "Number of monthly activities in {{ year }}",
+          "hourly": "Visitors on a defined day (hourly)",
+          "timeRange": "Visitors on a defined day range (daily)",
+          "selectDate": "Please choose a date:",
+          "selectDateRange": "Please choose a date range:",
+          "noValidDate": "No valid date / date range chosen",
+          "numberVisitorsHour": "Number of visitors per hour",
+          "numberVisitorsDay": "Number of visitors per day",
+          "chartTitleDay": "Data from {{dateValue}}",
+          "chartTitleDayRange": "Data from {{dateValueFrom}} to {{dateValueTo}}",
+          "avgVisitorsYear": "Total visits per year",
+          "avgVisitorsDay": "Ø visitors in {{ month }} {{ year }} on a",
+          "avgVisitorsMonth": "Number of visitors per month in {{ year }}",
+          "selectDataBase": "Choose base data for the graphic:",
+          "date": "Date",
+          "resetDate": "choose another date",
+          "noData": "(no data available)"
+        },
+        "gfi": {
+          "street": "Location",
+          "avgVisitorsMonday": "Ø visitors on a Monday",
+          "avgVisitorsTuesday": "Ø visitors on a Tuesday",
+          "avgVisitorsWednesday": "Ø visitors on a Wednesday",
+          "avgVisitorsThursday": "Ø visitors on a Thursday",
+          "avgVisitorsFriday": "Ø visitors on a Friday",
+          "avgVisitorsSaturday": "Ø visitors on a Saturday",
+          "avgVisitorsSunday": "Ø visitors on a Sunday",
+          "avgVisitorsJanuary": "Ø daily visitors in January",
+          "avgVisitorsFebruary": "Ø daily visitors in February",
+          "avgVisitorsMarch": "Ø daily visitors in March",
+          "avgVisitorsApril": "Ø daily visitors in April",
+          "avgVisitorsMay": "Ø daily visitors in May",
+          "avgVisitorsJune": "Ø daily visitors in June",
+          "avgVisitorsJuly": "Ø daily visitors in July",
+          "avgVisitorsAugust": "Ø daily visitors in August",
+          "avgVisitorsSeptember": "Ø daily visitors in September",
+          "avgVisitorsOctober": "Ø daily visitors in October",
+          "avgVisitorsNovember": "Ø daily visitors in November",
+          "avgVisitorsDecember": "Ø daily visitors in December",
+          "avgVisitorYear": "Ø daily visitors in "
+        },
+        "compare": {
+          "location": "Location",
+          "date": "Date",
+          "compare": "Compare",
+          "character": "Character",
+          "location_comparison": "Location Comparison",
+          "date_a": "Base date",
+          "date_b": "Compare date",
+          "date_comparison": "Date comparison",
+          "selectLocationBinMap": "Activate in order to select location B on map",
+          "deselectLocationBinMap": "Deactivate in order to select location A on map"
+        },
+        "tab": {
+          "dwelltime": {
+            "chartTitle": "Dwell time in minutes"
+          },
+          "visitorTypes": {
+            "chartTitle": "Visitor Types",
+            "chartLabels": {
+              "residents": "Residents",
+              "commuters": "Commuters",
+              "tourists_day": "Day tourists",
+              "tourists_overnight": "Overnight tourists"
+            },
+            "cardLabels": {
+              "residentsPerDay": "Ø Residents per Tag",
+              "commutersPerDay": "Ø Commuters per Tag",
+              "touristsPerDay": "Ø Tourists per Tag"
+            }
+          },
+          "ageGroup": {
+            "chartTitle": "Age groups by year and by year and month",
+            "pieChartTitle": "Age groups by year",
+            "lineBarChartTitle": "Age groups by year and month"
+          },
+          "compareDates": {
+            "dropdown": {
+              "activities": "Activities",
+              "ageGroup": "Age groups",
+              "dwellTime": "Dwell Time",
+              "visitorTypes": "Visitor Types"
+            }
+          }
+        },
+        "locationSelectMenu": {
+            "menuPlaceholder": "Choose a location"
+        }
+      }
+    }
+  }
+}

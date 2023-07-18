@@ -78,8 +78,6 @@ describe("ADDONS: addlayerRemotely/store/actionsAddLayerRemotely.js", () => {
                     typ: "GeoJSON",
                     geojson: geojson,
                     transparent: true,
-                    minScale: null,
-                    maxScale: null,
                     gfiAttributes: {"test1": "xyz", "test2": "abc"},
                     layerAttribution: "nicht vorhanden",
                     legendURL: "",

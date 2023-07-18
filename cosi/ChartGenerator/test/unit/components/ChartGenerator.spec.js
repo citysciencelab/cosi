@@ -211,13 +211,13 @@ describe("CharGenerator.vue", () => {
         await wrapper.vm.channelGraphData(data1);
         await wrapper.vm.channelGraphData(data2);
 
-        await wrapper.findAll(".nxt").at(0).trigger("click");
+        await wrapper.vm.selectGraph(0);
         expect(wrapper.vm.activeGraph).to.be.equal(0);
 
-        await wrapper.findAll(".nxt").at(0).trigger("click");
+        await wrapper.vm.selectGraph(1);
         expect(wrapper.vm.activeGraph).to.be.equal(1);
 
-        await wrapper.findAll(".nxt").at(1).trigger("click");
+        await wrapper.vm.selectGraph(0);
         expect(wrapper.vm.activeGraph).to.be.equal(0);
     });
 
@@ -227,7 +227,8 @@ describe("CharGenerator.vue", () => {
 
         await wrapper.vm.channelGraphData(data1);
 
-        await wrapper.findAll(".rm").at(0).trigger("click");
+        // await wrapper.findAll(".rm").at(0).trigger("click");
+        await wrapper.vm.removeGraph(0);
 
         expect(wrapper.vm.datasets.length).to.be.equal(0);
         expect(wrapper.vm.active).to.be.equal(false);

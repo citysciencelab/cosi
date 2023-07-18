@@ -5,7 +5,6 @@ $masterportal_red: #e20b0d;
 $error_red: #FF6555;
 $green:#57A845;
 $brightred: #FC176B;
-
 @mixin drop_shadow {
     -webkit-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 5px 10px -5px rgba(0,0,0,0.75);
@@ -56,5 +55,4 @@ $brightred: #FC176B;
 @import "./scss/tools.scss";
 @import "./scss/table.scss";
 @import "./scss/vuetify.scss";
-@import "./scss/info.scss";
 @import "./scss/fixes.scss";

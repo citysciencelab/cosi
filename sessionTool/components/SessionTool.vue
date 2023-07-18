@@ -28,10 +28,10 @@ export default {
     },
     created () {
         this.$on("close", this.close);
-        registerMap();
-        registerLayers();
-        registerFilter();
-        registerDraw();
+        registerMap(this.$store);
+        registerLayers(this.$store);
+        registerFilter(this.$store);
+        registerDraw(this.$store);
     },
     methods: {
         ...mapMutations("Tools/SessionTool", Object.keys(mutations)),
@@ -52,37 +52,43 @@ export default {
             const file = event.target.files.item(0),
                 fileReader = new FileReader();
 
-            fileReader.onload = (evt) => {
-                let json;
-
-                try {
-                    json = JSON.parse(evt.target.result);
-                }
-                catch (e) {
-                    console.warn("Trying to parse given string into a json", json);
-                    this.$store.dispatch("Alerting/addSingleAlert", i18next.t("additional:modules.tools.sessionTool.errorOnLoad"));
-                }
-                if (!isObject(json?.state)) {
-                    return;
-                }
-                this.observer.forEach(({key, setter}) => {
-                    if (typeof setter !== "function") {
-                        return;
-                    }
-
-                    Object.entries(json.state).forEach(async ([jsonKey, value]) => {
-                        if (jsonKey === key) {
-                            await setter(value, json.state);
-                        }
-                    });
-                });
-                this.close();
-            };
+            fileReader.onload = (evt) => this.onFileLoad(evt.target.result);
 
             if (file) {
                 fileReader.readAsText(file);
                 this.fileName = file?.name ? file.name : "";
             }
+        },
+        /**
+         * Onload function for the FileReader.
+         * @param {String} fileContent The file content as string.
+         * @returns {void}
+         */
+        onFileLoad (fileContent) {
+            let json;
+
+            try {
+                json = JSON.parse(fileContent);
+            }
+            catch (e) {
+                console.warn("Trying to parse given string into a json", json);
+                this.$store.dispatch("Alerting/addSingleAlert", i18next.t("additional:modules.tools.sessionTool.errorOnLoad"));
+            }
+            if (!isObject(json?.state)) {
+                return;
+            }
+            this.observer.forEach(({key, setter}) => {
+                if (typeof setter !== "function") {
+                    return;
+                }
+
+                Object.entries(json.state).forEach(async ([jsonKey, value]) => {
+                    if (jsonKey === key) {
+                        await setter(value, json.state);
+                    }
+                });
+            });
+            this.close();
         },
         /**
          * Creates a file based on given blob.
@@ -107,6 +113,10 @@ export default {
                 state: {}
             };
 
+            if (!Array.isArray(observer)) {
+                return;
+            }
+
             for (let index = 0; index < observer.length; index++) {
                 if (typeof observer[index]?.getter !== "function") {
                     continue;
@@ -117,6 +127,10 @@ export default {
             }
             this.createFile(new Blob([JSON.stringify(copyObject)], {type: "application/json;"}), "session.masterportal");
         },
+        /**
+         * Triggers a click event on the hidden button to trigger the upload.
+         * @returns {void}
+         */
         triggerUpload () {
             if (this.$refs.fileInput) {
                 this.$refs.fileInput.click();
@@ -151,11 +165,12 @@ export default {
                             @change="uploadFile"
                         >
                         <input
+                            id="fileUpload"
                             type="button"
                             class="btn btn-primary"
                             :aria-label="$t('additional:modules.tools.sessionTool.buttonTextUpload')"
                             :value="$t('additional:modules.tools.sessionTool.buttonTextUpload')"
-                            @click="triggerUpload()"
+                            @click="triggerUpload"
                         >
                         <span class="ms-2">{{ fileName }}</span>
                     </div>
@@ -166,6 +181,7 @@ export default {
                     </div>
                     <div class="card-body">
                         <input
+                            id="fileDownload"
                             class="btn btn-primary"
                             type="button"
                             :value="$t('additional:modules.tools.sessionTool.buttonTextDownload')"

@@ -22,10 +22,9 @@ const helpers = {
      * Converts data for POST-request
      * Considers mandatory and optional parameters
      * @param {Object} brw selectedBrwFeature from the state
-     * @param  {Object} wpsTimeout timeout attribute for wps from the state
      * @returns {String} Object for POST-request
      */
-    convert: function ({brw, wpsTimeout}) {
+    convert: function ({brw}) {
         const requestObj = {};
         let richtwert = brw.get("richtwert_euro").replace(".", "").replace(",", ".");
 
@@ -199,9 +198,6 @@ const helpers = {
                 dataType: "string",
                 value: brw.get("zStrassenLage")
             };
-        }
-        if (wpsTimeout && Object.keys(wpsTimeout).length > 0) {
-            requestObj.tm_ttl = wpsTimeout.tm_ttl;
         }
         return requestObj;
     },

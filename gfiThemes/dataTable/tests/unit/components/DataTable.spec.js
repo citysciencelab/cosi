@@ -12,7 +12,8 @@ config.mocks.$t = key => key;
 
 describe("/src/modules/tools/gfi/components/themes/dataTable/components/DataTable.vue", () => {
     let wrapper,
-        spyRunSorting;
+        spyRunSorting,
+        spyResetAll;
 
     const featureData = {
             getTheme: () => {
@@ -20,7 +21,8 @@ describe("/src/modules/tools/gfi/components/themes/dataTable/components/DataTabl
                     "name": "DataTable",
                     "params": {
                         "enableDownload": true,
-                        "isSortable": true
+                        "isSortable": true,
+                        "showCount": "count"
                     }
                 };
             },
@@ -89,6 +91,7 @@ describe("/src/modules/tools/gfi/components/themes/dataTable/components/DataTabl
 
     beforeEach(() => {
         spyRunSorting = sinon.spy(DataTableTheme.methods, "runSorting");
+        spyResetAll = sinon.spy(DataTableTheme.methods, "resetAll");
         wrapper = shallowMount(DataTableTheme, {
             localVue,
             store,
@@ -225,6 +228,50 @@ describe("/src/modules/tools/gfi/components/themes/dataTable/components/DataTabl
 
             expect(wrapperNew.findAll(".multiselect-dropdown").exists()).to.be.true;
         });
+
+        it("It should contains a resetAll button", () => {
+            expect(wrapper.find(".reset-all").exists()).to.be.true;
+        });
+
+        it("It should not contain a resetAll button", async () => {
+            const newFeature = {
+                getTheme: () => "DataTable",
+                getTitle: () => "DataTable",
+                getAttributesToShow: () => {
+                    return {};
+                },
+                getMimeType: () => "text/xml",
+                getFeatures: () => []
+            };
+
+            await wrapper.setProps({feature: newFeature});
+
+            expect(wrapper.find(".reset-all").exists()).to.be.false;
+        });
+
+        it("It should contains a div Element for count", () => {
+            expect(wrapper.find(".count").exists()).to.be.true;
+        });
+
+        it("It should shows right count with label", () => {
+            expect(wrapper.find(".count").text()).equals("count 2");
+        });
+
+        it("It should not contain a div Element for count", async () => {
+            const newFeature = {
+                getTheme: () => "DataTable",
+                getTitle: () => "DataTable",
+                getAttributesToShow: () => {
+                    return {};
+                },
+                getMimeType: () => "text/xml",
+                getFeatures: () => []
+            };
+
+            await wrapper.setProps({feature: newFeature});
+
+            expect(wrapper.find(".count").exists()).to.be.false;
+        });
     });
 
     describe("User Interactions", () => {
@@ -233,6 +280,13 @@ describe("/src/modules/tools/gfi/components/themes/dataTable/components/DataTabl
 
             await icon.trigger("click");
             expect(spyRunSorting.calledOnce).to.be.true;
+        });
+
+        it("should call 'resetAll' when the resetAll button is clicked", async () => {
+            const button = wrapper.find(".reset");
+
+            await button.trigger("click");
+            expect(spyResetAll.calledOnce).to.be.true;
         });
     });
 
@@ -491,63 +545,6 @@ describe("/src/modules/tools/gfi/components/themes/dataTable/components/DataTabl
             });
         });
 
-        describe("getUniqueValuesByColumnName", () => {
-            it("should return an empty array if first param is not a string", () => {
-                expect(wrapper.vm.getUniqueValuesByColumnName(undefined)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName(null)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName({})).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName([])).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName(true)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName(false)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName(1234)).to.deep.equal([]);
-            });
-
-            it("should return an empty array if second param is not an array", () => {
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", {})).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", "string")).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", 1234)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", true)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", false)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", undefined)).to.deep.equal([]);
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", null)).to.deep.equal([]);
-            });
-
-            it("should return an empty array if second param is an empty array", () => {
-                expect(wrapper.vm.getUniqueValuesByColumnName("foo", [])).to.deep.equal([]);
-            });
-
-            it("should return an empty array if given head is not found in objects of the array", () => {
-                const rows = [
-                        {
-                            foo: "bar",
-                            fuz: "buz"
-                        },
-                        {
-                            foo: "bar",
-                            fuz: "buz"
-                        }
-                    ],
-                    head = "fow";
-
-                expect(wrapper.vm.getUniqueValuesByColumnName(head, rows)).to.deep.equal([]);
-            });
-
-            it("should return an array with keys as strings", () => {
-                const rows = [
-                        {
-                            foo: "bar",
-                            fuz: "buz"
-                        },
-                        {
-                            foo: "bar",
-                            fuz: "buz"
-                        }
-                    ],
-                    head = "foo";
-
-                expect(wrapper.vm.getUniqueValuesByColumnName(head, rows)).to.deep.equal(["bar"]);
-            });
-        });
         describe("addFilter", () => {
             it("should not update the filterObject property", () => {
                 const copy = JSON.parse(JSON.stringify(wrapper.vm.filterObject));
@@ -630,6 +627,55 @@ describe("/src/modules/tools/gfi/components/themes/dataTable/components/DataTabl
                     ];
 
                 expect(wrapper.vm.getFilteredRows(filterObject, rows)).to.be.an("array").and.to.be.empty;
+            });
+        });
+        describe("resetAll", () => {
+            it("should reset the data to original data", () => {
+                const originRows = [{"Entnahme Datum": "2019",
+                        "OHG in Meter": "0.10",
+                        "UHG in Meter": "0.35",
+                        "Arsen": "15,9",
+                        "Cadmium": "1,38",
+                        "Chrom": "21,6",
+                        "Kupfer": "290,0",
+                        "Quecksilber": "0,285",
+                        "Nickel": "24,9",
+                        "Blei": "289,0",
+                        "Thallium": "---",
+                        "Zink": "393,0",
+                        "Molybdän": "4,53",
+                        "Einheit": "mg/kg TM"}, {
+                        "Entnahme Datum": "2019",
+                        "OHG in Meter": "0.00",
+                        "UHG in Meter": "0.10",
+                        "Arsen": "14,7",
+                        "Cadmium": "1,34",
+                        "Chrom": "40,5",
+                        "Kupfer": "774,0",
+                        "Quecksilber": "0,346",
+                        "Nickel": "22,9",
+                        "Blei": "209,0",
+                        "Thallium": "---",
+                        "Zink": "568,0",
+                        "Molybdän": "19,8",
+                        "Einheit": "mg/kg TM"
+                    }],
+                    originColumns = [{
+                        "index": 0,
+                        "name": "Entnahme Datum",
+                        "order": "origin"
+                    },
+                    {
+                        "index": 1,
+                        "name": "OHG in Meter",
+                        "order": "origin"
+                    }];
+
+                wrapper.vm.resetAll();
+                expect(wrapper.vm.filterObject).to.deep.equal({});
+                expect(wrapper.vm.dropdownSelected).to.deep.equal({});
+                expect(wrapper.vm.rows).to.deep.equal(originRows);
+                expect(wrapper.vm.columns).to.deep.equal(originColumns);
             });
         });
     });

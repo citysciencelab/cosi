@@ -7,7 +7,6 @@ import mutations from "../store/mutationsQueryDistricts";
 import rawLayerList from "@masterportal/masterportalapi/src/rawLayerList";
 import compareFeatures from "./compareFeatures.js";
 import LayerFilter from "./LayerFilter.vue";
-import Info from "text-loader!./info.html";
 import {Fill, Stroke, Style} from "ol/style.js";
 import {getAllFeaturesByLayerId as _getAllFeatures} from "../../utils/features/getAllFeaturesByLayerId";
 import exportXlsx from "../../utils/exportXlsx";
@@ -182,13 +181,6 @@ export default {
         },
 
         setLayerOptions: function () {
-            const urls = this.selectedDistrictLevel.stats.baseUrl,
-                layers = [];
-
-            urls.forEach(url => {
-                layers.push(...this.getLayerList().filter(layer=> layer.url === url));
-            });
-
             this.allLayerOptions = [];
 
             // facility data first
@@ -204,7 +196,7 @@ export default {
 
             // statistical data second
             for (const m of this.mapping) {
-                const layer = layers.find(l=>l.id && l.id === m[this.keyOfAttrNameStats]);
+                const layer = this.selectedDistrictLevel.stats.layers.find(l=>l.id && l.id === m[this.keyOfAttrNameStats]);
 
                 if (layer) {
                     this.allLayerOptions.push({
@@ -546,15 +538,6 @@ export default {
             this.updateAvailableLayerOptions();
         },
 
-        showHelp: function () {
-            this.cleanup();
-            this.addSingleAlert({
-                category: "Info",
-                content: Info,
-                displayClass: "info"
-            });
-        },
-
         close () {
             this.setActive(false);
 
@@ -687,16 +670,6 @@ export default {
             exportXlsx([headers, [], ...filters, ...data], filename, {exclude: this.excludedPropsForExport}, "aoa_to_sheet");
         },
         // pagination functions
-        /**
-         * @description Selects the next or the previous supply analysis in the Tool Window.
-         * @param {Integer} value +1 or -1.
-         * @returns {Void} Function returns nothing.
-         */
-        setPrevNext (value) {
-            const l = this.dataSets.length;
-
-            this.setActiveSet((((this.activeSet + value) % l) + l) % l); // modulo with negative handling
-        },
         downloadAll () {
             this.dataSets.forEach((set, index) => {
                 this.exportTable(index);
@@ -801,6 +774,7 @@ export default {
                     >
                         {{ $t('additional:modules.tools.cosi.queryDistricts.resetSelection') }}
                     </v-btn>
+                    <v-divider />
                     <AnalysisPagination
                         v-if="dataSets.length > 0 || layerFilterModels.length > 0"
                         :sets="dataSets"
@@ -814,12 +788,9 @@ export default {
                             downloads: [$t('additional:modules.tools.cosi.queryDistricts.exportTable')],
                             downloadAll: $t('additional:modules.tools.cosi.queryDistricts.paginationDownloadAll'),
                             remove: $t('additional:modules.tools.cosi.queryDistricts.paginationRemove'),
-                            removeAll: $t('additional:modules.tools.cosi.queryDistricts.paginationRemoveAll'),
-                            next: $t('additional:modules.tools.cosi.queryDistricts.paginationNext'),
-                            prev: $t('additional:modules.tools.cosi.queryDistricts.paginationPrev'),
+                            removeAll: $t('additional:modules.tools.cosi.queryDistricts.paginationRemoveAll')
                         }"
                         @setActiveSet="(n) => setActiveSet(n)"
-                        @setPrevNext="(n) => setPrevNext(n)"
                         @removeSingle="(n) => removeSet(n)"
                         @addSet="addSet"
                         @removeAll="removeAll"

@@ -666,7 +666,7 @@ export default {
 
     .addon_container {
         position:fixed;
-        z-index:5000;
+        z-index:100;
         left:10px;
         bottom:30px;
         width:460px;

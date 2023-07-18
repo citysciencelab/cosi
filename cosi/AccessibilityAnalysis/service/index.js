@@ -132,6 +132,7 @@ const id = "AccessibilityAnalysisService",
             if (worker === undefined) {
                 // worker.terminate();
                 worker = workerFactory();
+                worker.postMessage({type: "register", projections: rootGetters.namedProjections});
                 worker.onerror = e => {
                     console.error(e);
                 };

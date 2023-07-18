@@ -1,22 +1,22 @@
 ### Einrichtungen bearbeiten
 
-Sie können sowohl selbst angelegte als auch bereits in den Daten vorhandene Einrichtungen bearbeiten, sobald Sie ein aktives Szenario haben. Sollten Sie kein Szenario angelegt haben und Sie klicken eine Einrichtung an, wird folgendes Popup angezeigt:
+Haben Sie ein aktives Szenario können Sie sowohl selbst angelegte als auch bereits in den Daten vorhandene Einrichtungen bearbeiten. Sollten Sie kein Szenario angelegt haben und Sie klicken eine Einrichtung an, wird folgendes Popup angezeigt:
 
 ![Abbildung 1: Bitte erstellen Sie ein Szenario](https://user-images.githubusercontent.com/43250699/159273029-a17ce734-e7ed-4374-9cf4-433d44f26508.JPG)
 
-*Abbildung 1: Bitte erstellen Sie ein Szenario*
+*Abbildung 1: Bitte erstellen Sie ein Szenario.*
 
-Ein Szenario können Sie wie im [Szenario Manager](./einrichtungenanlegen.md) beschrieben anlegen. Sobald Sie ein Szenario erfolgreich erstellt haben, wenn Sie eine Einrichtung anklicken, folgender Popup am unteren Bildschirmrand: 
+Ein Szenario können Sie wie im [Szenario Manager](./einrichtungenanlegen.md) beschrieben anlegen. Ist ein Szenario angelegt und Sie wählen per Mausklick eine Einrichtung an, erscheint folgendes Popup am unteren Bildschirmrand: 
 
 ![Abbildung 2: Einrichtung bearbeiten](https://user-images.githubusercontent.com/43250699/159273504-35b08fa1-2206-4ef4-a850-670f0e03a381.JPG)
 
-*Abbildung 2: Einrichtung bearbeiten*
+*Abbildung 2: Einrichtung bearbeiten.*
 
-Wählen Sie hier den Button **BEARBEITEN** an, daraufhin wird sich das folgende Fenster öffnen:
+Wählen Sie hier den Button **BEARBEITEN** an. Daraufhin wird sich das folgende Fenster öffnen:
 
 ![Abbildung 3: Einrichtung-Bearbeiten-Fenster](https://user-images.githubusercontent.com/43250699/159273975-1e1f2960-1af4-4e49-a03a-5657060b322f.png)
 
-*Abbildung 3: Einrichtung bearbeiten*
+*Abbildung 3: Einrichtung bearbeiten.*
 
 1. **Eingaben sperren**
    > Mit Hilfe dieses Buttons sperren Sie die Input-Felder des Fensters, so dass Sie nicht mehr bearbeitet werden können. Die Input-Felder sind standardmäßig gesperrt, so dass Sie diesen Button aktivieren müssen, ehe Sie eine vorhandene Einrichtung bearbeiten können. 
@@ -36,7 +36,7 @@ Wählen Sie hier den Button **BEARBEITEN** an, daraufhin wird sich das folgende 
 *Abbildung 4: Clusterauswahl*
 
 1. **Das angewählte Cluster (3)**
-   > Die Darstellung von Einrichtungen wird auf der Karte gebündelt, wenn zu viele Einrichtungen an einem Ort sind, so dass sie in der aktuellen Zoomstufe nicht dargestellt werden können. 
+   > Die Darstellung von Einrichtungen wird auf der Karte gebündelt, wenn zu viele Einrichtungen an einem Ort sind, wenn diese in der aktuellen Zoomstufe nicht dargestellt werden können. 
 2. **Auswahl**
    > Alle im Cluster gebundenen Einrichtungen werden angezeigt, sobald Sie auf das Cluster klicken. Sie können dann in diesem Fenster eine Einrichtung auswählen, woraufhin sich das Fenster aus *Abbildung 3* öffnet.
 

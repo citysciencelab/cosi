@@ -22,8 +22,7 @@ export default {
 
 <template lang="html">
     <v-col
-        cols="8"
-        class="mt-1"
+        class="mb-1"
     >
         <span class="text-subtitle-2"> {{ $t("additional:modules.tools.cosi.accessibilityAnalysis.legend") }} </span>
         <template

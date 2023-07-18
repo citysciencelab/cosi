@@ -9,3 +9,4 @@ qr/node_modules/*
 .vscode
 .idea
 .DS_Store
+vpiDashboard/config.local.js

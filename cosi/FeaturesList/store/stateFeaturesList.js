@@ -42,7 +42,8 @@ const state = {
     readmeUrl: {
         "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/featureslist.md",
         "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/einrichtungsuebersicht.md"
-    }
+    },
+    show: true
 };
 
 export default state;

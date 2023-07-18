@@ -2,8 +2,9 @@
 
 Durch das Erstellen eines Wohnbauquartiers können sie Wohnungsbauszenarien durchspielen. Die erstellten Wohnungsbauquartiere stehen Ihnen für weitere Analysefunktionen zur Verfügung. Die Szenarien können exportiert und gespeichert werden.
 
-Sobald sie "Wohnungsquartiere anlegen" auswählen, öffnet sich ein Fenster, in dessen oberem Bereich Sie den Szenario Manager finden. (s. [Szenario Manager](#markdown-header-szenario-manager))
+Sobald sie über "Simulation" "Wohnungsquartiere anlegen" auswählen, öffnet sich ein Fenster, in dessen oberem Bereich Sie den Szenario Manager finden (s. Abbidlung "Szenario Manager").
 
+![Abbildung: 2: Wohnungsbauquartiere anlegen](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/wohnquatier1.png?raw=true)
 ![Abbildung: 1: Wohnungsbauquartiere anlegen](https://user-images.githubusercontent.com/43250699/143025884-f86a5897-3757-4b35-9d6d-1e4969d8175d.png)  
 *Abbildung 1: Wohnungsbauquartiere anlegen*
 
