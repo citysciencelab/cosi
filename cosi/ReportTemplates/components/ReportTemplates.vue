@@ -210,40 +210,37 @@ export default {
             // 1. set data selection (or give resolved promise if none)
             let dataSelected = Promise.resolve();
 
-            console.log(chapter.dataSelection);
-
             if (Object.keys(chapter.dataSelection).length !== 0) {
                 dataSelected = this.setCurrentDataSelectionLayersOnly(chapter.dataSelection);
             }
+            // eslint-disable-next-line one-var
             const addSingleAlert = this.addSingleAlert;
 
-            // 2. run analysis
-            dataSelected.then(()=>{
-                console.log("data selected.");
-            })
-            // 3. alert on failure
+            dataSelected
+            // 2. alert on failure in data loading
                 .catch((e)=>{
-                    console.log("error:", e);
+                    console.warn("error:", e);
                     addSingleAlert({
                         content: "Daten Kapitel " + (templateItemsIndex + 1) + " konnten nicht geladen werden.",
                         category: "Fehler",
                         displayClass: "error"
                     });
-                    console.log("error:", e);
-                }).finally(()=>{ // after trying to load data is finished, run analysis
-                    console.log("data selected now run script");
+                    console.warn("error:", e);
+                }).finally(()=>{
+                    // 3. after trying to load data is finished, run analysis
                     this.clearTemplateItemOutput(templateItemsIndex);
                     return this.updateToolOutput(templateItemsIndex);
                 })
                 .catch((e)=>{
-                    console.log("error:", e);
+                    // 4. alert on failure in analysis
+                    console.warn("error:", e);
                     addSingleAlert({
                         content: "Analyse Kapitel " + (templateItemsIndex + 1) + " konnte eventuell nicht ausgefuehrt werden. Bitte überprüfen Sie die Tool Einstellungen.",
                         category: "Fehler",
                         displayClass: "error"
                     });
                 })
-            // 4. run callback once all finished
+                // 5. run callback once all finished
                 .finally(()=>{
                     if (finallyDo) {
                         finallyDo();
@@ -257,7 +254,6 @@ export default {
          * @returns {Promise} a promise that resolves once the output is received, or is rejected after a timeOut
          */
         updateToolOutput (templateItemsIndex) {
-
 
             // check if tool settings are stored
             if (!this.templateItems[templateItemsIndex].hasSettings) {
@@ -275,7 +271,6 @@ export default {
             const outputCallback = (output)=>{
                 const itemID = templateItemsIndex;
 
-                console.log(output);
                 if (output.type === "error") {
                     this.addSingleAlert({
                         content: "Problem mit Tool Einstellungen: " + output.message,
@@ -292,7 +287,6 @@ export default {
 
             // calls toolBridge to run the selected tool with the given settings
             // outputCallback then saves the results to this.templateItems
-            console.log("running tool on", this.templateItems[templateItemsIndex]);
             this.runTool({
                 toolName: this.templateItems[templateItemsIndex].tool, // the selected tool
                 settings: this.templateItems[templateItemsIndex].settings, // the settings stored previously via the `updateToolSeetings()` method

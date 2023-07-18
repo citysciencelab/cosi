@@ -16,7 +16,6 @@ const actions = {
         context.state.active = false;
     },
     finishEditingToolSettings (context) {
-        console.log("FINISH - ACTION");
 
         // get current settings via toolbridge
         const currentSettings = context.rootGetters["Tools/ToolBridge/currentSettings"],
@@ -26,7 +25,6 @@ const actions = {
             //       console.log(currentSettings(state.editingTool.toolName));
             validation = validateToolSettings(context.state.editingTool.toolName, settings);
 
-        console.log("VALIDATION", validation);
         // if no success, let caller know and stop:
         if (!validation.success) {
             return validation;
@@ -38,8 +36,6 @@ const actions = {
         return validation;
     },
     abortEditingToolSettings (context) {
-        console.log("ABORT - ACTION");
-
         // stop editing mode
         context.dispatch("returnToReportTemplatesInterface");
         // let reportTemplates know that editing is over but edits are not accepted

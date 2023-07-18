@@ -1,4 +1,3 @@
-import promisedEvent from "../../ReportTemplates/utils/promisedEvent";
 export default {
     /**
      *

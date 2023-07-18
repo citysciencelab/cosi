@@ -1,5 +1,5 @@
 <script>
-import {mapActions, mapMutations} from "vuex";
+import {mapActions} from "vuex";
 export default {
     name: "EditForReportTemplate",
     props: {
@@ -27,7 +27,6 @@ export default {
             const finishEditingValidationResult = this.finishEditingToolSettings(this.toolName);
 
             finishEditingValidationResult.then((validation)=>{
-                console.log(validation);
                 if (!validation.success) {
                     this.settingsIssues = validation.individualMessages;
                 }
