@@ -1,4 +1,3 @@
-import Vue from "vue";
 import {generateSimpleMutations} from "../../../../src/app-store/utils/generators";
 import stateSelectionManager from "./stateSelectionManager";
 

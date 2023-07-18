@@ -122,7 +122,8 @@ export default {
                 }
             }
         },
-        // selections - indirectly watched through computed variable selectionsLength
+        // Note on the importance of selectionsLength:
+        // `selections` is indirectly watched through the computed variable selectionsLength
         // Sets the all selections button active again if the this.selections array changes and updates the selection index
         selectionsLength (newValue, oldValue) {
             if ((oldValue && newValue && oldValue < newValue) || (!oldValue && newValue)) {

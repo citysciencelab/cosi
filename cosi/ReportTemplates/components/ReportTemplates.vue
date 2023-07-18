@@ -210,6 +210,8 @@ export default {
             // 1. set data selection (or give resolved promise if none)
             let dataSelected = Promise.resolve();
 
+            console.log(chapter.dataSelection);
+
             if (Object.keys(chapter.dataSelection).length !== 0) {
                 dataSelected = this.setCurrentDataSelectionLayersOnly(chapter.dataSelection);
             }
@@ -414,7 +416,7 @@ export default {
         addEmptyTemplateItem () { // "+" button to add new chapters to the template
             const newID = 1 + Math.max(...this.templateItems.map(o => o.id)); // create an ID one larger than the highest id in array
 
-            this.templateItems.push({title: "Neues Kapitel...", description: "", tool: "Dashboard", settings: {}, hasSettings: false, output: {}, dataSelection: {}, dataSelectionApplied: false, id: newID});
+            this.templateItems.push({title: "Neues Kapitel...", description: "", tool: null, settings: {}, hasSettings: false, output: {}, dataSelection: {}, dataSelectionApplied: false, id: newID});
 
         },
         deleteTemplateItem (index) { // id is the value for key "id" in the templateItem (stable & unique), not the array index (unstable)
@@ -457,7 +459,7 @@ export default {
             }
             this.setAcceptSelection(null); // make sure watcher is triggered in next line
             this.setAcceptSelection(dataSelection); // commit to selectionManager
-            // returns a promise that resolves when data is loaded (or gets rejected after timeout)
+            // Returns a promise that resolves when data is loaded (or gets rejected after timeout)
             return promisedEvent.call(
                 this,
                 "featureListUpdatedBy-setBBoxToGeom-updateSource",
@@ -478,26 +480,6 @@ export default {
             newSelection.storedLayers = dataSelection.storedLayers;
             // apply it
             return this.setCurrentDataSelection(newSelection);
-
-        },
-        /**
-         * apply data selection and track which one is selected
-         * @param {integer} index the array item index of the templateItem
-         * @return {void}
-         */
-        dataSelectionAppliedToggle (index) {
-            // if the dataselection is turned on...
-            if (this.templateItems[index].dataSelectionApplied) {
-                // set dataSelectionApplied to false for all templateItems except the selected one
-                for (let i = 0; i < this.templateItems.length; i++) {
-                    if (i !== index) {
-                        this.templateItems[i].dataSelectionApplied = false;
-                    }
-                }
-                // apply data selection
-                this.setCurrentDataSelection(this.templateItems[index].dataSelection);
-            }
-            // if dataselection is turned of, nothing happens. Data selection is a one way street - we don't "unselect" data.
 
         },
 
@@ -714,27 +696,8 @@ export default {
                                                         dense
                                                         @click="startEditingToolSettings({toolName: templateItem.tool,templateItemsIndex: index})"
                                                     >
-                                                        <!-- <v-tooltip
-                                                            activator="parent"
-                                                            position="right"
-                                                        >
-                                                            Öffnet das gewählte Tool, um die Einstellungen für die Analyse dieses Kapitels vorzunehmen
-                                                        </v-tooltip> -->
-                                                        hello!
-                                                        <v-tooltip
-                                                            activator="parent"
-                                                        >
-                                                            Tooltip
-                                                        </v-tooltip>
-                                                        <!-- <v-icon>mdi-pen</v-icon> -->
+                                                        <v-icon>mdi-pen</v-icon>
                                                     </v-btn><br><br>
-                                                    <v-tooltip text="Tooltip">
-                                                        <template #activator="{ props }">
-                                                            <v-btn v-bind="props">
-                                                                Tooltip
-                                                            </v-btn>
-                                                        </template>
-                                                    </v-tooltip>
                                                 </v-col>
                                             </v-row>
                                             <v-row v-if="!templateItem.hasToolSettings & templateItem.tool">
@@ -850,7 +813,6 @@ export default {
 #reportTemplates{
     overflow-y: auto;
     width:500px;
-    height:100%;
 }
     .textfieldtitle {
         font-size: 2em !important;

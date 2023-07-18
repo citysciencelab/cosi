@@ -1,10 +1,10 @@
 /**
- * returns a promise that is reolved upon an event. Use promisedEvent.call(eventName, timeOut, this) to ensure
- * @param {*} eventName name of event that should be awaited
- * @param {integer} timeOut ms how long to wait for event before rejecting the promoise (waits forever if not provided)
+ * Returns a promise that is reolved upon an event. Use promisedEvent.call(eventName, timeOut, this) to ensure
+ * @param {string} eventName name of event that should be awaited
+ * @param {number} timeOut ms how long to wait for event before rejecting the promise
  * @return {Promise} empty promise, resolved when promisedEvent is emitted
  */
-export default function promisedEvent (eventName, timeOut) {
+export default function promisedEvent (eventName, timeOut = 1500) {
     if (!this.$root.$on) {
         throw new Error("$root not available; use promisedEvent.call(parameters..., this)");
     }

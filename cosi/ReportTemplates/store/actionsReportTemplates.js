@@ -6,7 +6,7 @@ const actions = {
 
         }
         // close all other tools and stop their editing mode
-        this.commit("Tools/ReportTemplates/closeToolsInTemplateMode");
+        this.commit("Tools/ReportTemplates/returnToReportTemplatesInterface");
         // open selected tool in editing mode
         this.commit("Tools/" + payload.toolName + "/setReportTemplateMode", payload.templateItemsIndex);
         this.commit("Tools/" + payload.toolName + "/setActive", true);
@@ -32,7 +32,7 @@ const actions = {
             return validation;
         }
         // stop editing mode
-        this.commit("Tools/ReportTemplates/closeToolsInTemplateMode");
+        this.commit("Tools/ReportTemplates/returnToReportTemplatesInterface");
         // let reportTemplates know that editing is over and edits are accepted
         context.state.editingTool = {toolName: null, templateItemsIndex: null, accepted: true}; // watcher on editingTool handles rest
         return validation;
@@ -41,7 +41,7 @@ const actions = {
         console.log("ABORT - ACTION");
 
         // stop editing mode
-        this.commit("Tools/ReportTemplates/closeToolsInTemplateMode");
+        this.commit("Tools/ReportTemplates/returnToReportTemplatesInterface");
         // let reportTemplates know that editing is over but edits are not accepted
         context.state.editingTool = {toolName: null, templateItemsIndex: null, accepted: false}; // watcher on editingTool handles rest
     }
