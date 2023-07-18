@@ -138,7 +138,7 @@ export default {
         // ...
     },
     methods: {
-        ...mapActions("Tools/ReportTemplates", ["startEditingToolSettings", "finishEditingToolSettings", "abortEditingToolSettings"]),
+        ...mapActions("Tools/ReportTemplates", ["startEditingToolSettings", "finishEditingToolSettings", "abortEditingToolSettings", "returnToReportTemplatesInterface"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapMutations("Tools/ReportTemplates", Object.keys(mutations)),
         ...mapActions("Tools/ToolBridge", ["runTool"]),
