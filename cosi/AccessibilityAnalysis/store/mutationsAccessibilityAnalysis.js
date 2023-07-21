@@ -43,6 +43,10 @@ const mutations = {
      */
     setMetadata: (state, payload) => {
         state.metaData = payload;
+    },
+
+    setProgress: (moduleState, payload) => {
+        moduleState.progress = payload;
     }
 };
 

@@ -5,18 +5,20 @@ import {mapGetters, mapMutations, mapActions} from "vuex";
 import getters from "../store/gettersAccessibilityAnalysis";
 import mutations from "../store/mutationsAccessibilityAnalysis";
 import methods from "./methodsAnalysis";
-import * as Proj from "ol/proj.js";
 import deepEqual from "deep-equal";
 import {exportAsGeoJson, downloadGeoJson} from "../utils/exportResults";
 import {Select} from "ol/interaction";
 import ToolInfo from "../../components/ToolInfo.vue";
-import travelTimeIndex from "../assets/inrix_traveltimeindex_2021.json";
-import {onSearchbar, offSearchbar, getServiceUrl, onShowFeaturesById, onShowAllFeatures, onFeaturesLoaded, getModelByAttributes} from "../../utils/radioBridge.js";
+import {onSearchbar, offSearchbar, onShowFeaturesById, onShowAllFeatures, onFeaturesLoaded, getModelByAttributes} from "../../utils/radioBridge.js";
 import mapCanvasToImage, {exportMapView} from "../../utils/mapCanvasToImage";
 import AccessibilityAnalysisLegend from "./AccessibilityAnalysisLegend.vue";
 import AccessibilityAnalysisTrafficFlow from "./AccessibilityAnalysisTrafficFlow.vue";
 import {unpackCluster} from "../../utils/features/unpackCluster.js";
 import {getLayerSource} from "../../utils/layer/getLayerSource";
+import {geometryToGeoJson} from "../../utils/geometry/convertToGeoJson";
+import {transformCoordinate, transformCoordinates} from "../utils/transformCoordinates";
+import {simplify} from "../../utils/geometry/simplify";
+import {getFlatCoordinates} from "../../utils/geometry/getFlatCoordinates";
 
 export default {
     name: "AccessibilityAnalysis",
@@ -47,7 +49,6 @@ export default {
             }
         ];
         return {
-            travelTimeIndex,
             facilityNames: [],
             mapLayer: null,
             directionsLayer: null,
@@ -104,7 +105,6 @@ export default {
     computed: {
         ...mapGetters("Language", ["currentLocale"]),
         ...mapGetters("Tools/AccessibilityAnalysis", Object.keys(getters)),
-        ...mapGetters("Tools/AccessibilityAnalysisService", ["progress"]),
         ...mapGetters("Maps", ["projectionCode", "clickCoordinate", "getVisibleLayerList"]),
         ...mapGetters("MapMarker", ["markerPoint", "markerPolygon"]),
         ...mapGetters("Tools/DistrictSelector", ["boundingGeometry"]),
@@ -113,7 +113,6 @@ export default {
         ...mapGetters("Tools/SelectionManager", ["activeSelection"]),
         ...mapGetters("Tools/ScenarioBuilder", ["scenarioUpdated"]),
         ...mapGetters("Tools/Routing/Directions", ["directionsRouteSource", "directionsRouteLayer", "routingDirections"]),
-        ...mapGetters("Tools/Routing", {routingActive: "active", activeRoutingToolOption: "activeRoutingToolOption"}),
 
         _mode: {
             get () {
@@ -236,7 +235,7 @@ export default {
             }
 
             if (this.dataSets[newValue].inputs._mode === "point" || this.dataSets[newValue].inputs._mode === "facility") {
-                const icoord = Proj.transform(this.dataSets[newValue].inputs._coordinate[0], "EPSG:4326", this.projectionCode);
+                const icoord = transformCoordinate(this.dataSets[newValue].inputs._coordinate[0], "EPSG:4326", this.projectionCode);
 
                 this.placingPointMarker(icoord);
             }
@@ -278,17 +277,17 @@ export default {
         },
         clickCoordinate (coord) {
             if (this.active && this.mode === "point") {
-                this.setCoordinateFromClick(this.clickCoordinate);
+                this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode);
                 this.placingPointMarker(coord);
             }
         },
         setByFeature (val) {
             if (val && this.mode === "facility" && this.facilityFeature) {
                 if (val) {
-                    this.setCoordinateFromFeature(this.facilityFeature);
+                    this.setCoordinateFromFeature(this.facilityFeature, this.projectionCode);
                 }
                 else {
-                    this.setCoordinateFromClick(this.clickCoordinate);
+                    this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode);
                 }
             }
         },
@@ -372,8 +371,6 @@ export default {
     created () {
         this.$on("close", this.close);
         this.setNonReactiveData();
-
-        this.baseUrl = getServiceUrl("bkg_ors") + "/v2/";
     },
 
     /**
@@ -404,12 +401,11 @@ export default {
             setPopulationRequestActive: "setActive"
         }),
         ...mapMutations("Tools/AccessibilityAnalysis", Object.keys(mutations)),
-        ...mapActions("Tools/AccessibilityAnalysisService", ["getIsochrones"]),
+        ...mapActions("Tools/AccessibilityAnalysis", ["getIsochrones"]),
         ...mapActions("Tools/SelectionManager", ["addNewSelection"]),
         ...mapActions("Maps", ["setCenter", "removeInteraction", "addInteraction", "addLayer", "registerListener", "unregisterListener"]),
         ...mapMutations("Maps", ["removeLayerFromMap"]),
         ...mapActions("MapMarker", ["placingPointMarker", "removePointMarker"]),
-        ...mapActions("GraphicalSelect", ["featureToGeoJson"]),
         ...mapActions("Maps", ["addNewLayerIfNotExists"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...methods,
@@ -448,13 +444,39 @@ export default {
                 this.facilityFeature = unpackedFeature;
                 this.setSelectedFacility(unpackedFeature.get(layerMap.keyOfAttrName));
                 if (this.setByFeature) {
-                    this.setCoordinateFromFeature(unpackedFeature);
+                    this.setCoordinateFromFeature(unpackedFeature, this.projectionCode);
                 }
                 else {
-                    this.setCoordinateFromClick(this.clickCoordinate);
+                    this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode);
                 }
                 this.placingPointMarker(this.clickCoordinate);
             });
+        },
+
+        /**
+         * Sets and transforms the click coordinate to EPSG 4326.
+         * @param {event} clickCoordinate - The coordinate of the click.
+         * @param {String} mapProjectionCode - The code of the current map projection.
+         * @returns {void}
+         */
+        setCoordinateFromClick: function (clickCoordinate, mapProjectionCode) {
+            const coordinate = transformCoordinate(clickCoordinate, mapProjectionCode);
+
+            this.setCoordinate([coordinate]);
+            this.setSetBySearch(false);
+        },
+
+        /**
+         * Sets and transforms the coordinate(s) of a feature to EPSG 4326.
+         * @param {ol/Feature} feature - The feature.
+         * @param {String} mapProjectionCode - The code of the current map projection.
+         * @returns {void}
+         */
+        setCoordinateFromFeature: function (feature, mapProjectionCode) {
+            const simplifiedGeom = simplify(feature.getGeometry()),
+                coordiantes = getFlatCoordinates(simplifiedGeom);
+
+            this.setCoordinate(transformCoordinates(coordiantes, mapProjectionCode));
         },
 
         downloadMap () {
@@ -469,13 +491,6 @@ export default {
                     this.askUpdate = true;
                 }
             }
-        },
-
-        resetMarkerAndZoom () {
-            const icoord = Proj.transform(this.coordinate[0], "EPSG:4326", this.projectionCode);
-
-            this.placingPointMarker(icoord);
-            this.setCenter(icoord);
         },
 
         /**
@@ -524,10 +539,12 @@ export default {
         * @returns {void}
         */
         async requestInhabitants () {
+            const outerPolygon = geometryToGeoJson(this.isochroneFeatures[0].getGeometry(), false, "EPSG:25832", "EPSG:25832");
+
             this.close();
             await this.$nextTick();
             this.setPopulationRequestActive(true);
-            this.setPopulationRequestGeometry(this.rawGeoJson);
+            this.setPopulationRequestGeometry(outerPolygon);
         },
         createAnalysisSet: async function () {
             this.hide = false;
@@ -563,7 +580,7 @@ export default {
                 this.renderIsochrones(this._isochroneFeatures);
             }
 
-            this.dataSets[this.activeSet].geojson = this.exportAsGeoJson(this.mapLayer);
+            this.dataSets[this.activeSet].geojson = this.exportAsGeoJson(this.mapLayer, this.projectionCode);
             this.addNewSelection({selection: analysisSet.results, source: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.title"), id: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.transportTypes." + this._transportType) + ", " + this.$t("additional:modules.tools.cosi.accessibilityAnalysis.scaleUnits." + this._scaleUnit) + ", [...]"});
         },
         exportAsGeoJson,
@@ -601,7 +618,7 @@ export default {
             await this.createIsochrones();
 
             this.dataSets[this.activeSet].results = this._isochroneFeatures;
-            this.dataSets[this.activeSet].geojson = this.exportAsGeoJson(this.mapLayer);
+            this.dataSets[this.activeSet].geojson = this.exportAsGeoJson(this.mapLayer, this.projectionCode);
 
             this.renderIsochrones(this._isochroneFeatures);
         },
@@ -826,7 +843,7 @@ export default {
                                         {{ $t('additional:modules.tools.cosi.accessibilityAnalysis.clear') }}
                                     </v-btn>
                                     <v-btn
-                                        v-if="mode === 'point' || mode === 'facility'"
+                                        v-if="mode === 'point' || mode === 'facility' || mode === 'path'"
                                         tile
                                         depressed
                                         color="grey lighten-1"

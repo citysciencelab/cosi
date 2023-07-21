@@ -1,6 +1,7 @@
 
 import {generateSimpleGetters} from "../../../../src/app-store/utils/generators";
 import vueAddonState from "./stateAccessibilityAnalysis";
+import {getServiceUrl} from "../../utils/radioBridge.js";
 
 const getters = {
     ...generateSimpleGetters(vueAddonState),
@@ -20,6 +21,10 @@ const getters = {
             setByFeature: state.setByFeature,
             steps: state.steps
         };
+    },
+
+    baseUrl: s => serviceId => {
+        return getServiceUrl(serviceId || s.fallbackServiceId) + "/v2/";
     }
 };
 

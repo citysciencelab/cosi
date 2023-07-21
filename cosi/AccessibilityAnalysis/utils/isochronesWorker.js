@@ -1,8 +1,8 @@
-import {writeFeatures} from "../components/util.js";
 import {createIsochrones, getFilterPoly, setFilterPoly} from "./createIsochrones";
 import "regenerator-runtime/runtime";
 import axios from "axios";
 import {registerProjections} from "../../utils/registerProjections.js";
+import GeoJSON from "ol/format/GeoJSON";
 
 /**
  * @param {*} self self
@@ -18,7 +18,7 @@ async function onmessage (self, event) {
                 self.postMessage({type, "progress": p});
             });
 
-            self.postMessage({type: event.data.type, result: writeFeatures(features)});
+            self.postMessage({type: event.data.type, result: new GeoJSON().writeFeatures(features)});
         }
         else if (event.data.type === "init") {
             setFilterPoly(event.data.coords);

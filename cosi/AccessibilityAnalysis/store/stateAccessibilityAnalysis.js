@@ -24,7 +24,6 @@ const state = {
     resizableWindow: false,
     isVisibleInMenu: true,
     deactivateGFI: true,
-    rawGeoJson: null,
     isochroneFeatures: [],
     isochroneColors: undefined,
     mode: "point",
@@ -50,7 +49,14 @@ const state = {
     },
     // these two variables are required to make this addon compatible with the toolBridge addon (for details see toolBridge documentation)
     toolBridgeIn: {settings: {}, type: "", outputCallback: null}, // accepts settings from toolBridge - must have a *watcher*
-    toolBridgeOut: {}// pass current settings to toolBridge - must have a *getter
+    toolBridgeOut: {}, // pass current settings to toolBridge - must have a *getter
+    progress: 0,
+    batchSize: 50,
+    filterPoly: null,
+    filterUrl: "https://geodienste.hamburg.de/HH_WFS_Verwaltungsgrenzen",
+    filterFeatureType: "landesgrenze",
+    serviceId: "bkg_ors",
+    fallbackServiceId: "csl_ors"
 };
 
 export default state;
