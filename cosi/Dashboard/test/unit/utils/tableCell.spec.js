@@ -22,7 +22,7 @@ describe("Dashboard/utils/tableCells", () => {
             expect(getValue({}, {}, "")).to.be.equal("-");
         });
         it("should return the parsed value", () => {
-            expect(getValue(item, header, timestamp)).to.be.equal("2.266");
+            expect(getValue.call({currentLocale: "de-DE"}, item, header, timestamp)).to.be.equal("2.266");
         });
     });
 
