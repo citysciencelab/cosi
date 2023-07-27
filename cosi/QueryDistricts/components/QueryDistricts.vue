@@ -378,7 +378,7 @@ export default {
 
             if (this.selectedDistrict) {
                 const selector = this.keyOfAttrNameStats,
-                    feature = features.find(f => f[selector] === this.selectedDistrictLevel.districtNamesMap[this.selectedDistrict]);
+                    feature = features.find(f => f[selector] === this.selectedDistrictLevel.districtNamesMap[this.selectedDistrict] || this.selectedDistrict);
 
                 if (feature) {
                     const value = Number(Number(parseFloat(feature[model.field])).toFixed(3));
