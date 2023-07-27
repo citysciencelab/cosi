@@ -21,7 +21,7 @@ const state = {
     width: 0.45,
     // ResidentialSimulation specific state
     timelinePrefix: "jahr_",
-    groupsList: ["Bevölkerung", "Bevölkerung Prognose", "Arbeitslose", "Sozialversicherungspflichtige", "SGB II Leistungen", "Verkehr"],
+    groupsList: ["Bevölkerung", "Bevölkerung unter x Jahren", "Bevölkerung ab x Jahren", "Bevölkerung x bis x Jahren", "Bevölkerung x bis unter 18 Jahren", "Bevölkerung Prognose", "Arbeitslose", "Sozialversicherungspflichtige", "SGB II Leistungen", "Verkehr"],
     basePopulationProp: "Bevölkerung insgesamt",
     drawingLayer: null,
     defaults: {

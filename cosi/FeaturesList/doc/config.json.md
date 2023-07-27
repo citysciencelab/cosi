@@ -1,4 +1,4 @@
-**DistrictSelector**
+**FeaturesList**
 
 Mit dem DistrictSelector kann ein Gebiet auf Basis einer Verwaltungsebene (z.B.: Statistisches Gebiet) ausgewählt werden. Für das gewählte Gebiet werden die entsprechenden regionalstatistischen Daten geladen.
 

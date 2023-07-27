@@ -378,7 +378,7 @@ export default {
 
             if (this.selectedDistrict) {
                 const selector = this.keyOfAttrNameStats,
-                    feature = features.find(f => f[selector] === this.selectedDistrict);
+                    feature = features.find(f => f[selector] === this.selectedDistrictLevel.districtNamesMap[this.selectedDistrict]);
 
                 if (feature) {
                     const value = Number(Number(parseFloat(feature[model.field])).toFixed(3));
@@ -640,9 +640,7 @@ export default {
                 date = new Date().toLocaleDateString("de-DE", {year: "numeric", month: "numeric", day: "numeric"}),
                 filename = `${this.$t("additional:modules.tools.cosi.queryDistricts.exportFilename")}_${date}`,
                 data = [
-                    // this.resultTableHeaders.map(header => header.text),
                     this.dataSets[index].inputs.resultTableHeaders.map(header => header.text),
-                    // ...this.results.map(row => {
                     ...this.dataSets[index].results.map(row => {
                         const _row = Object.values(row);
 
@@ -650,9 +648,7 @@ export default {
                     })
                 ],
                 headers = ["Referenzgebiet", "Filter-Nr.", "Name", "Attribut", "Quotient", "Feld", "Min.", "Max.", "Ref.-Wert", "- Toleranz", "+ Toleranz"],
-                // filters = this.layerFilterModels.map((filter, i) => [
                 filters = this.dataSets[index].inputs.layerFilterModels.map((filter, i) => [
-                    // this.selectedDistrict,
                     this.dataSets[index].inputs.selectedDistrict,
                     i + 1,
                     filter.name,
