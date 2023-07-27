@@ -4,10 +4,29 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
 
    > Nach dem Sie Ihre gewünschten Gebiete und Fachdaten ausgewählt haben, können Sie unter Analyse - Graphenvisualisierung, Ihre Ergebnisse visuell darstellen lassen. 
    
-   > **Hinweis**: Wenn Sie die Graphenvisualisierung direkt aus dem Analyse Menü öffnen, bitte unten in der Kartenvisualisierung auf das Graph Symbol klicken. 
+   > **Hinweis**: Wenn Sie die Graphenvisualisierung direkt aus dem Analyse Menü öffnen, bitte unten in der Kartenvisualisierung auf das Graph Symbol klicken.
+
+
+
+![Abbildung_1: Graphenvisualisierung](https://github.com/citysciencelab/cosi/assets/140716054/4b079653-f480-4794-beca-840fea337517)
+
+*Abbildung 1: Graphenvisualisierung*
+
+
+   > Sie finden dieses Symbol auch im gesamten CoSI wie z.B.
+
+
+  **Dashboard --> Einrichtungsübersicht**
+
+
+  **Dashboard --> Statistische Datenübersicht --> wählen Sie hier eine Kategorie & klicken 3 punkte menü --> Diagramme**
+
+
+
 
 ![Abbildung 1: Graphenvisualisierung](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/graphenvisualisierung.png?raw=true)  
-*Abbildung 1: Graphenvisualisierung*
+
+*Abbildung 2: Graphenvisualisierung aktuell*
 
 1. **Diagrammtyp auswählen**
    > Häufig werden gleich unterschiedliche Graphen erstellt. Hier können Sie zwischen den verfügbaren Diagrammen für den ausgewählten Datensatz umschalten.
