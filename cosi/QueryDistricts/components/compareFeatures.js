@@ -18,30 +18,29 @@ export default {
             }),
             intersection = allFeatures.reduce((a, b) => a.filter(
                 x => b.find(y => y[this.keyOfAttrNameStats]
-                    === x[this.keyOfAttrNameStats]))),
+                    === x[this.keyOfAttrNameStats])))
+                .sort((a, b) => a.id > b.id ? 1 : -1),
             results = intersection.reduce((res, statObj) => {
-                if (res.resultNames.includes(statObj.id)) {
-                    return res;
-                }
-                const geom = this.selectedDistrictLevel.districts
-                    .find(d => unifyString(statObj.id, false).includes(d.getName()))?.adminFeature.getGeometry();
+                if (!res.resultNames.includes(statObj.id)) {
+                    const geom = this.selectedDistrictLevel.districts
+                        .find(d => unifyString(statObj.id, false).includes(d.getName()))?.adminFeature.getGeometry();
 
-                statObj.feature.setGeometry(geom);
-
-                return [...res, {
-                    tableRow: {
+                    statObj.feature.setGeometry(geom);
+                    res.table.push({
                         name: statObj.id,
                         ...allFeatures.map((p, i) => parseFloat(p.find(f => f[this.keyOfAttrNameStats] === statObj.id)[layerFilterList[i].field]))
-                    },
-                    feature: statObj.feature,
-                    resultName: statObj.id
-                }];
-            }, []).sort((a, b) => a.resultName > b.resultName ? 1 : -1);
+                    });
+                    res.features.push(statObj.feature);
+                    res.resultNames.push(statObj.id);
+                }
 
-        return {
-            resultNames: results.map(r => r.resultName),
-            features: results.map(r => r.feature),
-            table: results.map(r => r.tableRow)
-        };
+                return res;
+            }, {
+                resultNames: [],
+                features: [],
+                table: []
+            });
+
+        return results;
     }
 };
