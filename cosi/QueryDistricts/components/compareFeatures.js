@@ -20,26 +20,28 @@ export default {
                 x => b.find(y => y[this.keyOfAttrNameStats]
                     === x[this.keyOfAttrNameStats]))),
             results = intersection.reduce((res, statObj) => {
-                if (!res.resultNames.includes(statObj.id)) {
-                    const geom = this.selectedDistrictLevel.districts
-                        .find(d => unifyString(statObj.id, false).includes(d.getName()))?.adminFeature.getGeometry();
+                if (res.resultNames.includes(statObj.id)) {
+                    return res;
+                }
+                const geom = this.selectedDistrictLevel.districts
+                    .find(d => unifyString(statObj.id, false).includes(d.getName()))?.adminFeature.getGeometry();
 
-                    statObj.feature.setGeometry(geom);
-                    res.table.push({
+                statObj.feature.setGeometry(geom);
+
+                return [...res, {
+                    tableRow: {
                         name: statObj.id,
                         ...allFeatures.map((p, i) => parseFloat(p.find(f => f[this.keyOfAttrNameStats] === statObj.id)[layerFilterList[i].field]))
-                    });
-                    res.features.push(statObj.feature);
-                    res.resultNames.push(statObj.id);
-                }
+                    },
+                    feature: statObj.feature,
+                    resultName: statObj.id
+                }];
+            }, []).sort((a, b) => a.resultName > b.resultName ? 1 : -1);
 
-                return res;
-            }, {
-                resultNames: [],
-                features: [],
-                table: []
-            });
-
-        return results;
+        return {
+            resultNames: results.map(r => r.resultName),
+            features: results.map(r => r.feature),
+            table: results.map(r => r.tableRow)
+        };
     }
 };
