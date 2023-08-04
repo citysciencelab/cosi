@@ -9,6 +9,7 @@ import sinon from "sinon";
 import Tool from "../../../../../../src/modules/tools/ToolTemplate.vue";
 import Layer from "ol/layer/Vector.js";
 import Source from "ol/source/Vector.js";
+import Feature from "ol/Feature.js";
 
 config.mocks.$t = key => key;
 
@@ -32,8 +33,16 @@ describe("addons/cosi/PolygonStyler/components/PolygonStyler.vue", () => {
                 });
             }
         },
-        layerOne = new Layer({id: "123", name: "first", source: new Source(), gfiAttributes: {test: "Test"}}),
-        layerTwo = new Layer({id: "456", name: "second", source: new Source()});
+        feature = new Feature({
+            styleRule: {
+                style: {}
+            }
+        }),
+        source = new Source({
+            features: [feature]
+        }),
+        layerOne = new Layer({id: "123", name: "first", source, gfiAttributes: {test: "Test"}}),
+        layerTwo = new Layer({id: "456", name: "second", source});
 
     beforeEach(() => {
         vuetify = new Vuetify();
@@ -236,7 +245,7 @@ describe("addons/cosi/PolygonStyler/components/PolygonStyler.vue", () => {
 
                 wrapper.vm.addTableItem(testArray, "first");
 
-                expect(testArray[0]).to.have.all.keys("name", "layer", "features", "featureAttributes", "isVisible", "defaultRenderer", "styleList");
+                expect(testArray[0]).to.have.all.keys("name", "layer", "features", "featureAttributes", "isVisible", "defaultStyle", "styleList");
             });
         });
 
@@ -297,59 +306,26 @@ describe("addons/cosi/PolygonStyler/components/PolygonStyler.vue", () => {
                         {
                             attribute: "first",
                             fill: {
-                                color: "#898989",
-                                opacity: 0
+                                color: "rgb(137, 137, 137, 0.3)"
                             },
                             stroke: {
-                                color: "#898989",
-                                opacity: 1,
-                                width: 2
+                                color: "rgb(137, 137, 137, 0.8)"
                             },
                             text: "first"
                         },
                         {
                             attribute: "second",
                             fill: {
-                                color: "#898989",
-                                opacity: 0
+                                color: "rgb(137, 137, 137, 0.3)"
                             },
                             stroke: {
-                                color: "#898989",
-                                opacity: 1,
-                                width: 2
+                                color: "rgb(137, 137, 137, 0.8)"
                             },
                             text: "second"
                         }
                     ];
 
                 expect(styleList).to.deep.equal(expectedStyleList);
-            });
-        });
-
-        describe("getRenderFunctions", () => {
-            it("should get the right renderFunctions for the given style", () => {
-                const wrapper = factory.getShallowMount(),
-                    expectedStyleList = [
-                        {
-                            attribute: "first",
-                            fill: {
-                                color: "#e3e3e3",
-                                opacity: 0
-                            },
-                            stroke: {
-                                color: "#e3e3e3",
-                                opacity: 1,
-                                width: 1
-                            }
-                        }
-                    ],
-                    renderFunctions = wrapper.vm.getRenderFunctions(expectedStyleList, "first");
-
-                expect(renderFunctions).to.have.all.keys("fill", "stroke");
-                expect(renderFunctions.fill.attributes.color).to.be.a("function");
-                expect(renderFunctions.fill.attributes.opacity).to.be.a("function");
-                expect(renderFunctions.stroke.attributes.color).to.be.a("function");
-                expect(renderFunctions.stroke.attributes.width).to.be.a("function");
             });
         });
     });

@@ -56,8 +56,7 @@ export default {
          * @returns {void}
          */
         setColorToStyle (style, color) {
-            style.color = color.hex;
-            style.opacity = color.alpha;
+            style.color = `rgba(${color.rgba.r}, ${color.rgba.g}, ${color.rgba.b}, ${color.rgba.a})`;
             this.toggleColorPickerDialog();
         },
 

@@ -249,16 +249,19 @@ describe("addons/cosi/PolygonStyler/components/PolygonStylerSettings.vue", () =>
                         propsData: {styleList}
                     }),
                     style = {
-                        color: "init",
-                        opacity: 0
+                        color: "init"
                     },
                     color = {
-                        hex: "new",
-                        alpha: 0.5
+                        rgba: {
+                            r: "red",
+                            g: "green",
+                            b: "blue",
+                            a: "alpha"
+                        }
                     };
 
                 wrapper.vm.setColorToStyle(style, color);
-                expect(style).to.deep.equal({color: "new", opacity: 0.5});
+                expect(style).to.deep.equal({color: "rgba(red, green, blue, alpha)"});
                 wrapper.destroy();
             });
 
@@ -266,9 +269,17 @@ describe("addons/cosi/PolygonStyler/components/PolygonStylerSettings.vue", () =>
                 const spyToggleColorPickerDialog = sinon.stub(PolygonStylerSettings.methods, "toggleColorPickerDialog"),
                     wrapper = factory.getShallowMount({
                         propsData: {styleList}
-                    });
+                    }),
+                    color = {
+                        rgba: {
+                            r: "red",
+                            g: "green",
+                            b: "blue",
+                            a: "alpha"
+                        }
+                    };
 
-                wrapper.vm.setColorToStyle({}, {});
+                wrapper.vm.setColorToStyle({}, color);
                 expect(spyToggleColorPickerDialog.calledOnce).to.be.true;
                 wrapper.destroy();
             });
