@@ -34,7 +34,7 @@ const state = {
     defaultMapMarkerStyleId: "",
     heading: 0,
     serviceId: "oblique",
-    dataYear: "2022"
+    dataYear: ""
 };
 
 export default state;
