@@ -69,7 +69,7 @@ Mobile the iFrame is displayed in the window.
     "vcOblique": {
     "name": "translate#additional:modules.tools.vcOblique.title",
     "icon": "bi-image",
-    "data-year":"2020"
+    "dataYear":"2020"
     }
 ```
 

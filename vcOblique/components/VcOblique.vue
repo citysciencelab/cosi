@@ -80,7 +80,7 @@ export default {
         },
         /**
          * translates the given key, checkes if the key exists and throws a console warning if not
-         * @param {String} key the key to translate
+         * @param {String} key the translation-key to lookup
          * @param {Object} [options=null] for interpolation, formating and plurals
          * @returns {String} the translation or the key itself on error
          */
