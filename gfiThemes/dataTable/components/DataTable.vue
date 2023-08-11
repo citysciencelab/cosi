@@ -320,6 +320,18 @@ export default {
             }
             this.rows = this.originRows;
             this.columns = this.getColumns(this.feature.getAttributesToShow());
+        },
+
+        /**
+         * Gets the css z-index for the column header.
+         * The left column should always have a higher z-index than the right column.
+         * @param {Number} idx - The of the column.
+         * @return {Object} The style object.
+         */
+        getZIndex (idx) {
+            return {
+                "z-index": this.columns.length - idx
+            };
         }
     }
 };
@@ -344,7 +356,8 @@ export default {
                     v-for="col in columns"
                     :key="col.index"
                     class="filter-select-box-container"
-                    :class="typeof showCount !== 'undefined' ? 'more-sticky' : ''"
+                    :class="[typeof showCount !== 'undefined' ? 'more-sticky' : '']"
+                    :style="getZIndex(col.index)"
                 >
                     <span
                         v-if="isFilterable"
