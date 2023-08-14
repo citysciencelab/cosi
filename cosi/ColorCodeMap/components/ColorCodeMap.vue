@@ -10,6 +10,7 @@ import groupMapping from "../../utils/groupMapping";
 import mapping from "../../assets/mapping.json";
 import ChartDataset from "../../ChartGenerator/classes/ChartDataset";
 import {mapDistrictNames} from "../../DistrictSelector/utils/prepareDistrictLevels";
+import {convertColor} from "../../../../src/utils/convertColor";
 
 export default {
     name: "ColorCodeMap",
@@ -246,11 +247,11 @@ export default {
                         if (this.originalStyling === null) {
                             this.originalStyling = getStyling;
                         }
-
                         const styleArray = [],
-                            match_props = matchResults.get(this.yearSelector + this.selectedYear);
+                            match_props = matchResults.get(this.yearSelector + this.selectedYear),
+                            convertedColor = convertColor(this.colorScale.scale(match_props), "rgb");
 
-                        getStyling.fill = match_props !== undefined ? new Fill({color: utils.getRgbArray(this.colorScale.scale(match_props), 0.75)}) : new Fill({color: "rgba(0, 0, 0, 0.75)"});
+                        getStyling.fill = match_props !== undefined ? new Fill({color: [...convertedColor, 0.75]}) : new Fill({color: "rgba(0, 0, 0, 0.75)"});
                         getStyling.zIndex = 1;
                         getStyling.text = new Text({
                             font: "16px Calibri,sans-serif",
@@ -351,7 +352,9 @@ export default {
                     if (this.originalStyling === null) {
                         this.originalStyling = getStyling;
                     }
-                    getStyling.fill = new Fill({color: utils.getRgbArray(this.colorScale.scale(matchResults.data), 0.75)});
+                    const convertedColor = convertColor(this.colorScale.scale(matchResults.data), "rgb");
+
+                    getStyling.fill = new Fill({color: [...convertedColor, 0.75]});
                     getStyling.zIndex = 1;
                     getStyling.text = new Text({
                         font: "16px Calibri,sans-serif",

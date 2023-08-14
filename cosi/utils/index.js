@@ -1,5 +1,4 @@
 import unifyString from "./unifyString";
-import getRgbArray from "./getRgbArray";
 import getBoundingGeometry from "./getBoundingGeometry";
 import calculateExtent from "./features/calculateExtent";
 import calculateRatio from "./calculateRatio";
@@ -30,7 +29,6 @@ addPolyfills();
  */
 export default {
     unifyString,
-    getRgbArray,
     getBoundingGeometry,
     compensateLackingData,
     calculateExtent,
