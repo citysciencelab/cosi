@@ -13,7 +13,6 @@
     "@turf/boolean-point-in-polygon": "^6.5.0",
     "@turf/buffer": "^6.5.0",
     "@turf/center-of-mass": "^6.5.0",
-    "@turf/circle": "^6.5.0",
     "@turf/concave": "^6.5.0",
     "@turf/helpers": "^6.5.0",
     "@turf/intersect": "^6.5.0",

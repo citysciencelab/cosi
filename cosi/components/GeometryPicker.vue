@@ -3,11 +3,10 @@ import {mapGetters, mapActions} from "vuex";
 import beautifyKey from "../../../src/utils/beautifyKey";
 import {getOlGeomTypeByGmlType} from "../utils/getOlGeomByGmlType";
 import Feature from "ol/Feature";
-import Polygon from "ol/geom/Polygon";
+import {Polygon, fromCircle} from "ol/geom/Polygon";
 import Point from "ol/geom/Point";
 import {Draw, Select} from "ol/interaction";
 import {getSearchResultsCoordinates, getSearchResultsGeometry} from "../utils/getSearchResultsGeom";
-import {circleToPolygon} from "../utils/geomUtils";
 import {onSearchbar, offSearchbar} from "../utils/radioBridge.js";
 
 export default {
@@ -33,7 +32,7 @@ export default {
         },
         additionalSelectLayerIds: {
             type: Array,
-            default: () => ["import_draw_layer"]
+            default: () => ["importDrawLayer"]
         }
     },
     data () {
@@ -273,7 +272,7 @@ export default {
 
             // Transform a circle to an approx. polygon for use with all other tools
             if (type === "Circle") {
-                geometry = circleToPolygon(geometry, 64, this.projectionCode);
+                geometry = fromCircle(geometry, 64);
                 type = "Polygon";
             }
 
