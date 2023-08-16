@@ -99,7 +99,8 @@ export default {
             abortController: null,
             currentCoordinates: null,
             hide: false,
-            facilityFeature: null
+            facilityFeature: null,
+            addMultipleCoordinates: false
         };
     },
     computed: {
@@ -194,6 +195,14 @@ export default {
                 this.setIsochroneFeatures(v);
             }
         },
+        _useTravelTimeIndex: {
+            get () {
+                return this.transportType === "driving-car" && this.scaleUnit === "time" ? this.useTravelTimeIndex : false;
+            },
+            set (v) {
+                this.setUseTravelTimeIndex(v);
+            }
+        },
         selectedFacilityLayer () {
             const selectedLayerNames = {},
                 selectedLayer = [];
@@ -233,14 +242,14 @@ export default {
             for (const key in this.dataSets[newValue].inputs) {
                 this[key] = this.dataSets[newValue].inputs[key];
             }
-
+            this.removePointMarker();
             if (this.dataSets[newValue].inputs._mode === "point" || this.dataSets[newValue].inputs._mode === "facility") {
-                const icoord = transformCoordinate(this.dataSets[newValue].inputs._coordinate[0], "EPSG:4326", this.projectionCode);
+                for (const coordinate of this.dataSets[newValue].inputs._coordinate) {
+                    const icoord = transformCoordinate(coordinate, "EPSG:4326", this.projectionCode);
 
-                this.placingPointMarker(icoord);
-            }
-            else {
-                this.removePointMarker();
+                    icoord.keepPreviousMarker = true;
+                    this.placingPointMarker(icoord);
+                }
             }
 
             this._isochroneFeatures = this.dataSets[newValue].results;
@@ -275,12 +284,11 @@ export default {
                 this.removeLayerFromMap(this.directionsLayer);
             }
         },
-        clickCoordinate (coord) {
-            if (this.active && this.mode === "point") {
-                this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode);
-                this.placingPointMarker(coord);
-            }
-        },
+        // clickCoordinate () {
+        //     if (this.active && this.mode === "point") {
+        //         this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode);
+        //     }
+        // },
         setByFeature (val) {
             if (val && this.mode === "facility" && this.facilityFeature) {
                 if (val) {
@@ -422,6 +430,27 @@ export default {
             });
 
             this.registerSelectListener(this.select);
+            this.registerClickListener();
+        },
+
+        /**
+         * Registers the listeners to keyboard events onkeydown and onkeyup
+         * @returns {void}
+         */
+        registerClickListener () {
+            // /**
+            //  * Sets the flag for multiple points
+            //  * @param {Event} evt - the key Event
+            //  * @return {void}
+            //  */
+            // function setAddMultipleCoordinates (evt) {
+            //     this.addMultipleCoordinates = evt.shiftKey;
+            // }
+            mapCollection.getMap("2D").addEventListener("click", evt => {
+                if (this.active && this.mode === "point") {
+                    this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode, evt.originalEvent.shiftKey);
+                }
+            });
         },
 
         /**
@@ -447,9 +476,8 @@ export default {
                     this.setCoordinateFromFeature(unpackedFeature, this.projectionCode);
                 }
                 else {
-                    this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode);
+                    this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode, evt.mapBrowserEvent.originalEvent.shiftKey);
                 }
-                this.placingPointMarker(this.clickCoordinate);
             });
         },
 
@@ -457,13 +485,24 @@ export default {
          * Sets and transforms the click coordinate to EPSG 4326.
          * @param {event} clickCoordinate - The coordinate of the click.
          * @param {String} mapProjectionCode - The code of the current map projection.
+         * @param {String} [shiftKeyPressed] - add points to selection if shiftKey is pressed
          * @returns {void}
          */
-        setCoordinateFromClick: function (clickCoordinate, mapProjectionCode) {
+        setCoordinateFromClick: function (clickCoordinate, mapProjectionCode, shiftKeyPressed) {
             const coordinate = transformCoordinate(clickCoordinate, mapProjectionCode);
 
-            this.setCoordinate([coordinate]);
             this.setSetBySearch(false);
+            if (shiftKeyPressed) {
+                const markerCoord = [...clickCoordinate];
+
+                markerCoord.keepPreviousMarker = true;
+                this.setCoordinate([...this.coordinate, coordinate]);
+                this.placingPointMarker(markerCoord);
+            }
+            else {
+                this.setCoordinate([coordinate]);
+                this.placingPointMarker(clickCoordinate);
+            }
         },
 
         /**
@@ -477,6 +516,7 @@ export default {
                 coordiantes = getFlatCoordinates(simplifiedGeom);
 
             this.setCoordinate(transformCoordinates(coordiantes, mapProjectionCode));
+            this.placingPointMarker(this.clickCoordinate);
         },
 
         downloadMap () {
@@ -567,7 +607,7 @@ export default {
                 _scaleUnit: JSON.parse(JSON.stringify(this._scaleUnit)),
                 _distance: JSON.parse(JSON.stringify(this._distance)),
                 _time: JSON.parse(JSON.stringify(this._time)),
-                _useTravelTimeIndex: JSON.parse(JSON.stringify(this.useTravelTimeIndex)),
+                _useTravelTimeIndex: JSON.parse(JSON.stringify(this._useTravelTimeIndex)),
                 _setByFeature: JSON.parse(JSON.stringify(this._setByFeature)),
                 _steps: JSON.parse(JSON.stringify(this.steps)),
                 _selectedFacility: this.selectedFacility

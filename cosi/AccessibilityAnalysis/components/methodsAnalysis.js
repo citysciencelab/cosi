@@ -72,7 +72,7 @@ export default {
     createIsochronesRegion: async function () {
         const allActiveFeatures = filterAllFeatures(this.selectedFacilityLayer, this.isFeatureActive),
             coordinates = this.getCoordinates(allActiveFeatures, this.setByFeature),
-            {distance, maxDistance, steps} = getDistances(parseFloat(this.distance), this.useTravelTimeIndex, this.time);
+            {distance, maxDistance, steps} = getDistances(parseFloat(this.distance), this._useTravelTimeIndex, this.time);
 
         if (
             coordinates !== null &&
@@ -107,7 +107,7 @@ export default {
      */
     createIsochronesPoint: async function () {
         const
-            {distance, maxDistance, steps} = getDistances(parseFloat(this.distance), this.useTravelTimeIndex, this.time);
+            {distance, maxDistance, steps} = getDistances(parseFloat(this.distance), this._useTravelTimeIndex, this.time);
 
         if (
             this.coordinate.length > 0 &&
