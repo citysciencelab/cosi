@@ -139,7 +139,7 @@ export default {
                 features: foundLayer.getSource().getFeatures(),
                 featureAttributes: this.mapAttributes(foundLayer.get("gfiAttributes")),
                 isVisible: true,
-                defaultStyle: foundLayer.getSource().getFeatures()[0].get("styleRule").style,
+                defaultStyle: foundLayer.getSource().getFeatures()[0].styleRule.style,
                 styleList: []
             });
         },

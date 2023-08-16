@@ -33,17 +33,16 @@ describe("addons/cosi/PolygonStyler/components/PolygonStyler.vue", () => {
                 });
             }
         },
-        feature = new Feature({
-            styleRule: {
-                style: {}
-            }
-        }),
+        feature = new Feature(),
         source = new Source({
             features: [feature]
         }),
         layerOne = new Layer({id: "123", name: "first", source, gfiAttributes: {test: "Test"}}),
         layerTwo = new Layer({id: "456", name: "second", source});
 
+    feature.styleRule = {
+        style: {}
+    };
     beforeEach(() => {
         vuetify = new Vuetify();
         store = new Vuex.Store({
