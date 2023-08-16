@@ -624,7 +624,7 @@ export default {
                 return;
             }
 
-            const test = Object.keys(this.selected[0].score.distance),
+            const test = Object.keys(this.selected[0].score.distance.facilities),
                 colorMap = test.reduce((acc, layerId, index) => (
                     {...acc, [layerId]: getColorFromNumber(index, test.length)}), {});
 
