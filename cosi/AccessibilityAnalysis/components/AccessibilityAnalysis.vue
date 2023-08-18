@@ -19,6 +19,7 @@ import {geometryToGeoJson} from "../../utils/geometry/convertToGeoJson";
 import {transformCoordinate, transformCoordinates} from "../utils/transformCoordinates";
 import {simplify} from "../../utils/geometry/simplify";
 import {getFlatCoordinates} from "../../utils/geometry/getFlatCoordinates";
+import {filterAllFeatures} from "../../utils/layer/filterAllFeatures";
 
 export default {
     name: "AccessibilityAnalysis",
@@ -204,19 +205,7 @@ export default {
             }
         },
         selectedFacilityLayer () {
-            const selectedLayerNames = {},
-                selectedLayer = [];
-
-            this.selectedFacilityNames.forEach(name => {
-                selectedLayerNames[name] = true;
-            });
-
-            this.activeVectorLayerList.forEach(layer => {
-                if (Object.prototype.hasOwnProperty.call(selectedLayerNames, layer.get("name"))) {
-                    selectedLayer.push(layer);
-                }
-            });
-            return selectedLayer;
+            return this.activeVectorLayerList.filter(layer => this.selectedFacilityNames.includes(layer.get("name")));
         }
     },
     watch: {
@@ -284,11 +273,6 @@ export default {
                 this.removeLayerFromMap(this.directionsLayer);
             }
         },
-        // clickCoordinate () {
-        //     if (this.active && this.mode === "point") {
-        //         this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode);
-        //     }
-        // },
         setByFeature (val) {
             if (val && this.mode === "facility" && this.facilityFeature) {
                 if (val) {
@@ -438,14 +422,6 @@ export default {
          * @returns {void}
          */
         registerClickListener () {
-            // /**
-            //  * Sets the flag for multiple points
-            //  * @param {Event} evt - the key Event
-            //  * @return {void}
-            //  */
-            // function setAddMultipleCoordinates (evt) {
-            //     this.addMultipleCoordinates = evt.shiftKey;
-            // }
             mapCollection.getMap("2D").addEventListener("click", evt => {
                 if (this.active && this.mode === "point") {
                     this.setCoordinateFromClick(this.clickCoordinate, this.projectionCode, evt.originalEvent.shiftKey);
@@ -525,7 +501,8 @@ export default {
 
         tryUpdateIsochrones () {
             if (this.mode === "region" && this.currentCoordinates && this.dataSets.length > 0) {
-                const newCoordinates = this.getCoordinates(this.setByFeature);
+                const allActiveFeatures = filterAllFeatures(this.selectedFacilityLayer, this.isFeatureActive),
+                    newCoordinates = this.getCoordinates(allActiveFeatures, this.setByFeature);
 
                 if (!deepEqual(this.currentCoordinates.map(e=>[e[0], e[1]]), newCoordinates)) {
                     this.askUpdate = true;

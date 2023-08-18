@@ -18,6 +18,7 @@ import {getFlatCoordinates} from "../../utils/geometry/getFlatCoordinates";
 import {transformCoordinate} from "../utils/transformCoordinates";
 import {getDistances, getSteps} from "../utils/getDistances";
 
+
 export default {
     /**
      * create isochrones features
@@ -40,11 +41,9 @@ export default {
             }
         }
         catch (err) {
-
             if (err.request_canceled) {
                 return;
             }
-
 
             try {
                 const code = (err.error || err).response.data.error.code;
