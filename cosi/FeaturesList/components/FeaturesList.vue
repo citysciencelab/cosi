@@ -56,7 +56,8 @@ export default {
                 "Ein-/ Ausblenden",
                 "layerId",
                 "feature",
-                "key"
+                "key",
+                "gfiAttributes"
             ],
             featureColumns: [
                 {
