@@ -101,7 +101,7 @@ export default {
             currentCoordinates: null,
             hide: false,
             facilityFeature: null,
-            addMultipleCoordinates: false
+            addMultiplePoints: false
         };
     },
     computed: {
@@ -468,7 +468,7 @@ export default {
             const coordinate = transformCoordinate(clickCoordinate, mapProjectionCode);
 
             this.setSetBySearch(false);
-            if (shiftKeyPressed) {
+            if (shiftKeyPressed || this.addMultiplePoints) {
                 const markerCoord = [...clickCoordinate];
 
                 markerCoord.keepPreviousMarker = true;
@@ -565,6 +565,7 @@ export default {
         },
         createAnalysisSet: async function () {
             this.hide = false;
+            this.addMultiplePoints = false;
 
             const analysisSet = {
                 inputs: {},
@@ -717,18 +718,24 @@ export default {
                                 outlined
                                 dense
                                 hide-details
+                                :append-icon="addMultiplePoints ? 'mdi-map-marker-plus' : 'mdi-map-marker-plus-outline'"
+                                :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.setByFeatureInfo')"
+                                @click:append="addMultiplePoints = !addMultiplePoints"
                             />
                             <v-text-field
                                 v-if="mode === 'facility'"
                                 id="facility"
                                 :value="selectedFacility"
                                 class="mb-4"
-                                label="Klicken Sie auf eine Einrichtung"
+                                :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.setByFeature')"
                                 type="text"
                                 readonly
                                 outlined
                                 dense
                                 hide-details
+                                :append-icon="addMultiplePoints ? 'mdi-map-marker-plus' : 'mdi-map-marker-plus-outline'"
+                                :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.setByFeatureInfo')"
+                                @click:append="addMultiplePoints = !addMultiplePoints"
                             />
                             <v-select
                                 v-if="mode === 'region'"
@@ -748,7 +755,7 @@ export default {
                                 class="mb-4"
                                 dense
                                 hide-details
-                                :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.setByFeature')"
+                                :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.setByFeatureOutline')"
                                 :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.setByFeatureInfo')"
                             />
                             <v-select
