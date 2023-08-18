@@ -253,6 +253,8 @@ export default {
                 >
                     <li
                         class="nav-item"
+                        role="button"
+                        tabindex="0"
                         @click="existingLocationActive=true"
                         @keydown="existingLocationActive=true"
                     >
@@ -265,6 +267,8 @@ export default {
                     </li>
                     <li
                         class="nav-item"
+                        role="button"
+                        tabindex="0"
                         @click="existingLocationActive=false"
                         @keydown="existingLocationActive=false"
                     >

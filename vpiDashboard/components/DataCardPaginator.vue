@@ -75,6 +75,8 @@ export default {
             <ul class="pagination">
                 <li
                     class="page-item"
+                    role="button"
+                    tabindex="0"
                     @click="previous"
                     @keydown="previous"
                 >
@@ -91,6 +93,8 @@ export default {
                 </li>
                 <li
                     class="page-item"
+                    role="button"
+                    tabindex="0"
                     @click="next"
                     @keydown="next"
                 >

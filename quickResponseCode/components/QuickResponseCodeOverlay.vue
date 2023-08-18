@@ -94,6 +94,7 @@ export default {
             >
                 <span
                     class="bootstrap-icon"
+                    role="button"
                     tabindex="0"
                     title="Maximieren"
                     @click="resetQrDataUrl"

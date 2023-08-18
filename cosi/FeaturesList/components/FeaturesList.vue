@@ -720,6 +720,8 @@ export default {
             <div
                 v-if="isTimeSeriesAnalyseShow"
                 class="toggle"
+                role="button"
+                tabindex="0"
                 @click="toggleTool"
                 @keydown="toggleTool"
             >
@@ -818,8 +820,11 @@ export default {
                                         <div
                                             :key="col.value"
                                             class="text-right"
+                                            role="button"
+                                            tabindex="0"
                                             :class="col.hasAction ? 'number-action' : ''"
                                             @click="col.hasAction ? showDistanceScoreForItem(item) : null"
+                                            @keydown="col.hasAction ? showDistanceScoreForItem(item) : null"
                                         >
                                             <div>
                                                 {{ parseFloat(item[col.value]).toLocaleString(currentLocale) }}

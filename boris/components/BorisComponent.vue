@@ -284,6 +284,7 @@ export default {
                     </label>
                     <span
                         class="bootstrap-icon bi-question-circle-fill"
+                        role="button"
                         tabindex="0"
                         @click="toggleInfoText('1')"
                         @keydown.enter="toggleInfoText('1')"
@@ -461,6 +462,7 @@ export default {
                                 <span>{{ $t('additional:modules.tools.boris.landCalculation.calculatedLandValue') }}</span>
                                 <span
                                     class="bootstrap-icon bi-question-circle-fill"
+                                    role="button"
                                     tabindex="0"
                                     @click="toggleInfoText('6')"
                                     @keydown.enter="toggleInfoText('6')"

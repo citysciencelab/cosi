@@ -392,11 +392,13 @@ export default {
                         v-if="isSortable"
                         class="bootstrap-icon"
                         :class="getIconClassByOrder(col.order) + ' sort'"
+                        role="button"
+                        tabindex="0"
                         @click="runSorting(col)"
                         @keypress="runSorting(col)"
                     />
                 </th>
-            </thead>
+            </thead>"
             <tbody v-if="rows.length > 0">
                 <tr
                     v-for="(singleRow, index1) in rows"

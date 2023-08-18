@@ -821,6 +821,8 @@ export default {
                                 <span
                                     id="reference-district-button"
                                     class="name-tag district-name"
+                                    role="button"
+                                    tabindex="0"
                                     @click="zoomToDistrict({'name': selectedDistrict})"
                                     @keyUp="() => null"
                                 >{{ selectedDistrict }}</span>
@@ -859,6 +861,8 @@ export default {
                                     <span
                                         id="reference-district-button"
                                         class="name-tag district-name"
+                                        role="button"
+                                        tabindex="0"
                                         @click="zoomToDistrict({'name': selectedDistrict})"
                                         @keyUp="() => null"
                                     >{{ selectedDistrict }}</span>
