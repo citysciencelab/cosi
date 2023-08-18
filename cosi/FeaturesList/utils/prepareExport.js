@@ -68,7 +68,7 @@ export function prepareDetailsExport (data, filterProps) {
                 return filterProps[item.layerId].includes(prop[0]);
             });
 
-        return replaceValues(renameKeys({...Object.fromEntries(properties), ...item}, keyMap), valuesMap, true, false);
+        return replaceValues(renameKeys(keyMap, {...Object.fromEntries(properties), ...item}), valuesMap, true, false);
     });
 
     return exportData;
