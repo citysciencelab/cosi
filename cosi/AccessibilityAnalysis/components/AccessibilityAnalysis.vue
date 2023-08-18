@@ -236,7 +236,9 @@ export default {
                 for (const coordinate of this.dataSets[newValue].inputs._coordinate) {
                     const icoord = transformCoordinate(coordinate, "EPSG:4326", this.projectionCode);
 
-                    icoord.keepPreviousMarker = true;
+                    if (!this.dataSets[newValue].inputs._setByFeature) {
+                        icoord.keepPreviousMarker = true;
+                    }
                     this.placingPointMarker(icoord);
                 }
             }
