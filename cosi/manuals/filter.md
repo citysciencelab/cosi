@@ -6,7 +6,7 @@ Um Ihre gewünschten Fachdaten zu filtern, gehen Sie zunächst auf "Analyse" und
 
 ![Abbildung 1: Filter](https://user-images.githubusercontent.com/43250699/142924026-a46ada10-7289-4882-9b2e-c41528289930.jpg)
 
-*Abbildung 1: Filter*  
+*Abb.: Filter.*  
 
 1. **Ein Thema im Filter wählen**
    > Angezeigt werden die ausgewählten Themen. Themen können jederzeit hinzugefügt werden. Dazu Themenbau anklicken und Thema auswählen.
@@ -18,5 +18,6 @@ Um Ihre gewünschten Fachdaten zu filtern, gehen Sie zunächst auf "Analyse" und
     - Im Ergebnisfeld der Suche werden Namen der Gebiete / Einrichtungen angezeigt. Durch Anklicken der Namen wird die Auswahl in der Karte markiert. 
 4. **Filter löschen:** 
    > Einzelne Auswahl durch Anklicken des roten "X" oder gesamte Auswahl löschen durch Anklicken des Buttons "Alle löschen”.
-
+   
+<div style="page-break-after: always;"></div>
 

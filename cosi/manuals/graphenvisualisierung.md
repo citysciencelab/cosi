@@ -6,8 +6,8 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
    
    > **Hinweis**: Wenn Sie die Graphenvisualisierung direkt aus dem Analyse Menü öffnen, bitte unten in der Kartenvisualisierung auf das Graph Symbol klicken. 
 
-![Abbildung 1: Graphenvisualisierung](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/graphenvisualisierung.png?raw=true)  
-*Abbildung 1: Graphenvisualisierung*
+![Abbildung 1: Graphenvisualisierung](/cosi/manuals/graphenvisualisierung.png)  
+*Abb.: Graphenvisualisierung.*
 
 1. **Diagrammtyp auswählen**
    > Häufig werden gleich unterschiedliche Graphen erstellt. Hier können Sie zwischen den verfügbaren Diagrammen für den ausgewählten Datensatz umschalten.
@@ -19,4 +19,4 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
 4. **Y-Achse stapeln**
     > Die Werte der Datensätze werden aufsummiert und farblich abgetrennt dargestellt.
 5. **Ergebnisverzeichnis**
-   > Das [Ergebnisverzeichnis](./pagination.md) verwaltet die unterschiedlichen erstellten Graphen und bietet einige standardisierte Funktionen, zu denen Sie [hier](./pagination.md) mehr erfahren können.
+   > Das [Ergebnisverzeichnis](./ergebnisverzeichnis.md) verwaltet die unterschiedlichen erstellten Graphen und und erlaubt, sie als Bild oder gesammelt als zip-Datei herunterzuladen.
