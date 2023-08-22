@@ -101,6 +101,10 @@ ___
     - [Gebietsauswahl](##markdown-header-gebietsauswahl)
     - [Kartenanalyse regionalstatistischer Daten](#markdown-header-kartenanalyse-regionalstatistischer-daten)
     - [Ergebnisverzeichnis](#markdown-header-ergebnisverzeichnis)
+    - [Manuelle Flächenauswahl](areaselector.md)
+    - [Auswahlmanager]
+    - [Flächen stylen]
+    - []
 
 <div style="page-break-after: always;"></div>
 
