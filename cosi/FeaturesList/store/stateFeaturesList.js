@@ -40,8 +40,8 @@ const state = {
     disabledFeatureItems: [],
     distanceScoreEnabled: true,
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/featureslist.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/einrichtungsuebersicht.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/017featureslist.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/017einrichtungsuebersicht.md"
     },
     show: true
 };

@@ -29,8 +29,8 @@ const state = {
         ]
     },
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/scenariobuilder.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/einrichtungenanlegen.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/009scenariobuilder.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/009einrichtungenanlegen.md"
     },
     featureEditorDisabled: false
 };

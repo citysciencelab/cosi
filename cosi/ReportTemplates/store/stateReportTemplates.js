@@ -29,7 +29,7 @@ export default {
         {title: "Titel...", description: "Beschreibung...", tool: "Wählen!", settings: {}, hasSettings: false, output: {}, hasOutput: false, dataSelection: {}, hasDataSelection: false, dataSelectionApplied: false, id: 0}
     ],
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/fileimport.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/geodatenimportieren.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/024reporttool.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/024reporttool.md"
     }
 };
