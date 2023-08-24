@@ -127,6 +127,8 @@ export default {
                 catch (error) {
                     console.warn(error);
                 }
+                // run the chapter
+                this.applyChapter(oldValue.templateItemsIndex);
 
 
             }
@@ -216,6 +218,7 @@ export default {
             });
 
             if (!settingsValid.success) {
+                this.exportLoading = false;
                 this.addSingleAlert({
                     content: "Tool Einstellungen für Kapitel " + (templateItemsIndex + 1) + " sind nicht valide:" + settingsValid.message,
                     category: "Fehler",
@@ -261,6 +264,8 @@ export default {
                 })
                 // 5. run callback once all finished
                 .finally(()=>{
+                    this.exportLoading = false;
+
                     if (finallyDo) {
                         finallyDo();
                     }

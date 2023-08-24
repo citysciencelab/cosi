@@ -22,7 +22,6 @@ export default {
     },
     methods: {
         ...mapActions("Tools/ReportTemplates", ["finishEditingToolSettings", "abortEditingToolSettings"]),
-
         stopEditing () {
             const finishEditingValidationResult = this.finishEditingToolSettings(this.toolName);
 
