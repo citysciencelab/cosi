@@ -136,9 +136,6 @@ export default {
         active (newValue) {
             // if the tool is deactivated, close it properly including backbone model
             if (!newValue) {
-                console.log("CLOSING TOOL");
-                // log component
-                console.log(this);
                 // set the backbone model to active false for changing css class in menu (menu/desktop/tool/view.toggleIsActiveClass)
                 // else the menu-entry for this tool is always highlighted
                 const model = getModelByAttributes({
