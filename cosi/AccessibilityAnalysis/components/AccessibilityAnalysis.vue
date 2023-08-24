@@ -211,10 +211,6 @@ export default {
         }
     },
     watch: {
-        steps (newValue, oldValue) {
-            console.log("old", oldValue);
-            console.log("new", newValue);
-        },
         active () {
             if (this.active) {
                 onSearchbar(this.setSearchResultToOrigin);
@@ -324,7 +320,9 @@ export default {
                     this._scaleUnit = request.settings.scaleUnit;
                     this._distance = request.settings.distance;
                     this._timefi = request.settings.time;
-                    this.setUseTravelTimeIndex(request.settings.useTravelTimeIndex);
+                    if (request.settings.useTravelTimeIndex !== undefined) {
+                        this._useTravelTimeIndex = request.settings.useTravelTimeIndex;
+                    }
                     this._setByFeature = request.settings.setByFeature;
                     if (request.settings.steps) {
                         this.setSteps(request.settings.steps);
