@@ -2,7 +2,7 @@
 ## Cockpit Städtische Infrastrukturen
 #### GIS + datenbasierte Analyse- und Planungstools in der Hamburger Stadtverwaltung
 ___
-![CoSI Logo](../cosi/assets/cosi_logo_jf.png)
+![CoSI Logo](cosi_logo_jf.png)
 
 ___
 
