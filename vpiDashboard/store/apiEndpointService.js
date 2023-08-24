@@ -152,7 +152,7 @@ const apiEndpointService = {
      */
     async receiveAllSummary () {
         const
-            url = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/locations/all_summary/`,
+            url = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/locations/all_summary/?format=json`,
             query = {};
 
         return axios.get(

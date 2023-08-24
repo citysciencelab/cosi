@@ -16,10 +16,10 @@ export default {
 </script>
 
 <template>
-    <div class="button-container">
+    <div class="chart-type-change-button-container">
         <button
             type="button"
-            :class="['btn', chartType === 'bar' ? 'btn-primary' : 'btn-secondary']"
+            :class="['btn', 'btn-bar', chartType === 'bar' ? 'btn-primary' : 'btn-secondary']"
             @click="updateChartTypeOnParent('bar')"
         >
             <svg
@@ -37,7 +37,7 @@ export default {
         </button>
         <button
             type="button"
-            :class="['btn', chartType === 'line' ? 'btn-primary' : 'btn-secondary']"
+            :class="['btn', 'btn-line', , chartType === 'line' ? 'btn-primary' : 'btn-secondary']"
             @click="updateChartTypeOnParent('line')"
         >
             <svg
@@ -58,7 +58,7 @@ export default {
 </template>
 
 <style scoped>
-.button-container {
+.chart-type-change-button-container {
     display: flex;
 }
 </style>

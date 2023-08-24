@@ -1,11 +1,10 @@
 import requestIsochrones from "./requestIsochrones";
-import {readFeatures} from "../components/util.js";
 import {transformFeatures} from "../../utils/features/transform";
+import {transformCoordinate} from "./transformCoordinates";
 import {polygon as turfPolygon} from "@turf/helpers";
 import {default as turfUnion} from "@turf/union";
 import {default as turfBooleanPointInPolygon} from "@turf/boolean-point-in-polygon";
 import axios from "axios";
-import * as Proj from "ol/proj.js";
 import GeoJSON from "ol/format/GeoJSON";
 
 let abortController,
@@ -34,16 +33,16 @@ export function setFilterPoly (coords) {
 /**
  * create isochrones features
  * @export
- * @param {*} {transportType, coordinates, scaleUnit, distance, maxDistance, minDistance batchSize, baseUrl} parameters
+ * @param {*} {transportType, coordinates, scaleUnit, distance, maxDistance, batchSize, baseUrl} parameters
  * @param {*} progress progress callback
  * @return {*} features
  */
-export async function createIsochrones ({transportType, coordinates, scaleUnit, distance, maxDistance, minDistance, batchSize, baseUrl, projectionCode}, progress) {
+export async function createIsochrones ({transportType, coordinates, scaleUnit, distance, maxDistance, batchSize, baseUrl, projectionCode}, progress) {
     let ret;
 
     if (coordinates.length === 1) {
         progress(50);
-        ret = await createIsochronesPoint(transportType, coordinates[0], scaleUnit, distance, maxDistance, minDistance, baseUrl, projectionCode);
+        ret = await createIsochronesPoint(transportType, coordinates[0], scaleUnit, distance, maxDistance, baseUrl, projectionCode);
         progress(100);
         return ret;
     }
@@ -57,12 +56,11 @@ export async function createIsochrones ({transportType, coordinates, scaleUnit, 
  * @param {*} scaleUnit scaleUnit
  * @param {*} distance distance
  * @param {*} maxDistance maxDistance
- * @param {*} minDistance minDistance
  * @param {*} baseUrl baseUrl
  * @param {*} projectionCode projectionCode
  * @return {*} steps and features
  */
-async function createIsochronesPoint (transportType, coordinate, scaleUnit, distance, maxDistance, minDistance, baseUrl, projectionCode) {
+async function createIsochronesPoint (transportType, coordinate, scaleUnit, distance, maxDistance, baseUrl, projectionCode) {
     if (abortController) {
         abortController.cancel();
     }
@@ -134,8 +132,7 @@ async function createIsochronesPoints (args) {
         coordinatesList = [],
         groupedFeaturesList = [],
         filteredCoordinates = filterPoly === undefined ? args.coordinates :
-            args.coordinates.filter(c => turfBooleanPointInPolygon(
-                Proj.transform(c, "EPSG:4326", args.projectionCode), filterPoly));
+            args.coordinates.filter(c => turfBooleanPointInPolygon(transformCoordinate(c, "EPSG:4326", args.projectionCode), filterPoly));
 
     for (let i = 0; i < filteredCoordinates.length; i += args.batchSize) {
         const arrayItem = filteredCoordinates.slice(i, i + args.batchSize);
@@ -206,7 +203,7 @@ async function createIsochronesPoints (args) {
                 }
             }
             // readGeometries
-            layerUnionFeatures = readFeatures(JSON.stringify(layerUnion));
+            layerUnionFeatures = new GeoJSON().readFeatures(JSON.stringify(layerUnion));
 
             // TODO: get projections via arguments and/or store
             layerUnionFeatures = transformFeatures(layerUnionFeatures, "EPSG:4326", args.projectionCode);

@@ -15,6 +15,7 @@
  * @property {String} defaultMapMarkerStyleId contains the default styleId of the mapMarker
  * @property {String} heading contains the heading of the oblique viewer
  * @property {String} serviceId contains the id of the oblique viewer from the rest-services.json
+ * @property {String} dataYear the year of the datasource shown
  * */
 
 const state = {
@@ -32,7 +33,8 @@ const state = {
     lastCoordinates: "",
     defaultMapMarkerStyleId: "",
     heading: 0,
-    serviceId: "oblique"
+    serviceId: "oblique",
+    dataYear: ""
 };
 
 export default state;

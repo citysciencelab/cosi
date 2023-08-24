@@ -171,7 +171,8 @@ export default {
                     stats,
                     this.basePopulationProp,
                     this.timelinePrefix,
-                    this.groupsList
+                    this.groupsList,
+                    this.mapping
                 );
             }
 
@@ -210,7 +211,8 @@ export default {
                     stats,
                     "Bevölkerung insgesamt",
                     this.timelinePrefix,
-                    this.groupsList
+                    this.groupsList,
+                    this.mapping
                 );
             }
 

@@ -145,8 +145,11 @@ export default {
     <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
     <div
         class="feature-icon"
+        role="button"
+        tabindex="0"
         :title="getTitle(item)"
         @click="zoomToFeature"
+        @keydown.enter="zoomToFeature"
     >
         <InlineSvg
             v-if="getSvgSrc()"

@@ -330,6 +330,8 @@ export default {
                                 'hint': true,
                                 'grey-icon': currentScale === currentMapScale
                             }"
+                            role="button"
+                            tabindex="0"
                             @mouseover="showHintInfoScale = true"
                             @focusin="showHintInfoScale = true"
                             @mouseleave="showHintInfoScale = false"

@@ -57,6 +57,8 @@ export default {
 <template>
     <div
         class="input-wrapper"
+        role="button"
+        tabindex="0"
         @mouseover="setShowCalendarIcon(false)"
         @focus="setShowCalendarIcon(false)"
         @mouseleave="setShowCalendarIcon(true)"
@@ -71,6 +73,8 @@ export default {
         <i :class="['bi bi-calendar4 calendar', showCalendarIcon ? 'show': '']" />
         <i
             :class="['bi bi-x', !showCalendarIcon ? 'show': '']"
+            role="button"
+            tabindex="0"
             @click="clearInput"
             @keypress.enter="clearInput"
         />

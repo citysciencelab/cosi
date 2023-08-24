@@ -1,9 +1,10 @@
 
 import {generateSimpleGetters} from "../../../../src/app-store/utils/generators";
-import vueAddonState from "./stateAccessibilityAnalysis";
+import stateAccessibilityAnalysis from "./stateAccessibilityAnalysis";
+import {getServiceUrl} from "../../utils/radioBridge.js";
 
 const getters = {
-    ...generateSimpleGetters(vueAddonState),
+    ...generateSimpleGetters(stateAccessibilityAnalysis),
     // this is required to make this addon compatible with the toolBridge addon (see toolBridge documentation).
     // the definition here must match the input expected by the watcher on the `toolBridgeIn` variable
     toolBridgeOut: (state) => {
@@ -20,6 +21,9 @@ const getters = {
             setByFeature: state.setByFeature,
             steps: state.steps
         };
+    },
+    baseUrl: s => serviceId => {
+        return getServiceUrl(serviceId || s.fallbackServiceId) + "/v2/";
     }
 };
 

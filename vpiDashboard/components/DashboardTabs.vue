@@ -60,6 +60,8 @@ export default {
                 <a
                     class="nav-link"
                     :class="{ active: tab.selected }"
+                    role="button"
+                    tabindex="0"
                     @click="selectTab(tab.index)"
                     @keydown="selectTab(tab.index)"
                 >{{ tab.name }}</a>

@@ -207,7 +207,6 @@ export default {
                 const canvasPNG = canvas.$refs.canvas.toDataURL("image/png");
 
                 zip.file("cosi_chart_" + i + ".png", canvasPNG);
-                // this.downloadFile(canvasPNG);
             });
 
             zip.generateAsync({type: "blob"})
@@ -583,10 +582,6 @@ export default {
                                 .graph_sub {
                                     position:relative;
                                 }
-                            }
-
-                            .current_graph {
-                                //min-height:400px;
                             }
 
                             .graph_sub {

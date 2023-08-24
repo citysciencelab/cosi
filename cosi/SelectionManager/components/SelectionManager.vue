@@ -581,6 +581,8 @@ export default {
                             v-for="(selection, i) in selectionsToMerge"
                             :key="i"
                             class="cache_selection"
+                            role="button"
+                            tabindex="0"
                             @click="inputActiveSelection(i)"
                             @keyup="inputActiveSelection(i)"
                             @mouseover="hoverSelection(i, 'rgba(47, 162, 255, 0.3)')"
@@ -618,6 +620,8 @@ export default {
                                         extended: extendedOptions.includes(i),
                                         hoverHighlight: selectionsToMerge.includes(i)
                                     }"
+                                    role="button"
+                                    tabindex="0"
                                     @mouseover="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
                                     @focus="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
                                     @mouseleave="resetHovers"

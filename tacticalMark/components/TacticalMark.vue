@@ -601,6 +601,8 @@ export default {
                             <div
                                 ref="Vorlage_Dammbalken"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Dammbalken.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Dammbalken.jpg');"
                             >
@@ -622,6 +624,8 @@ export default {
                             <div
                                 ref="Vorlage_Deich"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Deich.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Deich.jpg');"
                             >
@@ -643,6 +647,8 @@ export default {
                             <div
                                 ref="Vorlage_Zug_DB"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Zug_DB.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Zug_DB.jpg');"
                             >
@@ -664,6 +670,8 @@ export default {
                             <div
                                 ref="Vorlage_Dammbalken_ueberflutet_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Dammbalken_ueberflutet_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Dammbalken_ueberflutet_defekt.jpg');"
                             >
@@ -685,6 +693,8 @@ export default {
                             <div
                                 ref="Vorlage_Deich_normal"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Deich_normal.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Deich_normal.jpg');"
                             >
@@ -706,6 +716,8 @@ export default {
                             <div
                                 ref="Vorlage_Zug_DB_Schaden"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Zug_DB_Schaden.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Zug_DB_Schaden.jpg');"
                             >
@@ -727,6 +739,8 @@ export default {
                             <div
                                 ref="Vorlage_Drehtor"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Drehtor.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Drehtor.jpg');"
                             >
@@ -748,6 +762,8 @@ export default {
                             <div
                                 ref="Vorlage_Deichbruch"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Deichbruch.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Deichbruch.jpg');"
                             >
@@ -769,6 +785,8 @@ export default {
                             <div
                                 ref="Vorlage_Zugunglueck"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Zugunglueck.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Zugunglueck.jpg');"
                             >
@@ -790,6 +808,8 @@ export default {
                             <div
                                 ref="Vorlage_Drehtor_ueberflutet_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Drehtor_ueberflutet_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Drehtor_ueberflutet_defekt.jpg');"
                             >
@@ -811,6 +831,8 @@ export default {
                             <div
                                 ref="Vorlage_Deichwart"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Deichwart.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Deichwart.jpg');"
                             >
@@ -832,6 +854,8 @@ export default {
                             <div
                                 ref="Vorlage_E_Lok_DB"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_E_Lok_DB.jpg');"
                                 @keydown.enter="setIcon('Vorlage_E_Lok_DB.jpg');"
                             >
@@ -853,6 +877,8 @@ export default {
                             <div
                                 ref="Vorlage_Schleusen"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Schleusen.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Schleusen.jpg');"
                             >
@@ -874,6 +900,8 @@ export default {
                             <div
                                 ref="Vorlage_Produktionsbetrieb_firma"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Produktionsbetrieb_firma.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Produktionsbetrieb_firma.jpg');"
                             >
@@ -895,6 +923,8 @@ export default {
                             <div
                                 ref="Vorlage_E_Lok_DB_Schaden"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_E_Lok_DB_Schaden.jpg');"
                                 @keydown.enter="setIcon('Vorlage_E_Lok_DB_Schaden.jpg');"
                             >
@@ -916,6 +946,8 @@ export default {
                             <div
                                 ref="Vorlage_Schleusen_ueberflutet_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Schleusen_ueberflutet_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Schleusen_ueberflutet_defekt.jpg');"
                             >
@@ -937,6 +969,8 @@ export default {
                             <div
                                 ref="Vorlage_Produktionsbetrieb_firma_problem"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Produktionsbetrieb_firma_problem.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Produktionsbetrieb_firma_problem.jpg');"
                             >
@@ -958,6 +992,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_oben"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_oben.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_oben.jpg');"
                             >
@@ -979,6 +1015,8 @@ export default {
                             <div
                                 ref="Vorlage_Schiebetor"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Schiebetor.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Schiebetor.jpg');"
                             >
@@ -1000,6 +1038,8 @@ export default {
                             <div
                                 ref="Vorlage_Produktionsbetrieb_firma_problem_auslaufen"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Produktionsbetrieb_firma_problem_auslaufen.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Produktionsbetrieb_firma_problem_auslaufen.jpg');"
                             >
@@ -1021,6 +1061,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_oben_rechts"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_oben_rechts.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_oben_rechts.jpg');"
                             >
@@ -1042,6 +1084,8 @@ export default {
                             <div
                                 ref="Vorlage_Schiebetor_uebeflutet_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Schiebetor_uebeflutet_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Schiebetor_uebeflutet_defekt.jpg');"
                             >
@@ -1063,6 +1107,8 @@ export default {
                             <div
                                 ref="Vorlage_Produktionsbetrieb_firma_explosion_brand"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Produktionsbetrieb_firma_explosion_brand.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Produktionsbetrieb_firma_explosion_brand.jpg');"
                             >
@@ -1084,6 +1130,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_rechts"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_rechts.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_rechts.jpg');"
                             >
@@ -1105,6 +1153,8 @@ export default {
                             <div
                                 ref="Vorlage_sandsackwall"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_sandsackwall.jpg');"
                                 @keydown.enter="setIcon('Vorlage_sandsackwall.jpg');"
                             >
@@ -1126,6 +1176,8 @@ export default {
                             <div
                                 ref="Vorlage_LKW_Tank"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_LKW_Tank.jpg');"
                                 @keydown.enter="setIcon('Vorlage_LKW_Tank.jpg');"
                             >
@@ -1147,6 +1199,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_unten_rechts"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_unten_rechts.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_unten_rechts.jpg');"
                             >
@@ -1168,6 +1222,8 @@ export default {
                             <div
                                 ref="Vorlage_sandsackwall_ueberflutet_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_sandsackwall_ueberflutet_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_sandsackwall_ueberflutet_defekt.jpg');"
                             >
@@ -1189,6 +1245,8 @@ export default {
                             <div
                                 ref="Vorlage_LKW_Tank_Auslaufen"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_LKW_Tank_Auslaufen.jpg');"
                                 @keydown.enter="setIcon('Vorlage_LKW_Tank_Auslaufen.jpg');"
                             >
@@ -1210,6 +1268,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_unten"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_unten.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_unten.jpg');"
                             >
@@ -1231,6 +1291,8 @@ export default {
                             <div
                                 ref="Vorlage_Klapptor"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Klapptor.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Klapptor.jpg');"
                             >
@@ -1252,6 +1314,8 @@ export default {
                             <div
                                 ref="Vorlage_Wasser"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Wasser.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Wasser.jpg');"
                             >
@@ -1273,6 +1337,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_unten_links"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_unten_links.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_unten_links.jpg');"
                             >
@@ -1294,6 +1360,8 @@ export default {
                             <div
                                 ref="Vorlage_Klapptor_ueberflutet_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Klapptor_ueberflutet_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Klapptor_ueberflutet_defekt.jpg');"
                             >
@@ -1315,6 +1383,8 @@ export default {
                             <div
                                 ref="Vorlage_Haus"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Haus.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Haus.jpg');"
                             >
@@ -1336,6 +1406,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_links"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_links.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_links.jpg');"
                             >
@@ -1357,6 +1429,8 @@ export default {
                             <div
                                 ref="Vorlage_Kraftwerk"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kraftwerk.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kraftwerk.jpg');"
                             >
@@ -1378,6 +1452,8 @@ export default {
                             <div
                                 ref="Vorlage_container"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_container.jpg');"
                                 @keydown.enter="setIcon('Vorlage_container.jpg');"
                             >
@@ -1399,6 +1475,8 @@ export default {
                             <div
                                 ref="Vorlage_Pfeil_oben_links"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pfeil_oben_links.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pfeil_oben_links.jpg');"
                             >
@@ -1420,6 +1498,8 @@ export default {
                             <div
                                 ref="Vorlage_Kraftwerk_gefahr"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kraftwerk_gefahr.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kraftwerk_gefahr.jpg');"
                             >
@@ -1441,6 +1521,8 @@ export default {
                             <div
                                 ref="Vorlage_bombe"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_bombe.jpg');"
                                 @keydown.enter="setIcon('Vorlage_bombe.jpg');"
                             >
@@ -1462,6 +1544,8 @@ export default {
                             <div
                                 ref="Vorlage_viereck"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_viereck.jpg');"
                                 @keydown.enter="setIcon('Vorlage_viereck.jpg');"
                             >
@@ -1487,6 +1571,8 @@ export default {
                             <div
                                 ref="Vorlage_Mannschaft"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Mannschaft.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Mannschaft.jpg');"
                             >
@@ -1508,6 +1594,8 @@ export default {
                             <div
                                 ref="Vorlage_Notunterkunft_Kapazitaet"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Notunterkunft_Kapazitaet.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Notunterkunft_Kapazitaet.jpg');"
                             >
@@ -1529,6 +1617,8 @@ export default {
                             <div
                                 ref="Vorlage_sandsacklager"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_sandsacklager.jpg');"
                                 @keydown.enter="setIcon('Vorlage_sandsacklager.jpg');"
                             >
@@ -1550,6 +1640,8 @@ export default {
                             <div
                                 ref="Vorlage_Kran_Bergepanzer"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kran_Bergepanzer.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kran_Bergepanzer.jpg');"
                             >
@@ -1571,6 +1663,8 @@ export default {
                             <div
                                 ref="Vorlage_Mannschaft_F"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Mannschaft_F.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Mannschaft_F.jpg');"
                             >
@@ -1592,6 +1686,8 @@ export default {
                             <div
                                 ref="Vorlage_Notunterkunft_Kapazitaet_aktiviert"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Notunterkunft_Kapazitaet_aktiviert.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Notunterkunft_Kapazitaet_aktiviert.jpg');"
                             >
@@ -1613,6 +1709,8 @@ export default {
                             <div
                                 ref="Vorlage_Sandsacklager_aktiviert"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Sandsacklager_aktiviert.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Sandsacklager_aktiviert.jpg');"
                             >
@@ -1634,6 +1732,8 @@ export default {
                             <div
                                 ref="Vorlage_Kran_Bergepanzer_Raeumschild"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kran_Bergepanzer_Raeumschild.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kran_Bergepanzer_Raeumschild.jpg');"
                             >
@@ -1655,6 +1755,8 @@ export default {
                             <div
                                 ref="Vorlage_Mannschaft_Pol"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Mannschaft_Pol.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Mannschaft_Pol.jpg');"
                             >
@@ -1676,6 +1778,8 @@ export default {
                             <div
                                 ref="Vorlage_Notunterkunft_Kapazitaet_ok"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Notunterkunft_Kapazitaet_ok.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Notunterkunft_Kapazitaet_ok.jpg');"
                             >
@@ -1697,6 +1801,8 @@ export default {
                             <div
                                 ref="Vorlage_Sandsacklager_ok"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Sandsacklager_ok.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Sandsacklager_ok.jpg');"
                             >
@@ -1718,6 +1824,8 @@ export default {
                             <div
                                 ref="Vorlage_Kran_Panzer"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kran_Panzer.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kran_Panzer.jpg');"
                             >
@@ -1739,6 +1847,8 @@ export default {
                             <div
                                 ref="Vorlage_Mannschaft_SAN"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Mannschaft_SAN.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Mannschaft_SAN.jpg');"
                             >
@@ -1760,6 +1870,8 @@ export default {
                             <div
                                 ref="Vorlage_Notunterkunft_besetzt_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Notunterkunft_besetzt_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Notunterkunft_besetzt_defekt.jpg');"
                             >
@@ -1781,6 +1893,8 @@ export default {
                             <div
                                 ref="Vorlage_Sandsacklager_leer"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Sandsacklager_leer.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Sandsacklager_leer.jpg');"
                             >
@@ -1802,6 +1916,8 @@ export default {
                             <div
                                 ref="Vorlage_Kran_BW"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kran_BW.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kran_BW.jpg');"
                             >
@@ -1823,6 +1939,8 @@ export default {
                             <div
                                 ref="Vorlage_Mannschaft_THW"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Mannschaft_THW.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Mannschaft_THW.jpg');"
                             >
@@ -1844,6 +1962,8 @@ export default {
                             <div
                                 ref="Vorlage_Fluchtburg"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Fluchtburg.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Fluchtburg.jpg');"
                             >
@@ -1865,6 +1985,8 @@ export default {
                             <div
                                 ref="Vorlage_Sand_Lagerflaeche"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Sand_Lagerflaeche.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Sand_Lagerflaeche.jpg');"
                             >
@@ -1886,6 +2008,8 @@ export default {
                             <div
                                 ref="Vorlage_Kran_Feuerwehr"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kran_Feuerwehr.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kran_Feuerwehr.jpg');"
                             >
@@ -1907,6 +2031,8 @@ export default {
                             <div
                                 ref="Vorlage_Pol"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Pol.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Pol.jpg');"
                             >
@@ -1928,6 +2054,8 @@ export default {
                             <div
                                 ref="Vorlage_Fluchtburg_aktiviert"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Fluchtburg_aktiviert.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Fluchtburg_aktiviert.jpg');"
                             >
@@ -1949,6 +2077,8 @@ export default {
                             <div
                                 ref="Vorlage_Sand_Lagerflaeche_aktiviert"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Sand_Lagerflaeche_aktiviert.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Sand_Lagerflaeche_aktiviert.jpg');"
                             >
@@ -1970,6 +2100,8 @@ export default {
                             <div
                                 ref="Vorlage_Kran_THW"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kran_THW.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kran_THW.jpg');"
                             >
@@ -1991,6 +2123,8 @@ export default {
                             <div
                                 ref="Vorlage_THW"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_THW.jpg');"
                                 @keydown.enter="setIcon('Vorlage_THW.jpg');"
                             >
@@ -2012,6 +2146,8 @@ export default {
                             <div
                                 ref="Vorlage_Fluchtburg_aktiv_ok"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Fluchtburg_aktiv_ok.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Fluchtburg_aktiv_ok.jpg');"
                             >
@@ -2033,6 +2169,8 @@ export default {
                             <div
                                 ref="Vorlage_Kran_sonstige"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Kran_sonstige.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Kran_sonstige.jpg');"
                             >
@@ -2054,6 +2192,8 @@ export default {
                             <div
                                 ref="Vorlage_feuerwehr"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_feuerwehr.jpg');"
                                 @keydown.enter="setIcon('Vorlage_feuerwehr.jpg');"
                             >
@@ -2075,6 +2215,8 @@ export default {
                             <div
                                 ref="Vorlage_Fluchtburg_besetzt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Fluchtburg_besetzt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Fluchtburg_besetzt.jpg');"
                             >
@@ -2096,6 +2238,8 @@ export default {
                             <div
                                 ref="Vorlage_Sand_Lagerflaeche_leer_defekt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Sand_Lagerflaeche_leer_defekt.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Sand_Lagerflaeche_leer_defekt.jpg');"
                             >
@@ -2117,6 +2261,8 @@ export default {
                             <div
                                 ref="Vorlage_TLF"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_TLF.jpg');"
                                 @keydown.enter="setIcon('Vorlage_TLF.jpg');"
                             >
@@ -2138,6 +2284,8 @@ export default {
                             <div
                                 ref="feuerwehr_rtw"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('feuerwehr_rtw.jpg');"
                                 @keydown.enter="setIcon('feuerwehr_rtw.jpg');"
                             >
@@ -2159,6 +2307,8 @@ export default {
                             <div
                                 ref="Vorlage_Fluchtburg_Kapazitaet"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Fluchtburg_Kapazitaet.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Fluchtburg_Kapazitaet.jpg');"
                             >
@@ -2180,6 +2330,8 @@ export default {
                             <div
                                 ref="Vorlage_HWS_Material"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_HWS_Material.jpg');"
                                 @keydown.enter="setIcon('Vorlage_HWS_Material.jpg');"
                             >
@@ -2201,6 +2353,8 @@ export default {
                             <div
                                 ref="Vorlage_Drehleiter"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Drehleiter.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Drehleiter.jpg');"
                             >
@@ -2222,6 +2376,8 @@ export default {
                             <div
                                 ref="feuerwehr_nef"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('feuerwehr_nef.jpg');"
                                 @keydown.enter="setIcon('feuerwehr_nef.jpg');"
                             >
@@ -2243,6 +2399,8 @@ export default {
                             <div
                                 ref="Vorlage_Bereitstellungsraum_Ort"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Bereitstellungsraum_Ort.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Bereitstellungsraum_Ort.jpg');"
                             >
@@ -2264,6 +2422,8 @@ export default {
                             <div
                                 ref="Vorlage_TEL_DV1"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_TEL_DV1.jpg');"
                                 @keydown.enter="setIcon('Vorlage_TEL_DV1.jpg');"
                             >
@@ -2285,6 +2445,8 @@ export default {
                             <div
                                 ref="Vorlage_Bagger_Tieflader"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Bagger_Tieflader.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Bagger_Tieflader.jpg');"
                             >
@@ -2306,6 +2468,8 @@ export default {
                             <div
                                 ref="feuerwehr_umwelt"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('feuerwehr_umwelt.jpg');"
                                 @keydown.enter="setIcon('feuerwehr_umwelt.jpg');"
                             >
@@ -2327,6 +2491,8 @@ export default {
                             <div
                                 ref="Vorlage_Bereitstellungsraum_Ort_arbeitet"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Bereitstellungsraum_Ort_arbeitet.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Bereitstellungsraum_Ort_arbeitet.jpg');"
                             >
@@ -2348,6 +2514,8 @@ export default {
                             <div
                                 ref="Vorlage_TEL_DV2"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_TEL_DV2.jpg');"
                                 @keydown.enter="setIcon('Vorlage_TEL_DV2.jpg');"
                             >
@@ -2369,6 +2537,8 @@ export default {
                             <div
                                 ref="Vorlage_Radlader"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Radlader.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Radlader.jpg');"
                             >
@@ -2390,6 +2560,8 @@ export default {
                             <div
                                 ref="Vorlage_LKW"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_LKW.jpg');"
                                 @keydown.enter="setIcon('Vorlage_LKW.jpg');"
                             >
@@ -2411,6 +2583,8 @@ export default {
                             <div
                                 ref="Vorlage_Bereitstellungsraum_Ort_aktiv"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Bereitstellungsraum_Ort_aktiv.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Bereitstellungsraum_Ort_aktiv.jpg');"
                             >
@@ -2432,6 +2606,8 @@ export default {
                             <div
                                 ref="Vorlage_TEL_DV3"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_TEL_DV3.jpg');"
                                 @keydown.enter="setIcon('Vorlage_TEL_DV3.jpg');"
                             >
@@ -2453,6 +2629,8 @@ export default {
                             <div
                                 ref="Vorlage_Transporthubschrauber_BW"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Transporthubschrauber_BW.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Transporthubschrauber_BW.jpg');"
                             >
@@ -2474,6 +2652,8 @@ export default {
                             <div
                                 ref="Vorlage_LKW_Kippeinrichtung"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_LKW_Kippeinrichtung.jpg');"
                                 @keydown.enter="setIcon('Vorlage_LKW_Kippeinrichtung.jpg');"
                             >
@@ -2495,6 +2675,8 @@ export default {
                             <div
                                 ref="Vorlage_Bereitstellungsraum_Ort_inaktiv"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_Bereitstellungsraum_Ort_inaktiv.jpg');"
                                 @keydown.enter="setIcon('Vorlage_Bereitstellungsraum_Ort_inaktiv.jpg');"
                             >
@@ -2516,6 +2698,8 @@ export default {
                             <div
                                 ref="Vorlage_TEL_DV4"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_TEL_DV4.jpg');"
                                 @keydown.enter="setIcon('Vorlage_TEL_DV4.jpg');"
                             >
@@ -2537,6 +2721,8 @@ export default {
                             <div
                                 ref="Vorlage_RTH"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_RTH.jpg');"
                                 @keydown.enter="setIcon('Vorlage_RTH.jpg');"
                             >
@@ -2558,6 +2744,8 @@ export default {
                             <div
                                 ref="Vorlage_LKW_Stadtreinigung"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('Vorlage_LKW_Stadtreinigung.jpg');"
                                 @keydown.enter="setIcon('Vorlage_LKW_Stadtreinigung.jpg');"
                             >
@@ -2591,6 +2779,8 @@ export default {
                             <div
                                 ref="damage_account"
                                 class="tm-btn"
+                                role="button"
+                                tabindex="0"
                                 @click="setIcon('damage_account.jpg', 'dmaNumber');"
                                 @keydown.enter="setIcon('damage_account.jpg', 'dmaNumber');"
                             >
@@ -2614,6 +2804,8 @@ export default {
                         <div
                             ref="modify"
                             class="tm-btn"
+                            role="button"
+                            tabindex="0"
                             @click="modifyIcon();"
                             @keydown.enter="modifyIcon();"
                         >
@@ -2628,6 +2820,8 @@ export default {
                         <div
                             ref="delete"
                             class="tm-btn"
+                            role="button"
+                            tabindex="0"
                             @click="deleteIcon();"
                             @keydown.enter="deleteIcon();"
                         >
@@ -2642,6 +2836,8 @@ export default {
                         <div
                             ref="download"
                             class="tm-btn"
+                            role="button"
+                            tabindex="0"
                             @click="download();"
                             @keydown.enter="download();"
                         >

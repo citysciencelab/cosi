@@ -3,8 +3,6 @@ import Tool from "../../../../src/modules/tools/ToolTemplate.vue";
 import {mapGetters, mapMutations} from "vuex";
 import mutations from "../store/mutationsPolygonStyler";
 import getters from "../store/gettersPolygonStyler";
-import WebGLVectorLayerRenderer from "ol/renderer/webgl/VectorLayer.js";
-import {asArray} from "ol/color";
 import {getModelByAttributes} from "../../utils/radioBridge.js";
 import PolygonStylerSettings from "./PolygonStylerSettings.vue";
 
@@ -127,20 +125,6 @@ export default {
         ...mapMutations("Tools/PolygonStyler", Object.keys(mutations)),
 
         /**
-         * Packs the color.
-         * @param {Array} color - The color to pack.
-         * @returns {Number} The packed color.
-         */
-        packColor (color) {
-            const array = asArray(color),
-                r = array[0] * 256 * 256,
-                g = array[1] * 256,
-                b = array[2];
-
-            return r + g + b;
-        },
-
-        /**
          * Adds a table item by the given layer name.
          * @param {Object[]} tableItems - The table items.
          * @param {String} name - The name of the layer to add.
@@ -155,7 +139,7 @@ export default {
                 features: foundLayer.getSource().getFeatures(),
                 featureAttributes: this.mapAttributes(foundLayer.get("gfiAttributes")),
                 isVisible: true,
-                defaultRenderer: foundLayer.renderer_,
+                defaultStyle: foundLayer.getSource().getFeatures()[0].styleRule.style,
                 styleList: []
             });
         },
@@ -169,43 +153,6 @@ export default {
         differenceOfTwoArrays (arrFirst, arrSecond) {
             return arrFirst.filter(value => !arrSecond.includes(value))
                 .concat(arrSecond.filter(value => !arrFirst.includes(value)));
-        },
-
-        /**
-         * Gets the render functions for styling features based on the passed attribute.
-         * @param {Object[]} styleList - A list of style objects. For each value of the passed attribute a style object is available.
-         * @param {String} attribute - The attribute to be styled by.
-         * @returns {Object} An object with the render functions for the fill and stroke style.
-         */
-        getRenderFunctions (styleList, attribute) {
-            return {
-                fill: {
-                    attributes: {
-                        color: (feature) => {
-                            const style = styleList.find(color => color.attribute === feature.get(attribute));
-
-                            return this.packColor(style.fill.color);
-                        },
-                        opacity: (feature) => {
-                            const style = styleList.find(color => color.attribute === feature.get(attribute));
-
-                            return style.fill.opacity;
-                        }
-                    }
-                },
-                stroke: {
-                    attributes: {
-                        color: (feature) => {
-                            const style = styleList.find(color => color.attribute === feature.get(attribute));
-
-                            return this.packColor(style.stroke.color);
-                        },
-                        width: () => {
-                            return 1;
-                        }
-                    }
-                }
-            };
         },
 
         /**
@@ -268,27 +215,27 @@ export default {
                     attribute: value,
                     text: typeof value === "undefined" ? this.$t("additional:modules.tools.cosi.polygonStyler.noData") : value,
                     fill: {
-                        color: "#898989",
-                        opacity: 0
+                        color: "rgb(137, 137, 137, 0.3)"
                     },
                     stroke: {
-                        color: "#898989",
-                        opacity: 1,
-                        width: 2
+                        color: "rgb(137, 137, 137, 0.8)"
                     }
                 };
             });
         },
 
         /**
-         * Sets a renderer to a layer and update the map.
+         * Sets the default style to the features.
          * @param {ol/layer} layer - The layer to render.
-         * @param {ol/renderer/webgl} renderer - The WebGL vector layer renderer.
+         * @param {Object} defaultStyle - Fill color and stroke color in rgba.
          * @returns {void}
          */
-        setRendererToLayer (layer, renderer) {
-            layer.renderer_ = renderer;
-            mapCollection.getMap("2D").renderSync();
+        setFeaturesDefaultStyle (layer, defaultStyle) {
+            layer.getSource().getFeatures().forEach(feature => {
+                feature.set("FILLCOLOR", defaultStyle.polygonFillColor);
+                feature.set("OPACITY", defaultStyle.polygonFillColor[3]);
+                feature.set("STROKECOLOR", defaultStyle.polygonStrokeColor);
+            });
         },
 
         /**
@@ -301,9 +248,12 @@ export default {
          */
         updateStyle ({layer, styleList, selectedAttribute}) {
             if (selectedAttribute) {
-                const renderer = new WebGLVectorLayerRenderer(layer, this.getRenderFunctions(styleList, selectedAttribute));
+                layer.getSource().getFeatures().forEach(feature => {
+                    const style = styleList.find(color => color.attribute === feature.get(selectedAttribute));
 
-                this.setRendererToLayer(layer, renderer);
+                    feature.set("FILLCOLOR", style.fill.color);
+                    feature.set("STROKECOLOR", style.stroke.color);
+                });
             }
             this.settingsDialog = false;
         },
@@ -374,7 +324,7 @@ export default {
                         <v-btn
                             :title="$t('additional:modules.tools.cosi.polygonStyler.removeButton')"
                             icon
-                            @click="setRendererToLayer(item.layer, item.defaultRenderer)"
+                            @click="setFeaturesDefaultStyle(item.layer, item.defaultStyle)"
                         >
                             <v-icon>mdi-delete</v-icon>
                         </v-btn>

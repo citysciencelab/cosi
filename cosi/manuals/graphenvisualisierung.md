@@ -3,6 +3,8 @@ ___
 Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwaltet diese. Darüberhinaus ermöglicht es Ihnen den Export dieser Graphen als PNG.
 
    > Nach dem Sie Ihre gewünschten Gebiete und Fachdaten ausgewählt haben, können Sie unter Analyse - Graphenvisualisierung, Ihre Ergebnisse visuell darstellen lassen. 
+   
+   > **Hinweis**: Wenn Sie die Graphenvisualisierung direkt aus dem Analyse Menü öffnen, bitte unten in der Kartenvisualisierung auf das Graph Symbol klicken. 
 
 ![Abbildung 1: Graphenvisualisierung](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/graphenvisualisierung.png?raw=true)  
 *Abbildung 1: Graphenvisualisierung*

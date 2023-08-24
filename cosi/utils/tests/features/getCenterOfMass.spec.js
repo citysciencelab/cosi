@@ -4,7 +4,7 @@ import sinon from "sinon";
 import Feature from "ol/Feature";
 import {Polygon} from "ol/geom";
 
-describe("utils/features/convertToGeoJson", () => {
+describe("utils/features/getCenterOfMass", () => {
     const polygonFeature = new Feature({
         geometry: new Polygon([
             [
@@ -25,7 +25,7 @@ describe("utils/features/convertToGeoJson", () => {
         sinon.restore();
     });
 
-    describe("featureToGeoJson", () => {
+    describe("getCenterOfMass", () => {
         it("should return false if the given parameter is an object", () => {
             expect(getCenterOfMass({})).to.be.false;
         });

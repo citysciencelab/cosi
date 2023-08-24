@@ -118,7 +118,8 @@ export default {
             selectedFeatures: "selectedFeatures",
             selectedAdminFeatures: "selectedAdminFeatures",
             selectedDistricts: "selectedDistricts",
-            selectedDistrictLevel: "selectedDistrictLevel"
+            selectedDistrictLevel: "selectedDistrictLevel",
+            mapping: "mapping"
         }),
         geomField () {
             return {
@@ -248,7 +249,8 @@ export default {
                     stats,
                     "Bevölkerung insgesamt",
                     this.timelinePrefix,
-                    this.groupsList
+                    this.groupsList,
+                    this.mapping
                 );
 
             if (baseStats) {

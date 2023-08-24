@@ -8,8 +8,8 @@ describe("getColorFromNumber", () => {
         expect(getColorFromNumber(1, 10)).to.be.eql([128, 62, 117]);
         expect(getColorFromNumber(2, 10)).to.be.eql([255, 104, 0]);
     });
-    it("should convert number to color outside range", () => {
-        expect(getColorFromNumber(-1, 0)).to.be.eql([128, 64, 64]);
-        expect(getColorFromNumber(100, 10)).to.be.eql([128, 64, 128]);
+    it("should return random rgb as array", () => {
+        expect(getColorFromNumber(-1, 0)).to.be.an("array").with.lengthOf(3);
+        expect(getColorFromNumber(100, 10)).to.be.an("array").with.lengthOf(3);
     });
 });

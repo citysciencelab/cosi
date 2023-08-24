@@ -1,26 +1,17 @@
 import {featuresToGeoJsonCollection, featureToGeoJson} from "../../utils/features/convertToGeoJson";
 import {downloadJsonToFile} from "../../utils/download";
-import store from "../../../../src/app-store";
 import {Point} from "ol/geom.js";
 import Feature from "ol/Feature.js";
 import {filterAllFeatures} from "../../utils/layer/filterAllFeatures";
 
 /**
- * Gets the map's CRS from the app-store
- * @returns {String} the map's current CRS code
- */
-function getPortalCrs () {
-    return store.getters["Maps/projectionCode"];
-}
-
-/**
  * Prepares the export of the results of the supply analysis as geojson
  * @param {*} mapLayer - the components mapLayer
+ * @param {String} projectionCode - The map projection code.
  * @returns {void}
  */
-export function exportAsGeoJson (mapLayer) {
-    const projectionCode = getPortalCrs(),
-        features = mapLayer.getSource().getFeatures(),
+export function exportAsGeoJson (mapLayer, projectionCode) {
+    const features = mapLayer.getSource().getFeatures(),
         featureCollection = featuresToGeoJsonCollection(mapLayer.getSource().getFeatures(), false, projectionCode),
         startIndex = featureCollection.features.length === 3 ? 0 : 1;
 

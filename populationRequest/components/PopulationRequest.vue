@@ -557,6 +557,8 @@ export default {
                             <div class="title-checkbox pull-left">
                                 <label
                                     for="rasterCheckBoxPopRE"
+                                    role="button"
+                                    tabindex="0"
                                     @click="triggerRaster(!rasterActive)"
                                     @keydown.enter="triggerRaster(!rasterActive)"
                                 >{{ translate("additional:modules.tools.populationRequest.select.showRasterLayer") }}</label>
@@ -577,6 +579,8 @@ export default {
                             <div class="title-checkbox pull-left">
                                 <label
                                     for="alkisAdressesCheckBoxPopRe"
+                                    role="button"
+                                    tabindex="0"
                                     @click="triggerAlkisAdresses(!alkisAdressesActive)"
                                     @keydown.enter="triggerAlkisAdresses(!alkisAdressesActive)"
                                 >

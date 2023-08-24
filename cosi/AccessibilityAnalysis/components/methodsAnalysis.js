@@ -1,4 +1,3 @@
-import * as Proj from "ol/proj.js";
 import * as Extent from "ol/extent";
 import GeometryCollection from "ol/geom/GeometryCollection";
 import {setBBoxToGeom} from "../../utils/setBBoxToGeom";
@@ -8,7 +7,7 @@ import {
     featureCollection as turfFeatureCollection
 } from "@turf/helpers";
 import {default as turfBuffer} from "@turf/buffer";
-import {readFeatures} from "../components/util.js";
+import GeoJSON from "ol/format/GeoJSON";
 import {transformFeatures} from "../../utils/features/transform";
 import {getModelByAttributes} from "../../utils/radioBridge.js";
 import {getRecordById} from "../../../../src/api/csw/getRecordById";
@@ -16,11 +15,10 @@ import {filterAllFeatures} from "../../utils/layer/filterAllFeatures";
 import {styleIsochroneFeatures} from "../utils/styleIsochroneFeatures.js";
 import {simplify} from "../../utils/geometry/simplify";
 import {getFlatCoordinates} from "../../utils/geometry/getFlatCoordinates";
-import {transformCoordinates} from "../utils/transformCoordinates";
+import {transformCoordinate} from "../utils/transformCoordinates";
+import {getDistances, getSteps} from "../utils/getDistances";
 
-export const methodConfig = {
-    store: null
-};
+
 export default {
     /**
      * create isochrones features
@@ -43,16 +41,12 @@ export default {
             }
         }
         catch (err) {
-
             if (err.request_canceled) {
                 return;
             }
 
-            console.error(err);
-
             try {
                 const code = (err.error || err).response.data.error.code;
-
 
                 if (code === 3002 || code === 3099) {
                     this.showErrorInvalidInput();
@@ -77,7 +71,7 @@ export default {
     createIsochronesRegion: async function () {
         const allActiveFeatures = filterAllFeatures(this.selectedFacilityLayer, this.isFeatureActive),
             coordinates = this.getCoordinates(allActiveFeatures, this.setByFeature),
-            {distance, maxDistance, minDistance, steps} = this.getDistances();
+            {distance, maxDistance, steps} = getDistances(parseFloat(this.distance), this._useTravelTimeIndex, this.time);
 
         if (
             coordinates !== null &&
@@ -93,7 +87,6 @@ export default {
                 scaleUnit: this.scaleUnit,
                 distance,
                 maxDistance,
-                minDistance,
                 baseUrl: this.baseUrl
             });
 
@@ -113,7 +106,7 @@ export default {
      */
     createIsochronesPoint: async function () {
         const
-            {distance, maxDistance, minDistance, steps} = this.getDistances();
+            {distance, maxDistance, steps} = getDistances(parseFloat(this.distance), this._useTravelTimeIndex, this.time);
 
         if (
             this.coordinate.length > 0 &&
@@ -127,14 +120,11 @@ export default {
                 scaleUnit: this.scaleUnit,
                 distance,
                 maxDistance,
-                minDistance,
                 baseUrl: this.baseUrl
             });
 
             this.setSteps(steps);
-            this.setRawGeoJson(await this.featureToGeoJson(features[0]));
             this.setIsochroneFeatures(features);
-            this.showRequestButton = true;
             this.cleanup();
         }
         else {
@@ -155,22 +145,6 @@ export default {
             this.setIsochroneAsBbox();
         }
     },
-    /**
-     * add coordinate after user click
-     * @param {event} clickCoordinate - The coordinate of the click event on the map.
-     * @returns {void}
-     */
-    setCoordinateFromClick: function (clickCoordinate) {
-        this.setCoordinate(transformCoordinates([clickCoordinate], this.projectionCode));
-        this.setSetBySearch(false);
-    },
-
-    setCoordinateFromFeature: function (feature) {
-        const simplifiedGeom = simplify(feature.getGeometry()),
-            coordiantes = getFlatCoordinates(simplifiedGeom);
-
-        this.setCoordinate(transformCoordinates(coordiantes, this.projectionCode));
-    },
 
     createBufferFromDirections: function () {
         let bufferFeatures;
@@ -179,11 +153,13 @@ export default {
             distance = parseFloat(this.distance) / 1000,
             steps = [distance, distance * 2 / 3, distance / 3],
             coords = this.selectedDirections?.lineString
-                .map(pt => Proj.transform(pt, this.projectionCode, "EPSG:4326")),
+                .map(pt => transformCoordinate(pt, this.projectionCode, "EPSG:4326")),
             lineString = turfLineString(coords),
-            buffer = turfFeatureCollection(steps.map(dist => turfBuffer(lineString, dist)));
+            buffer = turfFeatureCollection(steps.map(dist => {
+                return turfBuffer(lineString, dist);
+            }));
 
-        bufferFeatures = readFeatures(JSON.stringify(buffer));
+        bufferFeatures = new GeoJSON().readFeatures(buffer);
         bufferFeatures = transformFeatures(bufferFeatures, "EPSG:4326", this.projectionCode);
         bufferFeatures.forEach((feature, i) => {
             feature.set("featureType", featureType);
@@ -192,8 +168,7 @@ export default {
             feature.set("unit", this.scaleUnit);
         });
 
-        this.setSteps([distance * 1000 / 3, distance * 2000 / 3, distance * 1000].map((n) => Number.isInteger(n) ? n.toLocaleString("de-DE") : n.toFixed(2)));
-        this.setRawGeoJson(buffer);
+        this.setSteps(getSteps(parseFloat(this.distance)));
         this.setIsochroneFeatures(bufferFeatures);
     },
 
@@ -205,7 +180,7 @@ export default {
         const coord = getSearchResultsCoordinates();
 
         if (coord) {
-            this.setCoordinate([Proj.transform(coord, this.projectionCode, "EPSG:4326")]);
+            this.setCoordinate([transformCoordinate(coord, this.projectionCode, "EPSG:4326")]);
             this.setClickCoordinate(coord);
             this.setSetBySearch(true);
         }
@@ -262,9 +237,7 @@ export default {
      * @returns {void}
      */
     clear: function () {
-        this.showRequestButton = false;
         this.setSteps([0, 0, 0]);
-        this.setRawGeoJson(null);
         this.setIsochroneFeatures([]);
     },
 
@@ -284,36 +257,11 @@ export default {
         else {
             this.renderIsochrones(this._isochroneFeatures);
             if (this.mode === "point") {
-                this.placingPointMarker(
-                    Proj.transform(this.coordinate[0], "EPSG:4326", this.projectionCode)
-                );
+                this.placingPointMarker(transformCoordinate(this.coordinate[0], "EPSG:4326", this.projectionCode));
             }
         }
     },
 
-    /**
-     * gets the distance weighted by travel time index
-     * @returns {{distance: Number, maxDistance: Number, minDistance: Number, steps: String[]}} distance with penalty and legend
-     */
-    getDistances: function () {
-        const
-            hasPenalty = this.useTravelTimeIndex && this.scaleUnit === "time" && this.transportType === "driving-car",
-            penalty = this.travelTimeIndex[this.time] / Math.min(...Object.values(this.travelTimeIndex)),
-            rawDistance = parseFloat(this.distance);
-        let
-            distance = rawDistance,
-            maxDistance, minDistance,
-            steps = [rawDistance / 3, rawDistance * 2 / 3, rawDistance].map(n => Number.isInteger(n) ? n.toLocaleString("de-DE") : n.toFixed(2));
-
-        if (hasPenalty) {
-            distance = rawDistance / penalty;
-            maxDistance = rawDistance;
-            minDistance = rawDistance / (Math.max(...Object.values(this.travelTimeIndex)) / Math.min(...Object.values(this.travelTimeIndex)));
-            steps = [...steps, "max"];
-        }
-
-        return {distance, maxDistance, minDistance, steps};
-    },
     // pull meta data for the dataset used for the analysis
     getMetadataSelectedData: async function () {
         // first find out what layer we are working with
@@ -342,7 +290,7 @@ export default {
                     }
                     return [...res, Extent.getCenter(geometry.getExtent())];
 
-                }, []).map(coord => Proj.transform(coord, this.projectionCode, "EPSG:4326"));
+                }, []).map(coord => transformCoordinate(coord, this.projectionCode, "EPSG:4326"));
         }
         return null;
     }

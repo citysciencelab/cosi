@@ -74,6 +74,7 @@ export default {
                     <li
                         v-for="streetName in streetNames"
                         :key="streetName"
+                        role="button"
                         tabindex="0"
                         class="list-group-item"
                         @click="searchHousenumbers({streetName, eventType: 'click'})"
@@ -86,6 +87,7 @@ export default {
                     <li
                         v-for="houseNumber in filteredHouseNumbers"
                         :key="houseNumber.name"
+                        role="button"
                         tabindex="0"
                         class="list-group-item"
                         @click="findHouseNumber({input: houseNumber.name, layer})"

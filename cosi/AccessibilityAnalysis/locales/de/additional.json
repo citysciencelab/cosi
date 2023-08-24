@@ -13,8 +13,10 @@
                       "path": "Erreichbarkeit entlang einer Route"
                     },
                     "pointOfReference": "Referenzpunkt: Klicken Sie auf die Karte",
-                    "setByFeature": "Von Flächenaußengrenzen ermitteln",
+                    "setByFeature": "Klicken Sie auf eine Einrichtung",
+                    "setByFeatureOutline": "Von Flächenaußengrenzen ermitteln",
                     "setByFeatureInfo": "Verwendet die Eckpunkte von Polygonen für die Berechnung. Achtung: Kann bei extrem komplexen Flächen zu Fehlern führen.",
+                    "addMultiplePoints": "Weitere Punkte hinzufügen ein-/ausschalten",
                     "topic": "Thema",
                     "directions": "Berechnete Routen",
                     "transportType": "Verkehrsmittel",

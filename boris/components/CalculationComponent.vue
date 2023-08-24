@@ -82,6 +82,7 @@ export default {
                 <span> {{ title }}</span>
                 <span
                     class="bootstrap-icon bi-question-circle-fill"
+                    role="button"
                     tabindex="0"
                     @click="toggleInfoText(textId)"
                     @keydown.enter="toggleInfoText(textId)"
@@ -118,6 +119,7 @@ export default {
                 <span>{{ title }}</span>
                 <span
                     class="bootstrap-icon bi-question-circle-fill"
+                    role="button"
                     tabindex="0"
                     @click="toggleInfoText(textId)"
                     @keydown.enter="toggleInfoText(textId)"

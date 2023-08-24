@@ -61,13 +61,15 @@ Mobile the iFrame is displayed in the window.
 |name|yes|String|Elevation|The title of the tool or the entry in the tool list|false|
 |icon|yes|string|bi-camera-fill|The icon to use.|false|
 |styleId|no|String|"obliqueViewer"|StyleId from the style.json to style the mapmarker in the map when obliqueviewer is open.|true|
+|dataYear|no|String|""|Year of the underlying data.|false|
 
 **Example**
 ```
 #!json
     "vcOblique": {
     "name": "translate#additional:modules.tools.vcOblique.title",
-    "icon": "bi-image"
+    "icon": "bi-image",
+    "dataYear":"2020"
     }
 ```
 
