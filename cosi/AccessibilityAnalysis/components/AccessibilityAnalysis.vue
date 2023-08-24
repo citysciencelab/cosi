@@ -211,6 +211,10 @@ export default {
         }
     },
     watch: {
+        steps (newValue, oldValue) {
+            console.log("old", oldValue);
+            console.log("new", newValue);
+        },
         active () {
             if (this.active) {
                 onSearchbar(this.setSearchResultToOrigin);
@@ -322,7 +326,9 @@ export default {
                     this._timefi = request.settings.time;
                     this.setUseTravelTimeIndex(request.settings.useTravelTimeIndex);
                     this._setByFeature = request.settings.setByFeature;
-                    this.setSteps(request.settings.steps);
+                    if (request.settings.steps) {
+                        this.setSteps(request.settings.steps);
+                    }
                     this.setSelectedFacility(request.settings.selectedFacility);
                     return request; // (we care about the side effects only)
                 },
@@ -597,8 +603,8 @@ export default {
                 _time: this._time ? JSON.parse(JSON.stringify(this._time)) : undefined,
                 _useTravelTimeIndex: this._useTravelTimeIndex ? JSON.parse(JSON.stringify(this._useTravelTimeIndex)) : undefined,
                 _setByFeature: this._setByFeature ? JSON.parse(JSON.stringify(this._setByFeature)) : undefined,
-                _steps: this.steps ? JSON.parse(JSON.stringify(this.steps)) : this.steps,
-                _selectedFacility: this.selectedFacility ? this.selectedFacility : undefined
+                _steps: this._steps ? JSON.parse(JSON.stringify(this._steps)) : [],
+                _selectedFacility: this._selectedFacility ? this._selectedFacility : undefined
             };
             this.dataSets.push(analysisSet);
 
