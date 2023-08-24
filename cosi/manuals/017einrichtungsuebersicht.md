@@ -34,7 +34,7 @@
       - **10.2 Graphenvisualisierung als PNG oder Zip**
          > Die Graphenvisualisierung kann als PNG oder Zip heruntergeladen werden. Die entsprechenden Buttons befinden sich unterhalb der Graphenvisualisierung.
 11. **Tabelle exportieren**
-      > Die ausgewählten Einträge als XLSX für Excel exportieren. Über aus Auswahlfeld *Detailansicht exportieren* können alle bzw. in der Detailansicht ausgewählte Attribute eines Einrichtungstyps exportiert werden. Ist keine Auswahl getroffen, werden alle Einrichtungen exportiert.
+      > Die ausgewählten Einträge als XLSX für Excel exportieren. Über das Auswahlfeld *Detailansicht exportieren* können alle bzw. in der Detailansicht ausgewählte Attribute eines Einrichtungstyps exportiert werden. Ist keine Auswahl getroffen, werden alle Einrichtungen exportiert.
 12. **Standortbewertung: Themenauswahl**
       > Erlaubt die Auswahl beliebiger weiterer Fachdatenthemen für eine Standortbewertung. Bei Fachdaten, welche Punkte oder Flächen in der Karte repräsentieren (i.d.R. Einrichtungen) wird der Ort des Typs gefunden, welcher jeder Einrichtung in der Tabelle am nächsten ist und die Laufdistanz in Metern angegeben. Bei der Auswahl mehrerer Themen wird ein gewichteter Mittelwert gebildet (s. 8./13.). Andere Themen, z.B. Lärmkarte, Luftqualität, etc. für die Bewertung befinden sich im Aufbau.
 13. **Standortbewertung: Gewichtung**

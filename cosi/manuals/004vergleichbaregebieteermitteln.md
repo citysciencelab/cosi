@@ -14,17 +14,17 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
 2. **Referenzgebiet**
    > Optional kann eins der ausgewählten Gebiete als Referenzgebiet angegeben werden.
 3. **Filter hinzufügen**
-   > Die Parametereinstellungen zeigen den aktuellen Datensatz (Jahr Min.- und Max.-Wert aller Hamburger Gebiete, den Referenzwert (frei wählbar oder des Referenzgebiets) sowie die Toleranz nach oben und unten. Das Toleranzintervall ist entweder in absoluten Zahlen oder in Prozent für anteilige Werte angegeben.
+   > Die Parametereinstellungen zeigen den aktuellen Datensatz Jahr Min.- und Max.-Wert aller Hamburger Gebiete, den Referenzwert (frei wählbar oder des Referenzgebiets) sowie die Toleranz nach oben und unten. Das Toleranzintervall ist entweder in absoluten Zahlen oder in Prozent für anteilige Werte angegeben.
 4. **Alle Filter zurücksetzen** 
    > Setzen Sie Ihre Eingaben zurück.  
 5. **Ergebnisverzeichnis** 
-   > Der "Datensatz hinzufügen" Button aus dem [Ergebnisverzeichnis](./ergebnisverzeichnis.md).  
+   > Der "Datensatz hinzufügen" Button aus dem [Ergebnisverzeichnis](ergebnisverzeichnis.md).  
 
 ![Abbildung 2: Vergleichbare Gebiete ermitteln, Ergebnisse](https://user-images.githubusercontent.com/43250699/157013004-f8b83b5e-92b3-4900-a0c0-60a1518a187f.png)  
 *Abb.: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
 
 1. **Ergebnisverzeichnis**
-   > Das [Ergebnisverzeichnis](./ergebnisverzeichnis.md) verwaltet die unterschiedlichen Datensätze. Es erscheint, sobald Sie einen zweiten Datensatz erstellt haben.
+   > Das [Ergebnisverzeichnis](ergebnisverzeichnis.md) verwaltet die unterschiedlichen Datensätze. Es erscheint, sobald Sie einen zweiten Datensatz erstellt haben.
 2. **Parametereinstellungen (Jahr)**
    > Wählen Sie die Grundlage für das entsprechende Jahr aus.  
 3. **Parametereinstellungen (Attribute)**

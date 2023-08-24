@@ -19,4 +19,4 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
 4. **Y-Achse stapeln**
     > Die Werte der Datensätze werden aufsummiert und farblich abgetrennt dargestellt.
 5. **Ergebnisverzeichnis**
-   > Das [Ergebnisverzeichnis](./ergebnisverzeichnis.md) verwaltet die unterschiedlichen erstellten Graphen und und erlaubt, sie als Bild oder gesammelt als zip-Datei herunterzuladen.
+   > Das [Ergebnisverzeichnis](./ergebnisverzeichnis.md) verwaltet die unterschiedlichen erstellten Graphen und erlaubt, sie als Bild oder gesammelt als zip-Datei herunterzuladen.
