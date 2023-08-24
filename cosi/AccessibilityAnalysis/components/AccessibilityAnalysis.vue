@@ -595,7 +595,7 @@ export default {
                 _scaleUnit: this._scaleUnit ? JSON.parse(JSON.stringify(this._scaleUnit)) : undefined,
                 _distance: this._distance ? JSON.parse(JSON.stringify(this._distance)) : undefined,
                 _time: this._time ? JSON.parse(JSON.stringify(this._time)) : undefined,
-                _useTravelTimeIndex: this.useTravelTimeIndex ? JSON.parse(JSON.stringify(this.useTravelTimeIndex)) : undefined,
+                _useTravelTimeIndex: this._useTravelTimeIndex ? JSON.parse(JSON.stringify(this._useTravelTimeIndex)) : undefined,
                 _setByFeature: this._setByFeature ? JSON.parse(JSON.stringify(this._setByFeature)) : undefined,
                 _steps: this.steps ? JSON.parse(JSON.stringify(this.steps)) : this.steps,
                 _selectedFacility: this.selectedFacility ? this.selectedFacility : undefined

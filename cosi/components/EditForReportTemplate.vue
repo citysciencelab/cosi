@@ -69,7 +69,7 @@ export default {
                 color="grey lighten-1"
                 @click="abortEditingToolSettings(toolName)"
             >
-                abbrechen
+                Abbrechen
             </v-btn>
             <v-btn
                 dense
@@ -78,7 +78,7 @@ export default {
                 color="light green"
                 @click="stopEditing()"
             >
-                übernehmen
+                Übernehmen
             </v-btn>
         </v-card-actions>
     </v-card>
