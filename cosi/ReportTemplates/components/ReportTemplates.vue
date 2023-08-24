@@ -9,6 +9,7 @@ import mutations from "../store/mutationsReportTemplates";
 import tableify from "tableify"; // generate html tables from js objects
 import promisedEvent from "../utils/promisedEvent";
 import validateToolSettings from "../utils/validateToolSettings";
+import {getModelByAttributes} from "../../utils/radioBridge.js";
 
 export default {
     name: "ReportTemplates",
@@ -128,6 +129,23 @@ export default {
                 }
 
 
+            }
+        },
+        active (newValue) {
+            // if the tool is deactivated, close it properly including backbone model
+            if (!newValue) {
+                console.log("CLOSING TOOL");
+                // log component
+                console.log(this);
+                // set the backbone model to active false for changing css class in menu (menu/desktop/tool/view.toggleIsActiveClass)
+                // else the menu-entry for this tool is always highlighted
+                const model = getModelByAttributes({
+                    id: this.$store.state.Tools.ReportTemplates.id
+                });
+
+                if (model) {
+                    model.set("isActive", false);
+                }
             }
         }
     },
@@ -654,7 +672,7 @@ export default {
                                             </v-row>
                                             <!-- tool selection -->
                                             <v-row>
-                                                <v-col cols="8">
+                                                <v-col cols="12">
                                                     <v-select
                                                         v-model="templateItem.tool"
                                                         label="Tool wählen"
@@ -664,12 +682,12 @@ export default {
                                                         @change="startEditingToolSettings({toolName: templateItem.tool,templateItemsIndex: index})"
                                                     />
                                                 </v-col>
-                                                <v-col cols="4">
+                                                <v-col cols="12">
                                                     <v-btn
                                                         dense
                                                         @click="startEditingToolSettings({toolName: templateItem.tool,templateItemsIndex: index})"
                                                     >
-                                                        <v-icon>mdi-pen</v-icon>
+                                                        <v-icon>mdi-pen</v-icon> Tool Einstellungen bearbeiten
                                                     </v-btn><br><br>
                                                 </v-col>
                                             </v-row>
