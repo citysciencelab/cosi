@@ -208,12 +208,6 @@ export default {
                 // validate tool settings with validateToolSettings function
                 settingsValid = validateToolSettings(chapter.tool, chapter.settings);
 
-            this.addSingleAlert({
-                content: "kapitel anwendung!",
-                category: "Fehler",
-                displayClass: "error"
-            });
-
             if (!settingsValid.success) {
                 this.exportLoading = false;
                 this.addSingleAlert({
