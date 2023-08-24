@@ -5,9 +5,9 @@ ___
 Das Werkzeug erlaubt die Ermittlung aller Gebiete (Stadtteile oder statistische Gebiete), in denen die ausgewählten Parameter vorherrschen, bzw. solcher, die dem gewählten Referenzgebiet in diesen Parametern ähneln.
 Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ein Referenzgebiet (optional).  
 
-![Abbildung 1: Vergleichbare Gebiete ermitteln](https://user-images.githubusercontent.com/43250699/157012950-d631691b-0f40-4ab5-85f4-9e6b9c250d7e.png)   
+![Vergleichbare Gebiete ermitteln](004a_vergleichbaregebiete_ermitteln.PNG)   
  
-*Abb.: Vergleichbare Gebiete ermitteln.*  
+*Abb.004a: Vergleichbare Gebiete ermitteln.*  
 
 1. **Statistische Datenfilter**
    > Gewünschte Parameter für den Vergleich auswählen. Es können beliebig viele Parameter hinzugefügt werden. Alle StaNord-Datensätze sind hierfür verfügbar. Anteilige Werte eignen sich jedoch besser für die Vergleichbarkeit. Gegenwärtig können eigene Berechnungen aus dem Dashboard nicht herangezogen werden.
@@ -20,8 +20,8 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
 5. **Ergebnisverzeichnis** 
    > Der "Datensatz hinzufügen" Button aus dem [Ergebnisverzeichnis](ergebnisverzeichnis.md).  
 
-![Abbildung 2: Vergleichbare Gebiete ermitteln, Ergebnisse](https://user-images.githubusercontent.com/43250699/157013004-f8b83b5e-92b3-4900-a0c0-60a1518a187f.png)  
-*Abb.: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
+![Vergleichbare Gebiete ermitteln, Ergebnisse](004b_vergleichbaregebiete_ergebnis.PNG)  
+*Abb.004b: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
 
 1. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](ergebnisverzeichnis.md) verwaltet die unterschiedlichen Datensätze. Es erscheint, sobald Sie einen zweiten Datensatz erstellt haben.

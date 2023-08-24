@@ -27,9 +27,9 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
   
 
 
-![Abbildung 1: Erreichbarkeit ab einem Referenzpunkt](erreichbarkeitreferenzpunkt.png)
+![Erreichbarkeit ab einem Referenzpunkt](003a_erreichbarkeitreferenzpunkt.png)
 
-*Abb.: Erreichbarkeit ab einem Referenzpunkt.*
+*Abb.003a: Erreichbarkeit ab einem Referenzpunkt.*
   
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -61,9 +61,9 @@ Diese Analyse wird genauso hergestellt, wie ab einem Referenzpunkt. Nur wird hie
 #### Erreichbarkeit im Gebiet
 Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungsart (im Beispiel Krankenhäuser) in dem festgelegten Einzugsbereich (Planungsgebiet). Der Einzugsbereich ist die Entfernung von der jeweiligen Einrichtung und kann in Zeit oder in Metern angegeben werden. Die Erreichbarkeit ist abhängig von dem festgelegten Verkehrsmittel.
 
-![Abbildung 2: Erreichbarkeit ausgewählter Einrichtungen im Gebiet](erreichbarkeitabeinrichtung.png)
+![Erreichbarkeit ausgewählter Einrichtungen im Gebiet](003b_erreichbarkeitabeinrichtung.png)
 
-*Abb.: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
+*Abb.003b: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
 
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -86,15 +86,15 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 11. **Legende & Isochronen**
     > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen die vom den Einrichtungen aus erreichbaren Gebiete abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
 12. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis.md) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis) verwaltet werden.
 
    ### Erreichbarkeit entlang einer Route
 Wenn Sie im Routing-Tool eine Route erstellt haben, können Sie die Erreichbarkeit in einem bestimmten Umkreis um die Route herum berechnen lassen.
   
 Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
-![Abbildung 3: Erreichbarkeit entlang einer Route](erreichbarkeitroute.png)
+![Erreichbarkeit entlang einer Route](003c_erreichbarkeitroute.png)
 
-*Abb.: Erreichbarkeit entlang einer Route.*
+*Abb.003c: Erreichbarkeit entlang einer Route.*
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet. Beachten Sie, dass Sie die Erreichbarkeit entlang einer Route nur auswählen können, wenn Sie im Vorfeld im Routing-Tool eine Route angelegt haben.
 2. **Route auswählen**
@@ -108,4 +108,4 @@ Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
 7. **Legende und Isochronen**
    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das um die Route herum erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern.
 8. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis.md) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis) verwaltet werden.

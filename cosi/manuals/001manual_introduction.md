@@ -74,37 +74,35 @@ ___
   - [Datenmodell & -Infrastruktur](#markdown-header-datenmodell---infrastruktur)
   - [Module](#markdown-header-module)
    - [Themen (Layer)](#markdown-header-themen-layer)
-   - [Analyse](#markdown-header-analyse)
-      - [Manuelle Flächenauswahl für Fachdaten](#markdown-header-manuelle-flächenauswahl-für-fachdaten)
-      - [Einwohnerabfrage](#markdown-header-einwohnerabfrage)
-      - [Erreichbarkeitsanalyse](#markdown-header-erreichbarkeitsanalyse)
+   - [Analyse]
+      - [Einwohnerabfrage](/cosi/manuals/002einwohnerabfrage)
+      - [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse)
          - [Erreichbarkeit ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-referenzpunkt)
          - [Erreichbarkeit im Gebiet](#markdown-header-erreichbarkeit-im-gebiet)
          - [Erreichbarkeit entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
-      - [Vergleichbare Gebiete ermitteln](#markdown-header-vergleichbare-gebiete-ermitteln)
-      - [Filter](#markdown-header-filter)
-      - [Versorgungsanalyse](#markdown-header-versorgungsanalyse)
-      - [DIPAS](#markdown-header-dipas)
-      - [Datenvisualisierung](#markdown-header-datenvisualisierung)
-    - [Simulation](#markdown-header-simulation)
-      - [Einrichtungen anlegen](#markdown-header-einrichtungen-anlegen)
-      - [Einrichtungen bearbeiten](#markdown-header-einrichtungen-bearbeiten)
-      - [Wohnungsbauquartiere anlegen](#markdown-header-wohnungsbauquartiere-anlegen)
-    - [Dienste](#markdown-header-dienste)
-      - [Geodaten Importieren](#markdown-header-geodaten-importieren)
-      - [Sitzung Speichern/Laden](#markdown-header-sitzung-speichernladen)
-      - [Vorlagen](#markdown-header-vorlagen)
-    - [Dashboard](#markdown-header-dashboard)
-      - [Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)
-         - [Burgermenü](#markdown-header-burgermenü)
-      - [Einrichtungsübersicht](#markdown-header-einrichtungsübersicht)
-    - [Gebietsauswahl](##markdown-header-gebietsauswahl)
-    - [Kartenanalyse regionalstatistischer Daten](#markdown-header-kartenanalyse-regionalstatistischer-daten)
-    - [Ergebnisverzeichnis](#markdown-header-ergebnisverzeichnis)
-    - [Manuelle Flächenauswahl](areaselector.md)
-    - [Auswahlmanager]
-    - [Flächen stylen]
-    - []
+      - [Vergleichbare Gebiete ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln)
+      - [Filter](/cosi/manuals/005filter)
+      - [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse)
+      - [DIPAS](/cosi/manuals/007dipas)
+      - [Datenvisualisierung](/cosi/manuals/008graphenvisualisierung)
+    - [Simulation]
+      - [Einrichtungen anlegen](/cosi/manuals/009einrichtungenanlegen)
+      - [Einrichtungen bearbeiten](/cosi/manuals/010einrichtungenbearbeiten)
+      - [Wohnungsbauquartiere anlegen](/cosi/manuals/011wohnquartiereanlegen)
+    - [Dienste](/cosi/manuals/012dienste)
+      - [Geodaten Importieren](/cosi/manuals/013geodatenimportieren)
+      - [Sitzung Speichern/Laden](/cosi/manuals/014sitzungspeichern)
+      - [Vorlagen](/cosi/manuals/015vorlagen)
+    - [Dashboard]
+      - [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht)
+      - [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht)
+    - [Gebietsauswahl](/cosi/manuals/018gebietsauswahl)
+    - [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung)
+    - [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis)
+    - [Manuelle Flächenauswahl](/cosi/manuals/021manuelleflaechenauswahl)
+    - [Auswahlmanager](/cosi/manuals/022auswahlmanager)
+    - [Flächen stylen](/cosi/manuals/023flaechenstylen)
+    - [Report Tool](/cosi/manuals/024reporttool)
 
 <div style="page-break-after: always;"></div>
 
@@ -114,21 +112,21 @@ ___
   
 CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
 
-![Vgl_FHH_Atlas](../cosi/manuals/Vgl_FHH_Atlas.png)
+![Vgl_FHH_Atlas](../cosi/manuals/001a_Vgl_FHH_Atlas.png)
 
-*Abb.: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
+*Abb.001a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
 Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
-![stat_daten-anzeige](../cosi/manuals/stat_daten-anzeige.png)
+![stat_daten-anzeige](../cosi/manuals/001b_stat_daten-anzeige.png)
 
-*Abb.: Anzeige statistischer Daten auf der Karte und im Dashboard.*
+*Abb.001b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
-![bsp-analysefunktionen](../cosi/manuals/bsp-analysefunktionen.png)
+![bsp-analysefunktionen](../cosi/manuals/001c_bsp-analysefunktionen.png)
 
-*Abb.: Analysefunktionen, hier Versorgungsanalyse.*
+*Abb.001c: Analysefunktionen, hier Versorgungsanalyse.*
 
 Darüber hinaus erlaubt CoSI, in die Datensätze “einzugreifen”: sie zu filtern, zu durchsuchen oder für die Darstellung von Planungsszenarien im laufenden Programm zu verändern (s. Simulation).
 
@@ -194,40 +192,40 @@ ___
 ### Überblick 
 CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet") an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
 
-![Abbildung 1: Das CoSI Nutzer-Interface](https://user-images.githubusercontent.com/43250699/142911085-50a9fe73-0171-47d0-b2f9-527593ae42ed.jpg)
+![Das CoSI Nutzer-Interface](001d_user_interface.PNG)
 
-*Abb.: Das CoSI User-Interface.*
+*Abb.001d: Das CoSI User-Interface.*
 
 1. **Themenbau/ Layer** (s. Themen)
 2. **Analyse**
-      1. [Manuelle Flächenauswahl für Fachdaten](#markdown-header-manuelle-flächenauswahl-für-fachdaten)
-      2. [Einwohnerabfrage](#markdown-header-einwohnerabfrage)
-      3. [Erreichbarkeitsanalyse](#markdown-header-erreichbarkeitsanalyse)
-      4. [Vergleichbare Gebiete ermitteln](#markdown-header-vergleichbare-gebiete-ermitteln)
-      5. [Filter](#markdown-header-filter)
+      1. [Manuelle Flächenauswahl für Fachdaten](/cosi/manuals/021manuelleflaechenauswahl)
+      2. [Einwohnerabfrage](/cosi/manuals/002einwohnerabfrage)
+      3. [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse)
+      4. [Vergleichbare Gebiete ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln)
+      5. [Filter](/cosi/manuals/005filter)
       6. Strecke/ Fläche messen
-      7. [Versorgungsanalyse](#markdown-header-versorgungsanalyse)
-      8. [DIPAS](#markdown-header-dipas)
-      9. [Datenvisualisierung](#markdown-header-datenvisualisierung)
+      7. [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse)
+      8. [DIPAS](/cosi/manuals/007dipas)
+      9. [Datenvisualisierung](/cosi/manuals/008graphenvisualisierung)
 
 3. **Simulation**
-      1. [Einrichtungen anlegen](#markdown-header-einrichtungen-anlegen)
-      2. [Einrichtungen bearbeiten](#markdown-header-einrichtungen-bearbeiten)
-      2. [Wohnungsbauquartiere anlegen](#markdown-header-wohnungsbauquartiere-anlegen)
+      1. [Einrichtungen anlegen](/cosi/manuals/009einrichtungenanlegen)
+      2. [Einrichtungen bearbeiten](/cosi/manuals/010einrichtungenbearbeiten)
+      2. [Wohnungsbauquartiere anlegen](/cosi/manuals/011wohnquartiereanlegen)
 
 4. **Dienste**
       1. Zeichnen/ Schreiben
       2. Karte drucken
       3. Mousehover ein-/ ausschalten
-      4. [Geodaten Importieren](#markdown-header-geodaten-importieren)
+      4. [Geodaten Importieren](/cosi/manuals/013geodatenimportieren)
       5. WMS hinzufügen
-      6. [Sitzung speichern/laden](#markdown-header-sitzung-speichern)
-      7. [Vorlagen](#markdown-header-vorlagen)
+      6. [Sitzung speichern/laden](/cosi/manuals/014sitzungspeichern)
+      7. [Vorlagen](/cosi/manuals/015vorlagen)
 
 5. **Dashboard**
-      1. [Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)
-      2. [Einrichtungsübersicht](#markdown-header-einrichtungsübersicht)
-6. **[Gebiete auswählen](#markdown-header-gebiete-auswählen)**
+      1. [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht)
+      2. [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht)
+6. **[Gebiete auswählen](/cosi/manuals/018gebietsauswahl)**
 7. **Kontaktformular**
 8. **Legende** (s. Legende)
 9. **Suchleiste**
@@ -237,7 +235,7 @@ CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tool
 12. **Herauszoomen**
 13. **Vollbildansicht aktivieren/ deaktivieren**
 14. **Zurück zur Startansicht**
-15. **[Kartenanalyse regionalstatistischer Daten](#markdown-header-kartenanalyse-regionalstatistischer-daten)**
+15. **[Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung)**
 16. **Tooltip** (sog. Mousehover)
    > Zeigt das Gebiet und andere Elemente wie Tooltipps unter dem Mauszeiger an. Kann unter "Dienste" via "Mousehover ein-/ausschalten" deaktiviert werden.
 18. **Ausgewählte Gebiete**
@@ -253,9 +251,9 @@ Layer können aus dem Reiter "Themen" jederzeit zugeschaltet oder ausgeschaltet 
 
 Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten und die aktuelle Auswahl an Kartenebenen.
 
-![Abbildung 2: Der Themenbaum](https://user-images.githubusercontent.com/43250699/159332327-0b3301d1-4ae9-4b1f-9cb1-4fe733d51a54.png)
+![Der Themenbaum](001e_Themenbaum.PNG)
 
-*Abb.: Der Themenbaum.*
+*Abb.001e: Der Themenbaum.*
 
 Öffnen Sie mit dem Plus die Übersicht der Themenkategorie oder minimieren sie die Ansicht wieder mit dem Minus.
 
@@ -276,8 +274,8 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
    > Diese Funktion fixiert den Themenbaum, so dass er auch bei Interaktionen mit der Karte angezeigt bleibt.
    
    **Ausgewählte Themen**  
-      ![Abbildung 3: Ausgewählte Themen](https://user-images.githubusercontent.com/43250699/142911886-03547719-aab0-4f80-a3e3-cfdca1267eb7.png)  
-      *Abb.: Ausgewählte Themen.*  
+      ![Abbildung 3: Ausgewählte Themen](001f_ausgewaehltethemen.PNG)  
+      *Abb.001f: Ausgewählte Themen.*  
       - **3.1 Informationen und Legenden**
       - **3.2 Einstellungen**  
          Über das Zahnrad öffnen sich Einstellungen für Transparenz und Ebene verschieben.
@@ -286,33 +284,13 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
       - **3.4 Ebene nach oben/unten**  
          Über das Pfeilmenü kann die Ebene der Layer verschoben werden.
 
-Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In der nachfolgenden Abbildung zum Beispiel stellen die blauen Punkte die vorhandenen Einrichtungen im Gebiet dar. Nummerierte Punkte zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an.
+Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In der nachfolgenden Abbildung zum Beispiel stellen die grün/blauen Punkte und Icons die vorhandenen Sportstätten im Gebiet dar. Die gelben und grünen Flächen sind aus dem Verzeichnis öffentlicher Grünanlagen. Nummerierte Punkte zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an, wenn sich Punkte überschneiden.
 Eine Legende zu den aktiven Themen kann durch einen Klick auf den Reiter "Legende" eingeblendet werden. Unabhängig davon können über den Infobutton rechts neben dem Layer weitere Informationen zu dem jeweiligen Thema aufgerufen werden. Es werden folgende Informationen bereitgestellt: Kurzbeschreibung des Themas, Datenstand und Legende. Auch befinden sich hinter dem Info-Button die Links zu Downloadquellen und eine WFS - bzw. WMF -Adresse.
-Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle Auswahl (Sportstätte, Kita, etc.). Auf der Infotafel werden Informationen über das Objekt angezeigt. Datenschutzrelevante (personenbezogene) Daten werden nicht angezeigt.
+Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle Auswahl (Sportstätte, Grünanlage, etc.). Auf der Infotafel werden Informationen über das Objekt angezeigt. Datenschutzrelevante (personenbezogene) Daten werden nicht angezeigt.
 
-![Abbildung 4: Manuelle Flächenauswahl](https://user-images.githubusercontent.com/43250699/159277769-55018485-2d35-438f-8f5e-c215e53c367c.png)
+![Abbildung 4: Manuelle Flächenauswahl](001g_bspkartenansicht.PNG)
 
-*Abb.: Beispiel für Kartenansicht.*
-
-<div style="page-break-after: always;"></div>
-
-___
-## Analyse
-#### Werkzeuge des Analysemenüs
-___
-### Manuelle Flächenauswahl für Fachdaten
-Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, innerhalb dessen Fachdaten angezeigt werden. Einrichtungen oder andere Fachdatenmarker, die außerhalb dieses Polygons liegen, werden ausgeblendet.
-
-![Abbildung 4: Manuelle Flächenauswahl](https://user-images.githubusercontent.com/43250699/159277769-55018485-2d35-438f-8f5e-c215e53c367c.png)
-
-*Abb.: Manuelle Flächenauswahl*
-
-1. **Polygon zeichnen**
-   > Klicken Sie auf diesen Button, um ein neues Polygon auf der Karte zu zeichnen.
-2. **Eingabe löschen**
-   > Löscht die bestehende Flächenauswahl und zeigt alle Fachdaten wieder an.
-3. **Einwohnerabfrage**
-   > Für die aktuelle Flächenauswahl eine [Einwohnerabfrage](#markdown-header-einwohnerabfrage) durchführen.
+*Abb.001g: Beispiel für Kartenansicht.*
 
 <div style="page-break-after: always;"></div>
 
