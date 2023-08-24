@@ -674,6 +674,7 @@ export default {
                     <EditForReportTemplate
                         :report-template-mode="reportTemplateMode"
                         tool-name="Dashboard"
+                        instructions="Wählen sie mindestens ein Gebiet in der Gebietsauswahl aus. Stellen Sie dann hier ein, welche Themen und Daten übernommen werden sollen. Drücken Sie dann auf übernehmen, um die Einstellungen in das Report Template zu übernehmen."
                     />
                     <v-container fluid>
                         <DashboardToolbar

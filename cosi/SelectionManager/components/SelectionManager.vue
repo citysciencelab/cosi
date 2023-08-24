@@ -122,10 +122,10 @@ export default {
                 }
             }
         },
-        // Note on the importance of selectionsLength:
+        selectionsLength (newValue, oldValue) {
+        // Note on the importance of selectionsLength watcher in the overall structure:
         // `selections` is indirectly watched through the computed variable selectionsLength
         // Sets the all selections button active again if the this.selections array changes and updates the selection index
-        selectionsLength (newValue, oldValue) {
             if ((oldValue && newValue && oldValue < newValue) || (!oldValue && newValue)) {
                 this.inputActiveSelection(newValue - 1);
             }

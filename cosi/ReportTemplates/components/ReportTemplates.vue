@@ -168,8 +168,8 @@ export default {
             // recursive function - exit with callback after all chapters finished
             if (startIndex >= this.templateItems.length) {
                 if (callback) {
-                    // eslint-disable-next-line callback-return
                     callback();
+                    return;
                 }
                 return;
             }
@@ -210,17 +210,18 @@ export default {
             // 1. set data selection (or give resolved promise if none)
             let dataSelected = Promise.resolve();
 
-            if (Object.keys(chapter.dataSelection).length !== 0) {
+            // eslint-disable-next-line one-var
+            const toolUsesData = chapter.tool !== "Dashboard",
+                chapterHasDataSelection = Object.keys(chapter.dataSelection).length !== 0;
+
+            if (toolUsesData & chapterHasDataSelection) {
                 dataSelected = this.setCurrentDataSelectionLayersOnly(chapter.dataSelection);
             }
-            // eslint-disable-next-line one-var
-            const addSingleAlert = this.addSingleAlert;
-
             dataSelected
             // 2. alert on failure in data loading
                 .catch((e)=>{
                     console.warn("error:", e);
-                    addSingleAlert({
+                    this.addSingleAlert({
                         content: "Daten Kapitel " + (templateItemsIndex + 1) + " konnten nicht geladen werden.",
                         category: "Fehler",
                         displayClass: "error"
@@ -234,7 +235,7 @@ export default {
                 .catch((e)=>{
                     // 4. alert on failure in analysis
                     console.warn("error:", e);
-                    addSingleAlert({
+                    this.addSingleAlert({
                         content: "Analyse Kapitel " + (templateItemsIndex + 1) + " konnte eventuell nicht ausgefuehrt werden. Bitte überprüfen Sie die Tool Einstellungen.",
                         category: "Fehler",
                         displayClass: "error"
@@ -279,7 +280,7 @@ export default {
                     });
                 }
                 // ..commit the result to the store variable
-                this.$store.commit("Tools/ReportTemplates/templateItemOutput", {output, itemID});
+                this.templateItemOutput({output, itemID});
                 // emit event that resolves the promise returned from updateToolOutput function
                 this.$root.$emit("reportTemplates-received-output-" + templateItemsIndex);
             };
@@ -407,13 +408,17 @@ export default {
             this.uploadedTemplate = null;
             this.addEmptyTemplateItem();
         },
-        addEmptyTemplateItem () { // "+" button to add new chapters to the template
+        /**
+         * "+" button to add new chapters to the template
+         * @returns {void}
+         */
+        addEmptyTemplateItem () {
             const newID = 1 + Math.max(...this.templateItems.map(o => o.id)); // create an ID one larger than the highest id in array
 
             this.templateItems.push({title: "Neues Kapitel...", description: "", tool: null, settings: {}, hasSettings: false, output: {}, dataSelection: {}, dataSelectionApplied: false, id: newID});
 
         },
-        deleteTemplateItem (index) { // id is the value for key "id" in the templateItem (stable & unique), not the array index (unstable)
+        deleteTemplateItem (index) {
             this.templateItems.splice(index, 1);
         },
         clearTemplateItemDataSelection (index) {
@@ -453,7 +458,6 @@ export default {
             }
             this.setAcceptSelection(null); // make sure watcher is triggered in next line
             this.setAcceptSelection(dataSelection); // commit to selectionManager
-            // Returns a promise that resolves when data is loaded (or gets rejected after timeout)
             return promisedEvent.call(
                 this,
                 "featureListUpdatedBy-setBBoxToGeom-updateSource",
@@ -515,7 +519,7 @@ export default {
         },
         /**
          * Open a tool's interface
-         * @param {character} toolName name of the tool that should be opened
+         * @param {string} toolName name of the tool that should be opened
          * @param {boolean} closeReportTemplates true if reportTempates tool should be closed
          * @returns {void}
          */
@@ -555,31 +559,6 @@ export default {
                 />
                 <v-container class="main_container">
                     <!-- IMPORT / START NEW -->
-                    <v-row>
-                        "Report Templates" sind Dokumente mit voreingestellten Analysen, die sich dann auf Gebiete anwenden lassen. Jedes Report Template besteht aus Kapiteln. Jedes Kapitel enthält:<br><br>
-                    </v-row>
-                    <v-row>
-                        <ul>
-                            <li>Einen Titel</li>
-                            <li>Eine Beschreibung</li>
-                            <li>Das Anlayse Tool, das für das Kapitel verwendet wird</li>
-                            <li>Intern, die gewählten Einstellungen des Tools sowie die zugehörigen Datenlayer</li>
-                        </ul><br><br>
-                    </v-row>
-                    <v-row>
-                        Verwenden Sie das Report Templates Tool wie folgt:<br><br>
-                    </v-row>
-                    <v-row>
-                        <ol>
-                            <li>
-                                Laden Sie ein bestehendes Template hoch oder erstellen sie ein Neues.
-                            </li>
-                            <li>Bearbeiten Sie bei Bedarf dann die Kapitel und die Einstellungen der gewählten Analyse Tools. Mit dem "speichern" knopf können sie das Template als Datei herunterladen, mit der das aktuelle Template später wieder geladen werden kann.</li>
-                            <li>Wählen Sie das Gebiet, auf das das Template angewendet werden soll in der Gebietsauswahl aus. </li>
-                            <li>Entscheiden Sie sich für ein Exportforrmat</li>
-                            <li>Klicken Sie dann auf "Anwenden", um das Template auszuführen und den Report im gewählten Format zu öffnen bzw. herunterzuladen</li>
-                        </ol>
-                    </v-row>
 
                     <v-row class="mt-5">
                         <v-col>
@@ -587,7 +566,7 @@ export default {
                                 <v-divider />
                             </v-row>
                             <v-row>
-                                <h4>Template wählen</h4>
+                                <h4>{{ $t('additional:modules.tools.cosi.reportTemplates.chooseTemplate') }}</h4>
                             </v-row>
                             <v-row class="">
                                 Sie können entweder ein bestehendes Report Template hochladen, oder ein neues Template erstellen.

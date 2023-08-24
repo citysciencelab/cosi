@@ -18,14 +18,6 @@ export default {
             throw new Error(outputCallback + " must be a function");
         }
 
-
-        // validate settings
-        //     valid = this.validateToolSettings(toolName, settings);
-
-        // if (valid.success === false) {
-        //     throw new Error(valid.message + " for " + toolName);
-        // }
-        // commit request to the requested tool's store
         // eslint-disable-next-line one-var
         const toolPath = "Tools/" + toolName + "/setToolBridgeIn",
             request = {
