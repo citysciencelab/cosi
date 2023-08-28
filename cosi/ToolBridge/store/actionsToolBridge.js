@@ -17,6 +17,14 @@ export default {
         if (typeof outputCallback !== "function") {
             throw new Error(outputCallback + " must be a function");
         }
+        // assert settings to be an object and not null
+        if (typeof settings !== "object" || settings === null) {
+            throw new Error(settings + " must be an object");
+        }
+        // assert updateInterfaceOnly to be a boolean or undefined
+        if (typeof updateInterfaceOnly !== "undefined" && typeof updateInterfaceOnly !== "boolean") {
+            throw new Error(updateInterfaceOnly + " must be a boolean or undefined");
+        }
 
         // eslint-disable-next-line one-var
         const toolPath = "Tools/" + toolName + "/setToolBridgeIn",

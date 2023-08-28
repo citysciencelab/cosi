@@ -94,7 +94,7 @@ describe("addons/cosi/ToolBridge/components/ToolBridge.vue", () => {
             wrapper.destroy();
         }
     });
-    describe("Runs Callback when results received", () => {
+    describe("ToolBrigde cycle management", () => {
 
         store = new Vuex.Store({
             namespaces: true,
@@ -117,6 +117,73 @@ describe("addons/cosi/ToolBridge/components/ToolBridge.vue", () => {
             }
         });
 
+        it("should throw an error if tool is not supported", () => {
+            // mock toolbridge request
+            // eslint-disable-next-line no-empty-function
+            const testRequest = {toolName: "some unsupported tool name", settings: {}, outputCallback: ()=>{}, updateInterfaceOnly: false},
+                spycommit = sinon.spy();
+
+            expect(() => actionsToolBridge.runTool({commit: spycommit, getters: {supportedTools: ["Dashboard"]}}, testRequest)).to.throw();
+        });
+
+        it("should throw an error if wrongly typed input", () => {
+            // mock toolbridge request
+
+            const spycommit = sinon.spy(),
+
+
+                // eslint-disable-next-line no-empty-function
+                requestBadtoolName = {toolName: null, settings: {}, outputCallback: ()=>{}, updateInterfaceOnly: false},
+                requestBadSettings = {toolName: "Dashboard", settings: null, outputCallback: ()=>{}, updateInterfaceOnly: false},
+                requestBadOutputCallback = {toolName: "Dashboard", settings: {}, outputCallback: null, updateInterfaceOnly: false},
+                requestBadUpdateInterfaceOnly = {toolName: "Dashboard", settings: {}, outputCallback: ()=>{}, updateInterfaceOnly: null};
+
+            // eslint-disable-next-line require-jsdoc
+            function expectErrorOnBadInput (request) {
+                expect(() => actionsToolBridge.runTool({commit: spycommit, getters: {supportedTools: ["Dashboard"]}}, request)).to.throw();
+            }
+
+            expectErrorOnBadInput(requestBadtoolName);
+            expectErrorOnBadInput(requestBadSettings);
+            expectErrorOnBadInput(requestBadOutputCallback);
+            expectErrorOnBadInput(requestBadUpdateInterfaceOnly);
+
+
+        });
+
+        it("runTool action should commit if tool supported", () => {
+            // mock toolbridge request
+            // eslint-disable-next-line no-empty-function
+            const testRequest = {toolName: "Dashboard", settings: {}, outputCallback: ()=>{}, updateInterfaceOnly: false},
+                spycommit = sinon.spy();
+
+            actionsToolBridge.runTool({commit: spycommit, getters: {supportedTools: ["Dashboard"]}}, testRequest);
+            expect(spycommit.calledOnce).to.be.true;
+        });
+
+        it("runTool action should commit to correct store variable", () => {
+            // mock toolbridge request
+            // eslint-disable-next-line no-empty-function
+            const testRequest = {toolName: "Dashboard", settings: {"test": "some tool settings"}, outputCallback: ()=>{}, updateInterfaceOnly: false},
+                spycommit = sinon.spy();
+            // run action
+
+            actionsToolBridge.runTool({commit: spycommit, getters: {supportedTools: ["Dashboard"]}}, testRequest);
+            expect(spycommit.args[0][0]).to.equal("Tools/Dashboard/setToolBridgeIn");
+
+        });
+
+        it("runTool action should commit correct settings", () => {
+            // expect settings deep equal commited test request settings
+            const testRequest = {toolName: "Dashboard", settings: {"test": "some tool settings"}, outputCallback: ()=>{}, updateInterfaceOnly: false},
+                spycommit = sinon.spy();
+
+            actionsToolBridge.runTool({commit: spycommit, getters: {supportedTools: ["Dashboard"]}}, testRequest);
+
+            expect(spycommit.args[0][1].settings).to.deep.equal(testRequest.settings);
+        });
+
+
         it("toolbridge runs result callback when results received", () => {
 
             const testCallback = sinon.spy(),
@@ -132,16 +199,6 @@ describe("addons/cosi/ToolBridge/components/ToolBridge.vue", () => {
 
         });
 
-        it("runTool action should commit to relevant store variable", () => {
-            // mock toolbridge request
-            const testRequest = {toolName: "Dashboard", settings: {}, outputCallback: ()=>{}, updateInterfaceOnly: false},
-
-                // run action
-                spycommit = sinon.spy();
-
-            actionsToolBridge.runTool({commit: spycommit, getters: {supportedTools: ["Dashboard"]}}, testRequest);
-            expect(spycommit.calledOnce).to.be.true;
-        });
 
     });
 

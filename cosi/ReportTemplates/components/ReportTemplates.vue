@@ -583,7 +583,7 @@ export default {
                                 <h4>{{ $t('additional:modules.tools.cosi.reportTemplates.chooseTemplate') }}</h4>
                             </v-row>
                             <v-row class="">
-                                Sie können entweder ein bestehendes Report Template hochladen, oder ein neues Template erstellen.
+                                <!-- Sie können entweder ein bestehendes Report Template hochladen, oder ein neues Template erstellen. -->
                             </v-row>
                             <v-row class="">
                                 <v-file-input
@@ -618,7 +618,7 @@ export default {
                                 <h4>Template Bearbeiten</h4>
                             </v-row>
                             <v-row class="ml-5">
-                                Hier können Sie die Kapitel des Templates bearbeiten. Geben Sie für jedes Kapitel einen Titel und eine Beschreibung ein. Wählen Sie dann ein Analyse Tool für das Kapitel. Klicken Sie dann auf den Stift. Dann öffnet sich das Tool. Wählen Sie die relevanten Datenlayer aus dem Themenbaum, und geben Sie die gewünschten Einstellungen im Tool ein.
+                                <!-- Hier können Sie die Kapitel des Templates bearbeiten. Geben Sie für jedes Kapitel einen Titel und eine Beschreibung ein. Wählen Sie dann ein Analyse Tool für das Kapitel. Klicken Sie dann auf den Stift. Dann öffnet sich das Tool. Wählen Sie die relevanten Datenlayer aus dem Themenbaum, und geben Sie die gewünschten Einstellungen im Tool ein. -->
                             </v-row>
                             <v-row>
                                 <v-col cols="12">
