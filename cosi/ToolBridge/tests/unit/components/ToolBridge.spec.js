@@ -3,10 +3,7 @@ import {config, shallowMount, createLocalVue} from "@vue/test-utils";
 import {expect} from "chai";
 import Vuetify from "vuetify";
 import actionsToolBridge from "../../../store/actionsToolBridge";
-import ToolBridge from "../../../store/indexToolBridge";
-
 import sinon from "sinon/pkg/sinon-esm";
-import ToolBridgeGetters from "../../../store/gettersToolBridge";
 import ToolBridgeComponent from "../../../components/ToolBridge.vue";
 import ToolBridgeModule from "../../../store/indexToolBridge";
 
@@ -134,9 +131,13 @@ describe("addons/cosi/ToolBridge/components/ToolBridge.vue", () => {
 
                 // eslint-disable-next-line no-empty-function
                 requestBadtoolName = {toolName: null, settings: {}, outputCallback: ()=>{}, updateInterfaceOnly: false},
-                requestBadSettings = {toolName: "Dashboard", settings: null, outputCallback: ()=>{}, updateInterfaceOnly: false},
+                requestBadSettings = {toolName: "Dashboard", settings: null, outputCallback: ()=>{
+                    return false;
+                }, updateInterfaceOnly: false},
                 requestBadOutputCallback = {toolName: "Dashboard", settings: {}, outputCallback: null, updateInterfaceOnly: false},
-                requestBadUpdateInterfaceOnly = {toolName: "Dashboard", settings: {}, outputCallback: ()=>{}, updateInterfaceOnly: null};
+                requestBadUpdateInterfaceOnly = {toolName: "Dashboard", settings: {}, outputCallback: ()=>{
+                    return false;
+                }, updateInterfaceOnly: null};
 
             // eslint-disable-next-line require-jsdoc
             function expectErrorOnBadInput (request) {
@@ -175,7 +176,9 @@ describe("addons/cosi/ToolBridge/components/ToolBridge.vue", () => {
 
         it("runTool action should commit correct settings", () => {
             // expect settings deep equal commited test request settings
-            const testRequest = {toolName: "Dashboard", settings: {"test": "some tool settings"}, outputCallback: ()=>{}, updateInterfaceOnly: false},
+            const testRequest = {toolName: "Dashboard", settings: {"test": "some tool settings"}, outputCallback: ()=>{
+                    return false;
+                }, updateInterfaceOnly: false},
                 spycommit = sinon.spy();
 
             actionsToolBridge.runTool({commit: spycommit, getters: {supportedTools: ["Dashboard"]}}, testRequest);
