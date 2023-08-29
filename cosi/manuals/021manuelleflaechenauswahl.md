@@ -1,7 +1,9 @@
 ### Manuelle Flächenauswahl für Fachdaten
 Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, innerhalb dessen Fachdaten angezeigt werden. Einrichtungen oder andere Fachdatenmarker, die außerhalb dieses Polygons liegen, werden ausgeblendet.
 
-![Abb.: Manuelle Flächenauswahl](021a_manuelleflaechenauswahl.png) "Abb.a: Manuelle Flächenauswahl"
+![Abb.: Manuelle Flächenauswahl](021a_manuelleflaechenauswahl.png) 
+
+*Abb.a: Manuelle Flächenauswahl*
 
 1. **Polygon zeichnen**
    > Klicken Sie auf diesen Button, um ein neues Polygon auf der Karte zu zeichnen.
