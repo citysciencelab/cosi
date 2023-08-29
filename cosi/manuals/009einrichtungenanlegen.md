@@ -8,8 +8,8 @@ ___
 Sobald sie unter "Simulation" "Einrichtungen anlegen" auswählen, öffnet sich ein Fenster, in dessen oberem Bereich Sie den Szenario Manager finden. Bei der Funktion "Wohnungsbauquartiere anlegen" befindet sich der Szenario Manager an derselben Stelle.
 
 #### Szenario Manager
-![Abbildung 1: Szenario Manager](https://user-images.githubusercontent.com/43250699/143022435-622e8032-e0da-4b5e-bd0c-9e33aa07de2c.png) 
-*Abb.: Szenario Manager*  
+![Abbildung 1: Szenario Manager](009a_einrichtungenanlegen.PNG) 
+*Abb.a: Szenario Manager*  
 
 1. **Szenario Dropdown**
    > Zeigt bisher erstellte Szenarien an.
@@ -27,8 +27,8 @@ Szenarios.
   
  *Sie **müssen** ein Thema aus den geladenen Fachdaten wählen. Sind keine Fachdaten ausgewählt, ist kein Szenario möglich. Wählen Sie mindestens ein Analysethema aus dem Themenbaum.*  
 
-![Abbildung 2: Einrichtungen anlegen](https://user-images.githubusercontent.com/43250699/143023574-324b2275-eea7-4926-bf3d-07c2f21124e1.png)  
-*Abb.: Einrichtungen anlegen*  
+![Abbildung 2: Einrichtungen anlegen](009b_einrichtungenanlegen.PNG)  
+*Abb.b: Einrichtungen anlegen*  
 
 1. **Einrichtung kopieren**
    > Erlaubt das Kopieren einer vorhandenen Einrichtung. 

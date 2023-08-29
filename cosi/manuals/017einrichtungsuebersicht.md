@@ -1,7 +1,7 @@
 ### Einrichtungsübersicht
    > Um zur Einrichtungsübersicht zu gelangen, muss zunächst ein beliebiger Stadtteil oder Bezirk ausgewählt werden. Als nächtes unter dem Bereich Themen die gewünschten Themen oder Fachdaten auswählen (z.B. Bildung und Wissenschaft). Im Dashboard unter Einrichtungsübersicht können Sie dann mit der Analyse Ihrer Einrichtung beginnen.
    
-![Abbildung 1: Einrichtungsübersicht](https://user-images.githubusercontent.com/43250699/159693060-ce1ffbeb-e9f6-4525-8896-13f341138246.png)
+![Abbildung 1: Einrichtungsübersicht](017a_einrichtungsuebersicht.PNG)
 *Abb.: Einrichtungsübersicht.*
 
 1. **Detailansicht ein-/ausklappen**
@@ -9,7 +9,7 @@
 2. **Einrichtung auswählen**
    > Einrichtungen für den Export auswählen. Ausgewählte Einrichtungen werden in der Karte visuell hervorgehoben.
    *Wenn Sie die Einrichtung ausgewählt haben und unter **12** einen Fachdatensatz zur Auswertung ausgewählt haben, werden diese ebenfalls auf der Karte angezeigt. (s. Abbildung 2)*
-   ![Abbildung 2: Fachdaten zur Auswertung auf der Karte](https://user-images.githubusercontent.com/43250699/159693761-ebea6f7d-49a4-4cca-9f2a-3f6ef71503c8.JPG)
+   ![Abbildung 2: Fachdaten zur Auswertung auf der Karte](017b_einrichtungsuebersicht.PNG)
 *Abb.: Weitere Fachdaten auf der Karte.*
 3. **Einrichtung fokussieren**
    > Durch einen Klick auf das Symbol der Einrichtung zoomt die Karte zu den gewählten Einrichtungen. Die Einrichtungen werden dann in der Karte visuell hervorgehoben.
@@ -22,7 +22,7 @@
 6. **Einträge sortieren**
    > Alle Spalten können, durch mehrmaliges Klicken auf die Kopfzeile, neben dem Namen (z.B. Einrichtung) auf- und absteigend sortiert werden (alphabetisch oder nach Wert). Dabei kann für max. 2 Spalten erfolgen (z.B. 1. nach Typ und 2. nach numerischem Wert).
 7. **Numerische Attribute**
-   > Alle Attribute einer Einrichtung, die Zahlwerte abbilden (welche auch für die [Versorgungsanalyse](./versorgungsanalyse.md) verwendet werden können) werden in einer eigenen Spalte dargestellt. Die Farbe des Balkens richtet sich dabei nach dem Dezil des Wertes in der Liste aller Einrichtungen. Die Länge des Balkens ist proportional zum Höchstwert.
+   > Alle Attribute einer Einrichtung, die Zahlwerte abbilden (welche auch für die [Versorgungsanalyse](006versorgungsanalyse.md) verwendet werden können) werden in einer eigenen Spalte dargestellt. Die Farbe des Balkens richtet sich dabei nach dem Dezil des Wertes in der Liste aller Einrichtungen. Die Länge des Balkens ist proportional zum Höchstwert.
 8. **Durchschnittliche Anbindung (in m)**
    > Die Anbindungsspalte zeigt die durchschnittliche Laufdistanz (in m) zu den jeweils nächstgelegenen Einrichtungen der ausgewählten Typen. Durch einen Klick auf den Wert kann die entsprechende Aufschlüsselung geöffnet werden (s. 12.).
 9.  **Such- und Filterfunktionen**

@@ -9,16 +9,16 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 
   > Um zur statistischen Datenübersicht zu gelangen, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
   
-![Abbildung 27: Statistische Datenübersicht](statistischedatenuebersicht1.png)
+![Abbildung 27: Statistische Datenübersicht](016a_statistischedatenuebersicht.png)
 *Abb.: Statistische Datenübersicht 1*
 
-![Abbildung 29: Statistische Datenübersicht](statistischedatenuebersicht2.png)
+![Abbildung 29: Statistische Datenübersicht](016b_statistischedatenuebersicht.png)
 *Abb.: Statistische Datenübersicht 2*
 
 
 
 1. **Gruppen ein-/ausklappen**
-   > Thematische Gruppen (vgl. [Regionalstatistische Daten](./kartenvisualisierung.md)) über das **+** ein- und ausklappen.
+   > Thematische Gruppen (vgl. [Regionalstatistische Daten](019kartenvisualisierung.md)) über das **+** ein- und ausklappen.
 2. **Aktionen**
    > - [Dreistrich-Menü](#dreistrich-menü) aufklappen
    > - Visualisierung ein- / ausschalten: Schaltet die Visualisierung des ausgewählten Indikators zum aktuell gewählten Jahr in der Karte ein/aus
@@ -45,7 +45,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
       > Die Darstellung in der Karte entspricht der des Kontrollfeldes [Kartenanalyse regionalstatistischer Daten](./kartenvisualisierung.md).
 
 #### Dreistrich Menü
-![Abbildung 28: Statistische Datenübersicht - Dreistrich-menü](../utils/assets/screenshots/statdashboard_burgermenu.PNG)
+![Abbildung 28: Statistische Datenübersicht - Dreistrich-menü](016c_statdashboard_burgermenu.PNG)
 *Abb.: Statistische Datenübersicht - Dreistrich-Menü.*
 
 1. **Visualisierung ein-/ausschalten**
@@ -69,6 +69,6 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 10. **Dividieren**
       > Analog zu **Addieren**, dividiert **A** / **B**.
 11. **Diagramme erzeugen**
-      > Erzeugt Diagramme für den ausgewählten Indikator im [Chartgenerator](./chartgenerator.md) (analog zu [Kartenanalyse regionalstatistischer Daten](./kartenvisualisierung.md)). Visualisiert alle ausgewählten Spalten (s. [Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)).
+      > Erzeugt Diagramme für den ausgewählten Indikator im [Graphenvisualisierung](008graphenvisualisierung.md) (analog zu [Kartenanalyse regionalstatistischer Daten](019kartenvisualisierung.md)). Visualisiert alle ausgewählten Spalten (s. [Statistische Datenübersicht](016statistischedatenuebersicht.md)).
 12. **Korrelations- / Streuungsdiagramm**
-      > Visualisiert ein Streuungsdiagramm für die Felder **A** (Y-Achse) über **B** (X-Achse) im [Chartgenerator](./chartgenerator.md) und berechnet die Korrelation (Pearson) zwischen den Datensätzen und zeichet eine Regressionsgerade.
+      > Visualisiert ein Streuungsdiagramm für die Felder **A** (Y-Achse) über **B** (X-Achse) im [Graphenvisualisierung](008graphenvisualisierung.md) und berechnet die Korrelation (Pearson) zwischen den Datensätzen und zeichet eine Regressionsgerade.

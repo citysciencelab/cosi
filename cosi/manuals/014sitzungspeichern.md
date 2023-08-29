@@ -1,5 +1,5 @@
 ### Sitzung Speichern / Laden 
-![Abbildung 1: Sitzung Speichern](../utils/assets/screenshots/sitzungspeichern.png)
+![Abbildung 1: Sitzung Speichern](014_sitzungspeichern.PNG)
 *Abb.: Sitzung speichern / laden*
 
 
@@ -7,8 +7,8 @@ Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informatione
 
 - Die ausgewählte Verwaltungsebene und ausgewählte Gebiete
 - Aktive Fachdatenthemen 
-- Mit den [Simulationswerkzeugen](./einrichtungenanlegen.md) erstellte Szenarien 
-- Ergebnisse und Konfigurationen der Werkzeuge [Erreichbarkeitsanalyse](./erreichbarkeitsanalyse.md) und [Versorgungsanalyse](./versorgungsanalyse.md)
+- Mit den [Simulationswerkzeugen](009einrichtungenanlegen.md) erstellte Szenarien 
+- Ergebnisse und Konfigurationen der Werkzeuge [Erreichbarkeitsanalyse](003erreichbarkeitsanalyse.md) und [Versorgungsanalyse](006versorgungsanalyse.md)
 
 Die Funktion ist unter "Dienste", "Sitzung speichern/laden" zu finden.
 

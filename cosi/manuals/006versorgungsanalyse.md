@@ -29,11 +29,11 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
 *Abb.b: Versorgungsanalyse, Ergebnisse.*
 
 1. **Ergebnisverzeichnis**
-   > Das [Ergebnisverzeichnis](./ergebnisverzeichnis.md) verwaltet alle von Ihnen erstellen Datensätze und bietet bestimmte standardisierte Funktionen wie Downloads und ähnliches an.
+   > Das [Ergebnisverzeichnis](020ergebnisverzeichnis.md) verwaltet alle von Ihnen erstellen Datensätze und bietet bestimmte standardisierte Funktionen wie Downloads und ähnliches an.
 2. **Daten als Chart visualisieren**
-   > Die Daten werden zum [Chartgenerator](./chartgenerator.md) geladen und dort als Graphen visualisiert.
+   > Die Daten werden zur [Graphenvisualisierung](008graphenvisualisierung.md) geladen und dort als Graphen dargestellt.
 3. **Auf der Karte visualisieren**  
-   > Die Daten werden mit Hilfe der [Kartenvisualisierung](./kartenvisualisierung.md) auf der Karte visualisiert und je nach Wert in unterschiedlichen Farben dargestellt.
+   > Die Daten werden mit Hilfe der [Kartenvisualisierung](019kartenvisualisierung.md) auf der Karte visualisiert und je nach Wert in unterschiedlichen Farben dargestellt.
 4. **Tabellenspalte für erweiterte Funktionen auswählen**
    > Hier können Sie Tabellenspalten auswählen die für die erweiterten Funktionen "Als Chart visualisieren" (3) und "Auf der Karte visualisieren" (4) herangezogen werden soll.
    
