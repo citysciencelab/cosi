@@ -32,10 +32,10 @@ const state = {
     chart: false,
     upperEdge: 80,
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/colorcodemap.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/kartenvisualisierung.md",
-        "en": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/colorcodemap.md",
-        "de": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/kartenvisualisierung.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/019colorcodemap.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/019kartenvisualisierung.md",
+        "en": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/019colorcodemap.md",
+        "de": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/019kartenvisualisierung.md"
     }
 };
 
