@@ -36,3 +36,4 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
 6. **Als Gebietsauswahl setzen**
    > Über *Ergebnis als Gebietsauswahl* setzen kann die aktuelle Gebietsauswahl für weitere Analysen auf die Ergebnis-Gebiete gesetzt werden.
   
+<div style="page-break-after: always;"></div>
