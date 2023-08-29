@@ -3,9 +3,9 @@ ___
 Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet werden. Die Datensätze können entweder regionalstatistische Daten oder Einrichtungsdaten aus dem Menü "Themen/ Fachdaten" sein. Damit die Versorgungsanalyse verwendet werden kann, müssen mindestens zwei Datensätze geladen worden sein. Die "Versorgungsanalyse" finden sie im Bereich "Analyse".
 
 
-![Abbildung 1: Versorgungsanalyse, Einstellungen](https://user-images.githubusercontent.com/43250699/142926985-dfc8c2f9-c652-49f5-8f92-64a985a64f5e.jpg)
+![Abbildung 1: Versorgungsanalyse, Einstellungen](006a_versorgungsanalyse.PNG)
 
-*Abb.: Versorgungsanalyse, Einstellungen.*
+*Abb.a: Versorgungsanalyse, Einstellungen.*
 
 1. **Info** 
    > Über den Button finden Sie zu dieser Anleitung.
@@ -24,9 +24,9 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
 8. **Die gesamte Auswahl zurücksetzen**
 9. **Berechnen**
 
-![Abbildung 2: Versorgungsanalyse, Ergebnisse](https://user-images.githubusercontent.com/43250699/157009202-4cfeb5ff-e519-4305-ba4f-4ecde4f60bd0.png)
+![Abbildung 2: Versorgungsanalyse, Ergebnisse](006b_versorgungsanalyse.PNG)
 
-*Abb.: Versorgungsanalyse, Ergebnisse.*
+*Abb.b: Versorgungsanalyse, Ergebnisse.*
 
 1. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](./ergebnisverzeichnis.md) verwaltet alle von Ihnen erstellen Datensätze und bietet bestimmte standardisierte Funktionen wie Downloads und ähnliches an.
