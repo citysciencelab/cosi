@@ -71,38 +71,38 @@ ___
 ## Inhalt
 ___
 - CoSI: Cockpit Städtische Infrakstrukturen
-  - [Datenmodell & -Infrastruktur](#markdown-header-datenmodell---infrastruktur)
-  - [Module](#markdown-header-module)
-   - [Themen (Layer)](#markdown-header-themen-layer)
-   - [Analyse]
-      - [Einwohnerabfrage](/cosi/manuals/002einwohnerabfrage)
-      - [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse)
-         - [Erreichbarkeit ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-referenzpunkt)
-         - [Erreichbarkeit im Gebiet](#markdown-header-erreichbarkeit-im-gebiet)
-         - [Erreichbarkeit entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
-      - [Vergleichbare Gebiete ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln)
-      - [Filter](/cosi/manuals/005filter)
-      - [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse)
-      - [DIPAS](/cosi/manuals/007dipas)
-      - [Datenvisualisierung](/cosi/manuals/008graphenvisualisierung)
-    - [Simulation]
-      - [Einrichtungen anlegen](/cosi/manuals/009einrichtungenanlegen)
-      - [Einrichtungen bearbeiten](/cosi/manuals/010einrichtungenbearbeiten)
-      - [Wohnungsbauquartiere anlegen](/cosi/manuals/011wohnquartiereanlegen)
-    - [Dienste](/cosi/manuals/012dienste)
-      - [Geodaten Importieren](/cosi/manuals/013geodatenimportieren)
-      - [Sitzung Speichern/Laden](/cosi/manuals/014sitzungspeichern)
-      - [Vorlagen](/cosi/manuals/015vorlagen)
-    - [Dashboard]
-      - [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht)
-      - [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht)
-    - [Gebietsauswahl](/cosi/manuals/018gebietsauswahl)
-    - [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung)
-    - [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis)
-    - [Manuelle Flächenauswahl](/cosi/manuals/021manuelleflaechenauswahl)
-    - [Auswahlmanager](/cosi/manuals/022auswahlmanager)
-    - [Flächen stylen](/cosi/manuals/023flaechenstylen)
-    - [Report Tool](/cosi/manuals/024reporttool)
+  - [Datenmodell & -Infrastruktur](#-datenmodell-infrastruktur)
+  - [Module](#module)
+   - [Themen (Layer)](#themen-layer)
+   - [Analyse] (#analyse)
+      - [Einwohnerabfrage](#einwohnerabfrage)
+      - [Erreichbarkeitsanalyse](#erreichbarkeitsanalyse)
+         - [Erreichbarkeit ab einem Referenzpunkt](#erreichbarkeit-ab-einem-referenzpunkt)
+         - [Erreichbarkeit im Gebiet](#erreichbarkeit-im-gebiet)
+         - [Erreichbarkeit entlang einer Route](#erreichbarkeit-entlang-einer-route)
+      - [Vergleichbare Gebiete ermitteln](#4vergleichbare-gebiete-ermitteln)
+      - [Filter](#filter)
+      - [Versorgungsanalyse](#versorgungsanalyse)
+      - [DIPAS](#dipas)
+      - [Graphenvisualisierung](#graphenvisualisierung)
+    - [Simulation] (#simulation)
+      - [Einrichtungen anlegen](#einrichtungen-anlegen)
+      - [Einrichtungen bearbeiten](#einrichtungen-bearbeiten)
+      - [Wohnungsbauquartiere anlegen](#wohnquartiere-anlegen)
+    - [Dienste](#dienste)
+      - [Geodaten Importieren](#geodaten-importieren)
+      - [Sitzung Speichern/Laden](#sitzung-speichernladen)
+      - [Vorlagen](#vorlagen)
+    - Dashboard
+      - [Statistische Datenübersicht](#statistische-datenuebersicht)
+      - [Einrichtungsübersicht](#einrichtungsuebersicht)
+    - [Gebietsauswahl](#gebietsauswahl)
+    - [Kartenanalyse regionalstatistischer Daten](#kartenanalyse-regionalstatistischer-daten)
+    - [Ergebnisverzeichnis](#ergebnisverzeichnis)
+    - [Manuelle Flächenauswahl](#manuelleflaechenauswahl)
+    - [Auswahlmanager](#auswahlmanager)
+    - [Flächen stylen](#flaechen-stylen)
+    - [Report Tool](#report-tool)
 
 <div style="page-break-after: always;"></div>
 
@@ -112,19 +112,19 @@ ___
   
 CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
 
-![Vgl_FHH_Atlas](../cosi/manuals/001a_Vgl_FHH_Atlas.png)
+![Vgl_FHH_Atlas](/cosi/manuals/001a_Vgl_FHH_Atlas.png)
 
 *Abb.001a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
 Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
-![stat_daten-anzeige](../cosi/manuals/001b_stat_daten-anzeige.png)
+![stat_daten-anzeige](/cosi/manuals/001b_stat_daten-anzeige.png)
 
 *Abb.001b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
-![bsp-analysefunktionen](../cosi/manuals/001c_bsp-analysefunktionen.png)
+![bsp-analysefunktionen](/cosi/manuals/001c_bsp-analysefunktionen.png)
 
 *Abb.001c: Analysefunktionen, hier Versorgungsanalyse.*
 
@@ -192,7 +192,7 @@ ___
 ### Überblick 
 CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet") an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
 
-![Das CoSI Nutzer-Interface](001d_user_interface.PNG)
+![Das CoSI Nutzer-Interface](/cosi/manuals/001d_user_interface.PNG)
 
 *Abb.001d: Das CoSI User-Interface.*
 
