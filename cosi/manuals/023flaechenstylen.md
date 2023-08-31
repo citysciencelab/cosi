@@ -4,19 +4,19 @@ Mit Hilfe dieser Funktion können Sie Flächen, z.B. Gebäudegrundrisse, auf der
 
 Wählen Sie dazu ein Gebiet und z.B. den Datensatz Gebäude.
 
-![Abb. 1](023a_flächenstylen.png)
+![Abb. 1](/cosi/manuals/023a_flächenstylen.png)
 *Abb.a: Gebietsauswahl mit Gebäuden in Standard-Darstellung*
 
 Starten Sie die Funktion Flächen Stylen im Menü Analyse.
 
-![Abb. 2](023b_flächenstylen.png)
+![Abb. 2](/cosi/manuals/023b_flächenstylen.png)
 *Abb.b: Flächen Stylen – Datenauswahl*
 
 1. **Thema auswählen**
 
 > Klicken sie auf Themenauswahl und haken den gewünschten Datensatz an, hier: Gebäude.
 
-![Abb. 3](023c_flächenstylen.png)
+![Abb. 3](/cosi/manuals/023c_flächenstylen.png)
 *Abb.c: Flächen Stylen – Farbeinstellungen*
 
 1. **Daten auswählen**
@@ -27,12 +27,12 @@ Starten Sie die Funktion Flächen Stylen im Menü Analyse.
 
 > Klicken Sie auf das Stiftsymbol, um die Farbeinstellungen zu starten oder auch, um später Farbeinstellungen zu ändern oder zu ergänzen.
 
-![Abb. 4](023d_flächenstylen.png)
+![Abb. 4](/cosi/manuals/023d_flächenstylen.png)
 *Abb.d: Flächen Stylen – Farbeinstellungen*
 
 1. **Farben zuweisen**
 
-> Wählen sie den Farbkreis aus, dessen Farbe sie wählen möchten. Sie können Füllfarbe und Umrissfarbe festlegen. Siehe nachfolgenden Punkt **Farbe wählen**.
+> Wählen sie den Farbkreis aus, dessen Farbe sie wählen möchten. Sie können Füllfarbe und Umrissfarbe festlegen.
 
 2. **Farben zurücksetzen**
 
@@ -46,7 +46,7 @@ Starten Sie die Funktion Flächen Stylen im Menü Analyse.
 
 >Bestätigen Sie gewollte Änderungen mit der Schaltfläche Übernehmen. Sie verlassen den Dialog und die neuen Farben werden angezeigt.
 
-![Abb. 5](023e_flächenstylen.png)
+![Abb. 5](/cosi/manuals/023e_flächenstylen.png)
 *Abb.e: Flächen Stylen – Farbauswahl*
 
 Sie haben verschiedene Möglichkeiten, die Farbe einzustellen:

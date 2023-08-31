@@ -2,7 +2,7 @@
 ___
 Mit diesem Werkzeug können Sie eigene Datensätze in Form von GeoJSONs hochladen und als Themenlayer einfügen, der anschließend visualisiert werden kann und dem alle weiteren Analysefunktionen von CoSI zur Verfügung stehen.   
 
-![Abbildung 1: Dateien importieren](013a_geodatenimport.PNG)  
+![Abbildung 1: Dateien importieren](/cosi/manuals/013a_geodatenimport.PNG)  
 *Abb.a: Dateien importieren.*   
 1. **Info**
    > Über den Button finden Sie zu dieser Anleitung.
@@ -15,21 +15,22 @@ Mit diesem Werkzeug können Sie eigene Datensätze in Form von GeoJSONs hochlade
   
 Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welchem Sie bestimmte Funktionen haben, um den Layer aus der Datei zu generieren.  
 
-![Abbildung 2: Geodaten Importieren, Layeroptionen festlegen](013b_geodatenimport.PNG)  
+![Abbildung 2: Geodaten Importieren, Layeroptionen festlegen](/cosi/manuals/013b_geodatenimport.PNG)  
+
 *Abb.b: Geodaten Importieren, Layeroptionen festlegen* 
 
 5. **Layername**
    > Hier können Sie den Layer frei benennen. Standardmäßig wird der Name der hochgeladenen Datei verwendet.
-6. **[Styling](#markdown-header-styling)**
-7. **[Einrichtungsdaten](#markdown-header-einrichtungsdaten)**
-8. **[Filterdaten](#markdown-header-filterdaten)**
-9. **[Numerische Werte](#markdown-header-numerische-werte)**
+6. **[Styling](#styling)**
+7. **[Einrichtungsdaten](#einrichtungsdaten)**
+8. **[Filterdaten](#filterdaten)**
+9. **[Numerische Werte](#numerische-werte)**
 10. **Abbrechen/ Layer hinzufügen**
    > Mit einem Klick auf den Button "Abbrechen" brechen Sie den Vorgang ab und schließen das Fenster. Mit einem Klick auf "Layer Hinzufügen" wird der Import abgeschlossen und mit Ihren Einstellungen für die Funktionen in CoSI bereitgestellt.
 
 #### Styling
 
-![Abbildung 3: Geodaten Importieren, Layerstyling](013c_geodatenimport.PNG)  
+![Abbildung 3: Geodaten Importieren, Layerstyling](/cosi/manuals/013c_geodatenimport.PNG)  
 *Abb.c: Geodaten Importieren, Layerstyling*  
 
 - **6.1** Ein Icon auswählen, mit dem die jeweiligen Punkte visualisiert werden sollen. (Diese Option steht nicht zur Verfügung, wenn es sich bei denen von Ihnen hochgeladenen Geodaten um Polygone handelt).
@@ -39,7 +40,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
 - **6.3** Haben Sie weder "Farbe nach Attributen" ausgewählt bzw. bei "Farbe nach Attributen" nicht die Checkbox "Regenbogenfarbspektrum" aktiviert, können Sie hier eine Farbe bestimmen, auf deren Basis die Daten visualisiert werden. Ein Klick auf das farbige Viereck der Textbox öffnet das Farbauswahlfeld.
 
 #### Einrichtungsdaten
-![Abbildung 4: Geodaten Importieren, Einrichtungsdaten](013d_geodatenimport.PNG)  
+![Abbildung 4: Geodaten Importieren, Einrichtungsdaten](/cosi/manuals/013d_geodatenimport.PNG)  
 *Abb.d: Geodaten Importieren, Einrichtungsdaten.*    
 
    - **7.1** Hier wählen Sie aus allen Attributen der Einträge Ihrer hochgeladenen Datei das Attribut aus, welches einen eindeutigen, individuellen Namen des Eintrags enthält. Dies ist für bestimmte Funktionen von CoSI relevant. Sollte ein solches Attribut nicht existieren, lassen Sie es bitte einfach frei.
@@ -48,16 +49,16 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
    - **7.4** Sollte keines der automatisch erkannten Attribute die korrekten Adressdaten enthalten, können Sie mit dem Button "Aus allen Objekteigenschaften wählen" alle Attribute anzeigen lassen, um daraus die Adresseigenschaften auszuwählen. Sollten in dem Datensatz keine entsprechenden Informationen hinterlegt sein, können Sie dieses Auswahlfeld ignorieren.
 
 #### Filterdaten
-![Abbildung 5: Geodaten Importieren, Filterdaten festlegen](013e_geodatenimport.PNG)  
+![Abbildung 5: Geodaten Importieren, Filterdaten festlegen](/cosi/manuals/013e_geodatenimport.PNG)  
 *Abb.e: Geodaten Importieren, Filterdaten festlegen*  
 
    - Unter CoSIs Werkzeugen finden Sie auch das Filterwerkzeug, mit denen Sie alle Datensätze nach bestimmten Kriterien filtern können. Bitte bestimmen Sie hier, welche der Attribute Ihrer Daten für den Filter verfügbar gemacht werden sollen.
    - **8.1** Mit einem Klick auf diesen Button öffnet sich ein Auswahlfeld, mit Hilfe dessen Sie ein Attribut zur weißen Liste des Filters hinzufügen können.
 
 #### Numerische Werte
-![Abbildung 6: Geodarten Importieren, Numerische Werte festlegen](013f_geodatenimport.PNG)  
+![Abbildung 6: Geodarten Importieren, Numerische Werte festlegen](/cosi/manuals/013f_geodatenimport.PNG)  
 *Abb.f: Geodarten Importieren, Numerische Werte festlegen*  
-- Mit Hilfe des Werkzeugs [Versorgungsanalyse](006versorgungsanalyse.md) können Sie unterschiedlichste Zahlwerte gegeneinander verrechnen. In diesem Bereich bestimmen Sie Attribute, die numerische Werte enthalten, die für die Versorgungsanalyse bereitgestellt werden sollen. Dies können alle sinnvoll quantitativ messbaren Werte sein, wie beispielswiese "Budget", "Einwohnerzahl", "Fläche" oder "Besuche pro Woche" etc.  
+- Mit Hilfe des Werkzeugs [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse.md) können Sie unterschiedlichste Zahlwerte gegeneinander verrechnen. In diesem Bereich bestimmen Sie Attribute, die numerische Werte enthalten, die für die Versorgungsanalyse bereitgestellt werden sollen. Dies können alle sinnvoll quantitativ messbaren Werte sein, wie beispielswiese "Budget", "Einwohnerzahl", "Fläche" oder "Besuche pro Woche" etc.  
 
    - **9.1** Für die bessere Visualisierung in einer späteren Tabelle, können Sie hier dem numerischen Wert einen sinnvollen Namen geben, sollte das Attribut nicht sinnvoll benannt sein. So könnten Sie beispielsweise "budget_21" in "Verfügbare Mittel 2021" umbenennen.
    - **9.2** Hier sehen Sie die ID des Attributs und dahinter in Klammern einen Beispielwert aus dem ersten Eintrag.
