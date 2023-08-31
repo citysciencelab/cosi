@@ -266,7 +266,15 @@ const mutations = {
         ];
 
         state.allLocationsGeoJson = geoJSON;
-        state.allLocationsArray = allLocationsArray;
+        state.allLocationsArray = allLocationsArray.sort((a, b) => {
+            if (a.street < b.street) {
+                return -1;
+            }
+            if (a.street > b.street) {
+                return 1;
+            }
+            return 0;
+        });
     },
     /**
      * Sets the dwell times (grouped by "dwell time" and by date), selected from WhatALocation data.
