@@ -97,6 +97,31 @@ export default {
                     model.set("isActive", false);
                 }
 
+                this.$watch("$store.state.Tools.Print.active", (newVal) => {
+                    if (newVal) {
+                        styleSelectedDistrictLevels(this.districtLevels, this.selectedLevelId, {
+                            fill: {
+                                color: [255, 255, 255, 0]
+                            },
+                            stroke: {
+                                color: [51, 153, 204, 1],
+                                width: 3
+                            }
+                        }, 0);
+                    }
+                    else if (this.selectedNames.length) {
+                        styleSelectedDistrictLevels(this.districtLevels, this.selectedLevelId, {
+                            fill: {
+                                color: [255, 255, 255, 0]
+                            },
+                            stroke: {
+                                color: [51, 153, 204, 1],
+                                width: 3
+                            }
+                        }, 0.6);
+                    }
+                });
+
                 // remove overlay if no districts are selected at this point
                 if (this.selectedNames.length === 0) {
                     styleSelectedDistrictLevels(this.districtLevels);
