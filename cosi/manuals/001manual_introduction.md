@@ -71,7 +71,7 @@ ___
 ## Inhalt
 ___
 - CoSI: Cockpit Städtische Infrakstrukturen
-  - [Datenmodell & -Infrastruktur](#-datenmodell-und-infrastruktur)
+  - [Datenmodell und Infrastruktur](#-datenmodell-und-infrastruktur)
   - [Module](#module)
    - [Themen (Layer)](#themen-layer)
    - [Analyse] (#analyse)
