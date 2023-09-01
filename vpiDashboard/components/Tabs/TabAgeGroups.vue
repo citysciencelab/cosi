@@ -1,5 +1,5 @@
 <script>
-import {mapGetters, mapActions, mapState} from "vuex";
+import {mapGetters, mapActions} from "vuex";
 import getters from "../../store/gettersVpiDashboard";
 import actions from "../../store/actionsVpiDashboard";
 
@@ -77,39 +77,54 @@ export default {
             },
             timestamp: null,
             showChart: false,
-            currentYearIndex: 0
+            currentlySelectedYear: new Date().getFullYear()
         };
     },
     computed: {
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
-        ...mapState("Tools/VpiDashboard", ["allAgeGroupsMonthlyData"]),
-        ...mapGetters("Language", ["currentLocale"])
+        ...mapGetters("Language", ["currentLocale"]),
+        /**
+         * creates an array of years, starting from 2019 (first available year in data from WhatALocation) till current year
+         * @returns {Array} list of years available in the dashboard
+        */
+        yearList () {
+            const thisYear = new Date().getFullYear(),
+                list = [];
+            let firstYear = 2019;
+
+            while (firstYear <= thisYear) {
+                list.push(firstYear);
+                firstYear++;
+            }
+
+            return list;
+        }
     },
     watch: {
         async selectedLocationId () {
             this.showChart = false;
-            await this.getAllAgeGroupsData();
-            await this.fillInitialChartData();
+            await this.updateChartData();
             this.showChart = true;
         }
     },
     async created () {
         await this.getAllAgeGroupsData();
-        await this.fillInitialChartData();
+        await this.updateChartData();
         this.showChart = true;
     },
     methods: {
         ...mapActions("Tools/VpiDashboard", Object.keys(actions)),
         /*
-         * Create the chart data for first overview
+         * get the chart data from the store for the selected year
          * @returns {void}
          */
-        async fillInitialChartData () {
-            this.chartdata.bar.datasets = this.allAgeGroupsMonthlyData;
+        async updateChartData () {
+            this.chartdata.bar.datasets = this.allAgeGroupsMonthlyData[this.currentlySelectedYear];
             this.chartdata.bar.labels = this.ageGroupxLabels;
-            this.chartdata.line.datasets = this.allAgeGroupsMonthlyDataLine;
+            this.chartdata.line.datasets = this.allAgeGroupsMonthlyDataLine[this.currentlySelectedYear];
             this.chartdata.line.labels = this.ageGroupxLabels;
-            this.createPieChartData();
+            this.chartdata.pie.datasets = this.ageGroupsYearlyData[this.currentlySelectedYear];
+            this.chartdata.pie.labels = this.ageGroupPieChartLabels;
         },
         /**
          * define, which charttype shall be displayed
@@ -120,57 +135,28 @@ export default {
             this.chartType = chartType;
         },
         /**
-         * reacts on the change of the paginator in monthly or daily data card
+         * reacts on the change of the year paginator
          * @param {String} index selected page to be shown
          * @returns {void}
          */
         async changeIndex (index) {
-            this.currentYearIndex = index;
-            this.createPieChartData();
+            this.currentlySelectedYear = 2019 + index;
+            this.updateChartData();
             this.timestamp = window.performance.now();
         },
         /**
-         * generate the dataset for the pie chart
-         * @returns {void}
+         * translates the given key, checkes if the key exists and throws a console warning if not
+         * @param {String} key the key to translate
+         * @param {Object} [options=null] for interpolation, formating and plurals
+         * @returns {String} the translation or the key itself on error
          */
-        async createPieChartData () {
-            const year = this.allAgeGroupsYears[this.currentYearIndex],
-                chartObj = {
-                    backgroundColor: [],
-                    data: [],
-                    hoverOffset: 4
-                },
-                reorderedLabels = [...this.ageGroupPieChartLabels],
-                yearTotal = this.ageGroupsYearlyData.reduce((total, value) => {
-                    if (value.year === year && reorderedLabels.includes(value.label)) {
-                        return total + value.sum;
-                    }
-                    return total;
-                }, 0);
+        translate (key, options = null) {
+            if (key === "additional:" + this.$t(key)) {
+                console.warn("the key " + JSON.stringify(key) + " is unknown to the additional translation");
+            }
 
-            this.ageGroupsYearlyData.forEach(ageGroups => {
-                if (ageGroups.year === year && reorderedLabels.includes(ageGroups.label)) {
-                    chartObj.backgroundColor.push(ageGroups.backgroundColor);
-                    chartObj.label = ageGroups.ageGroup;
-
-                    // Round and also show trailing zeros, e.g. 18 becomes 18,0
-                    const percentValue = (Math.round(ageGroups.sum * 100 / yearTotal * 10) / 10)
-                        .toFixed(1);
-
-                    chartObj.data.push(percentValue);
-                }
-
-            });
-
-            // set the labels in the same order as the data for the pie chart
-            // by moving the last group >69 to the first item in the array
-            reorderedLabels.unshift(reorderedLabels.pop());
-
-            this.chartdata.pie.datasets = [];
-            this.chartdata.pie.datasets.push(chartObj);
-            this.chartdata.pie.labels = reorderedLabels;
+            return this.$t(key, options);
         }
-
     }
 };
 </script>
@@ -194,13 +180,14 @@ export default {
                             >
                                 <h4> {{ $t("additional:modules.tools.vpidashboard.tab.ageGroup.pieChartTitle") }} </h4>
                                 <DataCardPaginator
-                                    :paginator-data="allAgeGroupsYears"
+                                    :paginator-data="yearList"
+                                    :start-value-index="yearList.length - 1"
                                     @pager="changeIndex"
                                 />
                                 <PiechartItem
                                     v-if="showChart"
-                                    :key="timestamp"
                                     ref="pieChart"
+                                    :key="timestamp"
                                     :data="chartdata.pie"
                                     :given-options="pieChartOptions"
                                     class="pieChart"
@@ -212,9 +199,10 @@ export default {
                             <div
                                 class="row chart bar"
                             >
-                                <h4> {{ $t("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle") }} </h4>
+                                <h4> {{ translate("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle", { year: currentlySelectedYear }) }} </h4>
                                 <BarchartItem
                                     v-if="showChart"
+                                    :key="timestamp"
                                     :data="chartdata.bar"
                                     :given-scales="{
                                         xAxes: [{
@@ -229,6 +217,9 @@ export default {
                                             }
                                         }]
                                     }"
+                                    :given-options="{
+                                        animation: false
+                                    }"
                                 />
                             </div>
                         </div>
@@ -237,9 +228,13 @@ export default {
                             <div
                                 class="row chart line"
                             >
-                                <h4> {{ $t("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle") }} </h4>
+                                <h4> {{ translate("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle", { year: currentlySelectedYear }) }} </h4>
                                 <LinechartItem
+                                    :key="timestamp"
                                     :data="chartdata.line"
+                                    :given-options="{
+                                        animation: false
+                                    }"
                                 />
                             </div>
                         </div>

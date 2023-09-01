@@ -27,10 +27,10 @@ describe("addons/vpiDashboard/test/ age groups tab component", () => {
                             return [];
                         },
                         allAgeGroupsMonthlyDataLine () {
-                            return [];
+                            return {2023: []};
                         },
                         allAgeGroupsMonthlyData () {
-                            return [];
+                            return {2023: []};
                         },
                         selectedLocationId () {
                             return "";
@@ -42,7 +42,7 @@ describe("addons/vpiDashboard/test/ age groups tab component", () => {
                             return [];
                         },
                         ageGroupsYearlyData () {
-                            return [];
+                            return {2023: []};
                         }
                     },
                     actions: {

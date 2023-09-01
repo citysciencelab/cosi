@@ -118,7 +118,7 @@
           "ageGroup": {
             "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat",
             "pieChartTitle": "Altersgruppen pro Jahr",
-            "lineBarChartTitle": "Altersgruppen pro Jahr und Monat"
+            "lineBarChartTitle": "Wöchentliche Besucher je Altersgruppe im Jahr {{year}}"
           },
           "compareDates": {
             "dropdown": {
