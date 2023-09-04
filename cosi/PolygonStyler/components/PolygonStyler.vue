@@ -3,14 +3,15 @@ import Tool from "../../../../src/modules/tools/ToolTemplate.vue";
 import {mapGetters, mapMutations} from "vuex";
 import mutations from "../store/mutationsPolygonStyler";
 import getters from "../store/gettersPolygonStyler";
-import {getModelByAttributes} from "../../utils/radioBridge.js";
 import PolygonStylerSettings from "./PolygonStylerSettings.vue";
-
+import {getComponent} from "../../../../src/utils/getComponent";
+import ToolInfo from "../../components/ToolInfo.vue";
 
 export default {
     name: "PolygonStyler",
     components: {
         Tool,
+        ToolInfo,
         PolygonStylerSettings
     },
     data () {
@@ -110,11 +111,8 @@ export default {
     created () {
         this.$on("close", () => {
             this.setActive(false);
-            // set the backbone model to active false for changing css class in menu (menu/desktop/tool/view.toggleIsActiveClass)
-            // else the menu-entry for this tool is always highlighted
-            const model = getModelByAttributes({
-                id: this.$store.state.Tools.QueryDistricts.id
-            });
+
+            const model = getComponent(this.storePath.id);
 
             if (model) {
                 model.set("isActive", false);
@@ -290,6 +288,11 @@ export default {
             #toolBody
         >
             <v-app id="polygon-styler">
+                <ToolInfo
+                    :url="readmeUrl"
+                    :locale="currentLocale"
+                    :summary="$t('additional:modules.tools.cosi.polygonStyler.description')"
+                />
                 <v-select
                     v-model="selectedLayerNameList"
                     class="mb-5"
