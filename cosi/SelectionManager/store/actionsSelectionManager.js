@@ -53,8 +53,8 @@ const actions = {
         selectionObject.selection = mergedPolygons;
         selectionObject.source = source;
         selectionObject.id = id;
-        selectionObject.abv = state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? id.match(/\b([A-Z0-9])/g).join("") + "-" + state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length : id.match(/\b([A-Z0-9])/g).join("");
-
+        // selectionObject.abv = state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? id.match(/\b([A-Z0-9])/g).join("") + "-" + state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length : id.match(/\b([A-Z0-9])/g).join("");
+        selectionObject.abv = id + "-1";
         commit("addSelection", selectionObject);
     }
 };

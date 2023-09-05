@@ -78,7 +78,11 @@ export default {
 
             }
         },
-        // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
+        /**
+             * @descriptionwatcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
+             * @param {Integer} value - Index of the new active selection in this.selections
+             * @returns {void}
+             */
         activeSelection (value) {
             if (value !== null) {
                 this.activateSelection(value);
@@ -122,6 +126,12 @@ export default {
                 }
             }
         },
+        /**
+             * @description watcher the length (computed property) of this.selections array
+             * @param {Integer} newValue - new value after length has changed
+             * @param {Integer} oldValue - old value after length has changed
+             * @returns {void}
+             */
         selectionsLength (newValue, oldValue) {
         // Note on the importance of selectionsLength watcher in the overall structure:
         // `selections` is indirectly watched through the computed variable selectionsLength
