@@ -40,7 +40,7 @@ ___
 
 
 ### Stand
-08/23
+09/23
 
 ### Keywords
 GIS, Dashboard, Data Driven Urban Planning, Social Infrastructure, Urban Data Platform, Data Visualization, Planning Support Tools, Demand Driven Decision Making  
@@ -102,7 +102,6 @@ ___
     - [Manuelle Flächenauswahl](#manuelleflaechenauswahl)
     - [Auswahlmanager](#auswahlmanager)
     - [Flächen stylen](#flaechen-stylen)
-    - [Report Tool](#report-tool)
 
 <div style="page-break-after: always;"></div>
 
@@ -114,20 +113,20 @@ CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener 
 
 ![Vgl_FHH_Atlas](/cosi/manuals/001a_Vgl_FHH_Atlas.png)
 
-*Abb.001a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
+*Abb. a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
 Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
 ![stat_daten-anzeige](/cosi/manuals/001b_stat_daten-anzeige.png)
 
-*Abb.001b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
+*Abb. b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
 ![bsp-analysefunktionen](/cosi/manuals/001c_bsp-analysefunktionen.png)
 
 
-*Abb.001c: Analysefunktionen, hier Versorgungsanalyse.*
+*Abb. c: Analysefunktionen, hier Versorgungsanalyse.*
 
 Darüber hinaus erlaubt CoSI, in die Datensätze “einzugreifen”: sie zu filtern, zu durchsuchen oder für die Darstellung von Planungsszenarien im laufenden Programm zu verändern (s. Simulation).
 
@@ -195,7 +194,7 @@ CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tool
 
 ![Das CoSI Nutzer-Interface](/cosi/manuals/001d_user_interface.PNG)
 
-*Abb.001d: Das CoSI User-Interface.*
+*Abb. d: Das CoSI User-Interface.*
 
 1. **Themenbau/ Layer** (s. Themen)
 2. **Analyse**
@@ -254,7 +253,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
 
 ![Der Themenbaum](/cosi/manuals/001e_Themenbaum.PNG)
 
-*Abb.e: Der Themenbaum.*
+*Abb. e: Der Themenbaum.*
 
 Öffnen Sie mit dem Plus die Übersicht der Themenkategorie oder minimieren sie die Ansicht wieder mit dem Minus.
 
@@ -291,7 +290,7 @@ Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle 
 
 ![Abbildung 4: Manuelle Flächenauswahl](/cosi/manuals/001g_bspkartenansicht.PNG)
 
-*Abb.g: Beispiel für Kartenansicht.*
+*Abb. g: Beispiel für Kartenansicht.*
 
 <div style="page-break-after: always;"></div>
 

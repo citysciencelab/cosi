@@ -3,7 +3,7 @@ ___
 Mit diesem Werkzeug können Sie eigene Datensätze in Form von GeoJSONs hochladen und als Themenlayer einfügen, der anschließend visualisiert werden kann und dem alle weiteren Analysefunktionen von CoSI zur Verfügung stehen.   
 
 ![Abbildung 1: Dateien importieren](/cosi/manuals/013a_geodatenimport.PNG)  
-*Abb.a: Dateien importieren.*   
+*Abb. a: Dateien importieren.*   
 1. **Info**
    > Über den Button finden Sie zu dieser Anleitung.
 2. **Upload per Drag And Drop**
@@ -17,7 +17,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
 
 ![Abbildung 2: Geodaten Importieren, Layeroptionen festlegen](/cosi/manuals/013b_geodatenimport.PNG)  
 
-*Abb.b: Geodaten Importieren, Layeroptionen festlegen* 
+*Abb. b: Geodaten Importieren, Layeroptionen festlegen* 
 
 5. **Layername**
    > Hier können Sie den Layer frei benennen. Standardmäßig wird der Name der hochgeladenen Datei verwendet.
@@ -31,7 +31,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
 #### Styling
 
 ![Abbildung 3: Geodaten Importieren, Layerstyling](/cosi/manuals/013c_geodatenimport.PNG)  
-*Abb.c: Geodaten Importieren, Layerstyling*  
+*Abb. c: Geodaten Importieren, Layerstyling*  
 
 - **6.1** Ein Icon auswählen, mit dem die jeweiligen Punkte visualisiert werden sollen. (Diese Option steht nicht zur Verfügung, wenn es sich bei denen von Ihnen hochgeladenen Geodaten um Polygone handelt).
 - **6.2** Mit dieser Checkbox legen Sie fest, ob alle Entitäten des Datensatzes mit derselben Farbe dargestellt werden sollen oder basierend auf einer ihrer Attribute farblich angepasst werden sollen. Aktivieren Sie diese Checkbox, bestimmen Sie das gewünschte Attribut bitte wie in 6.2.1 beschrieben.
@@ -41,7 +41,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
 
 #### Einrichtungsdaten
 ![Abbildung 4: Geodaten Importieren, Einrichtungsdaten](/cosi/manuals/013d_geodatenimport.PNG)  
-*Abb.d: Geodaten Importieren, Einrichtungsdaten.*    
+*Abb. d: Geodaten Importieren, Einrichtungsdaten.*    
 
    - **7.1** Hier wählen Sie aus allen Attributen der Einträge Ihrer hochgeladenen Datei das Attribut aus, welches einen eindeutigen, individuellen Namen des Eintrags enthält. Dies ist für bestimmte Funktionen von CoSI relevant. Sollte ein solches Attribut nicht existieren, lassen Sie es bitte einfach frei.
    - **7.2** Hier wählen Sie aus allen Attributen der Einträge Ihrer hochgeladenen Datei ein Attribut aus, was den Typ des jeweiligen Eintrags am besten beschreibt. Handelt es sich bei Ihrem Datensatz beispielsweise um eine Reihe von unterschiedlichen Einrichtungen, könnte hier als Attribut eines gewählt werden, dass Werte wie "Kindergarten", "Krankenhaus" oder "Hotel" enthält.
@@ -50,14 +50,14 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
 
 #### Filterdaten
 ![Abbildung 5: Geodaten Importieren, Filterdaten festlegen](/cosi/manuals/013e_geodatenimport.PNG)  
-*Abb.e: Geodaten Importieren, Filterdaten festlegen*  
+*Abb. e: Geodaten Importieren, Filterdaten festlegen*  
 
    - Unter CoSIs Werkzeugen finden Sie auch das Filterwerkzeug, mit denen Sie alle Datensätze nach bestimmten Kriterien filtern können. Bitte bestimmen Sie hier, welche der Attribute Ihrer Daten für den Filter verfügbar gemacht werden sollen.
    - **8.1** Mit einem Klick auf diesen Button öffnet sich ein Auswahlfeld, mit Hilfe dessen Sie ein Attribut zur weißen Liste des Filters hinzufügen können.
 
 #### Numerische Werte
 ![Abbildung 6: Geodarten Importieren, Numerische Werte festlegen](/cosi/manuals/013f_geodatenimport.PNG)  
-*Abb.f: Geodarten Importieren, Numerische Werte festlegen*  
+*Abb. f: Geodarten Importieren, Numerische Werte festlegen*  
 - Mit Hilfe des Werkzeugs [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse.md) können Sie unterschiedlichste Zahlwerte gegeneinander verrechnen. In diesem Bereich bestimmen Sie Attribute, die numerische Werte enthalten, die für die Versorgungsanalyse bereitgestellt werden sollen. Dies können alle sinnvoll quantitativ messbaren Werte sein, wie beispielswiese "Budget", "Einwohnerzahl", "Fläche" oder "Besuche pro Woche" etc.  
 
    - **9.1** Für die bessere Visualisierung in einer späteren Tabelle, können Sie hier dem numerischen Wert einen sinnvollen Namen geben, sollte das Attribut nicht sinnvoll benannt sein. So könnten Sie beispielsweise "budget_21" in "Verfügbare Mittel 2021" umbenennen.

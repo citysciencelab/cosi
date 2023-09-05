@@ -1,4 +1,5 @@
 ### Erreichbarkeitsanalyse
+
 Die "Erreichbarkeitsanalyse" erreichen Sie über den Bereich "Analyse". 
 Eine Erreichbarkeitsanalyse kann auf drei Arten durchgeführt werden:  
 1. [Ab einem Referenzpunkt](#erreichbarkeit-ab-einem-Referenzpunkt)
@@ -29,7 +30,7 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 
 ![Erreichbarkeit ab einem Referenzpunkt](/cosi/manuals/003a_erreichbarkeitreferenzpunkt.png)
 
-*Abb.a: Erreichbarkeit ab einem Referenzpunkt.*
+*Abb. a: Erreichbarkeit ab einem Referenzpunkt.*
   
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -46,7 +47,7 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 7. **Ergebnis ausblenden**
    > Die Ergebnisdarstellung auf der Karte wird ausgeblendet. Alle Fachdaten außerhalb der Isochronen werden wieder eingeblendet.
 8. **Einwohnerabfrage**
-   > (s. Einwohnerabfrage)
+   > [s. Einwohnerabfrage](#einwohnerabfrage)
 9.  **Legende & Isochronen**
    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das vom Referenzpunkt aus erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
 11. **Ergebnisverzeichnis**
@@ -63,7 +64,7 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 
 ![Erreichbarkeit ausgewählter Einrichtungen im Gebiet](/cosi/manuals/003b_erreichbarkeitabeinrichtung.png)
 
-*Abb.b: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
+*Abb. b: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
 
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -94,7 +95,7 @@ Wenn Sie im Routing-Tool eine Route erstellt haben, können Sie die Erreichbarke
 Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
 ![Erreichbarkeit entlang einer Route](/cosi/manuals/003c_erreichbarkeitroute.png)
 
-*Abb.c: Erreichbarkeit entlang einer Route.*
+*Abb. c: Erreichbarkeit entlang einer Route.*
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet. Beachten Sie, dass Sie die Erreichbarkeit entlang einer Route nur auswählen können, wenn Sie im Vorfeld im Routing-Tool eine Route angelegt haben.
 2. **Route auswählen**

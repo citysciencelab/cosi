@@ -4,7 +4,7 @@ Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in d
 
 ![Abbildung 1: DIPAS](/cosi/manuals/007a_dipas.PNG)
 
-*Abb.a: DIPAS Menü und Anzeige.*
+*Abb. a: DIPAS Menü und Anzeige.*
 
 1. **Beteiligungsverfahren auswählen**
    > Für jedes Verfahren aus der DIPAS-Datenbank wird automatisch eine Registerkarte angelegt, welche durchs Anklicken aufgeklappt werden kann. Ein aufgeklapptes Verfahren zeigt dessen Beschreibungstext und die Kontrollfelder für die Visualisierung. Jedem Verfahren wid dabei eine zufällige Farbe zugewiesen.

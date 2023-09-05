@@ -5,7 +5,7 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
 
 ![Abbildung 1: Versorgungsanalyse, Einstellungen](/cosi/manuals/006a_versorgungsanalyse.PNG)
 
-*Abb.a: Versorgungsanalyse, Einstellungen.*
+*Abb. a: Versorgungsanalyse, Einstellungen.*
 
 1. **Info** 
    > Über den Button finden Sie zu dieser Anleitung.
@@ -26,7 +26,7 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
 
 ![Abbildung 2: Versorgungsanalyse, Ergebnisse](/cosi/manuals/006b_versorgungsanalyse.PNG)
 
-*Abb.b: Versorgungsanalyse, Ergebnisse.*
+*Abb. b: Versorgungsanalyse, Ergebnisse.*
 
 1. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis.md) verwaltet alle von Ihnen erstellen Datensätze und bietet bestimmte standardisierte Funktionen wie Downloads und ähnliches an.
@@ -49,5 +49,7 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
          Hier wurde der Wert des Auswahlfeldes (1) durch den Wert des Auswahlfeldes (2) geteilt.
       - **Bedarfsdeckung:**  
          Die Versorgungsabdeckung in Prozent, d.h. das Verhältnis zwischen der aus Auswahlfeld (1) ermittelten Kapazität und Auswahlfeld (2) im Gebiet. Wurde kein Faktor F ausgewählt, zeigt die Spalte das direkte Verhältnis beider Felder in Prozent an.
-      - **6.1 Ergebnisverzeichnis der Ergebnistabelle**
-         Wenn in Ihrer Ergebnistabelle mehr als 10 Ergebnisse angezeigt werden, können Sie hier entsprechend die Daten durchschalten.
+
+   6.1 **Ergebnisverzeichnis der Ergebnistabelle**
+         
+      >Wenn in Ihrer Ergebnistabelle mehr als 10 Ergebnisse angezeigt werden, können Sie hier entsprechend die Daten durchschalten.

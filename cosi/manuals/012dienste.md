@@ -4,7 +4,7 @@ ___
 ___
 ![Abbildung 22: Dienste](/cosi/manuals/012a_dienste.PNG)
 
-*Abb.a: Dropdown Dienste.*
+*Abb. a: Dropdown Dienste.*
 
 1. **Zeichnen/ Schreiben**
 2. **Karte drucken**

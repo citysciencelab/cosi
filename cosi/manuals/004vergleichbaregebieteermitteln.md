@@ -7,7 +7,7 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
 
 ![Vergleichbare Gebiete ermitteln](/cosi/manuals/004a_vergleichbaregebiete_ermitteln.PNG)
  
-*Abb.a: Vergleichbare Gebiete ermitteln.*  
+*Abb. a: Vergleichbare Gebiete ermitteln.*  
 
 1. **Statistische Datenfilter**
    > Gewünschte Parameter für den Vergleich auswählen. Es können beliebig viele Parameter hinzugefügt werden. Alle StaNord-Datensätze sind hierfür verfügbar. Anteilige Werte eignen sich jedoch besser für die Vergleichbarkeit. Gegenwärtig können eigene Berechnungen aus dem Dashboard nicht herangezogen werden.
@@ -21,7 +21,7 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
    > Der "Datensatz hinzufügen" Button aus dem [Ergebnisverzeichnis](ergebnisverzeichnis.md).  
 
 ![Vergleichbare Gebiete ermitteln, Ergebnisse](/cosi/manuals/004b_vergleichbaregebiete_ergebnis.PNG)  
-*Abb.b: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
+*Abb. b: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
 
 1. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](/cosi/manuals/ergebnisverzeichnis.md) verwaltet die unterschiedlichen Datensätze. Es erscheint, sobald Sie einen zweiten Datensatz erstellt haben.

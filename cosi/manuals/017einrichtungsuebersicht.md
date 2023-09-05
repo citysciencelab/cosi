@@ -2,7 +2,7 @@
    > Um zur Einrichtungsübersicht zu gelangen, muss zunächst ein beliebiger Stadtteil oder Bezirk ausgewählt werden. Als nächtes unter dem Bereich Themen die gewünschten Themen oder Fachdaten auswählen (z.B. Bildung und Wissenschaft). Im Dashboard unter Einrichtungsübersicht können Sie dann mit der Analyse Ihrer Einrichtung beginnen.
    
 ![Abbildung 1: Einrichtungsübersicht](/cosi/manuals/017a_einrichtungsuebersicht.PNG)
-*Abb.a: Einrichtungsübersicht.*
+*Abb. a: Einrichtungsübersicht.*
 
 1. **Detailansicht ein-/ausklappen**
    > Über den Pfeil können *alle* Attribute einer Einrichtung aufgeklappt werden. Die einzelnen Zeilen der Detailansicht können für den weiteren Export ausgewählt werden.
@@ -10,7 +10,7 @@
    > Einrichtungen für den Export auswählen. Ausgewählte Einrichtungen werden in der Karte visuell hervorgehoben.
    *Wenn Sie die Einrichtung ausgewählt haben und unter **12** einen Fachdatensatz zur Auswertung ausgewählt haben, werden diese ebenfalls auf der Karte angezeigt. (s. Abbildung 2)*
    ![Abbildung 2: Fachdaten zur Auswertung auf der Karte](/cosi/manuals/017b_einrichtungsuebersicht.PNG)
-*Abb.b: Weitere Fachdaten auf der Karte.*
+*Abb. b: Weitere Fachdaten auf der Karte.*
 3. **Einrichtung fokussieren**
    > Durch einen Klick auf das Symbol der Einrichtung zoomt die Karte zu den gewählten Einrichtungen. Die Einrichtungen werden dann in der Karte visuell hervorgehoben.
 4. **Einrichtung ein-/ausblenden**

@@ -7,7 +7,7 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
    > **Hinweis**: Wenn Sie die Graphenvisualisierung direkt aus dem Analyse Menü öffnen, bitte unten in der Kartenvisualisierung auf das Graph Symbol klicken. 
 
 ![Abbildung 1: Graphenvisualisierung](/cosi/manuals/008_graphenvisualisierung.png)  
-*Abb.a: Graphenvisualisierung.*
+*Abb. a: Graphenvisualisierung.*
 
 1. **Diagrammtyp auswählen**
    > Häufig werden gleich unterschiedliche Graphen erstellt. Hier können Sie zwischen den verfügbaren Diagrammen für den ausgewählten Datensatz umschalten.

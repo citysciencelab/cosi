@@ -1,6 +1,6 @@
 ### Sitzung Speichern / Laden 
 ![Abbildung 1: Sitzung Speichern](/cosi/manuals/014_sitzungspeichern.PNG)
-*Abb.a: Sitzung speichern / laden*
+*Abb. a: Sitzung speichern / laden*
 
 
 Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informationen der aktuellen Arbeitssitzung abgespeichert werden um diese zu einem späteren Zeitpunkt wieder öffnen und weiterbearbeiten zu können. Dies umfasst:

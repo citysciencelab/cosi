@@ -5,7 +5,7 @@ Das Ergebnisverzeichnis unterstützt in einigen Werkzeugen die Verwaltung mehrer
 
 ![Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"](/cosi/manuals/020a_ergebnisverzeichnis.png)
 
-*Abb.a: Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"*
+*Abb. a: Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"*
   
 1. **Direktanwahl eines Datensatzes**
    > Wählen Sie direkt den Datensatz mit dem jeweiligen Index an. Sie können hier auch ablesen, wieviele Datensätze sie aktuell in dem jeweiligen Werkzeug haben.

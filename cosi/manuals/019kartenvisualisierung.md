@@ -7,7 +7,7 @@ Das Werkzeug kann die ausgewählten Datensätze auf der Karte visualisieren und 
 
 ![Abbildung 1: Fenster zur Kartenanalyse statistischer Daten](/cosi/manuals/019a_kartenvisualisierung.png)  
 
-*Abb.a: Fenster zur Kartenanalyse statistischer Daten.*  
+*Abb. a: Fenster zur Kartenanalyse statistischer Daten.*  
 
 1.	**Werkzeug minimieren/ maximieren**  
    > Über den Button kann das Fenster des Werkzeugs minimiert bzw. wieder maximiert werden.

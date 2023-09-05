@@ -7,11 +7,11 @@ Sobald Sie über "Simulation" "Wohnungsquartiere anlegen" auswählen, öffnet si
 
 ![Abbildung a: Wohnungsbauquartiere anlegen](/cosi/manuals/011a_wohnquartiere.PNG)
 
-*Abb.a: Wohnungsbauquartiere anlegen*
+*Abb. a: Wohnungsbauquartiere anlegen*
 
 ![Abbildung b: Wohnungsbauquartiere anlegen](/cosi/manuals/011b_wohnquartiere.PNG)  
 
-*Abb.b: Wohnungsbauquartiere anlegen*
+*Abb. b: Wohnungsbauquartiere anlegen*
 
 1. **Geometrie**
    > Mithilfe des Stiftes kann ein Polygon in der Karte gezeichnet werden. 

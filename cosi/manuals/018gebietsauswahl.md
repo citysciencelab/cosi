@@ -7,7 +7,7 @@ Wenn Sie Ihren Bezugsrahmen ändern möchten, könnten Sie dies unter "Gebiete a
 ![Abbildung 1: Gebietsauswahl](/cosi/manuals/018a_gebietsauswahl.png)
 
 
-*Abb.a: Das Werkzeug "Gebiet auswählen".*  
+*Abb. a: Das Werkzeug "Gebiet auswählen".*  
 
 1. **Bezugsrahmen wählen**
    > Über ein Dropdown Menü können **"Bezirke"**, **"Stadtteile"** oder **"Statistische Gebiete"** ausgewählt werden – dies legt die Verwaltungseinheit fest, für die die statistischen Daten angezeigt und Auswertungen erstellt werden sollen. Alle Funktionen sind auf den jeweiligen Gebietsebenen verfügbar. Die Zahl der verfügbaren Indikatoren kann jedoch variieren. Der Bezugsrahmen bestimmt auch die zu ladenden übergeordneten Referenzgebiete: Stadtteile für stat. Gebiete, Bezirke für Stadtteile.

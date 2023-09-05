@@ -10,7 +10,7 @@ Sobald sie unter "Simulation" "Einrichtungen anlegen" auswählen, öffnet sich e
 #### Szenario Manager
 ![Abbildung 1: Szenario Manager](/cosi/manuals/009a_einrichtungenanlegen.PNG) 
 
-*Abb.a: Szenario Manager*  
+*Abb. a: Szenario Manager*  
 
 1. **Szenario Dropdown**
    > Zeigt bisher erstellte Szenarien an.
@@ -30,7 +30,7 @@ Szenarios.
 
 ![Abbildung 2: Einrichtungen anlegen](/cosi/manuals/009b_einrichtungenanlegen.PNG)  
 
-*Abb.b: Einrichtungen anlegen*  
+*Abb. b: Einrichtungen anlegen*  
 
 1. **Einrichtung kopieren**
    > Erlaubt das Kopieren einer vorhandenen Einrichtung. 
@@ -51,11 +51,11 @@ Szenarios.
    7.2 **Name**
       > Bezeichnung der jeweiligen Einrichtung, die erstellt werden soll.
 8. **Optionale Spalten**
-   > Können bei Bedarf ergänzt werden.
+      > Können bei Bedarf ergänzt werden.
 9. **Anlegen**
-   > Erstellt die simulierte Einrichtung
+      > Erstellt die simulierte Einrichtung
 10. **Zurücksetzen**
-   > Setzt das Szenario zurück.
+      > Setzt das Szenario zurück.
 
 #### Schrittweises Vorgehen
 Zur besseren Verständlichkeit des Werkzeugs wird im Folgenden Schritt für Schritt erläutert, wie erfolgreich eine neue Einrichtung angelegt werden kann.

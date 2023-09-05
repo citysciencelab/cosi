@@ -10,10 +10,10 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
   > Um zur statistischen Datenübersicht zu gelangen, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
   
 ![Abbildung 27: Statistische Datenübersicht](/cosi/manuals/016a_statistischedatenuebersicht.png)
-*Abb.: Statistische Datenübersicht 1*
+*Abb. : Statistische Datenübersicht 1*
 
 ![Abbildung 29: Statistische Datenübersicht](/cosi/manuals/016b_statistischedatenuebersicht.png)
-*Abb.: Statistische Datenübersicht 2*
+*Abb. : Statistische Datenübersicht 2*
 
 
 
@@ -37,6 +37,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
    > Zeilen für Export und Diagramm-Erstellung auswählen. Ist keine Spalte ausgewählt werden alle für den Export bzw. nur die aktuelle für die Diagramme verwendet.
 9. **Trendpfeil**
    > Der Trendpfeil zeigt das extrapolierte Wachstum für den nächsten Zeitschritt (in % im Tooltip) an. Für die Abschätzung werden die Steigungen der letzten 5 Zeitschritte, gewichtet nach Aktualität, herangezogen. Die Darstellung erhebt **keinen Anspruch** auf Genauigkeit und berücksichtigt keine anderen Werte über die aktuelle Zeitreihe hinaus.
+   
 10. **Themenfilter**
       > Über den Filter können beliebige Indikatoren (sortiert nach Gruppen) für die Darstellung und den Export ausgewählt werden. Die Liste kann im Freitext durchsucht werden.
 11. **Tabelle exportieren**
@@ -46,7 +47,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 
 #### Dreistrich Menü
 ![Abbildung 28: Statistische Datenübersicht - Dreistrich-menü](/cosi/manuals/016c_statdashboard_burgermenu.PNG)
-*Abb.: Statistische Datenübersicht - Dreistrich-Menü.*
+*Abb. : Statistische Datenübersicht - Dreistrich-Menü.*
 
 1. **Visualisierung ein-/ausschalten**
    > Thematische Gruppen
