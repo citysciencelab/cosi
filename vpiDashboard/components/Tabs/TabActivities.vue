@@ -3,6 +3,7 @@ import {mapGetters, mapActions, mapState} from "vuex";
 import getters from "../../store/gettersVpiDashboard";
 import actions from "../../store/actionsVpiDashboard";
 import dayjs from "dayjs";
+import "dayjs/locale/de";
 
 // Components Import
 import LinechartItem from "../../../../src/share-components/charts/components/LinechartItem.vue";
@@ -81,6 +82,7 @@ export default {
     },
     computed: {
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
+        ...mapGetters("Language", ["currentLocale"]),
         ...mapState("Tools/VpiDashboard", [
             "allLocationsArray",
             "barChartDailyData",
@@ -244,6 +246,7 @@ export default {
                 else {
                     // just a single day with hourly data shall be displayed
                     this.chartSubTitle = this.translate("additional:modules.tools.vpidashboard.unique.chartTitleDay", {
+                        dayName: dayjs(values).locale(this.currentLocale).format("dddd"),
                         dateValue: dayjs(values).format("DD.MM.YYYY")
                     });
 
@@ -291,7 +294,7 @@ export default {
                     presentation_data.push(Math.floor(element.sum_num_visitors));
                 }
                 else {
-                    labels.push(dayjs(element.date).format("DD.MM.YYYY"));
+                    labels.push(dayjs(element.date).locale(this.currentLocale).format("dd, DD.MM.YYYY"));
                     presentation_data.push(Math.ceil(element.sum_num_visitors / 100) * 100);
                 }
             });

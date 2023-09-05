@@ -52,7 +52,7 @@
           "noValidDate": "Kein gültiger Zeitpunkt / Zeitraum ausgewählt",
           "numberVisitorsHour": "Anzahl Besucher pro Stunde",
           "numberVisitorsDay": "Anzahl Besucher pro Tag",
-          "chartTitleDay": "Daten vom {{dateValue}}",
+          "chartTitleDay": "Daten von {{dayName}}, den {{dateValue}}",
           "chartTitleDayRange": "Daten vom {{dateValueFrom}} bis zum {{dateValueTo}}",
           "avgVisitorsYear": "Besucher pro Jahr",
           "avgVisitorsDay": "Ø Besucher im {{ month }} {{ year }} an einem",
@@ -118,7 +118,7 @@
           "ageGroup": {
             "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat",
             "pieChartTitle": "Altersgruppen pro Jahr",
-            "lineBarChartTitle": "Altersgruppen pro Jahr und Monat"
+            "lineBarChartTitle": "Wöchentliche Besucher je Altersgruppe im Jahr {{year}}"
           },
           "compareDates": {
             "dropdown": {

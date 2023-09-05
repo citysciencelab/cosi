@@ -52,7 +52,7 @@
           "noValidDate": "No valid date / date range chosen",
           "numberVisitorsHour": "Number of visitors per hour",
           "numberVisitorsDay": "Number of visitors per day",
-          "chartTitleDay": "Data from {{dateValue}}",
+          "chartTitleDay": "Data from {{dayName}}, {{dateValue}}",
           "chartTitleDayRange": "Data from {{dateValueFrom}} to {{dateValueTo}}",
           "avgVisitorsYear": "Total visits per year",
           "avgVisitorsDay": "Ø visitors in {{ month }} {{ year }} on a",
@@ -118,7 +118,7 @@
           "ageGroup": {
             "chartTitle": "Age groups by year and by year and month",
             "pieChartTitle": "Age groups by year",
-            "lineBarChartTitle": "Age groups by year and month"
+            "lineBarChartTitle": "Weekly visitors per age group in year {{year}}"
           },
           "compareDates": {
             "dropdown": {

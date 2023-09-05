@@ -46,19 +46,19 @@ export default {
                 },
                 {
                     index: 1,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.age"),
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.types"),
                     selected: false,
                     showLocationSelectMenu: true
                 },
                 {
                     index: 2,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.dwelltime"),
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.age"),
                     selected: false,
                     showLocationSelectMenu: true
                 },
                 {
                     index: 3,
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.types"),
+                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.dwelltime"),
                     selected: false,
                     showLocationSelectMenu: true
                 },
@@ -282,13 +282,13 @@ export default {
                                         <TabActivities />
                                     </div>
                                     <div slot="tab-content-1">
-                                        <TabAgeGroups />
+                                        <TabVisitorTypes />
                                     </div>
                                     <div slot="tab-content-2">
-                                        <TabDwellTime />
+                                        <TabAgeGroups />
                                     </div>
                                     <div slot="tab-content-3">
-                                        <TabVisitorTypes />
+                                        <TabDwellTime />
                                     </div>
                                     <div slot="tab-content-4">
                                         <TabCompareDashboard />
