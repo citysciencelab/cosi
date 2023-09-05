@@ -40,7 +40,7 @@ ___
 
 
 ### Stand
-08/23
+09/23
 
 ### Keywords
 GIS, Dashboard, Data Driven Urban Planning, Social Infrastructure, Urban Data Platform, Data Visualization, Planning Support Tools, Demand Driven Decision Making  
