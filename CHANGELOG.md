@@ -3,20 +3,6 @@
 
 [Semantic versioning](https://semver.org/spec/v2.0.0.html) is used.
 
-## Unreleased - in development
-### __Breaking Changes__
-
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
----
 ## v2.34.0 - 2023-06-07
 ### Changed
 - The version of node was updated, must be `>= 16.13.2 <= 16.20.0`
