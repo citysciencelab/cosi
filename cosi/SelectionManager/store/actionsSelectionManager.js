@@ -1,6 +1,7 @@
 import union from "@turf/union";
 import Feature from "ol/Feature";
 import GeoJSON from "ol/format/GeoJSON";
+import uniqueAbv from "../utils/uniqueAbv";
 /**
      * @description Merges all polygons into a single openlayers feature and commits it to the store
      * @param {Function} store.commit - Function to commit a mutation.
@@ -54,7 +55,7 @@ const actions = {
         selectionObject.source = source;
         selectionObject.id = id;
         // selectionObject.abv = state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? id.match(/\b([A-Z0-9])/g).join("") + "-" + state.selections.filter(sel => sel.abv === id.match(/\b([A-Z0-9])/g).join("")).length : id.match(/\b([A-Z0-9])/g).join("");
-        selectionObject.abv = id + "-1";
+        selectionObject.abv = uniqueAbv(id, id, state.selections.map(sel => sel.abv), 0);
         commit("addSelection", selectionObject);
     }
 };
