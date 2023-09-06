@@ -41,7 +41,7 @@
         },
         "details": "Details",
         "unique": {
-          "allData": "Activities",
+          "allData": "Visitors totally since 2019",
           "uniqueVisitors": "Activities",
           "dailyOverview": "Average of daily activities in {{ month }} in {{ year }}",
           "monthlyOverview": "Number of monthly activities in {{ year }}",

@@ -46,13 +46,18 @@ export default {
             type: Number,
             required: false,
             default: 0
+        },
+        startValueIndex: {
+            type: Number,
+            required: false,
+            default: 0
         }
     },
     data () {
         return {
             currentMonthIndex: 0,
             currentDayIndex: 0,
-            currentYearIndex: 0
+            currentYearIndex: this.startValueIndex
         };
     },
     computed: {
@@ -213,6 +218,7 @@ export default {
         <div v-if="navigation">
             <DataCardPaginator
                 :paginator-data="paginatorData"
+                :start-value-index="startValueIndex"
                 @pager="changeIndex"
             />
         </div>

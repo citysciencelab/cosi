@@ -41,7 +41,7 @@
         },
         "details": "Details",
         "unique": {
-          "allData": "Aktivitäten",
+          "allData": "Besucher Insgesamt seit 2019",
           "uniqueVisitors": "Aktivitäten",
           "dailyOverview": "Durchschnittliche tägliche Aktivitäten im {{ month }} im Jahr {{ year }}",
           "monthlyOverview": "Anzahl der monatlichen Besucher im Jahr {{ year }}",

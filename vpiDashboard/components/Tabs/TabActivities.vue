@@ -53,12 +53,12 @@ export default {
             },
             possibleChartDatasets: [
                 {
-                    name: "additional:modules.tools.vpidashboard.unique.allData",
-                    chart: "overview"
-                },
-                {
                     name: "additional:modules.tools.vpidashboard.unique.monthlyOverview",
                     chart: "monthlyoverview"
+                },
+                {
+                    name: "additional:modules.tools.vpidashboard.unique.allData",
+                    chart: "overview"
                 },
                 {
                     name: "additional:modules.tools.vpidashboard.unique.dailyOverview",
@@ -73,10 +73,10 @@ export default {
                     chart: "timeRange"
                 }
             ],
-            selectedChartData: "overview",
+            selectedChartData: "monthlyoverview",
             chartSubTitle: "",
             renderKey: 0,
-            currentlySelectedYear: 2019,
+            currentlySelectedYear: new Date().getFullYear(),
             currentlySelectedMonth: 0
         };
     },
@@ -181,7 +181,11 @@ export default {
             if (this.dates.length !== 0) {
                 this.dayDatepickerValueChanged(this.dates);
             }
-            this.getCurrentBarChartData();
+            this.$store.commit("Tools/VpiDashboard/setBarChartMonthlyData", this.currentlySelectedYear);
+            this.$store.commit("Tools/VpiDashboard/setLineChartMonthlyData", this.currentlySelectedYear);
+            this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
+            this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
+            this.getCurrentBarAndLineChartData();
         },
         /**
          * define, which charttype shall be displayed
@@ -204,15 +208,14 @@ export default {
                 this.resetDates();
             }
             else {
-                this.getCurrentBarChartData();
-                this.changeChart(this.selectedChartData);
+                this.getCurrentBarAndLineChartData();
             }
         },
         /**
          * requests the data from the store for those chart data that are static
          * @returns {void}
         */
-        getCurrentBarChartData () {
+        getCurrentBarAndLineChartData () {
             switch (this.selectedChartData) {
                 case "overview":
                     this.chartdata.bar = this.barChartData;
@@ -359,7 +362,7 @@ export default {
                 this.$store.commit("Tools/VpiDashboard/setLineChartMonthlyData", this.currentlySelectedYear);
                 this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
                 this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
-                this.getCurrentBarChartData();
+                this.getCurrentBarAndLineChartData();
             }
         },
         /**
@@ -371,7 +374,7 @@ export default {
             this.currentlySelectedMonth = newMonth;
             this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
             this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
-            this.getCurrentBarChartData();
+            this.getCurrentBarAndLineChartData();
         },
         /**
          * sets the disabled dates for the datepicker
@@ -401,6 +404,7 @@ export default {
                         :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsYear')"
                         detail="activities"
                         :navigation="true"
+                        :start-value-index="yearList.length - 1"
                         @indexChanged="yearHasChanged"
                     />
                     <DataCard
@@ -477,7 +481,12 @@ export default {
                         <div
                             class="row chart bar"
                         >
-                            <BarchartItem :data="chartdata.bar" />
+                            <BarchartItem
+                                :data="chartdata.bar"
+                                :given-options="{
+                                    animation: false
+                                }"
+                            />
                         </div>
                     </div>
                     <!-- Line Chart -->
@@ -485,7 +494,12 @@ export default {
                         <div
                             class="row chart line"
                         >
-                            <LinechartItem :data="chartdata.line" />
+                            <LinechartItem
+                                :data="chartdata.line"
+                                :given-options="{
+                                    animation: false
+                                }"
+                            />
                         </div>
                     </div>
                 </div>
