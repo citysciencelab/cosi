@@ -181,6 +181,15 @@ export default {
                     style: style
                 });
 
+            this.$watch("$store.state.Tools.Print.active", (newVal) => {
+                if (newVal) {
+                    layer.setStyle(() => new Style({fill: new Fill({color: "rgba(255, 255, 255, 0)"}), stroke: new Stroke({color: "#A8404E", width: 6})}));
+                }
+                else {
+                    layer.setStyle(() => style);
+                }
+            });
+
             layer.setZIndex(9999);
             this.map.addLayer(layer);
 

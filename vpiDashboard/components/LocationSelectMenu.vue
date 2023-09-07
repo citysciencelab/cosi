@@ -36,10 +36,15 @@ export default {
         }
     },
     async created () {
-        this.selectedLocation = this.allLocationsArray[0];
-
-        const locationID = this.selectedLocation.id,
+        const jungfernstiegLocation = this.allLocationsArray.find((element) => element.street.startsWith("Jungfernstieg")),
             source = "dropdown";
+        let locationID = "";
+
+        this.selectedLocation = jungfernstiegLocation
+            ? jungfernstiegLocation
+            : this.allLocationsArray[0];
+
+        locationID = this.selectedLocation.id;
 
         this.$store.commit("Tools/VpiDashboard/setSelectedLocationId", {locationID, source});
     },

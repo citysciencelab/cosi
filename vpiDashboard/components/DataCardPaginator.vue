@@ -2,11 +2,6 @@
 export default {
     name: "DataCardPaginator",
     props: {
-        navigationFilter: {
-            type: Object,
-            required: false,
-            default: () => ({name: "Paginator"})
-        },
         paginatorData: {
             type: Array,
             required: false,
@@ -16,11 +11,16 @@ export default {
             type: String,
             required: false,
             default: ""
+        },
+        startValueIndex: {
+            type: Number,
+            required: false,
+            default: 0
         }
     },
     data () {
         return {
-            index: 0
+            index: this.startValueIndex
         };
     },
     computed: {
@@ -74,7 +74,7 @@ export default {
         <nav aria-label="navigation">
             <ul class="pagination">
                 <li
-                    class="page-item"
+                    class="page-item previous-paginator-button"
                     role="button"
                     tabindex="0"
                     @click="previous"
@@ -92,7 +92,7 @@ export default {
                     {{ paginatorData[index] }}
                 </li>
                 <li
-                    class="page-item"
+                    class="page-item next-paginator-button"
                     role="button"
                     tabindex="0"
                     @click="next"

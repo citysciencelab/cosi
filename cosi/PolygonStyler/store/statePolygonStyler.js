@@ -17,7 +17,11 @@ const state = {
     isVisibleInMenu: true,
     name: "Flächen Stylen",
     renderToWindow: false,
-    resizableWindow: true
+    resizableWindow: true,
+    readmeUrl: {
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/023flaechenstylen.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/023flaechenstylen.md"
+    }
 };
 
 export default state;

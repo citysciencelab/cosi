@@ -44,8 +44,8 @@ const state = {
     activeSet: 0,
     metaData: null,
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/accessibilityanalysis.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/erreichbarkeitsanalyse.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/003accessibilityanalysis.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/003erreichbarkeitsanalyse.md"
     },
     reportTemplateMode: null, // is tool open to edit a report template? null if not, integer with chapter index if yes
     // these two variables are required to make this addon compatible with the toolBridge addon (for details see toolBridge documentation)
