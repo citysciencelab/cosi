@@ -4,6 +4,8 @@ import getters from "../../store/gettersVpiDashboard";
 import actions from "../../store/actionsVpiDashboard";
 import LinechartItem from "../../../../src/share-components/charts/components/LinechartItem.vue";
 import BarchartItem from "../../utils/BarchartItem.vue";
+import PiechartItem from "../../../../src/share-components/charts/components/PiechartItem.vue";
+import DataCardPaginator from "../DataCardPaginator.vue";
 import ChangeChartTypeButtons from "../ChangeChartTypeButtons.vue";
 
 export default {
@@ -11,6 +13,8 @@ export default {
     components: {
         LinechartItem,
         BarchartItem,
+        PiechartItem,
+        DataCardPaginator,
         ChangeChartTypeButtons
     },
     data () {
@@ -18,13 +22,53 @@ export default {
             chartType: "bar",
             chartdata: {
                 bar: {},
-                line: {}
+                line: {},
+                pie: {}
+            },
+            currentlySelectedYear: new Date().getFullYear(),
+            timestamp: 0,
+            pieChartOptions: {
+                legend: {
+                    display: false
+                },
+                aspectRatio: 3,
+                animation: false,
+                tooltips: {
+                    callbacks: {
+                        // Creates a PieChart Tooltip like "30-90: 30.9%"
+                        label: (tooltipItem, data) => {
+
+                            const
+                                label = data.labels[tooltipItem.index],
+                                value = parseFloat(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index])
+                                    .toLocaleString(this.currentLocale);
+
+                            return `${label}: ${value}%`;
+                        }
+                    }
+                }
             }
         };
     },
     computed: {
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
-        ...mapGetters("Language", ["currentLocale"])
+        ...mapGetters("Language", ["currentLocale"]),
+        /**
+         * creates an array of years, starting from 2019 (first available year in data from WhatALocation) till current year
+         * @returns {Array} list of years available in the dashboard
+        */
+        yearList () {
+            const thisYear = new Date().getFullYear(),
+                list = [];
+            let firstYear = 2019;
+
+            while (firstYear <= thisYear) {
+                list.push(firstYear);
+                firstYear++;
+            }
+
+            return list;
+        }
     },
     watch: {
         async selectedLocationId () {
@@ -57,8 +101,19 @@ export default {
          * @returns {void}
          */
         async getCurrentChartData () {
-            this.chartdata.bar = this.getDwellTimeChartJsData("bar");
-            this.chartdata.line = this.getDwellTimeChartJsData("line");
+            this.chartdata.bar = this.getDwellTimeChartJsData("bar", this.currentlySelectedYear);
+            this.chartdata.line = this.getDwellTimeChartJsData("line", this.currentlySelectedYear);
+            this.chartdata.pie = this.getDwellTimeChartJsData("pie", this.currentlySelectedYear);
+        },
+        /**
+         * reacts on the change of the year paginator
+         * @param {String} index selected page to be shown
+         * @returns {void}
+         */
+        async changeIndex (index) {
+            this.currentlySelectedYear = 2019 + index;
+            this.getCurrentChartData();
+            this.timestamp = window.performance.now();
         }
     }
 };
@@ -75,10 +130,24 @@ export default {
                     {{ $t("additional:modules.tools.vpidashboard.tab.dwelltime.chartTitle") }}
                 </h2>
                 <div class="charts">
+                    <DataCardPaginator
+                        :paginator-data="yearList"
+                        :start-value-index="yearList.length - 1"
+                        @pager="changeIndex"
+                    />
+                    <!-- Pie Chart -->
+                    <PiechartItem
+                        ref="pieChart"
+                        :key="timestamp"
+                        :data="chartdata.pie"
+                        :given-options="pieChartOptions"
+                        class="piechart"
+                    />
                     <!-- Bar Chart -->
                     <div v-if="chartType === 'bar'">
                         <div class="row bar">
                             <BarchartItem
+                                :key="timestamp"
                                 :data="chartdata.bar"
                                 :given-scales="{
                                     xAxes: [{
@@ -93,13 +162,22 @@ export default {
                                         }
                                     }]
                                 }"
+                                :given-options="{
+                                    animation: false
+                                }"
                             />
                         </div>
                     </div>
                     <!-- Line Chart -->
                     <div v-if="chartType === 'line'">
                         <div class="row line">
-                            <LinechartItem :data="chartdata.line" />
+                            <LinechartItem
+                                :key="timestamp"
+                                :data="chartdata.line"
+                                :given-options="{
+                                    animation: false
+                                }"
+                            />
                         </div>
                     </div>
                 </div>
@@ -118,7 +196,12 @@ export default {
 h3 {
     margin: 0 0 1rem 0;
 }
+
 .charts {
     margin: 0 0 1rem 0;
+}
+
+.piechart {
+    margin-bottom: 30px;
 }
 </style>

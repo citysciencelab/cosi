@@ -2,7 +2,6 @@ import {generateSimpleGetters} from "../../../src/app-store/utils/generators";
 import stateVpiDashboard from "./stateVpiDashboard";
 import tabVisitorTypesGetters from "./tab/visitor-types/getters";
 import tabCompareDatesGetters from "./tab/compare/dates/getters";
-import {changeDateFormat} from "../utils/changeDateFormat";
 import tabCompareLocationsGetters from "./tab/compare/locations/getters";
 
 const getters = {
@@ -44,14 +43,6 @@ const getters = {
     getAllLocationsArray (state) {
         return state.allLocationsArray;
     },
-    /*
-     * Gets Array containing all WhatALocation dwell time data per dwell time range.
-     * @param {Object} state of this component
-     * @returns {Array} Array of dwell time data
-     */
-    getDwellTimePerTime (state) {
-        return state.dwellTimesPerTime;
-    },
     /**
      * Gets Array containing all WhatALocation dwell time data per date.
      * @param {Object} state of this component
@@ -63,38 +54,47 @@ const getters = {
     /**
      * Get a dwell time ChartJS data object for the requested chart type.
      * @param {Object} state of this component
-     * @returns {Object} ChartJS data for given chartType
+     * @returns {Object} ChartJS data for given chartType and requested year
      */
-    getDwellTimeChartJsData: (state) => (chartType) => {
-        const labels = [],
-            data_30_60 = [],
-            data_60_120 = [],
-            data_120_240 = [],
-            data_240 = [];
+    getDwellTimeChartJsData: (state) => (chartType, year) => {
+        const labels = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true}),
+            data_30_60 = state.dwellTimesPerDate[year]["30-60"].map(d => d.sum),
+            data_60_120 = state.dwellTimesPerDate[year]["60-120"].map(d => d.sum),
+            data_120_240 = state.dwellTimesPerDate[year]["120-240"].map(d => d.sum),
+            data_240 = state.dwellTimesPerDate[year]["240+"].map(d => d.sum),
+            yearSumForPieData = Object.values(state.dwellTimesPerYear[year]).reduce((a, b) => a + b),
+            pieData = [],
+            pieDataLabels = [],
+            pieDataColors = [],
+            colors = {
+                "30-60": "#00AA55",
+                "60-120": "#063970",
+                "120-240": "#B381B3",
+                "240+": "#CC3E00"
+            };
 
-        Object.keys(state.dwellTimesPerDate).forEach(date => {
-            const items = state.dwellTimesPerDate[date];
-
-            // Set label from date, e.g. 2023-01-01 becomes 2023-01
-            labels.push(changeDateFormat(date));
-
-            data_30_60.push(
-                items.find(i => i.DwellTime === "30-60")?.sum_num_visitors || 0
-            );
-            data_60_120.push(
-                items.find(i => i.DwellTime === "60-120")?.sum_num_visitors || 0
-            );
-            data_120_240.push(
-                items.find(i => i.DwellTime === "120-240")?.sum_num_visitors || 0
-            );
-            data_240.push(
-                items.find(i => i.DwellTime === "240+")?.sum_num_visitors || 0
-            );
+        Object.keys(state.dwellTimesPerYear[year]).forEach(dwellTimeGroup => {
+            // Round and also show trailing zeros, e.g. 18 becomes 18,0
+            pieData.push((Math.round(state.dwellTimesPerYear[year][dwellTimeGroup] * 100 / yearSumForPieData * 10) / 10).toFixed(1));
+            pieDataColors.push(colors[dwellTimeGroup]);
+            pieDataLabels.push(dwellTimeGroup);
         });
 
         let chartData;
 
         switch (chartType) {
+            case "pie":
+                chartData = {
+                    labels: pieDataLabels,
+                    datasets: [
+                        {
+                            data: pieData,
+                            backgroundColor: pieDataColors,
+                            hoverOffset: 4
+                        }
+                    ]
+                };
+                break;
             case "line":
                 chartData = {
                     labels: labels,
@@ -103,28 +103,28 @@ const getters = {
                             label: "30-60",
                             data: data_30_60,
                             fill: false,
-                            borderColor: "#00AA55",
+                            borderColor: colors["30-60"],
                             tension: 0.1
                         },
                         {
                             label: "60-120",
                             data: data_60_120,
                             fill: false,
-                            borderColor: "#063970",
+                            borderColor: colors["60-120"],
                             tension: 0.1
                         },
                         {
                             label: "120-240",
                             data: data_120_240,
                             fill: false,
-                            borderColor: "#B381B3",
+                            borderColor: colors["120-240"],
                             tension: 0.1
                         },
                         {
                             label: "240+",
                             data: data_240,
                             fill: false,
-                            borderColor: "#CC3E00",
+                            borderColor: colors["240+"],
                             tension: 0.1
                         }]
                 };
@@ -138,25 +138,25 @@ const getters = {
                             label: "30-60",
                             data: data_30_60,
                             hoverOffset: 4,
-                            backgroundColor: "#00AA55"
+                            backgroundColor: colors["30-60"]
                         },
                         {
                             label: "60-120",
                             data: data_60_120,
                             hoverOffset: 4,
-                            backgroundColor: "#063970"
+                            backgroundColor: colors["60-120"]
                         },
                         {
                             label: "120-240",
                             data: data_120_240,
                             hoverOffset: 4,
-                            backgroundColor: "#B381B3"
+                            backgroundColor: colors["120-240"]
                         },
                         {
                             label: "240+",
                             data: data_240,
                             hoverOffset: 4,
-                            backgroundColor: "#CC3E00"
+                            backgroundColor: colors["240+"]
                         }]
                 };
                 break;
