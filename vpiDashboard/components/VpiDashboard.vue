@@ -247,12 +247,20 @@ export default {
 </script>
 
 <template lang="html">
-    <div class="vpidashboardbasic">
+    <!--
+        Other tools have "ToolTemplate" as root element, but here VpiLoader is necessary.
+        Therefore set class dashboardActive to allow hiding tool when not active.
+    -->
+    <div
+        class="vpidashboardbasic"
+        :class="{ dashboardActive: active }"
+    >
         <VpiLoader />
         <ToolTemplate
             :title="translate(name)"
             :icon="icon"
             :active="active"
+            :show-in-sidebar="true"
             :render-to-window="renderToWindow"
             :resizable-window="resizableWindow"
             :initial-width="700"
@@ -310,7 +318,7 @@ export default {
 </template>
 
 <style scoped>
-    .vpidashboardbasic {
+    .vpidashboardbasic.dashboardActive {
         height: 100%;
     }
 

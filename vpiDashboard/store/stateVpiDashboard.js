@@ -7,7 +7,7 @@ const state = {
     active: false,
     name: "translate#additional:modules.tools.vpiDashboard.title",
     icon: "bi-graph-up",
-    renderToWindow: true,
+    renderToWindow: false,
     resizableWindow: true,
     isVisibleInMenu: true,
     deactivateGFI: false,

@@ -34,7 +34,7 @@ describe("addons/vpiDashboard/test/ ADDON: VPI Dashboard", () => {
             expect(icon(stateVpiDashboard)).to.equals("bi-graph-up");
         });
         it("returns the renderToWindow default value from state", () => {
-            expect(renderToWindow(stateVpiDashboard)).to.be.true;
+            expect(renderToWindow(stateVpiDashboard)).to.be.false;
         });
         it("returns the resizableWindow default value from state", () => {
             expect(resizableWindow(stateVpiDashboard)).to.be.true;
