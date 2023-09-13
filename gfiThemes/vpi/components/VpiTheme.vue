@@ -14,7 +14,7 @@ export default {
     },
     watch: {
         feature (value, oldValue) {
-            if (value.ID !== oldValue.ID) {
+            if (value.getMappedProperties().ID !== oldValue.getMappedProperties().ID) {
                 this.updateSelectedLocationId();
             }
         }
