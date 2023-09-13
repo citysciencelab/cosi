@@ -116,9 +116,10 @@
             }
           },
           "ageGroup": {
-            "chartTitle": "Age groups by year and by year and month",
+            "chartTitle": "Age groups by year and by year and month (*)",
             "pieChartTitle": "Age groups by year",
-            "lineBarChartTitle": "Weekly visitors per age group in year {{year}}"
+            "lineBarChartTitle": "Weekly visitors per age group in year {{year}}",
+            "footnote": "(*) People under 18 years are not displayed. The age group of 18-19 contains data leaks. Therefore the dataset will not be included."
           },
           "compareDates": {
             "dropdown": {

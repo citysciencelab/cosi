@@ -116,9 +116,10 @@
             }
           },
           "ageGroup": {
-            "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat",
+            "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat (*)",
             "pieChartTitle": "Altersgruppen pro Jahr",
-            "lineBarChartTitle": "Wöchentliche Besucher je Altersgruppe im Jahr {{year}}"
+            "lineBarChartTitle": "Wöchentliche Besucher je Altersgruppe im Jahr {{year}}",
+            "footnote": "(*) Unter 18 Jährige werden nicht erfasst. In der Altersgruppe der 18-19Jährigen bestehen Datenlücken, weshalb der Datensatz nicht berücksichtigt wurde."
           },
           "compareDates": {
             "dropdown": {
