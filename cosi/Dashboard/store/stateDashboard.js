@@ -22,8 +22,8 @@ const state = {
     resizableWindow: true,
     excludedPropsForExport: ["visualized", "expanded", "years", "groupIndex"],
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/016statistischedatenuebersicht.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/016statistischedatenuebersicht.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/0012_statistischedatenuebersicht.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/0012_statistischedatenuebersicht.md"
     },
     statsFeatureFilter: [],
     calculations: [],

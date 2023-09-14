@@ -1014,7 +1014,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 10. **Dividieren**
       > Analog zu **Addieren**, dividiert **A** / **B**.
 11. **Diagramme erzeugen**
-      > Erzeugt Diagramme für den ausgewählten Indikator im [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md) (analog zu [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung.md)). Visualisiert alle ausgewählten Spalten (s. [Statistische Datenübersicht](/cosi/manuals/0012statistischedatenuebersicht.md)).
+      > Erzeugt Diagramme für den ausgewählten Indikator im [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md) (analog zu [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung.md)). Visualisiert alle ausgewählten Spalten (s. [Statistische Datenübersicht](/cosi/manuals/0012_statistischedatenuebersicht.md)).
 12. **Korrelations- / Streuungsdiagramm**
       > Visualisiert ein Streuungsdiagramm für die Felder **A** (Y-Achse) über **B** (X-Achse) im [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md) und berechnet die Korrelation (Pearson) zwischen den Datensätzen und zeichet eine Regressionsgerade.
 ### Einrichtungsübersicht
