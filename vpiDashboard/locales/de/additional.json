@@ -102,7 +102,7 @@
             "chartTitle": "Verweildauer in Minuten"
           },
           "visitorTypes": {
-            "chartTitle": "Besuchertypen",
+            "chartTitle": "Besuchertypen pro Woche",
             "chartLabels": {
               "residents": "Einwohner",
               "commuters": "Pendler",
@@ -110,9 +110,9 @@
               "tourists_overnight": "Übernachtungstouristen"
             },
             "cardLabels": {
-              "commutersPerDay": "Ø Pendler pro Tag",
-              "residentsPerDay": "Ø Einwohner pro Tag",
-              "touristsPerDay": "Ø Touristen pro Tag"
+              "commutersPerWeek": "Ø Pendler pro Woche",
+              "residentsPerWeek": "Ø Einwohner pro Woche",
+              "touristsPerWeek": "Ø Touristen pro Woche"
             }
           },
           "ageGroup": {

@@ -1,5 +1,4 @@
 const state = {
-    visitorTypesByDate: [],
     visitorTypesByTypeAndYear: {},
     visitorTypesByYearAndTypeComplete: {}
 };
