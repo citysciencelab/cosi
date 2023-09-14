@@ -2,21 +2,21 @@
 
 Haben Sie ein aktives Szenario können Sie sowohl selbst angelegte als auch bereits in den Daten vorhandene Einrichtungen bearbeiten. Sollten Sie kein Szenario angelegt haben und Sie klicken eine Einrichtung an, wird folgendes Popup angezeigt:
 
-![Abbildung 1: Bitte erstellen Sie ein Szenario](010a_einrichtungenbearbeiten.PNG)
+![Abbildung 1: Bitte erstellen Sie ein Szenario](/cosi/manuals/010a_einrichtungenbearbeiten.PNG)
 
-*Abb.a: Bitte erstellen Sie ein Szenario.*
+*Abb. a: Bitte erstellen Sie ein Szenario.*
 
-Ein Szenario können Sie wie im [Szenario Manager](009einrichtungenanlegen.md) beschrieben anlegen. Ist ein Szenario angelegt und Sie wählen per Mausklick eine Einrichtung an, erscheint folgendes Popup am unteren Bildschirmrand: 
+Ein Szenario können Sie wie im [Szenario Manager](/cosi/manuals/009einrichtungenanlegen.md) beschrieben anlegen. Ist ein Szenario angelegt und Sie wählen per Mausklick eine Einrichtung an, erscheint folgendes Popup am unteren Bildschirmrand: 
 
-![Abbildung 2: Einrichtung bearbeiten](010b_einrichtungenbearbeiten.PNG)
+![Abbildung 2: Einrichtung bearbeiten](/cosi/manuals/010b_einrichtungenbearbeiten.PNG)
 
-*Abb.b: Einrichtung bearbeiten.*
+*Abb. b: Einrichtung bearbeiten.*
 
 Wählen Sie hier den Button **BEARBEITEN** an. Daraufhin wird sich das folgende Fenster öffnen:
 
-![Abbildung 3: Einrichtung-Bearbeiten-Fenster](010c_einrichtungenbearbeiten.PNG)
+![Abbildung 3: Einrichtung-Bearbeiten-Fenster](/cosi/manuals/010c_einrichtungenbearbeiten.PNG)
 
-*Abb.c: Fenster für das bearbeiten der Einrichtung.*
+*Abb. c: Fenster für das bearbeiten der Einrichtung.*
 
 1. **Eingaben sperren**
    > Mit Hilfe dieses Buttons sperren Sie die Input-Felder des Fensters, so dass Sie nicht mehr bearbeitet werden können. Die Input-Felder sind standardmäßig gesperrt, so dass Sie diesen Button aktivieren müssen, ehe Sie eine vorhandene Einrichtung bearbeiten können. 
@@ -31,9 +31,9 @@ Wählen Sie hier den Button **BEARBEITEN** an. Daraufhin wird sich das folgende 
 
 **Hinweis:** Wenn auf der Karte Cluster von Einrichtungen angezeigt werden, weil in der aktuellen Zoomstufe nicht alle Einrichtungen dargestellt werden können, öffnet sich bei einem Klick auf das Clustersymbol folgendes Fenster:
 
-![Abbildung 4: Clusterauswahl](010d_einrichtungenbearbeiten.PNG)
+![Abbildung 4: Clusterauswahl](/cosi/manuals/010d_einrichtungenbearbeiten.PNG)
 
-*Abb.d: Clusterauswahl.*
+*Abb. d: Clusterauswahl.*
 
 1. **Das angewählte Cluster (3)**
    > Die Darstellung von Einrichtungen wird auf der Karte gebündelt, wenn zu viele Einrichtungen an einem Ort sind, wenn diese in der aktuellen Zoomstufe nicht dargestellt werden können. 

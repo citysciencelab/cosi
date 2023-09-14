@@ -1,10 +1,10 @@
 ### Vorlagen
-![Abbildung 1: Vorlagen](015a_vorlagen.png)
+![Abbildung 1: Vorlagen](/cosi/manuals/015a_vorlagen.png)
 
-*Abb.a: Vorlagen Übersicht.*
+*Abb. a: Vorlagen Übersicht.*
 
-![Abbildung 1: Vorlagen](015b_vorlagen.png)
-*Abb.b: Vorlagen aufgeklappte Ansicht.*
+![Abbildung 1: Vorlagen](/cosi/manuals/015b_vorlagen.png)
+*Abb. b: Vorlagen aufgeklappte Ansicht.*
 
 Über den Dienst **Vorlagen** können Vorlagen zu verschieden Themenkomplexen und Arbeitsfeldern geladen werden. Diese können Fachdatenthemen, aktive Werkzeuge und eine Gebietsauswahl beinhalten. Die verfügbaren Vorlagen und ihr Inhalt werden von den Fachbehörden in Koordination mit dem CoSI-Betriebsteam gepflegt.
 

@@ -4,9 +4,9 @@ Die aktiven, ausgewählten Themen können durch Klick auf den Reiter "Filter" na
 
 Um Ihre gewünschten Fachdaten zu filtern, gehen Sie zunächst auf "Analyse" und dann auf "Filter".
 
-![Abbildung 1: Filter](005_filter.PNG)
+![Abbildung 1: Filter](/cosi/manuals/005_filter.PNG)
 
-*Abb.: Filter.*  
+*Abb. a: Filter.*  
 
 1. **Ein Thema im Filter wählen**
    > Angezeigt werden die ausgewählten Themen wie im Themenbaum. Themen können jederzeit hinzugefügt werden. Dazu Themenbaum im Filter aufklappen und Thema auswählen.
