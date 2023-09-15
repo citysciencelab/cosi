@@ -1,17 +1,17 @@
 ### DIPAS
-Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in der Karte visualisiert, nach verschiedenen Kriterien dargestellt und für alle CoSI-Werkzeuge verfügbar gemacht werden. D.h. alle Beiträge können in der [Einrichtungsübersicht](017einrichtungsuebersicht.md) angezeigt, für [Versorgungsanalyse](006versorgungsanalyse.md), [Erreichbarkeitsanalyse](003erreichbarkeitsanalyse.md) und [Vergleichbare Gebiete Ermitteln](004vergleichbaregebieteermitteln.md) verwendet und mit dem [Filter](005filter.md) gefiltert werden. Über "Analyse" erreichen Sie "Dipas".
+Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in der Karte visualisiert, nach verschiedenen Kriterien dargestellt und für alle CoSI-Werkzeuge verfügbar gemacht werden. D.h. alle Beiträge können in der [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht.md) angezeigt, für [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse.md), [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse.md) und [Vergleichbare Gebiete Ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln.md) verwendet und mit dem [Filter](/cosi/manuals/005filter.md) gefiltert werden. Über "Analyse" erreichen Sie "Dipas".
 
 
-![Abbildung 1: DIPAS](007a_dipas.PNG)
+![Abbildung 1: DIPAS](/cosi/manuals/007a_dipas.PNG)
 
-*Abb.a: DIPAS Menü und Anzeige.*
+*Abb. a: DIPAS Menü und Anzeige.*
 
 1. **Beteiligungsverfahren auswählen**
-   > Für jedes Verfahren aus der DIPAS-Datenbank wird automatisch eine Registerkarte angelegt, welche durchs Anklicken aufgeklappt werden kann. Ein aufgeklapptes Verfahren zeigt dessen Beschreibungstext und die Kontrollfelder für die Visualisierung. Jedem Verfahren wid dabei eine zufällige Farbe zugewiesen.
+   > Für jedes Verfahren aus der DIPAS-Datenbank wird automatisch eine Registerkarte angelegt, welche durch Anklicken aufgeklappt werden kann. Ein aufgeklapptes Verfahren zeigt dessen Beschreibungstext und die Kontrollfelder für die Visualisierung. Jedem Verfahren wid dabei eine zufällige Farbe zugewiesen.
 2. **Indikator**
-   > Das Icon in dem Indikator zeigt zum einen die Farbe an, in dem der jeweilige Datensatz visualisiert wird. Zum anderen zeigt es, ob der Datensatz gerade auf der Karte angezeigt wird.
+   > Das Icon in dem Indikator zeigt zum einen die Farbe an, in der der jeweilige Datensatz visualisiert wird. Zum anderen zeigt es, ob der Datensatz gerade auf der Karte angezeigt wird.
 3. **Legende**
-   > Die Legende zeigt an, welche Farbe den Eintragstypen in der Visualisierung zugeordnet wird.
+   > Die Legende zeigt an, welche Farbe den Eintragstypen in der Visualisierung jeweils zugeordnet wird.
 4. **Verfahren in der Karte anzeigen**
    > Zeigt das Verfahrensgebiet als Polygon in der Karte in der jeweiligen Farbe des Verfahrens.
    - **4.1 Auf der Karte anzeigen**
