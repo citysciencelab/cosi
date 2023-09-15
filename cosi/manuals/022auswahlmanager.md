@@ -7,7 +7,7 @@ Mit der Auswahlverwaltung können bereits ausgewählte oder angelegte Flächen (
 
 ![Abbildung 2: Auswahlverwaltung](https://github.com/citysciencelab/cosi/assets/43250699/278717a4-b3b2-4c5b-a340-2e2a8576d727)
 
-*Abbildung 2: Auswahlverwaltung mit mehreren Auswahlen*
+*Abb. a: Auswahlverwaltung mit mehreren Auswahlen*
 
 1. **Alle Flächen auswählen**
    > Der Bereich "*Alle Auswahlen*" ist verfügbar, sobald Sie mehr als eine Fläche in der Auswahlverwaltung zur Verfügung haben. Mit einem Klick auf den ersten Button erstellen Sie eine neue Auswahl, die *alle* Flächen innerhalb der Auswahlverwaltung beinhaltet.
