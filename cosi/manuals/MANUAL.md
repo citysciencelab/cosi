@@ -544,6 +544,7 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
    6.1 **Ergebnisverzeichnis der Ergebnistabelle:**
          
       >Wenn in Ihrer Ergebnistabelle mehr als 10 Ergebnisse angezeigt werden, können Sie hier entsprechend die Daten durchschalten.
+
 ### DIPAS
 Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in der Karte visualisiert, nach verschiedenen Kriterien dargestellt und für alle CoSI-Werkzeuge verfügbar gemacht werden. D.h. alle Beiträge können in der [Einrichtungsübersicht](./017einrichtungsuebersicht.md) angezeigt, für [Versorgungsanalyse](./006versorgungsanalyse.md), [Erreichbarkeitsanalyse](./003erreichbarkeitsanalyse.md) und [Vergleichbare Gebiete Ermitteln](./004vergleichbaregebieteermitteln.md) verwendet und mit dem [Filter](./005filter.md) gefiltert werden. Über "Analyse" erreichen Sie "Dipas".
 
@@ -601,6 +602,7 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
     > Die Werte der Datensätze werden aufsummiert und farblich abgetrennt dargestellt.
 5. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](./020ergebnisverzeichnis.md) verwaltet die unterschiedlichen erstellten Graphen und erlaubt, sie als Bild oder gesammelt als zip-Datei herunterzuladen.
+
 ___
 
 # Simulation
@@ -678,6 +680,7 @@ Zur besseren Verständlichkeit des Werkzeugs wird im Folgenden Schritt für Schr
    *"Achtung: Sie können jetzt auch echte Einrichtungen verschieben. Ihre Änderungen sind nur temporär und werden nach der Sitzung nicht gespeichert."*  
 
 Alle Analysen, die innerhalb eines Szenarios durchgeführt werden, berücksichtigen die Parameter der simulierten Einrichtungen.
+
 ### Einrichtungen bearbeiten
 
 Haben Sie ein aktives Szenario können Sie sowohl selbst angelegte als auch bereits in den Daten vorhandene Einrichtungen bearbeiten. Sollten Sie kein Szenario angelegt haben und Sie klicken eine Einrichtung an, wird folgendes Popup angezeigt:
@@ -1170,6 +1173,7 @@ Das Ergebnisverzeichnis unterstützt in einigen Werkzeugen die Verwaltung mehrer
    > Mit diesem Button löschen Sie einen Datensatz und alle dazugehörigen Ergebnisse.
 7. **Alle entfernen**
    > Mit diesem Button entfernen Sie alle Datensätze und setzen das Werkzeug zurück.
+
 ### Manuelle Flächenauswahl für Fachdaten
 Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, innerhalb dessen Fachdaten angezeigt werden. Einrichtungen oder andere Fachdatenmarker, die außerhalb dieses Polygons liegen, werden ausgeblendet.
 
@@ -1371,6 +1375,7 @@ Jedes Kapitel des Templates wird als grauer Kasten dargestellt.
 
 Um ein Template zu speichern, damit Sie es später anwenden oder mit anderen teilen können, drücken Sie auf "Template Speichern". Dabei wird eine Datei mit der Endung ".json" heruntergeladen. Diese Datei können Sie dann später wieder hochladen, um das Template zu bearbeiten oder anzuwenden (s.o.). ![Template speichern](./reporttemplates_speichern.png)
 
+
 ### Erreichbarkeitsanalyse
 Die "Erreichbarkeitsanalyse" erreichen Sie über den Bereich "Analyse". 
 Eine Erreichbarkeitsanalyse kann auf drei Arten durchgeführt werden:  
@@ -1482,67 +1487,3 @@ Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das um die Route herum erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern.
 8. **Ergebnisverzeichnis**
    > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](./ergebnisverzeichnis.md) verwaltet werden.
-# Report Templates
-
-### Beschreibung 
-
-"Report Templates" sind Dokumente mit voreingestellten Analysen, die sich dann auf Gebiete anwenden lassen. Jedes Report Template besteht aus Kapiteln. Jedes Kapitel enthält:<br><br>
-
-- Einen Titel
-- Eine Beschreibung
-- Das Analyse Tool, das für das Kapitel verwendet wird
-- Intern, die gewählten Einstellungen des Tools sowie die zugehörigen Datenlayer
- 
-Aktuell verfügbar sind die Tools "Erreichbarkeitsanalyse" und "Dashboard".
-
-### Anwendung
-
-Sie können entweder ein bestehendes Template hochladen, bearbeiten und anwenden, oder ein neues Template erstellen.
-
-1. Wählen Sie zuerst in der Gebietsauswahl das Gebiet aus, auf das Sie das ReportTemplate anwenden wollen.
-1.  Öffnen Sie dann das Report Template Tool under dem Menüpunkt "Dienste -> Report Template"
-
-#### Bestehendes Template hochladen
-
-1. Klicken Sie im Report Template Tool auf "Datei Wählen", und wählen die bestehende Template Datei aus ![Datei wählen](./reporttemplates_templatehochladen.png)
-
-#### Template Anwenden und als Dokument exportieren
-
-1. Wenn Sie ein Report Template hochgeladen (s.o.) oder ein neues erstellt und eingestellt (s.u.) haben, scrollen Sie nach unten zu "Auf Gebiet anwenden"
-1. Wählen Sie das gewünschte Export Format aus ![Export Format wählen](./reporttemplates_exportformat.png). Zur weiterverarbeitung in Word, wählen Sie "HTML".
-1. Drücken Sie auf Exportieren ![Exportieren klicken](./reporttemplates_export.png)
-
-Die Analysen des Templates werden nun auf das Gebiet angewendet. Die Exportierte Datei wird entweder in ihrem Download Ordner abgelegt, oder direkt im Browser (als neues Fenster oder Tab) angezeigt.
-
-
-#### Neues Template beginnen
-
-Um ein neues Template zu beginnen, drücken Sie unter "Template Wählen" auf das "+"  ![neues Template erstellen](./reporttemplates_neu.png)
-
-Fahren Sie dann fort mit "Template bearbeiten" (s.u.).
-
-#### Template bearbeiten
-
-Nachdem Sie ein template hochgeladen oder neu erstellt haben, können Sie es bearbiten.
-
-Jedes Kapitel des Templates wird als grauer Kasten dargestellt.
-
-*Kapitel löschen:* Sie können Kapitel über das Mülleimer Symbol in der oberen rechten Ecke löschen ![kapitel löschen](./reporttemplates_kapitel_loeschen.png)
-
-*Kapitel hinzufügen:* Sie können neue Kapitel hinzufügen in dem Sie auf das "Seite +" symbol unter dem letzten Kapitel drücken ![kapitel hinzufügen](./reporttemplates_kapitel_hinzu.png)
-
-*Kapitel bearbeiten:*
-
-1. Geben Sie Titel und Beschreibung für das Kapitel ein ![Titel und Beschreibung eingeben](./reporttemplates_bearbeiten_beschr_titel.png)
-
-1. Wählen Sie das Analyse Tool aus, das für das Kapitel verwendet werden soll. ![Analyse Tool auswählen](./reporttemplates_bearbeiten_analysetool.png)
-    - Es öffnet dann der Dialog des gewählten Analyse Tools. Ist bereits das Analyse Tool ausgewählt, das Sie verwenden wollen, drücken Sie nun auf "Tool Einstellungen bearbeiten".
-1. Geben Sie die relevanten Einstellungen in der Maske des Analyse Tools (z.B. Erreichbarkeitsanalyse) ein, und drücken Sie auf "Übernehmen". ![Analyse Tool Einstellungen bearbeiten](./reporttemplates_bearbeiten_analysetool_einstellungen.png)
-1. Wiederholen Sie den Vorgang für alle Kapitel, die Sie hinzufügen oder bearbeiten wollen.
-
-
-#### Template Speichern
-
-Um ein Template zu speichern, damit Sie es später anwenden oder mit anderen teilen können, drücken Sie auf "Template Speichern". ![Template speichern](./reporttemplates_speichern.png)
-
-Dabei wird eine Datei mit der Endung ".json" heruntergeladen. Diese Datei können Sie dann später wieder hochladen, um das Template zu bearbeiten oder anzuwenden (s.o.).
