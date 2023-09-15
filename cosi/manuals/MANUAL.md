@@ -75,7 +75,7 @@ ___
   - [Datenmodell und Infrastruktur](#-datenmodell-und-infrastruktur)
   - [Module](#module)
    - [Themen (Layer)](#themen-layer)
-   - [Analyse] (#analyse)
+   - [Analyse](#analyse)
       - [Einwohnerabfrage](#einwohnerabfrage)
       - [Erreichbarkeitsanalyse](#erreichbarkeitsanalyse)
          - [Erreichbarkeit ab einem Referenzpunkt](#erreichbarkeit-ab-einem-referenzpunkt)
@@ -86,13 +86,13 @@ ___
       - [Versorgungsanalyse](#versorgungsanalyse)
       - [DIPAS](#dipas)
       - [Graphenvisualisierung](#graphenvisualisierung)
-    - [Simulation] (#simulation)
+    - [Simulation](#simulation)
       - [Einrichtungen anlegen](#einrichtungen-anlegen)
       - [Einrichtungen bearbeiten](#einrichtungen-bearbeiten)
       - [Wohnungsbauquartiere anlegen](#wohnquartiere-anlegen)
     - [Dienste](#dienste)
       - [Geodaten Importieren](#geodaten-importieren)
-      - [Sitzung Speichern/Laden](#sitzung-speichernladen)
+      - [Sitzung Speichern/Laden](#sitzung-speichern-und-laden)
       - [Vorlagen](#vorlagen)
     - Dashboard
       - [Statistische Datenübersicht](#statistische-datenuebersicht)
@@ -895,7 +895,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster mit Funkti
    - **9.2** Hier sehen Sie die ID des Attributs und dahinter in Klammern einen Beispielwert aus dem ersten Eintrag.
    - **9.3** Mit dieser Checkbox fügen Sie das Attribut zu den numerischen Werten hinzu. 
 
-### Sitzung Speichern / Laden 
+### Sitzung Speichern und Laden
 
 ![Abbildung 1: Sitzung Speichern](./014_sitzungspeichern.PNG)
 *Abb. a: Sitzung speichern / laden*

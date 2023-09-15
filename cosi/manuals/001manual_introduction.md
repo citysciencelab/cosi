@@ -92,7 +92,7 @@ ___
       - [Wohnungsbauquartiere anlegen](#wohnquartiere-anlegen)
     - [Dienste](#dienste)
       - [Geodaten Importieren](#geodaten-importieren)
-      - [Sitzung Speichern/Laden](#sitzung-speichernladen)
+      - [Sitzung Speichern/Laden](#sitzung-speichern-und-laden)
       - [Vorlagen](#vorlagen)
     - Dashboard
       - [Statistische Datenübersicht](#statistische-datenuebersicht)
