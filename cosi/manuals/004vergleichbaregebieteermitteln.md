@@ -1,3 +1,4 @@
+
 ## Vergleichbare Gebiete ermitteln
 ___
 Über den Bereich der "Analyse" gelangen Sie zu "Vergleichbare Gebiete ermitteln".
@@ -14,7 +15,7 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
 2. **Referenzgebiet**
    > Optional kann eins der ausgewählten Gebiete als Referenzgebiet angegeben werden.
 3. **Filter hinzufügen**
-   > Die Parametereinstellungen zeigen den aktuellen Datensatz Jahr Min.- und Max.-Wert aller Hamburger Gebiete, den Referenzwert (frei wählbar oder des Referenzgebiets) sowie die Toleranz nach oben und unten. Das Toleranzintervall ist entweder in absoluten Zahlen oder in Prozent für anteilige Werte angegeben.
+   > Die Parametereinstellungen zeigen für den aktuellen Datensatz und das ausgewählte Jahr den Min.- und Max.-Wert aller Hamburger Gebiete, den Referenzwert (frei wählbar oder den Wert des Referenzgebiets) sowie die Toleranz nach oben und unten. Das Toleranzintervall ist entweder in absoluten Zahlen oder in Prozent für anteilige Werte angegeben.
 4. **Alle Filter zurücksetzen** 
    > Setzen Sie Ihre Eingaben zurück.  
 5. **Ergebnisverzeichnis** 
@@ -24,7 +25,7 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
 *Abb. b: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
 
 1. **Ergebnisverzeichnis**
-   > Das [Ergebnisverzeichnis](/cosi/manuals/ergebnisverzeichnis.md) verwaltet die unterschiedlichen Datensätze. Es erscheint, sobald Sie einen zweiten Datensatz erstellt haben.
+   > Das [Ergebnisverzeichnis](/cosi/manuals/ergebnisverzeichnis.md) verwaltet die unterschiedlichen Analysen. Es erscheint, sobald Sie eine zweite Analyse erstellt haben.
 2. **Parametereinstellungen (Jahr)**
    > Wählen Sie die Grundlage für das entsprechende Jahr aus.  
 3. **Parametereinstellungen (Attribute)**
