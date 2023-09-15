@@ -11,7 +11,7 @@
    > Zu den Vorlagen gelangen Sie über die Gebietsauswahl. Wenn das entsprechende Gebiet ausgewählt ist, finden Sie unter Dienste, die Option Vorlagen. Hier können Sie nun alle weiteren Optionen für die Vorlagen auswählen.
 
 1. **Liste aller Vorlagen (zum Aufklappen)**
-   > - Bildunsgeinrichtungen in Hamburg
+   > - Bildungseinrichtungen in Hamburg
    > - Bildungseinrichtungen in Bergedorf
    > - Erhaltungsmanagement Spielplätze
    > - Sozialraumprofil

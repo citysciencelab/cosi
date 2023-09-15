@@ -1055,7 +1055,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 11. **Tabelle exportieren**
       > Die ausgewählten Einträge als XLSX für Excel exportieren. Über das Auswahlfeld *Detailansicht exportieren* können alle bzw. in der Detailansicht ausgewählte Attribute eines Einrichtungstyps exportiert werden. Ist keine Auswahl getroffen, werden alle Einrichtungen exportiert.
 12. **Standortbewertung: Themenauswahl**
-      > Erlaubt die Auswahl beliebiger weiterer Fachdatenthemen für eine Standortbewertung. Bei Fachdaten, welche Punkte oder Flächen in der Karte repräsentieren (i.d.R. Einrichtungen) wird der Ort des Typs gefunden, welcher jeder Einrichtung in der Tabelle am nächsten ist und die Laufdistanz in Metern angegeben. Bei der Auswahl mehrerer Themen wird ein gewichteter Mittelwert gebildet (s. 8./13.). Andere Themen, z.B. Lärmkarte, Luftqualität, etc. für die Bewertung befinden sich im Aufbau.
+      > Die gelisteten Einrichtungen oder Standorte (z.B. Seniorenheime) können bewertet werden. Bewertunskriterium ist dabei die Laufweite in Metern zur jeweils nächstgelegenen Einrichtung eines anderen Fachdatenthemas (z.B. Haltestellen). Es können auch Themen als Kriterium ausgewählt werden, die in der Karte nicht als Punkt, sondern als Fläche repräsentiert werden (z.B. Spielplätze). Bei der Auswahl mehrerer Themen wird ein gewichteter Mittelwert gebildet (s. 8./13.). Andere Themen, z.B. Lärmkarte, Luftqualität, etc. für die Bewertung befinden sich im Aufbau.
 13. **Standortbewertung: Gewichtung**
       > Erlaubt die Gewichtung der Themen für die Standortbewertung. Ein Thema mit Wert 0,5 wird somit nur halb so stark in den Mittelwert einbezogen, wie eines mit dem Wert 1.
 14. **Standortvisualisierung für alle ausgewählten**
