@@ -22,7 +22,7 @@ Klicken Sie im Report Template Tool auf "Datei Wählen", und wählen die bestehe
 ### Template Anwenden und als Dokument exportieren
 
 1. Wenn Sie ein Report Template hochgeladen (s.o.) oder ein neues erstellt und eingestellt (s.u.) haben, scrollen Sie nach unten zu "Auf Gebiet anwenden"
-1. Wählen Sie das gewünschte Export Format aus. Zur weiterverarbeitung in Word, wählen Sie "HTML". ![Export Format wählen](./reporttemplates_exportformat.png). 
+1. Wählen Sie das gewünschte Export Format aus. Zur Weiterverarbeitung in Word, wählen Sie "HTML". ![Export Format wählen](./reporttemplates_exportformat.png). 
 1. Drücken Sie auf Exportieren ![Exportieren klicken](./reporttemplates_export.png)
 
 Die Analysen des Templates werden nun auf das Gebiet angewendet. Die exportierte Datei wird entweder in ihrem Download Ordner abgelegt, oder direkt im Browser (als neues Fenster oder Tab) angezeigt.
@@ -34,13 +34,13 @@ Um ein neues Template zu beginnen, drücken Sie unter "Template Wählen" auf das
 
 ### Template bearbeiten
 
-Nachdem Sie ein Template hochgeladen oder neu erstellt haben, können Sie es bearbiten.
+Nachdem Sie ein Template hochgeladen oder neu erstellt haben, können Sie es bearbeiten.
 
 Jedes Kapitel des Templates wird als grauer Kasten dargestellt.
 
 *Kapitel löschen:* Sie können Kapitel über das Mülleimer Symbol in der oberen rechten Ecke löschen ![kapitel löschen](./reporttemplates_kapitel_loeschen.png)
 
-*Kapitel hinzufügen:* Sie können neue Kapitel hinzufügen in dem Sie auf das "Seite +" symbol unter dem letzten Kapitel drücken ![kapitel hinzufügen](./reporttemplates_kapitel_hinzu.png)
+*Kapitel hinzufügen:* Sie können neue Kapitel hinzufügen indem Sie auf das "Seite +" symbol unter dem letzten Kapitel drücken ![kapitel hinzufügen](./reporttemplates_kapitel_hinzu.png)
 
 
 *Kapitel bearbeiten:*
@@ -49,7 +49,7 @@ Jedes Kapitel des Templates wird als grauer Kasten dargestellt.
 
 1. Wählen Sie das Analyse Tool aus, das für das Kapitel verwendet werden soll. ![Analyse Tool auswählen](./reporttemplates_bearbeiten_analysetool.png)
     - Es öffnet dann der Dialog des gewählten Analyse Tools. Ist bereits das Analyse Tool ausgewählt, das Sie verwenden wollen, drücken Sie nun auf "Tool Einstellungen bearbeiten".
-1. Geben Sie die relevanten Einstellungen in der Maske des Analyse Tools (z.B. Erreichbarkeitsanalyse) ein, und drücken Sie auf "Übernehmen". ![Analyse Tool Einstellungen bearbeiten](./reporttemplates_bearbeiten_analysetool_einstellungen.png)
+1. Geben Sie die relevanten Einstellungen in der Maske des Analyse Tools (z.B. Erreichbarkeitsanalyse) ein und drücken Sie auf "Übernehmen". ![Analyse Tool Einstellungen bearbeiten](./reporttemplates_bearbeiten_analysetool_einstellungen.png)
 1. Wiederholen Sie den Vorgang für alle Kapitel, die Sie hinzufügen oder bearbeiten wollen.
 
 
