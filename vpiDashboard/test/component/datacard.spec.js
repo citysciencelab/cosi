@@ -90,9 +90,9 @@ describe("addons/vpiDashboard/test/ data card component", () => {
 
         expect(wrapper.emitted().indexChanged[2]).to.deep.equal([3]);
 
-        // change Index to visitorTypeCommutersPerDay to see if correct current...Index value has been changed
+        // change Index to visitorTypeCommutersPerWeek to see if correct current...Index value has been changed
         // this will lead to a warning in test run but since this prop will never change during program run we can ignore this
-        wrapper.vm.detail = "visitorTypeCommutersPerDay";
+        wrapper.vm.detail = "visitorTypeCommutersPerWeek";
 
         wrapper.vm.changeIndex(4);
 
@@ -102,9 +102,9 @@ describe("addons/vpiDashboard/test/ data card component", () => {
 
         expect(wrapper.emitted().indexChanged[3]).to.deep.equal([4]);
 
-        // change Index to visitorTypeResidentsPerDay to see if correct current...Index value has been changed
+        // change Index to visitorTypeResidentsPerWeek to see if correct current...Index value has been changed
         // this will lead to a warning in test run but since this prop will never change during program run we can ignore this
-        wrapper.vm.detail = "visitorTypeResidentsPerDay";
+        wrapper.vm.detail = "visitorTypeResidentsPerWeek";
 
         wrapper.vm.changeIndex(5);
 
@@ -114,9 +114,9 @@ describe("addons/vpiDashboard/test/ data card component", () => {
 
         expect(wrapper.emitted().indexChanged[4]).to.deep.equal([5]);
 
-        // change Index to visitorTypeTouristsPerDay to see if correct current...Index value has been changed
+        // change Index to visitorTypeTouristsPerWeek to see if correct current...Index value has been changed
         // this will lead to a warning in test run but since this prop will never change during program run we can ignore this
-        wrapper.vm.detail = "visitorTypeTouristsPerDay";
+        wrapper.vm.detail = "visitorTypeTouristsPerWeek";
 
         wrapper.vm.changeIndex(6);
 

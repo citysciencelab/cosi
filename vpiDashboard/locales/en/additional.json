@@ -102,7 +102,7 @@
             "chartTitle": "Dwell time in minutes"
           },
           "visitorTypes": {
-            "chartTitle": "Visitor Types",
+            "chartTitle": "Visitor Types per week",
             "chartLabels": {
               "residents": "Residents",
               "commuters": "Commuters",
@@ -110,9 +110,9 @@
               "tourists_overnight": "Overnight tourists"
             },
             "cardLabels": {
-              "residentsPerDay": "Ø Residents per Tag",
-              "commutersPerDay": "Ø Commuters per Tag",
-              "touristsPerDay": "Ø Tourists per Tag"
+              "residentsPerWeek": "Ø Residents per week",
+              "commutersPerWeek": "Ø Commuters per week",
+              "touristsPerWeek": "Ø Tourists per week"
             }
           },
           "ageGroup": {

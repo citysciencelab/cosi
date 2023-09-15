@@ -112,18 +112,18 @@ export default {
                     class="row cards"
                 >
                     <DataCard
-                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.residentsPerDay')"
-                        detail="visitorTypeResidentsPerDay"
+                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.residentsPerWeek')"
+                        detail="visitorTypeResidentsPerWeek"
                         :update-index="dataCardIndex"
                     />
                     <DataCard
-                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.commutersPerDay')"
-                        detail="visitorTypeCommutersPerDay"
+                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.commutersPerWeek')"
+                        detail="visitorTypeCommutersPerWeek"
                         :update-index="dataCardIndex"
                     />
                     <DataCard
-                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.touristsPerDay')"
-                        detail="visitorTypeTouristsPerDay"
+                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.touristsPerWeek')"
+                        detail="visitorTypeTouristsPerWeek"
                         :update-index="dataCardIndex"
                     />
                 </div>
@@ -149,13 +149,21 @@ export default {
                                         }
                                     }]
                                 }"
+                                :given-options="{
+                                    animation: false
+                                }"
                             />
                         </div>
                     </div>
                     <!-- Line Chart -->
                     <div v-if="chartType === 'line'">
                         <div class="row line">
-                            <LinechartItem :data="chartdata.line" />
+                            <LinechartItem
+                                :data="chartdata.line"
+                                :given-options="{
+                                    animation: false
+                                }"
+                            />
                         </div>
                     </div>
                 </div>
