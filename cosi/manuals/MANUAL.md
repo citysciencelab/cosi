@@ -103,6 +103,7 @@ ___
     - [Manuelle Flächenauswahl](#manuelleflaechenauswahl)
     - [Auswahlmanager](#auswahlmanager)
     - [Flächen stylen](#flaechen-stylen)
+    - [Report Templates](#report-templates)
 
 <div style="page-break-after: always;"></div>
 
@@ -464,6 +465,7 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
    > Über *Ergebnis als Gebietsauswahl* setzen kann die aktuelle Gebietsauswahl für weitere Analysen auf die Ergebnis-Gebiete gesetzt werden.
   
 <div style="page-break-after: always;"></div>
+
 ## Filter
 ___
 Die aktiven, ausgewählten Themen können durch Klick auf den Reiter "Filter" nach den Kategorien ihrer Datensätze durchsucht und gefiltert werden. Die Karte zoomt automatisch auf die Filterergebnisse. Es werden nur Ergebnisse in den ausgewählten Gebieten einbezogen. Werden Analysefunktionen auf einen Datensatz angewendet, beziehen sie sich nicht auf den ganzen Datensatz, sondern auf das Filterergebnis.  Der Filter ist für alle Fachdatensätze verfügbar, welche sinnvolle filterbare Attribute (wie Fläche, Nutzung, Träger, etc.) aufweisen.  
@@ -580,6 +582,7 @@ Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in d
 10. **Beiträge in der Karte**
       > Alle Beiträge werden mit Ihrer ID (einer fortlaufenden Nummer) in der Karte dargestellt.
 <div style="page-break-after: always;"></div>
+
 ## Graphenvisualisierung
 ___
 Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwaltet diese. Darüber hinaus ermöglicht es Ihnen den Export dieser Graphen als PNG.
