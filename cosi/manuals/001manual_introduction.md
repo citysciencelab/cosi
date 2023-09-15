@@ -266,7 +266,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
       > Daten zur reinen "Anzeige" in der Karte, v.a. entnommen aus dem FHH Atlas (bereitgestellt als WMS).
 3. **Ausgewählte Themen**  
    > Siehe nachfolgende Abbildung.
-4. **Hilfsbutton**
+4. **Hilfe-Button**
    > Ruft diese Anleitung auf.
 5. **Kartenhintergrund**
    > Hier können Sie für den Kartenhintergrund grau oder weiß auswählen.

@@ -10,10 +10,10 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
   > Um zur statistischen Datenübersicht zu gelangen, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
   
 ![Abbildung 27: Statistische Datenübersicht](/cosi/manuals/016a_statistischedatenuebersicht.png)
-*Abb. : Statistische Datenübersicht 1*
+*Abb. a: Statistische Datenübersicht 1*
 
 ![Abbildung 29: Statistische Datenübersicht](/cosi/manuals/016b_statistischedatenuebersicht.png)
-*Abb. : Statistische Datenübersicht 2*
+*Abb. b: Statistische Datenübersicht 2*
 
 
 
@@ -47,18 +47,18 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 
 #### Dreistrich Menü
 ![Abbildung 28: Statistische Datenübersicht - Dreistrich-menü](/cosi/manuals/016c_statdashboard_burgermenu.PNG)
-*Abb. : Statistische Datenübersicht - Dreistrich-Menü.*
+*Abb. c: Statistische Datenübersicht - Dreistrich-Menü.*
 
 1. **Visualisierung ein-/ausschalten**
    > Thematische Gruppen
 2. **Zeitreihe in der Karte animieren**
-   > *(Funktioniert nur bei aktiver Kartenvisualisierung)*
+   > *Funktioniert nur bei aktiver Kartenvisualisierung*
 3. **Gebietsnamen ein-/ausblenden**
-   > *(Funktioniert nur bei aktiver Kartenvisualisierung)*
+   > *Funktioniert nur bei aktiver Kartenvisualisierung*
 4. **Für Feld A auswählen**
-   > Selektiert das Thema als **Feld A** für Berechnungen und Korrelation (siehe 7, 8, 9, 10, 12)
+   > Selektiert das Thema als **Feld A** für Berechnungen und Korrelation (siehe 7, 8, 9, 10, 12).
 5. **Für Feld B auswählen**
-   > Selektiert das Thema als **Feld B** für Berechnungen und Korrelation (siehe 7, 8, 9, 10, 12)
+   > Selektiert das Thema als **Feld B** für Berechnungen und Korrelation (siehe 7, 8, 9, 10, 12).
 6. **Auswahl aufheben**
    > Setzt die Felder **A** und **B** zurück
 7. **Addieren**
@@ -72,4 +72,4 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 11. **Diagramme erzeugen**
       > Erzeugt Diagramme für den ausgewählten Indikator im [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md) (analog zu [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung.md)). Visualisiert alle ausgewählten Spalten (s. [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht.md)).
 12. **Korrelations- / Streuungsdiagramm**
-      > Visualisiert ein Streuungsdiagramm für die Felder **A** (Y-Achse) über **B** (X-Achse) im [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md) und berechnet die Korrelation (Pearson) zwischen den Datensätzen und zeichet eine Regressionsgerade.
+      > Visualisiert ein Streuungsdiagramm für die Felder **A** (Y-Achse) über **B** (X-Achse) per [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md), berechnet die Korrelation (Pearson) zwischen den Datensätzen und zeichet eine Regressionsgerade.

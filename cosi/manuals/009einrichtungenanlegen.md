@@ -58,7 +58,7 @@ Szenarios.
       > Setzt das Szenario zurück.
 
 #### Schrittweises Vorgehen
-Zur besseren Verständlichkeit des Werkzeugs wird im Folgenden Schritt für Schritt erläutert, wie erfolgreich eine neue Einrichtung angelegt werden kann.
+Zur besseren Verständlichkeit des Werkzeugs wird im Folgenden Schritt für Schritt erläutert, wie eine neue Einrichtung erfolgreich angelegt werden kann.
 
 1. #### **Schritt 1:** Neues Szenario erstellen
 2. #### **Schritt 2:** Name für Szenario festlegen

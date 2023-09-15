@@ -36,7 +36,7 @@ Wählen Sie hier den Button **BEARBEITEN** an. Daraufhin wird sich das folgende 
 *Abb. d: Clusterauswahl.*
 
 1. **Das angewählte Cluster (3)**
-   > Die Darstellung von Einrichtungen wird auf der Karte gebündelt, wenn zu viele Einrichtungen an einem Ort sind, wenn diese in der aktuellen Zoomstufe nicht dargestellt werden können. 
+   > Die Darstellung von Einrichtungen wird auf der Karte gebündelt, wenn Einrichtungen so dicht beeinander liegen, dass sie, wenn diese in der aktuellen Zoomstufe nicht separiert werden können. 
 2. **Auswahl**
    > Alle im Cluster gebundenen Einrichtungen werden angezeigt, sobald Sie auf das Cluster klicken. Sie können dann in diesem Fenster eine Einrichtung auswählen, woraufhin sich das Fenster aus *Abbildung 3* öffnet.
 

@@ -1044,7 +1044,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 9.  **Such- und Filterfunktionen**
       > Hier können Sie die Liste nach Themen filtern oder im Freitext die Einrichtungen durchsuchen.
 10. **Einrichtungsdiagramme erstellen**
-      > Erzeugt für alle verfügbaren Datenspalten ein Balkendiagramm, in dem die Werte der jeweiligen Einrichtungen und ihre Verteilung über die ausgewählten Gebiete.
+      > Erzeugt für alle verfügbaren Datenspalten ein Balkendiagramm mit den Werten der jeweiligen Einrichtungen und ihre Verteilung über die ausgewählten Gebiete.
       - **10.1 Layer zusammenziehen**
          > Wenn Sie diese Checkbox aktivieren, werden bei "Einrichtungsdiagramme erstellen"  Einrichtungen unterschiedlichen Typs zusammengezogen, wenn sie identische Attribute haben. *Beispiel: Wenn Sie Supermärkte und Drogerien ausgewählt haben, teilen sich beide das Attribut "Verkaufsfläche in m² und werden dementsprechend im Graphen zusammen dargestellt".*
       - **10.2 Graphenvisualisierung als PNG oder Zip**
