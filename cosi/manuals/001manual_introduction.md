@@ -89,7 +89,7 @@ ___
     - [Simulation](#simulation)
       - [Einrichtungen anlegen](#einrichtungen-anlegen)
       - [Einrichtungen bearbeiten](#einrichtungen-bearbeiten)
-      - [Wohnungsbauquartiere anlegen](#wohnquartiere-anlegen)
+      - [Wohnungsbauquartiere anlegen](#wohnungsbauquartiere-anlegen)
     - [Dienste](#dienste)
       - [Geodaten Importieren](#geodaten-importieren)
       - [Sitzung Speichern/Laden](#sitzung-speichern-und-laden)
