@@ -72,12 +72,12 @@ ___
 ## Inhalt
 ___
 - CoSI: Cockpit Städtische Infrakstrukturen
-  - [Datenmodell und Infrastruktur](#-datenmodell-und-infrastruktur)
-  - [Module](#markdown-header-module)
+  - [Datenmodell und Infrastruktur](#datenmodell-und-infrastruktur)
+  - [Module](#module)
    - [Themen (Layer)](#themen-layer)
-   - [Analyse](#markdown-header-analyse)
+   - [Analyse](#analyse)
       - [Einwohnerabfrage](#einwohnerabfrage)
-      - [Erreichbarkeitsanalyse](#markdown-header-erreichbarkeitsanalyse)
+      - [Erreichbarkeitsanalyse](#erreichbarkeitsanalyse)
          - [Erreichbarkeit ab einem Referenzpunkt](#erreichbarkeit-ab-einem-referenzpunkt)
          - [Erreichbarkeit im Gebiet](#erreichbarkeit-im-gebiet)
          - [Erreichbarkeit entlang einer Route](#erreichbarkeit-entlang-einer-route)
