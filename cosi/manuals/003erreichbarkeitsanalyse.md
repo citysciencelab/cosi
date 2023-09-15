@@ -29,7 +29,7 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
   
 
 
-![Erreichbarkeit ab einem Referenzpunkt](/cosi/manuals/003a_erreichbarkeitreferenzpunkt.png)
+![Erreichbarkeit ab einem Referenzpunkt](./003a_erreichbarkeitreferenzpunkt.png)
 
 *Abb. a: Erreichbarkeit ab einem Referenzpunkt.*
   
@@ -52,7 +52,7 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 9.  **Legende & Isochronen**
    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das vom Referenzpunkt aus erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
 11. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis.md) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das [Ergebnisverzeichnis](./020ergebnisverzeichnis.md) verwaltet werden.
 
 *Für **Tageszeit**, **Verkehrsfluss berücksichtigen**, und **Von Flächenaußengrenzen berechnen** siehe im folgenden "Erreichbarkeit im Gebiet"*
 
@@ -64,7 +64,7 @@ Diese Analyse wird genauso hergestellt, wie ab einem Referenzpunkt. Nur wird hie
 
 Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungsart (im Beispiel Krankenhäuser) in dem festgelegten Einzugsbereich (Planungsgebiet). Der Einzugsbereich ist die Entfernung von der jeweiligen Einrichtung und kann in Zeit oder in Metern angegeben werden. Die Erreichbarkeit ist abhängig von dem festgelegten Verkehrsmittel.
 
-![Erreichbarkeit ausgewählter Einrichtungen im Gebiet](/cosi/manuals/003b_erreichbarkeitabeinrichtung.png)
+![Erreichbarkeit ausgewählter Einrichtungen im Gebiet](./003b_erreichbarkeitabeinrichtung.png)
 
 *Abb. b: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
 
@@ -89,14 +89,14 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 11. **Legende & Isochronen**
     > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen die vom den Einrichtungen aus erreichbaren Gebiete abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
 12. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das [Ergebnisverzeichnis](./020ergebnisverzeichnis) verwaltet werden.
 
    ### Erreichbarkeit entlang einer Route
 
 Wenn Sie im Routing-Tool eine Route erstellt haben, können Sie die Erreichbarkeit in einem bestimmten Umkreis um die Route herum berechnen lassen.
   
 Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
-![Erreichbarkeit entlang einer Route](/cosi/manuals/003c_erreichbarkeitroute.png)
+![Erreichbarkeit entlang einer Route](./003c_erreichbarkeitroute.png)
 
 *Abb. c: Erreichbarkeit entlang einer Route.*
 1. **Auswahl des Modus**
@@ -112,6 +112,6 @@ Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
 7. **Legende und Isochronen**
    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das um die Route herum erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern.
 8. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das [Ergebnisverzeichnis](./020ergebnisverzeichnis) verwaltet werden.
    
 <div style="page-break-after: always;"></div>

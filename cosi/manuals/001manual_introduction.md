@@ -2,7 +2,7 @@
 ## Cockpit Städtische Infrastrukturen
 #### GIS + datenbasierte Analyse- und Planungstools in der Hamburger Stadtverwaltung
 ___
-![CoSI Logo](/cosi/manuals/cosi_logo_jf.png)
+![CoSI Logo](./cosi_logo_jf.png)
 
 ___
 
@@ -112,19 +112,19 @@ ___
   
 CoSI ermöglicht ganz ähnlich wie der FHH-Atlas die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
 
-![Vgl_FHH_Atlas](/cosi/manuals/001a_Vgl_FHH_Atlas.png)
+![Vgl_FHH_Atlas](./001a_Vgl_FHH_Atlas.png)
 
 *Abb. a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
 Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
-![stat_daten-anzeige](/cosi/manuals/001b_stat_daten-anzeige.png)
+![stat_daten-anzeige](./001b_stat_daten-anzeige.png)
 
 *Abb. b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
-![bsp-analysefunktionen](/cosi/manuals/001c_bsp-analysefunktionen.png)
+![bsp-analysefunktionen](./001c_bsp-analysefunktionen.png)
 
 
 *Abb. c: Analysefunktionen, hier Versorgungsanalyse.*
@@ -193,40 +193,40 @@ ___
 ### Überblick 
 CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet") an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
 
-![Das CoSI Nutzer-Interface](/cosi/manuals/001d_user_interface.PNG)
+![Das CoSI Nutzer-Interface](./001d_user_interface.PNG)
 
 *Abb. d: Das CoSI User-Interface.*
 
 1. **Themenbau/ Layer** (s. Themen)
 2. **Analyse**
-      1. [Manuelle Flächenauswahl für Fachdaten](/cosi/manuals/021manuelleflaechenauswahl)
-      2. [Einwohnerabfrage](/cosi/manuals/002einwohnerabfrage)
-      3. [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse)
-      4. [Vergleichbare Gebiete ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln)
-      5. [Filter](/cosi/manuals/005filter)
+      1. [Manuelle Flächenauswahl für Fachdaten](./021manuelleflaechenauswahl)
+      2. [Einwohnerabfrage](./002einwohnerabfrage)
+      3. [Erreichbarkeitsanalyse](./003erreichbarkeitsanalyse)
+      4. [Vergleichbare Gebiete ermitteln](./004vergleichbaregebieteermitteln)
+      5. [Filter](./005filter)
       6. Strecke/ Fläche messen
-      7. [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse)
-      8. [DIPAS](/cosi/manuals/007dipas)
-      9. [Datenvisualisierung](/cosi/manuals/008graphenvisualisierung)
+      7. [Versorgungsanalyse](./006versorgungsanalyse)
+      8. [DIPAS](./007dipas)
+      9. [Datenvisualisierung](./008graphenvisualisierung)
 
 3. **Simulation**
-      1. [Einrichtungen anlegen](/cosi/manuals/009einrichtungenanlegen)
-      2. [Einrichtungen bearbeiten](/cosi/manuals/010einrichtungenbearbeiten)
-      2. [Wohnungsbauquartiere anlegen](/cosi/manuals/011wohnquartiereanlegen)
+      1. [Einrichtungen anlegen](./009einrichtungenanlegen)
+      2. [Einrichtungen bearbeiten](./010einrichtungenbearbeiten)
+      2. [Wohnungsbauquartiere anlegen](./011wohnquartiereanlegen)
 
 4. **Dienste**
       1. Zeichnen/ Schreiben
       2. Karte drucken
       3. Mousehover ein-/ ausschalten
-      4. [Geodaten Importieren](/cosi/manuals/013geodatenimportieren)
+      4. [Geodaten Importieren](./013geodatenimportieren)
       5. WMS hinzufügen
-      6. [Sitzung speichern/laden](/cosi/manuals/014sitzungspeichern)
-      7. [Vorlagen](/cosi/manuals/015vorlagen)
+      6. [Sitzung speichern/laden](./014sitzungspeichern)
+      7. [Vorlagen](./015vorlagen)
 
 5. **Dashboard**
-      1. [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht)
-      2. [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht)
-6. **[Gebiete auswählen](/cosi/manuals/018gebietsauswahl)**
+      1. [Statistische Datenübersicht](./016statistischedatenuebersicht)
+      2. [Einrichtungsübersicht](./017einrichtungsuebersicht)
+6. **[Gebiete auswählen](./018gebietsauswahl)**
 7. **Kontaktformular**
 8. **Legende** (s. Legende)
 9. **Suchleiste**
@@ -236,7 +236,7 @@ CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tool
 12. **Herauszoomen**
 13. **Vollbildansicht aktivieren/ deaktivieren**
 14. **Zurück zur Startansicht**
-15. **[Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung)**
+15. **[Kartenanalyse regionalstatistischer Daten](./019kartenvisualisierung)**
 16. **Tooltip** (sog. Mousehover)
    > Zeigt das Gebiet und andere Elemente wie Tooltipps unter dem Mauszeiger an. Kann unter "Dienste" via "Mousehover ein-/ausschalten" deaktiviert werden.
 18. **Ausgewählte Gebiete**
@@ -252,7 +252,7 @@ Layer können aus dem Reiter "Themen" jederzeit zugeschaltet oder ausgeschaltet 
 
 Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten und die aktuelle Auswahl an Kartenebenen.
 
-![Der Themenbaum](/cosi/manuals/001e_Themenbaum.PNG)
+![Der Themenbaum](./001e_Themenbaum.PNG)
 
 *Abb. e: Der Themenbaum.*
 
@@ -275,7 +275,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
    > Diese Funktion fixiert den Themenbaum, so dass er auch bei Interaktionen mit der Karte angezeigt bleibt.
    
    **Ausgewählte Themen**  
-      ![Abbildung 3: Ausgewählte Themen](/cosi/manuals/001f_ausgewaehltethemen.PNG)
+      ![Abbildung 3: Ausgewählte Themen](./001f_ausgewaehltethemen.PNG)
       *Abb.f: Ausgewählte Themen.*  
       - **3.1 Informationen und Legenden**
       - **3.2 Einstellungen**  
@@ -289,7 +289,7 @@ Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der K
 Eine Legende zu den aktiven Themen kann durch einen Klick auf den Reiter "Legende" eingeblendet werden. Unabhängig davon können über den Infobutton rechts neben dem Layer weitere Informationen zu dem jeweiligen Thema aufgerufen werden. Es werden folgende Informationen bereitgestellt: Kurzbeschreibung des Themas, Datenstand und Legende. Auch befinden sich hinter dem Info-Button die Links zu Downloadquellen und eine WFS - bzw. WMF -Adresse.
 Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle Auswahl (Sportstätte, Grünanlage, etc.). Auf der Infotafel werden Informationen über das Objekt angezeigt. Datenschutzrelevante (personenbezogene) Daten werden nicht angezeigt.
 
-![Abbildung 4: Manuelle Flächenauswahl](/cosi/manuals/001g_bspkartenansicht.PNG)
+![Abbildung 4: Manuelle Flächenauswahl](./001g_bspkartenansicht.PNG)
 
 *Abb. g: Beispiel für Kartenansicht.*
 

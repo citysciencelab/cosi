@@ -1,15 +1,15 @@
 
 ### Sitzung Speichern / Laden 
 
-![Abbildung 1: Sitzung Speichern](/cosi/manuals/014_sitzungspeichern.PNG)
+![Abbildung 1: Sitzung Speichern](./014_sitzungspeichern.PNG)
 *Abb. a: Sitzung speichern / laden*
 
 Mit dem Dienst **Sitzung speichern/laden** können die folgend aufgelisteten Informationen der aktuellen Arbeitssitzung abgespeichert werden, um diese zu einem späteren Zeitpunkt wieder öffnen und weiterbearbeiten zu können:
 
 - Die ausgewählte Verwaltungsebene und ausgewählte Gebiete
 - Aktive Fachdatenthemen 
-- Mit den [Simulationswerkzeugen](/cosi/manuals/009einrichtungenanlegen.md) erstellte Szenarien 
-- Ergebnisse und Konfigurationen der Werkzeuge [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse.md) und [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse.md)
+- Mit den [Simulationswerkzeugen](./009einrichtungenanlegen.md) erstellte Szenarien 
+- Ergebnisse und Konfigurationen der Werkzeuge [Erreichbarkeitsanalyse](./003erreichbarkeitsanalyse.md) und [Versorgungsanalyse](./006versorgungsanalyse.md)
 
 Die Funktion ist unter "Dienste", "Sitzung speichern/laden" zu finden.
 
