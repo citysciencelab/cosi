@@ -103,6 +103,7 @@ export default {
     watch: {
         async selectedLocationId () {
             this.showChart = false;
+            await this.getAllAgeGroupsData();
             await this.updateChartData();
             this.showChart = true;
         }

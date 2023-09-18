@@ -1,11 +1,13 @@
 import tabVisitorTypesActions from "./tab/visitor-types/actions";
 import tabCompareDatesActions from "./tab/compare/dates/actions";
+import tabAgeGroupActions from "./tab/age-groups/actions";
 import apiEndpointService from "./apiEndpointService";
 
 const actions = {
 
     ...tabVisitorTypesActions,
     ...tabCompareDatesActions,
+    ...tabAgeGroupActions,
 
     /**
      * Addresses the WhatALocation locations endpoint to get all locations
@@ -107,21 +109,6 @@ const actions = {
 
         commit("setDwellTimeLocationA", responseA.data);
         commit("setDwellTimeLocationB", responseB.data);
-        commit("setLoader", false);
-    },
-    /**
-     * Get all data by age group
-     * @param {Object} state the store's state and commit object.
-     * @returns {Promise<void>} sets the data in store
-     */
-    getAllAgeGroupsData: async ({state, commit}) => {
-        commit("setLoader", true);
-
-        const
-            response = await apiEndpointService.receiveAgeGroups(state.selectedLocationId);
-
-        commit("setAllAgeGroupsData", response.data);
-        commit("setAllAgeGroupsMonthlyData");
         commit("setLoader", false);
     },
     /**
