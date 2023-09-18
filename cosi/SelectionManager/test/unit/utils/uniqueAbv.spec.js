@@ -1,6 +1,5 @@
 import uniqueAbv from "../../../utils/uniqueAbv";
 import {expect} from "chai/index";
-import { uniq } from "shelljs";
 import sinon from "sinon";
 
 describe("SelectionManager/utils/uniqueAbv", () => {
