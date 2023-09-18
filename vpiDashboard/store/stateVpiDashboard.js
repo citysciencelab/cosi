@@ -2,6 +2,7 @@ import tabVisitorTypesState from "./tab/visitor-types/state";
 import tabCompareDatesState from "./tab/compare/dates/state";
 import tabCompareLocationsState from "./tab/compare/locations/state";
 import tabAgeGroupsState from "./tab/age-groups/state";
+import tabDwellTimeState from "./tab/dwell-time/state";
 
 const state = {
     id: "vpiDashboard",
@@ -26,15 +27,13 @@ const state = {
     barChartData: {},
     lineChartData: {},
     showLoader: false,
-    dwellTimesComplete: [],
-    dwellTimesPerDate: {},
-    dwellTimesPerYear: {},
     selectedLocationId: "",
     activityData: {},
     ...tabVisitorTypesState,
     ...tabCompareDatesState,
     ...tabCompareLocationsState,
-    ...tabAgeGroupsState
+    ...tabAgeGroupsState,
+    ...tabDwellTimeState
 };
 
 export default state;
