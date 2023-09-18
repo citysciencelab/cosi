@@ -74,8 +74,8 @@ const actions = {
         commit("setLoader", true);
 
         const
-            responseA = await apiEndpointService.receiveActivities(compareData.location_id_a, compareData.date),
-            responseB = await apiEndpointService.receiveActivities(compareData.location_id_b, compareData.date);
+            responseA = await apiEndpointService.receiveActivities(compareData.location_id_a, compareData.date[0], compareData.date[1]),
+            responseB = await apiEndpointService.receiveActivities(compareData.location_id_b, compareData.date[0], compareData.date[1]);
 
         commit("setActivitiesLocationA", responseA.data);
         commit("setActivitiesLocationB", responseB.data);

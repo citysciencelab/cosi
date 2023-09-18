@@ -95,7 +95,8 @@
           "date_b": "Vergleichsdatum",
           "date_comparison": "Vergleich Datumswerte",
           "selectLocationBinMap": "Anklicken um Standort B aus der Karte auszuwählen",
-          "deselectLocationBinMap": "Deaktivieren um Standort A aus der Karte auszuwählen"
+          "deselectLocationBinMap": "Deaktivieren um Standort A aus der Karte auszuwählen",
+          "noData": "Für Ihre Auswahl sind aktuell keine Daten vorhanden. Bitte verändern Sie Merkmal oder Datum!"
         },
         "tab": {
           "dwelltime": {

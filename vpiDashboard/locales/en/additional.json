@@ -95,7 +95,8 @@
           "date_b": "Compare date",
           "date_comparison": "Date comparison",
           "selectLocationBinMap": "Activate in order to select location B on map",
-          "deselectLocationBinMap": "Deactivate in order to select location A on map"
+          "deselectLocationBinMap": "Deactivate in order to select location A on map",
+          "noData": "For your selection currently no data is available. Please change characteristic or date!"
         },
         "tab": {
           "dwelltime": {
