@@ -456,11 +456,12 @@ describe("SelectionManager.vue", () => {
 
         it("should reset the SelectionManager on remove_all_btn click", async () => {
             const wrapper = await mount(),
-                remove_btn = wrapper.find("#sm_wrapper .all_functions_buttons .remove_all_btn");
+                remove_btn = wrapper.find("#sm_wrapper .all_function_buttons .remove_all_btn");
 
             await wrapper.vm.$nextTick();
 
             remove_btn.trigger("click");
+            await wrapper.vm.$nextTick();
             expect(store.getters["Tools/SelectionManager/selections"].length).to.equal(0);
             expect(wrapper.find("#sm").exists()).to.be.false;
         });
