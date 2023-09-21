@@ -27,6 +27,10 @@ export default {
                     name: this.translate("additional:modules.tools.vpidashboard.tabitems.activities")
                 },
                 {
+                    id: "daily",
+                    name: this.translate("additional:modules.tools.vpidashboard.unique.hourly")
+                },
+                {
                     id: "ageGroup",
                     name: this.translate("additional:modules.tools.vpidashboard.tabitems.age")
                 },
@@ -89,6 +93,12 @@ export default {
                 visitorTypesDateA: this.getVisitorTypesDateA(this.chartType),
                 visitorTypesDateB: this.getVisitorTypesDateB(this.chartType)
             };
+        },
+        dailyActivities () {
+            return {
+                activitiesLocationA: this.getDailyActivitiesDateA(this.chartType),
+                activitiesLocationB: this.getDailyActivitiesDateB(this.chartType)
+            };
         }
     },
     watch: {
@@ -106,9 +116,9 @@ export default {
             if (oldValue !== newValue) {
                 this.showCompareChart = false;
 
-                // reset date picker, if switched from 'activities' to other character,
-                // as 'activities' allow every date and other characters allow only first day of month
-                if (oldValue === "activities") {
+                // reset date picker, if switched from or to 'activities' or 'daily'
+                // as 'activities' allow a date range, 'daily' allow all single dates and other characters allow only first day of month
+                if (["activities", "daily"].includes(oldValue) || ["activities", "daily"].includes(newValue)) {
                     this.date_a = null;
                     this.date_b = null;
                 }
@@ -191,6 +201,12 @@ export default {
                 await this.getDataToCompare(compareData);
                 this.setBarChartDataForVisitorTypes();
                 this.setLineChartDataForVisitorTypes();
+            }
+            if (this.character === "daily") {
+                this.characterName = this.translate("additional:modules.tools.vpidashboard.unique.hourly");
+                await this.getDataToCompare(compareData);
+                this.setBarChartDataForDailyActivities();
+                this.setLineChartDataForDailyActivities();
             }
             this.showCompareChart = true;
         },
@@ -287,6 +303,28 @@ export default {
             this.chartdata.line.labels = this.visitorTypes.visitorTypesDateA.labels;
         },
         /**
+         * sets the bar chart data to compare daily invidual visitors
+         * @return {void}
+         */
+        setBarChartDataForDailyActivities () {
+            this.chartdata.bar.datasets[0] = this.dailyActivities.activitiesLocationA.datasets[0];
+            this.chartdata.bar.datasets[1] = this.dailyActivities.activitiesLocationB.datasets[0];
+            this.chartdata.bar.datasets[0].label = dayjs(this.date_a).format("DD.MM.YYYY");
+            this.chartdata.bar.datasets[1].label = dayjs(this.date_b).format("DD.MM.YYYY");
+            this.chartdata.bar.labels = this.dailyActivities.activitiesLocationA.labels;
+        },
+        /**
+         * sets the line chart data to compare daily invidual visitors
+         * @return {void}
+         */
+        setLineChartDataForDailyActivities () {
+            this.chartdata.line.datasets[0] = this.dailyActivities.activitiesLocationA.datasets[0];
+            this.chartdata.line.datasets[1] = this.dailyActivities.activitiesLocationB.datasets[0];
+            this.chartdata.line.datasets[0].label = dayjs(this.date_a).format("DD.MM.YYYY");
+            this.chartdata.line.datasets[1].label = dayjs(this.date_b).format("DD.MM.YYYY");
+            this.chartdata.line.labels = this.dailyActivities.activitiesLocationA.labels;
+        },
+        /**
          * sets the disabled dates for the datepicker
          * only allow past dates, at least 3 days ago for activities or 2 months ago for other characters but not longer than 01.01.2019
          * for every endpoint except of "Activities" only the first day in month may be selected
@@ -301,7 +339,7 @@ export default {
                 return true;
             }
 
-            if (this.character !== "activities") {
+            if (this.character !== "activities" && this.character !== "daily") {
                 if (new Date(val).getTime() >= (new Date().getTime() - twoMonthsInMilliseconds)) {
                     return true;
                 }
@@ -348,6 +386,14 @@ export default {
                     }
                     else {
                         this.setLineChartDataForActivities();
+                    }
+                    break;
+                case "daily":
+                    if (chartType === "bar") {
+                        this.setBarChartDataForDailyActivities();
+                    }
+                    else {
+                        this.setLineChartDataForDailyActivities();
                     }
                     break;
                 default:
@@ -493,7 +539,11 @@ export default {
                         />
                     </div>
                     <div v-if="showCompareChart && !noData()">
-                        <table class="table">
+                        <!-- make table horizontally, when max 7 columns (one week selected for activities) for good overview -->
+                        <table
+                            v-if="chartdata[chartType].labels.length < 8"
+                            class="table"
+                        >
                             <thead>
                                 <tr>
                                     <th>
@@ -528,6 +578,44 @@ export default {
                                         :key="index"
                                     >
                                         {{ columndata.toLocaleString("de-DE") }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- make table vertically, when too many columns so that it can be as high as necessary -->
+                        <table
+                            v-else
+                            class="table"
+                        >
+                            <thead>
+                                <tr>
+                                    <th v-if="character !== 'daily'">
+                                        {{ translate('additional:modules.tools.vpidashboard.compare.date') }}
+                                    </th>
+                                    <th v-else>
+                                        {{ translate('additional:modules.tools.vpidashboard.compare.hour') }}
+                                    </th>
+                                    <th>
+                                        {{ dayjs(date_a).format("DD.MM.YYYY") }}
+                                    </th>
+                                    <th>
+                                        {{ dayjs(date_b).format("DD.MM.YYYY") }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(columndata, index) in chartdata.bar.datasets[0].data"
+                                    :key="index"
+                                >
+                                    <td>
+                                        {{ chartdata.bar.labels[index] }}
+                                    </td>
+                                    <td>
+                                        {{ columndata.toLocaleString("de-DE") }}
+                                    </td>
+                                    <td>
+                                        {{ chartdata.bar.datasets[1].data[index].toLocaleString("de-DE") }}
                                     </td>
                                 </tr>
                             </tbody>

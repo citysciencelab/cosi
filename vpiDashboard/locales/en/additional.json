@@ -88,6 +88,7 @@
         "compare": {
           "location": "Location",
           "date": "Date",
+          "hour": "Hour",
           "compare": "Compare",
           "character": "Character",
           "location_comparison": "Location Comparison",

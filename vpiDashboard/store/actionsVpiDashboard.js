@@ -97,6 +97,23 @@ const actions = {
         return response.data;
     },
     /**
+     * Addresses the WhatALocation endpoint to get hourly data for one day for unique visitors for two locations
+     * @param {Object} commit Commit Object
+     * @param {Object} compareData contains the date to be requested (date) and the locationID if it is not the "selectedLocationId" (locID)
+     * @returns {Promise<void>} sets the data in store
+     **/
+    getActivitiesForDayToCompare: async ({commit}, compareData) => {
+        commit("setLoader", true);
+
+        const
+            responseA = await apiEndpointService.receiveVisitorsDaily(compareData.location_id_a, compareData.date[0]),
+            responseB = await apiEndpointService.receiveVisitorsDaily(compareData.location_id_b, compareData.date[0]);
+
+        commit("setActivitiesDailyLocationA", responseA.data);
+        commit("setActivitiesDailyLocationB", responseB.data);
+        commit("setLoader", false);
+    },
+    /**
      * changes the selected chart data key
      * @param {Object} commit actions commit object.
      * @param {String} chartname contains dateFrom and dateTo to define daterange to be requested

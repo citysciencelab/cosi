@@ -34,6 +34,10 @@ const generateDataArray = {
             groupByProperty = "DwellTime";
             dataKey = "sum_num_visitors";
         }
+        if (endpoint === "daily") {
+            groupByProperty = "date__hour";
+            dataKey = "sum_num_visitors";
+        }
 
         // eslint-disable-next-line
         const sum_num_visitors = [];
@@ -49,6 +53,10 @@ const generateDataArray = {
                 else {
                     labels.push(i18next.t("additional:modules.tools.vpidashboard.tab.compareDates.dropdown.activities"));
                 }
+                sum_num_visitors.push(Math.ceil(element[dataKey] / 100) * 100);
+            }
+            else if (endpoint === "daily") {
+                labels.push(element[groupByProperty] + ":00");
                 sum_num_visitors.push(Math.ceil(element[dataKey] / 100) * 100);
             }
             else {
@@ -72,7 +80,7 @@ const generateDataArray = {
             }
         }
 
-        if (endpoint !== "activities") {
+        if (!["activities", "daily"].includes(endpoint)) {
             labels.forEach(l => {
                 const data = dataFromEndpoint?.data.find(el => {
                     return el[groupByProperty] === l || el[groupByProperty] === "[" + l + "]";

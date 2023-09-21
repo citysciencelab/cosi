@@ -43,6 +43,10 @@ export default {
                     name: this.translate("additional:modules.tools.vpidashboard.tabitems.activities")
                 },
                 {
+                    id: "daily",
+                    name: this.translate("additional:modules.tools.vpidashboard.unique.hourly")
+                },
+                {
                     id: "ageGroup",
                     name: this.translate("additional:modules.tools.vpidashboard.tabitems.age")
                 },
@@ -99,6 +103,12 @@ export default {
                 activitiesLocationB: this.getActivitiesLocationB(this.chartType)
             };
         },
+        dailyActivities () {
+            return {
+                activitiesLocationA: this.getDailyActivitiesLocationA(this.chartType),
+                activitiesLocationB: this.getDailyActivitiesLocationB(this.chartType)
+            };
+        },
         showCompareButton () {
             if (this.location_a !== "" && this.location_b !== "" && this.character !== "" && this.dates) {
                 if (Array.isArray(this.dates) && !this.dates[0]) {
@@ -126,9 +136,9 @@ export default {
             if (oldValue !== newValue) {
                 this.showCompareChart = false;
 
-                // reset date picker, if switched from or to 'activities'
-                // as 'activities' allow a date range and other characters allow only first day of month
-                if (oldValue === "activities" || newValue === "activities") {
+                // reset date picker, if switched from or to 'activities' or 'daily'
+                // as 'activities' allow a date range, 'daily' allow all single dates and other characters allow only first day of month
+                if (["activities", "daily"].includes(oldValue) || ["activities", "daily"].includes(newValue)) {
                     this.dates = null;
                 }
             }
@@ -251,6 +261,11 @@ export default {
                 this.setBarChartDataForActivities();
                 this.setLineChartDataForActivities();
             }
+            if (this.character === "daily") {
+                await this.getActivitiesForDayToCompare(compareData);
+                this.setBarChartDataForDailyActivities();
+                this.setLineChartDataForDailyActivities();
+            }
             this.showCompareChart = true;
         },
         /**
@@ -342,6 +357,28 @@ export default {
             this.chartdata.line.labels = this.invidualVisitors.activitiesLocationA.labels;
         },
         /**
+         * sets the bar chart data to compare daily invidual visitors
+         * @return {void}
+         */
+        setBarChartDataForDailyActivities () {
+            this.chartdata.bar.datasets[0] = this.dailyActivities.activitiesLocationA.datasets[0];
+            this.chartdata.bar.datasets[1] = this.dailyActivities.activitiesLocationB.datasets[0];
+            this.chartdata.bar.datasets[0].label = this.location_a.street;
+            this.chartdata.bar.datasets[1].label = this.location_b.street;
+            this.chartdata.bar.labels = this.dailyActivities.activitiesLocationA.labels;
+        },
+        /**
+         * sets the line chart data to compare daily invidual visitors
+         * @return {void}
+         */
+        setLineChartDataForDailyActivities () {
+            this.chartdata.line.datasets[0] = this.dailyActivities.activitiesLocationA.datasets[0];
+            this.chartdata.line.datasets[1] = this.dailyActivities.activitiesLocationB.datasets[0];
+            this.chartdata.line.datasets[0].label = this.location_a.street;
+            this.chartdata.line.datasets[1].label = this.location_b.street;
+            this.chartdata.line.labels = this.dailyActivities.activitiesLocationA.labels;
+        },
+        /**
          * sets the disabled dates for the datepicker
          * only allow past dates, at least 3 days ago for activities or 2 months ago for other characters but not longer than 01.01.2019
          * for every endpoint except of "activities" only the first day in month may be selected
@@ -356,7 +393,7 @@ export default {
                 return true;
             }
 
-            if (this.character !== "activities") {
+            if (this.character !== "activities" && this.character !== "daily") {
                 if (new Date(val).getTime() >= (new Date().getTime() - twoMonthsInMilliseconds)) {
                     return true;
                 }
@@ -418,6 +455,14 @@ export default {
                     }
                     else {
                         this.setLineChartDataForActivities();
+                    }
+                    break;
+                case "daily":
+                    if (chartType === "bar") {
+                        this.setBarChartDataForDailyActivities();
+                    }
+                    else {
+                        this.setLineChartDataForDailyActivities();
                     }
                     break;
                 default:
@@ -634,8 +679,11 @@ export default {
                     >
                         <thead>
                             <tr>
-                                <th>
+                                <th v-if="character !== 'daily'">
                                     {{ translate('additional:modules.tools.vpidashboard.compare.date') }}
+                                </th>
+                                <th v-else>
+                                    {{ translate('additional:modules.tools.vpidashboard.compare.hour') }}
                                 </th>
                                 <th>
                                     {{ location_a.street }}

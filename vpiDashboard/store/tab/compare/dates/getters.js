@@ -63,6 +63,22 @@ const getters = {
      */
     getVisitorTypesDateB: ({visitorTypesDateB}) => (chartType) => {
         return getCompareData.getCompareData(visitorTypesDateB, "#0335FC", "visitorTypes", chartType);
+    },
+    /**
+     * Generates the data array for the bar chart for location a and date a
+     * @param {Object} activitiesDailyDateA activitiesDailyDateA state
+     * @return {Object} data Object for bar chart
+     */
+    getDailyActivitiesDateA: ({activitiesDailyDateA}) => (chartType) => {
+        return getCompareData.getCompareData(activitiesDailyDateA, "#FD763B", "daily", chartType);
+    },
+    /**
+     * Generates the data array for the bar chart for location a and date b
+     * @param {Object} activitiesDailyDateB activitiesDailyDateB state
+     * @return {Object} data Object for bar chart
+     */
+    getDailyActivitiesDateB: ({activitiesDailyDateB}) => (chartType) => {
+        return getCompareData.getCompareData(activitiesDailyDateB, "#0335FC", "daily", chartType);
     }
 };
 
