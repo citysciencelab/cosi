@@ -65,6 +65,7 @@ describe("addons/mietenspiegelFormular/components/MietenspiegelFormular.vue", ()
                 }
             }
         });
+
         sinon.spy(MietenspiegelFormular.methods, "getCalculationData");
         sinon.spy(MietenspiegelFormular.methods, "modifyMietenspiegelData");
         sinon.spy(MietenspiegelFormular.methods, "getFeatureProperties");
@@ -507,7 +508,7 @@ describe("addons/mietenspiegelFormular/components/MietenspiegelFormular.vue", ()
                         "averageValue": "9.76"
                     };
 
-                expect(wrapper.vm.getRentPrice("2011 bis 2015", "ab 131m²", calcData)).to.deep.equal(expected);
+                expect(wrapper.vm.getRentPrice("2011 bis 2015", "ab 131m²", "Normale Wohnlage", calcData)).to.deep.equal(expected);
             });
         });
         describe("getNoticeText", () => {
