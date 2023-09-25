@@ -24,7 +24,7 @@ export default {
                 bar: {},
                 line: {}
             },
-            dataCardIndex: 0
+            dataCardIndex: new Date().getFullYear() - 2019
         };
     },
     computed: {
@@ -105,6 +105,7 @@ export default {
                 <DataCardPaginator
                     v-if="hasEntry"
                     :paginator-data="yearList"
+                    :start-value-index="yearList.length - 1"
                     @pager="changeIndex"
                 />
                 <div
@@ -114,16 +115,19 @@ export default {
                     <DataCard
                         :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.residentsPerWeek')"
                         detail="visitorTypeResidentsPerWeek"
+                        :start-value-index="yearList.length - 1"
                         :update-index="dataCardIndex"
                     />
                     <DataCard
                         :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.commutersPerWeek')"
                         detail="visitorTypeCommutersPerWeek"
+                        :start-value-index="yearList.length - 1"
                         :update-index="dataCardIndex"
                     />
                     <DataCard
                         :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.touristsPerWeek')"
                         detail="visitorTypeTouristsPerWeek"
+                        :start-value-index="yearList.length - 1"
                         :update-index="dataCardIndex"
                     />
                 </div>

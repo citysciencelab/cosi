@@ -118,7 +118,7 @@ export default {
          * @returns {Boolean} is activities chart type
         */
         isActivitiesChartType () {
-            return ["hourly", "timeRange"].indexOf(this.selectedChartData) !== -1;
+            return ["hourly", "timeRange"].includes(this.selectedChartData);
         },
         /**
          * switches the datepicker title based on the requested user interaction (choose a single date or a date range)
@@ -362,7 +362,9 @@ export default {
                 this.$store.commit("Tools/VpiDashboard/setLineChartMonthlyData", this.currentlySelectedYear);
                 this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
                 this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
-                this.getCurrentBarAndLineChartData();
+                if (!this.isActivitiesChartType) {
+                    this.getCurrentBarAndLineChartData();
+                }
             }
         },
         /**
@@ -374,7 +376,9 @@ export default {
             this.currentlySelectedMonth = newMonth;
             this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
             this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
-            this.getCurrentBarAndLineChartData();
+            if (!this.isActivitiesChartType) {
+                this.getCurrentBarAndLineChartData();
+            }
         },
         /**
          * sets the disabled dates for the datepicker

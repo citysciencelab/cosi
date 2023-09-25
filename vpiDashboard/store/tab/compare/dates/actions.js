@@ -59,6 +59,19 @@ const actions = {
             commit(`setVisitorTypes${compareData.dates[1].dateName}`, responseB.data);
             commit("setLoader", false);
         }
+
+        // Handle "hourly data for a day"
+        if (compareData.character === "daily") {
+            commit("setLoader", true);
+
+            const
+                responseA = await apiEndpointService.receiveVisitorsDaily(compareData.location_id, compareData.dates[0].date),
+                responseB = await apiEndpointService.receiveVisitorsDaily(compareData.location_id, compareData.dates[1].date);
+
+            commit(`setActivitiesDaily${compareData.dates[0].dateName}`, responseA.data);
+            commit(`setActivitiesDaily${compareData.dates[1].dateName}`, responseB.data);
+            commit("setLoader", false);
+        }
     }
 };
 

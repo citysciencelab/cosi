@@ -7,6 +7,8 @@ const state = {
     visitorTypesLocationB: undefined,
     activitiesLocationA: undefined,
     activitiesLocationB: undefined,
+    activitiesDailyLocationA: undefined,
+    activitiesDailyLocationB: undefined,
     selectLocationBInMap: false,
     selectedLocationB: undefined
 };
