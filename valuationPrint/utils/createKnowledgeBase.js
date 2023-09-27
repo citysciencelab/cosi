@@ -109,10 +109,14 @@ export function createKnowledgeBase (parcelData, services, mapProjection, onstar
             });
         }
         else if (config?.precompiler?.type === "assignAttributes") {
-            const attributes = [];
+            const attributes = [],
+                configProperties = {};
 
+            config.propertyName.forEach(prop => {
+                configProperties[prop] = undefined;
+            });
             features.forEach(feature => {
-                attributes.push(Object.assign(feature.getProperties(), config.precompiler.attributes));
+                attributes.push(Object.assign(configProperties, feature.getProperties(), config.precompiler.attributes));
             });
             knowledgeBase[prefix] = attributes;
             createKnowledgeBase(parcelData, services, mapProjection, onstart, onfinish, onUserError, onDevError, knowledgeBase, idx + 1);
