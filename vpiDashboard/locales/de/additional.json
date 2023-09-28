@@ -114,8 +114,9 @@
             "cardLabels": {
               "commutersPerWeek": "Ø Pendler pro Woche",
               "residentsPerWeek": "Ø Einwohner pro Woche",
-              "touristsPerWeek": "Ø Touristen pro Woche"
-            }
+              "touristsPerWeek": "Ø Touristen pro Woche (*)"
+            },
+            "footnote": "(*) Touristen beinhalten Tages- und Übernachtungstouristen."
           },
           "ageGroup": {
             "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat (*)",
@@ -125,7 +126,7 @@
           },
           "compareDates": {
             "dropdown": {
-              "activities": "Aktivitäten",
+              "activities": "Besucher eines bestimmten Tages",
               "ageGroup": "Altersgruppen",
               "dwellTime": "Verweildauer",
               "visitorTypes": "Besuchertypen"

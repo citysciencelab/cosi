@@ -131,6 +131,9 @@ export default {
                         :update-index="dataCardIndex"
                     />
                 </div>
+                <p class="tourist-footnote">
+                    {{ $t("additional:modules.tools.vpidashboard.tab.visitorTypes.footnote") }}
+                </p>
                 <h2>
                     {{ $t("additional:modules.tools.vpidashboard.tab.visitorTypes.chartTitle") }}
                 </h2>
@@ -196,5 +199,10 @@ h3 {
     flex-wrap: wrap;
     gap: 1rem;
     margin: 0 auto 1rem auto;
+}
+.tourist-footnote {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: right;
 }
 </style>

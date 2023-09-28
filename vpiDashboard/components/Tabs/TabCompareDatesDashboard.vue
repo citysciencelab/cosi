@@ -24,7 +24,7 @@ export default {
             characteristic: [
                 {
                     id: "activities",
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.activities")
+                    name: this.translate("additional:modules.tools.vpidashboard.tab.compareDates.dropdown.activities")
                 },
                 {
                     id: "daily",
@@ -552,6 +552,7 @@ export default {
                                     <th
                                         v-for="header in chartdata[chartType].labels"
                                         :key="header"
+                                        class="charttable-center"
                                     >
                                         {{ header }}
                                     </th>
@@ -565,6 +566,7 @@ export default {
                                     <td
                                         v-for="(columndata, index) in chartdata[chartType].datasets[0].data"
                                         :key="index"
+                                        class="charttable-center"
                                     >
                                         {{ columndata.toLocaleString("de-DE") }}
                                     </td>
@@ -576,6 +578,7 @@ export default {
                                     <td
                                         v-for="(columndata, index) in chartdata[chartType].datasets[1].data"
                                         :key="index"
+                                        class="charttable-center"
                                     >
                                         {{ columndata.toLocaleString("de-DE") }}
                                     </td>
@@ -595,10 +598,10 @@ export default {
                                     <th v-else>
                                         {{ translate('additional:modules.tools.vpidashboard.compare.hour') }}
                                     </th>
-                                    <th>
+                                    <th class="charttable-center">
                                         {{ dayjs(date_a).format("DD.MM.YYYY") }}
                                     </th>
-                                    <th>
+                                    <th class="charttable-center">
                                         {{ dayjs(date_b).format("DD.MM.YYYY") }}
                                     </th>
                                 </tr>
@@ -611,10 +614,10 @@ export default {
                                     <td>
                                         {{ chartdata.bar.labels[index] }}
                                     </td>
-                                    <td>
+                                    <td class="charttable-center">
                                         {{ columndata.toLocaleString("de-DE") }}
                                     </td>
-                                    <td>
+                                    <td class="charttable-center">
                                         {{ chartdata.bar.datasets[1].data[index].toLocaleString("de-DE") }}
                                     </td>
                                 </tr>
@@ -629,3 +632,9 @@ export default {
         </div>
     </div>
 </template>
+
+<style scoped>
+    td.charttable-center, th.charttable-center {
+        text-align: center;
+    }
+</style>

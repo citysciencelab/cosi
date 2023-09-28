@@ -40,7 +40,7 @@ export default {
             characteristic: [
                 {
                     id: "activities",
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.activities")
+                    name: this.translate("additional:modules.tools.vpidashboard.unique.timeRange")
                 },
                 {
                     id: "daily",
@@ -701,10 +701,10 @@ export default {
                                 <td>
                                     {{ chartdata.bar.labels[index] }}
                                 </td>
-                                <td>
+                                <td class="charttable-center">
                                     {{ columndata.toLocaleString("de-DE") }}
                                 </td>
-                                <td>
+                                <td class="charttable-center">
                                     {{ chartdata.bar.datasets[1].data[index].toLocaleString("de-DE") }}
                                 </td>
                             </tr>
@@ -724,5 +724,9 @@ export default {
         height: 1.2em;
         width: 1.2em;
         margin: 10px 5px;
+    }
+
+    td.charttable-center {
+        text-align: center;
     }
 </style>

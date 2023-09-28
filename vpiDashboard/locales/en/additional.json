@@ -114,8 +114,9 @@
             "cardLabels": {
               "residentsPerWeek": "Ø Residents per week",
               "commutersPerWeek": "Ø Commuters per week",
-              "touristsPerWeek": "Ø Tourists per week"
-            }
+              "touristsPerWeek": "Ø Tourists per week (*)"
+            },
+            "footnote": "(*) Tourists contain day tourists and overnight tourists."
           },
           "ageGroup": {
             "chartTitle": "Age groups by year and by year and month (*)",
@@ -125,7 +126,7 @@
           },
           "compareDates": {
             "dropdown": {
-              "activities": "Activities",
+              "activities": "Visitors of a single day",
               "ageGroup": "Age groups",
               "dwellTime": "Dwell Time",
               "visitorTypes": "Visitor Types"
