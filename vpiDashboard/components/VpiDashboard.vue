@@ -99,7 +99,7 @@ export default {
     watch: {
         allLocationsGeoJson (val) {
             const params = {
-                name: "WhatALocation Standorte",
+                name: "Standorte Frequenzdaten",
                 id: "vpi",
                 geoJSON: val,
                 styleId: "customLayer",

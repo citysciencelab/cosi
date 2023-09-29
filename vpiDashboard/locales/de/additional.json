@@ -106,14 +106,14 @@
           "visitorTypes": {
             "chartTitle": "Besuchertypen pro Woche",
             "chartLabels": {
-              "residents": "Einwohner",
+              "residents": "Hamburger",
               "commuters": "Pendler",
               "tourists_day": "Tagestouristen",
               "tourists_overnight": "Übernachtungstouristen"
             },
             "cardLabels": {
               "commutersPerWeek": "Ø Pendler pro Woche",
-              "residentsPerWeek": "Ø Einwohner pro Woche",
+              "residentsPerWeek": "Ø Hamburger pro Woche",
               "touristsPerWeek": "Ø Touristen pro Woche (*)"
             },
             "footnote": "(*) Touristen beinhalten Tages- und Übernachtungstouristen."

@@ -106,13 +106,13 @@
           "visitorTypes": {
             "chartTitle": "Visitor Types per week",
             "chartLabels": {
-              "residents": "Residents",
+              "residents": "Hamburger",
               "commuters": "Commuters",
               "tourists_day": "Day tourists",
               "tourists_overnight": "Overnight tourists"
             },
             "cardLabels": {
-              "residentsPerWeek": "Ø Residents per week",
+              "residentsPerWeek": "Ø Hamburger per week",
               "commutersPerWeek": "Ø Commuters per week",
               "touristsPerWeek": "Ø Tourists per week (*)"
             },
