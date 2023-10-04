@@ -78,7 +78,11 @@ export default {
 
             }
         },
-        // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
+        /**
+             * @descriptionwatcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
+             * @param {Integer} value - Index of the new active selection in this.selections
+             * @returns {void}
+             */
         activeSelection (value) {
             if (value !== null) {
                 this.activateSelection(value);
@@ -122,6 +126,12 @@ export default {
                 }
             }
         },
+        /**
+             * @description watcher the length (computed property) of this.selections array
+             * @param {Integer} newValue - new value after length has changed
+             * @param {Integer} oldValue - old value after length has changed
+             * @returns {void}
+             */
         selectionsLength (newValue, oldValue) {
         // Note on the importance of selectionsLength watcher in the overall structure:
         // `selections` is indirectly watched through the computed variable selectionsLength
@@ -631,13 +641,16 @@ export default {
                                     }"
                                     role="button"
                                     tabindex="0"
+                                    :title="selection.id"
                                     @mouseover="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
                                     @focus="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
                                     @mouseleave="resetHovers"
                                     @focusout="resetHovers"
                                 >
                                     <span class="hint">{{ selection.abv }}</span>
-                                    <p>{{ selection.id }}</p>
+                                    <p class="selection_name">
+                                        {{ selection.id }}
+                                    </p>
                                     <ul
                                         class="function_buttons"
                                     >
@@ -997,6 +1010,12 @@ export default {
                                 line-height:20px;
                                 margin:5px 6px 5px 0px;
                                 border:1px solid #888;
+                            }
+
+                            p.selection_name {
+                                max-width:250px;
+                                white-space: nowrap;
+                                overflow:hidden;
                             }
 
                             p {
