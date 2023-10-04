@@ -6,7 +6,9 @@ const state = {
     dwellTimeDateA: undefined,
     dwellTimeDateB: undefined,
     visitorTypesDateA: undefined,
-    visitorTypesDateB: undefined
+    visitorTypesDateB: undefined,
+    activitiesDailyDateA: undefined,
+    activitiesDailyDateB: undefined
 };
 
 export default state;

@@ -249,8 +249,8 @@ export default {
                 layer.getSource().getFeatures().forEach(feature => {
                     const style = styleList.find(color => color.attribute === feature.get(selectedAttribute));
 
-                    feature.set("FILLCOLOR", style.fill.color);
-                    feature.set("STROKECOLOR", style.stroke.color);
+                    feature.set("fillColor", style.fill.color);
+                    feature.set("strokeColor", style.stroke.color);
                 });
             }
             this.settingsDialog = false;

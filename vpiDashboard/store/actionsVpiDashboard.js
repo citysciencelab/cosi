@@ -1,11 +1,15 @@
 import tabVisitorTypesActions from "./tab/visitor-types/actions";
 import tabCompareDatesActions from "./tab/compare/dates/actions";
+import tabAgeGroupActions from "./tab/age-groups/actions";
+import tabDwellTimeActions from "./tab/dwell-time/actions";
 import apiEndpointService from "./apiEndpointService";
 
 const actions = {
 
     ...tabVisitorTypesActions,
     ...tabCompareDatesActions,
+    ...tabAgeGroupActions,
+    ...tabDwellTimeActions,
 
     /**
      * Addresses the WhatALocation locations endpoint to get all locations
@@ -70,76 +74,11 @@ const actions = {
         commit("setLoader", true);
 
         const
-            responseA = await apiEndpointService.receiveActivities(compareData.location_id_a, compareData.date),
-            responseB = await apiEndpointService.receiveActivities(compareData.location_id_b, compareData.date);
+            responseA = await apiEndpointService.receiveActivities(compareData.location_id_a, compareData.date[0], compareData.date[1]),
+            responseB = await apiEndpointService.receiveActivities(compareData.location_id_b, compareData.date[0], compareData.date[1]);
 
         commit("setActivitiesLocationA", responseA.data);
         commit("setActivitiesLocationB", responseB.data);
-        commit("setLoader", false);
-    },
-    /**
-     * Addresses the WhatALocation dwell time endpoint to get the dwell times for the complete time range
-     * @param {Object} state the store's state and commit object.
-     * @returns {void}
-     **/
-    getDwellTimes: async ({state, commit}) => {
-        commit("setLoader", true);
-
-        const
-            response = await apiEndpointService.receiveDwellTimes(state.selectedLocationId);
-
-        commit("setDwellTimes", response.data.data);
-        commit("setLoader", false);
-    },
-    /**
-     * Addresses the WhatALocation dwell time endpoint with 2
-     * request to compare data
-     * @param {Object} commit Commit Object
-     * @param {Object} compareData Object which holds the data to compare
-     * @returns {Promise<void>} sets the data in store
-     */
-    getDwellTimesToCompare: async ({commit}, compareData) => {
-        commit("setLoader", true);
-
-        const
-            responseA = await apiEndpointService.receiveDwellTimes(compareData.location_id_a, compareData.date),
-            responseB = await apiEndpointService.receiveDwellTimes(compareData.location_id_b, compareData.date);
-
-        commit("setDwellTimeLocationA", responseA.data);
-        commit("setDwellTimeLocationB", responseB.data);
-        commit("setLoader", false);
-    },
-    /**
-     * Get all data by age group
-     * @param {Object} state the store's state and commit object.
-     * @returns {Promise<void>} sets the data in store
-     */
-    getAllAgeGroupsData: async ({state, commit}) => {
-        commit("setLoader", true);
-
-        const
-            response = await apiEndpointService.receiveAgeGroups(state.selectedLocationId);
-
-        commit("setAllAgeGroupsData", response.data);
-        commit("setAllAgeGroupsMonthlyData");
-        commit("setLoader", false);
-    },
-    /**
-     * Addresses the WhatALocation age group endpoint with 2
-     * request to compare data
-     * @param {Object } commit Commit Object
-     * @param {Object } compareData Object which holds the data to compare
-     * @returns {Promise<void>} sets the data in store
-     */
-    getAgeGroupsToCompare: async ({commit}, compareData) => {
-        commit("setLoader", true);
-
-        const
-            responseA = await apiEndpointService.receiveAgeGroups(compareData.location_id_a, compareData.date),
-            responseB = await apiEndpointService.receiveAgeGroups(compareData.location_id_b, compareData.date);
-
-        commit("setAgeGroupsLocationA", responseA.data);
-        commit("setAgeGroupsLocationB", responseB.data);
         commit("setLoader", false);
     },
     /**
@@ -156,6 +95,23 @@ const actions = {
 
         commit("setLoader", false);
         return response.data;
+    },
+    /**
+     * Addresses the WhatALocation endpoint to get hourly data for one day for unique visitors for two locations
+     * @param {Object} commit Commit Object
+     * @param {Object} compareData contains the date to be requested (date) and the locationID if it is not the "selectedLocationId" (locID)
+     * @returns {Promise<void>} sets the data in store
+     **/
+    getActivitiesForDayToCompare: async ({commit}, compareData) => {
+        commit("setLoader", true);
+
+        const
+            responseA = await apiEndpointService.receiveVisitorsDaily(compareData.location_id_a, compareData.date[0]),
+            responseB = await apiEndpointService.receiveVisitorsDaily(compareData.location_id_b, compareData.date[0]);
+
+        commit("setActivitiesDailyLocationA", responseA.data);
+        commit("setActivitiesDailyLocationB", responseB.data);
+        commit("setLoader", false);
     },
     /**
      * changes the selected chart data key

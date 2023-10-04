@@ -45,12 +45,12 @@ export default {
         },
         buildingAgeClass (newVal) {
             if (newVal && this.livingSpace) {
-                this.setRentPrice(this.getRentPrice(newVal, this.livingSpace, this.calculationData));
+                this.setRentPrice(this.getRentPrice(newVal, this.livingSpace, this.residentialInformation.bezeichnung, this.calculationData));
             }
         },
         livingSpace (newVal) {
             if (newVal && this.buildingAgeClass) {
-                this.setRentPrice(this.getRentPrice(this.buildingAgeClass, newVal, this.calculationData));
+                this.setRentPrice(this.getRentPrice(this.buildingAgeClass, newVal, this.residentialInformation.bezeichnung, this.calculationData));
             }
         },
         clickCoordinate (coord) {
@@ -88,21 +88,24 @@ export default {
          * Returns the min, max and middle value price for the rent from calculation data with given attributes.
          * @param {String} buildingAgeClass - the buildingAgeClass attribute to looking for in calculationData.
          * @param {String} livingSpace - the livingSpace attribute to looking for in calculationData.
+         * @param {String} location - The location attribute to looking for in calculationData.
          * @param {Object[]} calculationData - The calculated data array.
          * @returns {Object} - The Object with min, max and middle value for the rent price.
          */
-        getRentPrice (buildingAgeClass, livingSpace, calculationData) {
+        getRentPrice (buildingAgeClass, livingSpace, location, calculationData) {
             const result = {};
 
-            if (!Array.isArray(calculationData) || !calculationData.length || typeof buildingAgeClass !== "string" || typeof livingSpace !== "string") {
+            if (!Array.isArray(calculationData) || !calculationData.length || typeof buildingAgeClass !== "string" || typeof livingSpace !== "string" || typeof location !== "string") {
                 return result;
             }
 
             for (let i = 0; i < calculationData?.length; i++) {
                 if (Object.prototype.hasOwnProperty.call(calculationData[i], "Baualtersklasse/Bezugsfertigkeit") &&
                     Object.prototype.hasOwnProperty.call(calculationData[i], "Wohnfläche") &&
+                    Object.prototype.hasOwnProperty.call(calculationData[i], "Kategorie") &&
                     calculationData[i]["Baualtersklasse/Bezugsfertigkeit"] === buildingAgeClass &&
-                    calculationData[i]["Wohnfläche"] === livingSpace) {
+                    calculationData[i]["Wohnfläche"] === livingSpace &&
+                    calculationData[i].Kategorie === location) {
                     result.rangeMin = calculationData[i].spanne_min;
                     result.rangeMax = calculationData[i].spanne_max;
                     result.averageValue = calculationData[i].mittelwert;

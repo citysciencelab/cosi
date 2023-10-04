@@ -159,7 +159,8 @@ const actions = {
     },
 
     /**
-     * Checks if the oblique viewer url and called website have the same host and sets the url in the state.
+     * Checks if the oblique viewer URL and called website have the same origin (hostname) and sets the URL in the state.
+     * Different ports will be handled as same origin.
      * Difference only in `www.` is handled separately.
      * @param {Object} param store context
      * @param {Object} param.commit the commit
@@ -170,13 +171,15 @@ const actions = {
      * @returns {void}
      */
     setObliqueViewerURLWithSameHostname ({commit, dispatch, getters, rootGetters}, startCoordinates) {
-        const urlParts = rootGetters.getRestServiceById(getters.serviceId).url.split("https://")[1].split("/");
+        const serviceUrl = rootGetters.getRestServiceById(getters.serviceId).url,
+            serviceOrigin = new URL(serviceUrl),
+            currentOrigin = new URL(document.location.href);
 
-        if (document.location.hostname === urlParts[0]) {
-            commit("setObliqueViewerURL", rootGetters.getRestServiceById(getters.serviceId).url + "?groundPosition=" + startCoordinates);
+        if (serviceOrigin.hostname === currentOrigin.hostname) {
+            commit("setObliqueViewerURL", serviceUrl + "?groundPosition=" + startCoordinates);
         }
-        else if (document.location.hostname.startsWith("www.") && document.location.hostname.split("www.")[1] === urlParts[0]) {
-            dispatch("setObliqueViewerURLWithReplacedHostname", {urlParts, startCoordinates});
+        else if (document.location.hostname.startsWith("www.") && document.location.hostname.split("www.")[1] === serviceOrigin.hostname) {
+            dispatch("setObliqueViewerURLWithReplacedHostname", {urlParts: serviceOrigin.pathname, startCoordinates});
         }
         else {
             dispatch("Alerting/addSingleAlert", i18next.t("additional:modules.tools.vcOblique.sameOrigin"), {root: true});

@@ -26,8 +26,8 @@ describe("addons/vpiDashboard/test/ dwell time tab component", () => {
                         selectedLocationId () {
                             return "";
                         },
-                        getDwellTimeChartJsData: function (type) {
-                            return {type: type};
+                        getDwellTimeChartJsData: function (type, year) {
+                            return {type: type, year: year};
                         }
                     },
                     actions: {
@@ -48,6 +48,7 @@ describe("addons/vpiDashboard/test/ dwell time tab component", () => {
 
     it("renders the dwell time component", () => {
         expect(wrapper.find(".tab-dwell-time").exists()).to.be.true;
+        expect(wrapper.find(".piechart").exists()).to.be.true;
     });
 
     it("sets the correct charttype", () => {

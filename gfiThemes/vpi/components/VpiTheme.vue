@@ -12,15 +12,31 @@ export default {
             return this.feature.getMappedProperties();
         }
     },
+    watch: {
+        feature (value, oldValue) {
+            if (value.getMappedProperties().ID !== oldValue.getMappedProperties().ID) {
+                this.updateSelectedLocationId();
+            }
+        }
+    },
     async mounted () {
 
         if (!this.$store.getters["Tools/VpiDashboard/active"]) {
             await this.$store.commit("Tools/VpiDashboard/setActive", true);
         }
-        const locationID = this.feature.getMappedProperties().ID,
-            source = "map";
+        this.updateSelectedLocationId();
+    },
+    methods: {
+        /**
+         * Updates the selected location ID for VPI dashboard.
+         * @returns {void}
+         */
+        updateSelectedLocationId: function () {
+            const locationID = this.feature.getMappedProperties().ID,
+                source = "map";
 
-        this.$store.commit("Tools/VpiDashboard/setSelectedLocationId", {locationID, source});
+            this.$store.commit("Tools/VpiDashboard/setSelectedLocationId", {locationID, source});
+        }
     }
 };
 </script>

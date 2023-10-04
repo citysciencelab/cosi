@@ -41,7 +41,7 @@
         },
         "details": "Details",
         "unique": {
-          "allData": "Activities",
+          "allData": "Visitors totally since 2019",
           "uniqueVisitors": "Activities",
           "dailyOverview": "Average of daily activities in {{ month }} in {{ year }}",
           "monthlyOverview": "Number of monthly activities in {{ year }}",
@@ -88,6 +88,7 @@
         "compare": {
           "location": "Location",
           "date": "Date",
+          "hour": "Hour",
           "compare": "Compare",
           "character": "Character",
           "location_comparison": "Location Comparison",
@@ -95,34 +96,37 @@
           "date_b": "Compare date",
           "date_comparison": "Date comparison",
           "selectLocationBinMap": "Activate in order to select location B on map",
-          "deselectLocationBinMap": "Deactivate in order to select location A on map"
+          "deselectLocationBinMap": "Deactivate in order to select location A on map",
+          "noData": "For your selection currently no data is available. Please change characteristic or date!"
         },
         "tab": {
           "dwelltime": {
             "chartTitle": "Dwell time in minutes"
           },
           "visitorTypes": {
-            "chartTitle": "Visitor Types",
+            "chartTitle": "Visitor Types per week",
             "chartLabels": {
-              "residents": "Residents",
+              "residents": "Hamburger",
               "commuters": "Commuters",
               "tourists_day": "Day tourists",
               "tourists_overnight": "Overnight tourists"
             },
             "cardLabels": {
-              "residentsPerDay": "Ø Residents per Tag",
-              "commutersPerDay": "Ø Commuters per Tag",
-              "touristsPerDay": "Ø Tourists per Tag"
-            }
+              "residentsPerWeek": "Ø Hamburger per week",
+              "commutersPerWeek": "Ø Commuters per week",
+              "touristsPerWeek": "Ø Tourists per week (*)"
+            },
+            "footnote": "(*) Tourists contain day tourists and overnight tourists."
           },
           "ageGroup": {
-            "chartTitle": "Age groups by year and by year and month",
+            "chartTitle": "Age groups by year and by year and month (*)",
             "pieChartTitle": "Age groups by year",
-            "lineBarChartTitle": "Weekly visitors per age group in year {{year}}"
+            "lineBarChartTitle": "Weekly visitors per age group in year {{year}}",
+            "footnote": "(*) People under 18 years are not displayed. The age group of 18-19 contains data leaks. Therefore the dataset will not be included."
           },
           "compareDates": {
             "dropdown": {
-              "activities": "Activities",
+              "activities": "Visitors of a single day",
               "ageGroup": "Age groups",
               "dwellTime": "Dwell Time",
               "visitorTypes": "Visitor Types"

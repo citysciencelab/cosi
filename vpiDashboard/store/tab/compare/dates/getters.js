@@ -5,64 +5,80 @@ const getters = {
      * @param {Object} activitiesDateA activitiesDateA state
      * @return {Object} data Object for bar chart
      */
-    getActivitiesDateA: ({activitiesDateA}) => {
-        return getCompareData.getCompareData(activitiesDateA, "#FD763B", "activities");
+    getActivitiesDateA: ({activitiesDateA}) => (chartType) => {
+        return getCompareData.getCompareData(activitiesDateA, "#FD763B", "activities", chartType);
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
      * @param {Object} activitiesDateB activitiesDateB state
      * @return {Object} data Object for bar chart
      */
-    getActivitiesDateB: ({activitiesDateB}) => {
-        return getCompareData.getCompareData(activitiesDateB, "#0335FC", "activities");
+    getActivitiesDateB: ({activitiesDateB}) => (chartType) => {
+        return getCompareData.getCompareData(activitiesDateB, "#0335FC", "activities", chartType);
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date a
      * @param {Object} dwellTimeDateA dwellTimeDateA state
      * @return {Object} data Object for bar chart
      */
-    getDwellTimeDateA: ({dwellTimeDateA}) => {
-        return getCompareData.getCompareData(dwellTimeDateA, "#FD763B", "dwellTime");
+    getDwellTimeDateA: ({dwellTimeDateA}) => (chartType) => {
+        return getCompareData.getCompareData(dwellTimeDateA, "#FD763B", "dwellTime", chartType);
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
      * @param {Object} dwellTimeDateB dwellTimeDateB state
      * @return {Object} data Object for bar chart
      */
-    getDwellTimeDateB: ({dwellTimeDateB}) => {
-        return getCompareData.getCompareData(dwellTimeDateB, "#0335FC", "dwellTime");
+    getDwellTimeDateB: ({dwellTimeDateB}) => (chartType) => {
+        return getCompareData.getCompareData(dwellTimeDateB, "#0335FC", "dwellTime", chartType);
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date a
      * @param {Object} ageGroupsDateA ageGroupsDateA state
      * @return {Object} data Object for bar chart
      */
-    getAgeGroupsDateA: ({ageGroupsDateA}) => {
-        return getCompareData.getCompareData(ageGroupsDateA, "#FD763B", "ageGroup");
+    getAgeGroupsDateA: ({ageGroupsDateA}) => (chartType) => {
+        return getCompareData.getCompareData(ageGroupsDateA, "#FD763B", "ageGroup", chartType);
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
      * @param {Object} ageGroupsDateB ageGroupsDateB state
      * @return {Object} data Object for bar chart
      */
-    getAgeGroupsDateB: ({ageGroupsDateB}) => {
-        return getCompareData.getCompareData(ageGroupsDateB, "#0335FC", "ageGroup");
+    getAgeGroupsDateB: ({ageGroupsDateB}) => (chartType) => {
+        return getCompareData.getCompareData(ageGroupsDateB, "#0335FC", "ageGroup", chartType);
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date a
      * @param {Object} visitorTypesDateA visitorTypesDateA state
      * @return {Object} data Object for bar chart
      */
-    getVisitorTypesDateA: ({visitorTypesDateA}) => {
-        return getCompareData.getCompareData(visitorTypesDateA, "#FD763B", "visitorTypes");
+    getVisitorTypesDateA: ({visitorTypesDateA}) => (chartType) => {
+        return getCompareData.getCompareData(visitorTypesDateA, "#FD763B", "visitorTypes", chartType);
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
      * @param {Object} visitorTypesDateB visitorTypesDateB state
      * @return {Object} data Object for bar chart
      */
-    getVisitorTypesDateB: ({visitorTypesDateB}) => {
-        return getCompareData.getCompareData(visitorTypesDateB, "#0335FC", "visitorTypes");
+    getVisitorTypesDateB: ({visitorTypesDateB}) => (chartType) => {
+        return getCompareData.getCompareData(visitorTypesDateB, "#0335FC", "visitorTypes", chartType);
+    },
+    /**
+     * Generates the data array for the bar chart for location a and date a
+     * @param {Object} activitiesDailyDateA activitiesDailyDateA state
+     * @return {Object} data Object for bar chart
+     */
+    getDailyActivitiesDateA: ({activitiesDailyDateA}) => (chartType) => {
+        return getCompareData.getCompareData(activitiesDailyDateA, "#FD763B", "daily", chartType);
+    },
+    /**
+     * Generates the data array for the bar chart for location a and date b
+     * @param {Object} activitiesDailyDateB activitiesDailyDateB state
+     * @return {Object} data Object for bar chart
+     */
+    getDailyActivitiesDateB: ({activitiesDailyDateB}) => (chartType) => {
+        return getCompareData.getCompareData(activitiesDailyDateB, "#0335FC", "daily", chartType);
     }
 };
 

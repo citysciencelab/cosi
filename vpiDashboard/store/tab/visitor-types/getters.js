@@ -1,4 +1,3 @@
-import {changeDateFormat} from "../../../utils/changeDateFormat";
 const getters = {
     /**
      * Get a "visitor types" ChartJS data object.
@@ -6,31 +5,11 @@ const getters = {
      * @returns {Object} ChartJS data for given chartType
      */
     getVisitorTypesChartJsData: (state) => (chartType, year) => {
-        const labels = [],
-            data_residents = [],
-            data_commuter = [],
-            data_tourists_day = [],
-            data_tourists_overnight = [];
-
-        Object.keys(state.visitorTypesByYearAndTypeComplete[year]).forEach(date => {
-            const items = state.visitorTypesByYearAndTypeComplete[year][date];
-
-            // Set label from date, e.g. 2023-01-01 becomes 2023-01
-            labels.push(changeDateFormat(date));
-
-            data_residents.push(
-                Math.ceil(items.find(i => i.VisitorType === "Einwohner")?.sum_num_visitors / 100) * 100 || 0
-            );
-            data_commuter.push(
-                Math.ceil(items.find(i => i.VisitorType === "Pendler")?.sum_num_visitors / 100) * 100 || 0
-            );
-            data_tourists_day.push(
-                Math.ceil(items.find(i => i.VisitorType === "Tagestouristen")?.sum_num_visitors / 100) * 100 || 0
-            );
-            data_tourists_overnight.push(
-                Math.ceil(items.find(i => i.VisitorType === "Übernachtungstouristen")?.sum_num_visitors / 100) * 100 || 0
-            );
-        });
+        const labels = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true}),
+            data_residents = state.visitorTypesByYearAndTypeComplete[year].Einwohner.map(d => d.sum),
+            data_commuter = state.visitorTypesByYearAndTypeComplete[year].Pendler.map(d => d.sum),
+            data_tourists_day = state.visitorTypesByYearAndTypeComplete[year].Tagestouristen.map(d => d.sum),
+            data_tourists_overnight = state.visitorTypesByYearAndTypeComplete[year].Übernachtungstouristen.map(d => d.sum);
 
         let chartData;
 

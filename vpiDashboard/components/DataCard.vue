@@ -46,13 +46,18 @@ export default {
             type: Number,
             required: false,
             default: 0
+        },
+        startValueIndex: {
+            type: Number,
+            required: false,
+            default: 0
         }
     },
     data () {
         return {
             currentMonthIndex: 0,
             currentDayIndex: 0,
-            currentYearIndex: 0
+            currentYearIndex: this.startValueIndex
         };
     },
     computed: {
@@ -86,13 +91,13 @@ export default {
             }
 
             // Cards for Tab "Visitor Types"
-            if (this.detail === "visitorTypeCommutersPerDay" && this.visitorTypesByTypeAndYear?.Pendler) {
+            if (this.detail === "visitorTypeCommutersPerWeek" && this.visitorTypesByTypeAndYear?.Pendler) {
                 return this.visitorTypesByTypeAndYear.Pendler[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
             }
-            if (this.detail === "visitorTypeResidentsPerDay" && this.visitorTypesByTypeAndYear?.Einwohner) {
+            if (this.detail === "visitorTypeResidentsPerWeek" && this.visitorTypesByTypeAndYear?.Einwohner) {
                 return this.visitorTypesByTypeAndYear.Einwohner[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
             }
-            if (this.detail === "visitorTypeTouristsPerDay" && this.visitorTypesByTypeAndYear?.Touristen) {
+            if (this.detail === "visitorTypeTouristsPerWeek" && this.visitorTypesByTypeAndYear?.Touristen) {
                 return this.visitorTypesByTypeAndYear.Touristen[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
             }
 
@@ -123,13 +128,13 @@ export default {
             }
 
             // Cards for Tab "Visitor Types"
-            if (this.detail === "visitorTypeCommutersPerDay" && this.visitorTypesByTypeAndYear?.Pendler) {
+            if (this.detail === "visitorTypeCommutersPerWeek" && this.visitorTypesByTypeAndYear?.Pendler) {
                 return Object.keys(this.visitorTypesByTypeAndYear.Pendler);
             }
-            if (this.detail === "visitorTypeResidentsPerDay" && this.visitorTypesByTypeAndYear?.Einwohner) {
+            if (this.detail === "visitorTypeResidentsPerWeek" && this.visitorTypesByTypeAndYear?.Einwohner) {
                 return Object.keys(this.visitorTypesByTypeAndYear.Einwohner);
             }
-            if (this.detail === "visitorTypeTouristsPerDay" && this.visitorTypesByTypeAndYear?.Touristen) {
+            if (this.detail === "visitorTypeTouristsPerWeek" && this.visitorTypesByTypeAndYear?.Touristen) {
                 return Object.keys(this.visitorTypesByTypeAndYear.Touristen);
             }
 
@@ -140,9 +145,9 @@ export default {
         updateIndex (newValue, oldValue) {
             if (newValue !== oldValue) {
                 if (
-                    (this.detail === "visitorTypeCommutersPerDay" ||
-                    this.detail === "visitorTypeResidentsPerDay" ||
-                    this.detail === "visitorTypeTouristsPerDay") &&
+                    (this.detail === "visitorTypeCommutersPerWeek" ||
+                    this.detail === "visitorTypeResidentsPerWeek" ||
+                    this.detail === "visitorTypeTouristsPerWeek") &&
                     this.newValue !== this.currentYearIndex
                 ) {
                     this.changeIndex(newValue);
@@ -170,9 +175,9 @@ export default {
 
             // Cards for Tab "Visitor Types"
             if (
-                this.detail === "visitorTypeCommutersPerDay" ||
-                this.detail === "visitorTypeResidentsPerDay" ||
-                this.detail === "visitorTypeTouristsPerDay"
+                this.detail === "visitorTypeCommutersPerWeek" ||
+                this.detail === "visitorTypeResidentsPerWeek" ||
+                this.detail === "visitorTypeTouristsPerWeek"
             ) {
                 this.currentYearIndex = index;
             }
@@ -213,6 +218,7 @@ export default {
         <div v-if="navigation">
             <DataCardPaginator
                 :paginator-data="paginatorData"
+                :start-value-index="startValueIndex"
                 @pager="changeIndex"
             />
         </div>

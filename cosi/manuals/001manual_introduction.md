@@ -2,7 +2,7 @@
 ## Cockpit Städtische Infrastrukturen
 #### GIS + datenbasierte Analyse- und Planungstools in der Hamburger Stadtverwaltung
 ___
-![CoSI Logo](cosi_logo_jf.png)
+![CoSI Logo](./cosi_logo_jf.png)
 
 ___
 
@@ -36,11 +36,12 @@ ___
 - Paul Linnow, HafenCity Universität Hamburg
 - Peter Duensing, Senatskanzlei Hamburg, ITD
 - Sebastian Duden, LGV Hamburg
+- Till Wewer, Senatskanzlei Hamburg, ITD
 - Yuxiang Zhang, HafenCity Universität Hamburg  
 
 
 ### Stand
-08/23
+09/23
 
 ### Keywords
 GIS, Dashboard, Data Driven Urban Planning, Social Infrastructure, Urban Data Platform, Data Visualization, Planning Support Tools, Demand Driven Decision Making  
@@ -71,62 +72,62 @@ ___
 ## Inhalt
 ___
 - CoSI: Cockpit Städtische Infrakstrukturen
-  - [Datenmodell & -Infrastruktur](#markdown-header-datenmodell---infrastruktur)
+  - [Datenmodell und Infrastruktur](#markdown-header-datenmodell-und-infrastruktur)
   - [Module](#markdown-header-module)
    - [Themen (Layer)](#markdown-header-themen-layer)
-   - [Analyse]
-      - [Einwohnerabfrage](/cosi/manuals/002einwohnerabfrage)
-      - [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse)
+   - [Analyse](#markdown-header-analyse)
+      - [Einwohnerabfrage](#markdown-header-einwohnerabfrage)
+      - [Erreichbarkeitsanalyse](#markdown-header-erreichbarkeitsanalyse)
          - [Erreichbarkeit ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-referenzpunkt)
          - [Erreichbarkeit im Gebiet](#markdown-header-erreichbarkeit-im-gebiet)
          - [Erreichbarkeit entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
-      - [Vergleichbare Gebiete ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln)
-      - [Filter](/cosi/manuals/005filter)
-      - [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse)
-      - [DIPAS](/cosi/manuals/007dipas)
-      - [Datenvisualisierung](/cosi/manuals/008graphenvisualisierung)
-    - [Simulation]
-      - [Einrichtungen anlegen](/cosi/manuals/009einrichtungenanlegen)
-      - [Einrichtungen bearbeiten](/cosi/manuals/010einrichtungenbearbeiten)
-      - [Wohnungsbauquartiere anlegen](/cosi/manuals/011wohnquartiereanlegen)
-    - [Dienste](/cosi/manuals/012dienste)
-      - [Geodaten Importieren](/cosi/manuals/013geodatenimportieren)
-      - [Sitzung Speichern/Laden](/cosi/manuals/014sitzungspeichern)
-      - [Vorlagen](/cosi/manuals/015vorlagen)
-    - [Dashboard]
-      - [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht)
-      - [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht)
-    - [Gebietsauswahl](/cosi/manuals/018gebietsauswahl)
-    - [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung)
-    - [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis)
-    - [Manuelle Flächenauswahl](/cosi/manuals/021manuelleflaechenauswahl)
-    - [Auswahlmanager](/cosi/manuals/022auswahlmanager)
-    - [Flächen stylen](/cosi/manuals/023flaechenstylen)
-    - [Report Tool](/cosi/manuals/024reporttool)
+      - [Vergleichbare Gebiete ermitteln](#markdown-header-vergleichbare-gebiete-ermitteln)
+      - [Filter](#markdown-header-filter)
+      - [Versorgungsanalyse](#markdown-header-versorgungsanalyse)
+      - [DIPAS](#markdown-header-dipas)
+      - [Graphenvisualisierung](#markdown-header-graphenvisualisierung)
+    - [Simulation](#markdown-header-simulation)
+      - [Einrichtungen anlegen](#markdown-header-einrichtungen-anlegen)
+      - [Einrichtungen bearbeiten](#markdown-header-einrichtungen-bearbeiten)
+      - [Wohnungsbauquartiere anlegen](#markdown-header-wohnungsbauquartiere-anlegen)
+    - [Dienste](#markdown-header-dienste)
+      - [Geodaten Importieren](#markdown-header-geodaten-importieren)
+      - [Sitzung Speichern/Laden](#markdown-header-sitzung-speichern-und-laden)
+      - [Vorlagen](#markdown-header-vorlagen)
+    - Dashboard
+      - [Statistische Datenübersicht](#markdown-header-statistische-datenuebersicht)
+      - [Einrichtungsübersicht](#markdown-header-einrichtungsuebersicht)
+    - [Gebietsauswahl](#markdown-header-gebietsauswahl)
+    - [Kartenanalyse regionalstatistischer Daten](#markdown-header-kartenanalyse-regionalstatistischer-daten)
+    - [Ergebnisverzeichnis](#markdown-header-ergebnisverzeichnis)
+    - [Manuelle Flächenauswahl](#markdown-header-manuelleflaechenauswahl)
+    - [Auswahlmanager](#markdown-header-auswahlmanager)
+    - [Flächen stylen](#markdown-header-flaechen-stylen)
 
 <div style="page-break-after: always;"></div>
 
 ___
-## Datenmodell & -Infrastruktur
+## Datenmodell und Infrastruktur
 ___
   
-CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
+CoSI ermöglicht ganz ähnlich wie der FHH-Atlas die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
 
-![Vgl_FHH_Atlas](../cosi/manuals/001a_Vgl_FHH_Atlas.png)
+![Vgl_FHH_Atlas](./001a_Vgl_FHH_Atlas.png)
 
-*Abb.001a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
+*Abb. a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
 Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
-![stat_daten-anzeige](../cosi/manuals/001b_stat_daten-anzeige.png)
+![stat_daten-anzeige](./001b_stat_daten-anzeige.png)
 
-*Abb.001b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
+*Abb. b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
-![bsp-analysefunktionen](../cosi/manuals/001c_bsp-analysefunktionen.png)
+![bsp-analysefunktionen](./001c_bsp-analysefunktionen.png)
 
-*Abb.001c: Analysefunktionen, hier Versorgungsanalyse.*
+
+*Abb. c: Analysefunktionen, hier Versorgungsanalyse.*
 
 Darüber hinaus erlaubt CoSI, in die Datensätze “einzugreifen”: sie zu filtern, zu durchsuchen oder für die Darstellung von Planungsszenarien im laufenden Programm zu verändern (s. Simulation).
 
@@ -152,14 +153,14 @@ Die Daten des StaNord liegen für alle Verwaltungsebenen der FHH (statistische G
    - Infrastruktur
    - Bevölkerungsbewegung
 
-Diese Datensätze beinhalten Zeitreihen, welche (je nach Datensatz) von ca. 2012 an erfasst sind und jährlich erweitert werden.
+Diese Datensätze beinhalten Zeitreihen, welche je nach Datensatz von ca. 2012 an erfasst sind und jährlich erweitert werden.
 
 *Hinweis: Aus datenschutzrechtlichen Gründen werden bereits vom Datenbereitsteller solche Datensätze herausgefiltert, welche bei sensiblen Daten auf einzelne Individuen zurückverfolgbar wären. Diese Datensätze sind mit "–" oder mit "Keine Daten" ausgewiesen.*
 
 ### Fachdaten
-CoSI bietet ganz ähnlich wie der FHH-Atlas Fachdatensätze in einem Themenbaum an. Während der FHH-Atlas grundsätzlich alle auf der Urban Data Platform verfügbaren und innerhalb der FHH freigegebenen Datensätze anzeigt, wird für CoSI in Abstimmung mit der Nutzendengruppe AG CoSI eine Auwahl getroffen. Dies dient der Übersicht und ermöglicht den Test und ggf. die Anpassung der Analysefunktionen an die angebotenen Daten.
+CoSI bietet ganz ähnlich wie der FHH-Atlas Fachdatensätze in einem Themenbaum an. Während der FHH-Atlas grundsätzlich alle auf der Urban Data Platform verfügbaren und innerhalb der FHH freigegebenen Datensätze anzeigt, wird für CoSI in Abstimmung mit der Nutzendengruppe AG CoSI eine Auswahl getroffen. Dies dient der Übersicht und ermöglicht den Test und ggf. die Anpassung der Analysefunktionen an die angebotenen Daten.
 
-Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder noch eingebunden werden können, werden als Geodienste von unterschiedlichsten Dateneignern (dies sind vor allem Behörden und Bezirksämter, aber prinzipiell sind auch Vereine oder Privatunternehmen denkbar.) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
+Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder zukünftig noch eingebunden werden, werden als Geodienste von unterschiedlichsten Dateneignern (dies sind vor allem Behörden und Bezirksämter, aber prinzipiell sind auch Vereine oder Privatunternehmen denkbar.) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
 
 ### Prognosedaten
 Die Prognosedaten enthalten die prognostizierte jährliche Bevölkerungsentwicklung in den Stadtteilen Hamburgs nach vier Altersgruppen und Geschlecht bis zum Jahr 2035. Stichtag ist jeweils der 31.12.
@@ -182,7 +183,7 @@ Alle in CoSI und dem FHH-Atlas dargestellten Daten werden von den Bereitstellern
 Ein WMS (Web Map Service) liefert Geodaten / Karten als Rasterbilder (PNG), welche zunächst einmal ohne Hintergrundinformation in der Karte angezeigt werden. Gleichzeitig können die Legende des Datensatzes oder Informationen zu einer bestimmten Koordinate über weitere Requests abgerufen werden.
 
 ### WFS
-Der WFS (Web Feature Service) liefert im Gegensatz zum WMS keine fertige Kartenansicht, sondern ein rohes Datenobjekt, bei dem der Datensatz jedes geografischen Objekts (Punkt, Linie, Fläche, etc.) inkl. seiner Attribute (z.B. eine Schule mitsamt ihrem Schultyp, ihrer Schülerzahl, Mailadresse und Nachmittagsangebot) einzeln übermittelt. Die Visualisierung (das Styling) der Daten erfolgt dann anhand vorgegebener oder mitgelieferter Konfigurationen innerhalb der Applikation. Dies ist rechenintensiver für den Anwendenden und weniger kontrollierbar von Seiten des Datenbereitstellers, bietet jedoch die Möglichkeit mit den Objekten innerhalb des Portals direkt zu interagieren oder sie zu verändern.  
+Der WFS (Web Feature Service) liefert im Gegensatz zum WMS keine fertige Kartenansicht, sondern ein rohes Datenobjekt, bei dem der Datensatz jedes geografischen Objekts (Punkt, Linie, Fläche, etc.) inkl. seiner Attribute (z.B. eine Schule mitsamt ihrem Schultyp, ihrer Schülerzahl, Mailadresse und Nachmittagsangebot) einzeln übermittelt wird. Die Visualisierung (das Styling) der Daten erfolgt dann anhand vorgegebener oder mitgelieferter Konfigurationen innerhalb der Applikation. Dies ist rechenintensiver für den Anwendenden und weniger kontrollierbar von Seiten des Datenbereitstellers, bietet jedoch die Möglichkeit mit den Objekten innerhalb des Portals direkt zu interagieren oder sie zu verändern.  
 
 <div style="page-break-after: always;"></div>
 
@@ -192,40 +193,40 @@ ___
 ### Überblick 
 CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet") an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
 
-![Das CoSI Nutzer-Interface](001d_user_interface.PNG)
+![Das CoSI Nutzer-Interface](./001d_user_interface.PNG)
 
-*Abb.001d: Das CoSI User-Interface.*
+*Abb. d: Das CoSI User-Interface.*
 
 1. **Themenbau/ Layer** (s. Themen)
 2. **Analyse**
-      1. [Manuelle Flächenauswahl für Fachdaten](/cosi/manuals/021manuelleflaechenauswahl)
-      2. [Einwohnerabfrage](/cosi/manuals/002einwohnerabfrage)
-      3. [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse)
-      4. [Vergleichbare Gebiete ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln)
-      5. [Filter](/cosi/manuals/005filter)
+      1. [Manuelle Flächenauswahl für Fachdaten](./021manuelleflaechenauswahl)
+      2. [Einwohnerabfrage](./002einwohnerabfrage)
+      3. [Erreichbarkeitsanalyse](./003erreichbarkeitsanalyse)
+      4. [Vergleichbare Gebiete ermitteln](./004vergleichbaregebieteermitteln)
+      5. [Filter](./005filter)
       6. Strecke/ Fläche messen
-      7. [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse)
-      8. [DIPAS](/cosi/manuals/007dipas)
-      9. [Datenvisualisierung](/cosi/manuals/008graphenvisualisierung)
+      7. [Versorgungsanalyse](./006versorgungsanalyse)
+      8. [DIPAS](./007dipas)
+      9. [Datenvisualisierung](./008graphenvisualisierung)
 
 3. **Simulation**
-      1. [Einrichtungen anlegen](/cosi/manuals/009einrichtungenanlegen)
-      2. [Einrichtungen bearbeiten](/cosi/manuals/010einrichtungenbearbeiten)
-      2. [Wohnungsbauquartiere anlegen](/cosi/manuals/011wohnquartiereanlegen)
+      1. [Einrichtungen anlegen](./009einrichtungenanlegen)
+      2. [Einrichtungen bearbeiten](./010einrichtungenbearbeiten)
+      2. [Wohnungsbauquartiere anlegen](./011wohnquartiereanlegen)
 
 4. **Dienste**
       1. Zeichnen/ Schreiben
       2. Karte drucken
       3. Mousehover ein-/ ausschalten
-      4. [Geodaten Importieren](/cosi/manuals/013geodatenimportieren)
+      4. [Geodaten Importieren](./013geodatenimportieren)
       5. WMS hinzufügen
-      6. [Sitzung speichern/laden](/cosi/manuals/014sitzungspeichern)
-      7. [Vorlagen](/cosi/manuals/015vorlagen)
+      6. [Sitzung speichern/laden](./014sitzungspeichern)
+      7. [Vorlagen](./015vorlagen)
 
 5. **Dashboard**
-      1. [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht)
-      2. [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht)
-6. **[Gebiete auswählen](/cosi/manuals/018gebietsauswahl)**
+      1. [Statistische Datenübersicht](./016statistischedatenuebersicht)
+      2. [Einrichtungsübersicht](./017einrichtungsuebersicht)
+6. **[Gebiete auswählen](./018gebietsauswahl)**
 7. **Kontaktformular**
 8. **Legende** (s. Legende)
 9. **Suchleiste**
@@ -235,7 +236,7 @@ CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tool
 12. **Herauszoomen**
 13. **Vollbildansicht aktivieren/ deaktivieren**
 14. **Zurück zur Startansicht**
-15. **[Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung)**
+15. **[Kartenanalyse regionalstatistischer Daten](./019kartenvisualisierung)**
 16. **Tooltip** (sog. Mousehover)
    > Zeigt das Gebiet und andere Elemente wie Tooltipps unter dem Mauszeiger an. Kann unter "Dienste" via "Mousehover ein-/ausschalten" deaktiviert werden.
 18. **Ausgewählte Gebiete**
@@ -251,9 +252,9 @@ Layer können aus dem Reiter "Themen" jederzeit zugeschaltet oder ausgeschaltet 
 
 Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten und die aktuelle Auswahl an Kartenebenen.
 
-![Der Themenbaum](001e_Themenbaum.PNG)
+![Der Themenbaum](./001e_Themenbaum.PNG)
 
-*Abb.001e: Der Themenbaum.*
+*Abb. e: Der Themenbaum.*
 
 Öffnen Sie mit dem Plus die Übersicht der Themenkategorie oder minimieren sie die Ansicht wieder mit dem Minus.
 
@@ -266,7 +267,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
       > Daten zur reinen "Anzeige" in der Karte, v.a. entnommen aus dem FHH Atlas (bereitgestellt als WMS).
 3. **Ausgewählte Themen**  
    > Siehe nachfolgende Abbildung.
-4. **Hilfsbutton**
+4. **Hilfe-Button**
    > Ruft diese Anleitung auf.
 5. **Kartenhintergrund**
    > Hier können Sie für den Kartenhintergrund grau oder weiß auswählen.
@@ -274,8 +275,8 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
    > Diese Funktion fixiert den Themenbaum, so dass er auch bei Interaktionen mit der Karte angezeigt bleibt.
    
    **Ausgewählte Themen**  
-      ![Abbildung 3: Ausgewählte Themen](001f_ausgewaehltethemen.PNG)  
-      *Abb.001f: Ausgewählte Themen.*  
+      ![Abbildung 3: Ausgewählte Themen](./001f_ausgewaehltethemen.PNG)
+      *Abb.f: Ausgewählte Themen.*  
       - **3.1 Informationen und Legenden**
       - **3.2 Einstellungen**  
          Über das Zahnrad öffnen sich Einstellungen für Transparenz und Ebene verschieben.
@@ -284,13 +285,13 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
       - **3.4 Ebene nach oben/unten**  
          Über das Pfeilmenü kann die Ebene der Layer verschoben werden.
 
-Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In der nachfolgenden Abbildung zum Beispiel stellen die grün/blauen Punkte und Icons die vorhandenen Sportstätten im Gebiet dar. Die gelben und grünen Flächen sind aus dem Verzeichnis öffentlicher Grünanlagen. Nummerierte Punkte zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an, wenn sich Punkte überschneiden.
+Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In der nachfolgenden Abbildung zum Beispiel stellen die grün/blauen Punkte und Icons die vorhandenen Sportstätten im Gebiet dar. Die gelben und grünen Flächen stammen aus dem Verzeichnis öffentlicher Grünanlagen. Nummerierte Punkte zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an, wenn sich Punkte überschneiden.
 Eine Legende zu den aktiven Themen kann durch einen Klick auf den Reiter "Legende" eingeblendet werden. Unabhängig davon können über den Infobutton rechts neben dem Layer weitere Informationen zu dem jeweiligen Thema aufgerufen werden. Es werden folgende Informationen bereitgestellt: Kurzbeschreibung des Themas, Datenstand und Legende. Auch befinden sich hinter dem Info-Button die Links zu Downloadquellen und eine WFS - bzw. WMF -Adresse.
 Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle Auswahl (Sportstätte, Grünanlage, etc.). Auf der Infotafel werden Informationen über das Objekt angezeigt. Datenschutzrelevante (personenbezogene) Daten werden nicht angezeigt.
 
-![Abbildung 4: Manuelle Flächenauswahl](001g_bspkartenansicht.PNG)
+![Abbildung 4: Manuelle Flächenauswahl](./001g_bspkartenansicht.PNG)
 
-*Abb.001g: Beispiel für Kartenansicht.*
+*Abb. g: Beispiel für Kartenansicht.*
 
 <div style="page-break-after: always;"></div>
 

@@ -24,7 +24,7 @@ export default {
                 bar: {},
                 line: {}
             },
-            dataCardIndex: 0
+            dataCardIndex: new Date().getFullYear() - 2019
         };
     },
     computed: {
@@ -105,6 +105,7 @@ export default {
                 <DataCardPaginator
                     v-if="hasEntry"
                     :paginator-data="yearList"
+                    :start-value-index="yearList.length - 1"
                     @pager="changeIndex"
                 />
                 <div
@@ -112,21 +113,27 @@ export default {
                     class="row cards"
                 >
                     <DataCard
-                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.residentsPerDay')"
-                        detail="visitorTypeResidentsPerDay"
+                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.residentsPerWeek')"
+                        detail="visitorTypeResidentsPerWeek"
+                        :start-value-index="yearList.length - 1"
                         :update-index="dataCardIndex"
                     />
                     <DataCard
-                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.commutersPerDay')"
-                        detail="visitorTypeCommutersPerDay"
+                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.commutersPerWeek')"
+                        detail="visitorTypeCommutersPerWeek"
+                        :start-value-index="yearList.length - 1"
                         :update-index="dataCardIndex"
                     />
                     <DataCard
-                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.touristsPerDay')"
-                        detail="visitorTypeTouristsPerDay"
+                        :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.touristsPerWeek')"
+                        detail="visitorTypeTouristsPerWeek"
+                        :start-value-index="yearList.length - 1"
                         :update-index="dataCardIndex"
                     />
                 </div>
+                <p class="tourist-footnote">
+                    {{ $t("additional:modules.tools.vpidashboard.tab.visitorTypes.footnote") }}
+                </p>
                 <h2>
                     {{ $t("additional:modules.tools.vpidashboard.tab.visitorTypes.chartTitle") }}
                 </h2>
@@ -149,13 +156,21 @@ export default {
                                         }
                                     }]
                                 }"
+                                :given-options="{
+                                    animation: false
+                                }"
                             />
                         </div>
                     </div>
                     <!-- Line Chart -->
                     <div v-if="chartType === 'line'">
                         <div class="row line">
-                            <LinechartItem :data="chartdata.line" />
+                            <LinechartItem
+                                :data="chartdata.line"
+                                :given-options="{
+                                    animation: false
+                                }"
+                            />
                         </div>
                     </div>
                 </div>
@@ -184,5 +199,10 @@ h3 {
     flex-wrap: wrap;
     gap: 1rem;
     margin: 0 auto 1rem auto;
+}
+.tourist-footnote {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: right;
 }
 </style>

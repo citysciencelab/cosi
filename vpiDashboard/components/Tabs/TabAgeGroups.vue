@@ -103,6 +103,7 @@ export default {
     watch: {
         async selectedLocationId () {
             this.showChart = false;
+            await this.getAllAgeGroupsData();
             await this.updateChartData();
             this.showChart = true;
         }
@@ -239,6 +240,7 @@ export default {
                             </div>
                         </div>
                     </div>
+                    {{ $t("additional:modules.tools.vpidashboard.tab.ageGroup.footnote") }}
                     <div class="charts chart-types select">
                         <ChangeChartTypeButtons
                             :chart-type="chartType"

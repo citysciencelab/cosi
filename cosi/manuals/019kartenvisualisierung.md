@@ -5,9 +5,9 @@ Das Werkzeug zur Visualisierung regionalstatistischer Daten ermöglicht die Ausw
 Das Werkzeug kann die ausgewählten Datensätze auf der Karte visualisieren und generiert eine dynamische Legende. Des Weiteren können Datensätze für mehrere Jahre ausgewählt und auf Wunsch in hintereinander laufender Folge animiert werden.  
 
 
-![Abbildung 1: Fenster zur Kartenanalyse statistischer Daten](https://user-images.githubusercontent.com/43250699/159270688-1d5e1b8f-799b-4d31-8b8e-247b0fd45293.png)  
+![Abbildung 1: Fenster zur Kartenanalyse statistischer Daten](./019a_kartenvisualisierung.png)  
 
-*Abb.: Fenster zur Kartenanalyse statistischer Daten.*  
+*Abb. a: Fenster zur Kartenanalyse statistischer Daten.*  
 
 1.	**Werkzeug minimieren/ maximieren**  
    > Über den Button kann das Fenster des Werkzeugs minimiert bzw. wieder maximiert werden.
@@ -16,7 +16,7 @@ Das Werkzeug kann die ausgewählten Datensätze auf der Karte visualisieren und 
 3.	**Vor/ Zurück**  
    > Mit den Vor- und Zurückbuttons können die regionalstatistischen Datensätze fließend durchgeschaltet werden.
 4.	**Jahresauswahl**  
-   > Hier können Sie das Jahr auswählen, für den der regionalstatistische Datensatz visualisiert wird. Standardmäßig ist das aktuellste, verfügbare Jahr ausgewählt.
+   > Hier können Sie das Jahr auswählen für den der regionalstatistische Datensatz visualisiert wird. Standardmäßig ist das aktuellste, verfügbare Jahr ausgewählt.
 5.	**Referenzjahr auswählen**  
    > Hier können Sie ein Vergleichsjahr auswählen. Die prozentuale Differenz zum ersten, ausgewählten Jahr wird dann ebenfalls auf der Karte eingeblendet.
 6.	**Auswahlfeld für die verfügbaren regionalstatistischen Datensätze**     

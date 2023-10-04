@@ -1,5 +1,7 @@
 <script>
 import BarchartItem from "../../../../src/share-components/charts/components/BarchartItem.vue";
+import LinechartItem from "../../../../src/share-components/charts/components/LinechartItem.vue";
+import ChangeChartTypeButtons from "../ChangeChartTypeButtons.vue";
 import DatePicker from "vue2-datepicker";
 import {mapActions, mapGetters, mapState} from "vuex";
 import actions from "../../store/actionsVpiDashboard";
@@ -12,18 +14,25 @@ export default {
     name: "TabCompareDashboard",
     components: {
         BarchartItem,
+        LinechartItem,
+        ChangeChartTypeButtons,
         DatePicker,
         Multiselect
     },
     data () {
         return {
-            date: null,
+            dates: null,
             all_locations: [],
             locations_a: [],
             location_a: "",
             location_b: "",
+            chartType: "bar",
             chartdata: {
                 bar: {
+                    datasets: [],
+                    labels: []
+                },
+                line: {
                     datasets: [],
                     labels: []
                 }
@@ -31,7 +40,11 @@ export default {
             characteristic: [
                 {
                     id: "activities",
-                    name: this.translate("additional:modules.tools.vpidashboard.tabitems.activities")
+                    name: this.translate("additional:modules.tools.vpidashboard.unique.timeRange")
+                },
+                {
+                    id: "daily",
+                    name: this.translate("additional:modules.tools.vpidashboard.unique.hourly")
                 },
                 {
                     id: "ageGroup",
@@ -68,30 +81,42 @@ export default {
         },
         dwellTime () {
             return {
-                dwellTimeLocationA: this.getDwellTimeLocationA,
-                dwellTimeLocationB: this.getDwellTimeLocationB
+                dwellTimeLocationA: this.getDwellTimeLocationA(this.chartType),
+                dwellTimeLocationB: this.getDwellTimeLocationB(this.chartType)
             };
         },
         ageGroups () {
             return {
-                ageGroupsLocationA: this.getAgeGroupsLocationA,
-                ageGroupsLocationB: this.getAgeGroupsLocationB
+                ageGroupsLocationA: this.getAgeGroupsLocationA(this.chartType),
+                ageGroupsLocationB: this.getAgeGroupsLocationB(this.chartType)
             };
         },
         visitorTypes () {
             return {
-                visitorTypesLocationA: this.getVisitorTypesLocationA,
-                visitorTypesLocationB: this.getVisitorTypesLocationB
+                visitorTypesLocationA: this.getVisitorTypesLocationA(this.chartType),
+                visitorTypesLocationB: this.getVisitorTypesLocationB(this.chartType)
             };
         },
         invidualVisitors () {
             return {
-                activitiesLocationA: this.getActivitiesLocationA,
-                activitiesLocationB: this.getActivitiesLocationB
+                activitiesLocationA: this.getActivitiesLocationA(this.chartType),
+                activitiesLocationB: this.getActivitiesLocationB(this.chartType)
+            };
+        },
+        dailyActivities () {
+            return {
+                activitiesLocationA: this.getDailyActivitiesLocationA(this.chartType),
+                activitiesLocationB: this.getDailyActivitiesLocationB(this.chartType)
             };
         },
         showCompareButton () {
-            if (this.location_a !== "" && this.location_b !== "" && this.character !== "" && this.date !== null) {
+            if (this.location_a !== "" && this.location_b !== "" && this.character !== "" && this.dates) {
+                if (Array.isArray(this.dates) && !this.dates[0]) {
+                    // dates can be an array for date ranges or a data object for single date selection
+                    // check for "this.dates" is sufficient for data object
+                    // this check is necessary for date range arrays which can be filled but with null values
+                    return false;
+                }
                 return true;
             }
             return false;
@@ -104,19 +129,17 @@ export default {
         }
     },
     watch: {
-        date (oldValue, newValue) {
-            if (oldValue !== newValue) {
-                this.showCompareChart = false;
-            }
+        dates () {
+            this.showCompareChart = false;
         },
         character (newValue, oldValue) {
             if (oldValue !== newValue) {
                 this.showCompareChart = false;
 
-                // reset date picker, if switched from 'activities' to other character,
-                // as 'activities' allow every date and other characters allow only first day of month
-                if (oldValue === "activities") {
-                    this.date = null;
+                // reset date picker, if switched from or to 'activities' or 'daily'
+                // as 'activities' allow a date range, 'daily' allow all single dates and other characters allow only first day of month
+                if (["activities", "daily"].includes(oldValue) || ["activities", "daily"].includes(newValue)) {
+                    this.dates = null;
                 }
             }
         },
@@ -197,30 +220,51 @@ export default {
          */
         async compareData () {
             const
-                date = dayjs(this.date).format("YYYY-MM-DD"),
                 location_id_a = this.location_a.location_id,
                 location_id_b = this.location_b.location_id,
                 compareData = {
                     location_id_a: location_id_a,
                     location_id_b: location_id_b,
-                    date: date
+                    date: null
                 };
+            let dateFrom = "",
+                dateTo = "";
+
+            if (!Array.isArray(this.dates)) {
+                dateFrom = dayjs(this.dates).format("YYYY-MM-DD");
+                dateTo = dayjs(this.dates).format("YYYY-MM-DD");
+            }
+            else {
+                dateFrom = dayjs(this.dates[0]).format("YYYY-MM-DD");
+                dateTo = dayjs(this.dates[1]).format("YYYY-MM-DD");
+            }
+
+            compareData.date = [dateFrom, dateTo];
 
             if (this.character === "dwellTime") {
                 await this.getDwellTimesToCompare(compareData);
                 this.setBarChartDataForDwellTime();
+                this.setLineChartDataForDwellTime();
             }
             if (this.character === "ageGroup") {
                 await this.getAgeGroupsToCompare(compareData);
-                this.setBarCharDataForAgeGroups();
+                this.setBarChartDataForAgeGroups();
+                this.setLineChartDataForAgeGroups();
             }
             if (this.character === "visitorTypes") {
                 await this.getVisitorTypesToCompare(compareData);
-                this.setBarCharDataForVisitorTypes();
+                this.setBarChartDataForVisitorTypes();
+                this.setLineChartDataForVisitorTypes();
             }
             if (this.character === "activities") {
                 await this.getActivitiesToCompare(compareData);
-                this.setBarCharDataForActivities();
+                this.setBarChartDataForActivities();
+                this.setLineChartDataForActivities();
+            }
+            if (this.character === "daily") {
+                await this.getActivitiesForDayToCompare(compareData);
+                this.setBarChartDataForDailyActivities();
+                this.setLineChartDataForDailyActivities();
             }
             this.showCompareChart = true;
         },
@@ -236,10 +280,21 @@ export default {
             this.chartdata.bar.labels = this.dwellTime.dwellTimeLocationA.labels;
         },
         /**
+         * sets the line chart data to compare dwell times
+         * @return {void}
+         */
+        setLineChartDataForDwellTime () {
+            this.chartdata.line.datasets[0] = this.dwellTime.dwellTimeLocationA.datasets[0];
+            this.chartdata.line.datasets[1] = this.dwellTime.dwellTimeLocationB.datasets[0];
+            this.chartdata.line.datasets[0].label = this.location_a.street;
+            this.chartdata.line.datasets[1].label = this.location_b.street;
+            this.chartdata.line.labels = this.dwellTime.dwellTimeLocationA.labels;
+        },
+        /**
          * sets the bar chart data to compare age groups
          * @return {void}
          */
-        setBarCharDataForAgeGroups () {
+        setBarChartDataForAgeGroups () {
             this.chartdata.bar.datasets[0] = this.ageGroups.ageGroupsLocationA.datasets[0];
             this.chartdata.bar.datasets[1] = this.ageGroups.ageGroupsLocationB.datasets[0];
             this.chartdata.bar.datasets[0].label = this.location_a.street;
@@ -247,10 +302,21 @@ export default {
             this.chartdata.bar.labels = this.ageGroups.ageGroupsLocationA.labels;
         },
         /**
+         * sets the line chart data to compare age groups
+         * @return {void}
+         */
+        setLineChartDataForAgeGroups () {
+            this.chartdata.line.datasets[0] = this.ageGroups.ageGroupsLocationA.datasets[0];
+            this.chartdata.line.datasets[1] = this.ageGroups.ageGroupsLocationB.datasets[0];
+            this.chartdata.line.datasets[0].label = this.location_a.street;
+            this.chartdata.line.datasets[1].label = this.location_b.street;
+            this.chartdata.line.labels = this.ageGroups.ageGroupsLocationA.labels;
+        },
+        /**
          * sets the bar chart data to compare visitor type
          * @return {void}
          */
-        setBarCharDataForVisitorTypes () {
+        setBarChartDataForVisitorTypes () {
             this.chartdata.bar.datasets[0] = this.visitorTypes.visitorTypesLocationA.datasets[0];
             this.chartdata.bar.datasets[1] = this.visitorTypes.visitorTypesLocationB.datasets[0];
             this.chartdata.bar.datasets[0].label = this.location_a.street;
@@ -258,15 +324,59 @@ export default {
             this.chartdata.bar.labels = this.visitorTypes.visitorTypesLocationA.labels;
         },
         /**
+         * sets the line chart data to compare visitor type
+         * @return {void}
+         */
+        setLineChartDataForVisitorTypes () {
+            this.chartdata.line.datasets[0] = this.visitorTypes.visitorTypesLocationA.datasets[0];
+            this.chartdata.line.datasets[1] = this.visitorTypes.visitorTypesLocationB.datasets[0];
+            this.chartdata.line.datasets[0].label = this.location_a.street;
+            this.chartdata.line.datasets[1].label = this.location_b.street;
+            this.chartdata.line.labels = this.visitorTypes.visitorTypesLocationA.labels;
+        },
+        /**
          * sets the bar chart data to compare invidual visitors
          * @return {void}
          */
-        setBarCharDataForActivities () {
+        setBarChartDataForActivities () {
             this.chartdata.bar.datasets[0] = this.invidualVisitors.activitiesLocationA.datasets[0];
             this.chartdata.bar.datasets[1] = this.invidualVisitors.activitiesLocationB.datasets[0];
             this.chartdata.bar.datasets[0].label = this.location_a.street;
             this.chartdata.bar.datasets[1].label = this.location_b.street;
             this.chartdata.bar.labels = this.invidualVisitors.activitiesLocationA.labels;
+        },
+        /**
+         * sets the line chart data to compare invidual visitors
+         * @return {void}
+         */
+        setLineChartDataForActivities () {
+            this.chartdata.line.datasets[0] = this.invidualVisitors.activitiesLocationA.datasets[0];
+            this.chartdata.line.datasets[1] = this.invidualVisitors.activitiesLocationB.datasets[0];
+            this.chartdata.line.datasets[0].label = this.location_a.street;
+            this.chartdata.line.datasets[1].label = this.location_b.street;
+            this.chartdata.line.labels = this.invidualVisitors.activitiesLocationA.labels;
+        },
+        /**
+         * sets the bar chart data to compare daily invidual visitors
+         * @return {void}
+         */
+        setBarChartDataForDailyActivities () {
+            this.chartdata.bar.datasets[0] = this.dailyActivities.activitiesLocationA.datasets[0];
+            this.chartdata.bar.datasets[1] = this.dailyActivities.activitiesLocationB.datasets[0];
+            this.chartdata.bar.datasets[0].label = this.location_a.street;
+            this.chartdata.bar.datasets[1].label = this.location_b.street;
+            this.chartdata.bar.labels = this.dailyActivities.activitiesLocationA.labels;
+        },
+        /**
+         * sets the line chart data to compare daily invidual visitors
+         * @return {void}
+         */
+        setLineChartDataForDailyActivities () {
+            this.chartdata.line.datasets[0] = this.dailyActivities.activitiesLocationA.datasets[0];
+            this.chartdata.line.datasets[1] = this.dailyActivities.activitiesLocationB.datasets[0];
+            this.chartdata.line.datasets[0].label = this.location_a.street;
+            this.chartdata.line.datasets[1].label = this.location_b.street;
+            this.chartdata.line.labels = this.dailyActivities.activitiesLocationA.labels;
         },
         /**
          * sets the disabled dates for the datepicker
@@ -283,7 +393,7 @@ export default {
                 return true;
             }
 
-            if (this.character !== "activities") {
+            if (this.character !== "activities" && this.character !== "daily") {
                 if (new Date(val).getTime() >= (new Date().getTime() - twoMonthsInMilliseconds)) {
                     return true;
                 }
@@ -297,10 +407,77 @@ export default {
          * @return {string} the label for the selected comparison type
          */
         getComparisonChartLabel (id) {
-            const
-                selectedItem = this.characteristic.find(item => item.id === id);
+            const selectedItem = this.characteristic.find(item => item.id === id);
+            let returnValue = selectedItem.name;
 
-            return selectedItem.name;
+            if (this.character === "ageGroup") {
+                returnValue += " (*)";
+            }
+
+            return returnValue;
+        },
+        /**
+         * define, which charttype shall be displayed
+         * @param {String} chartType an be one of "bar" or "line"
+         * @returns {void}
+         */
+        setChartType (chartType) {
+            this.chartType = chartType;
+
+            switch (this.character) {
+                case "dwellTime":
+                    if (chartType === "bar") {
+                        this.setBarChartDataForDwellTime();
+                    }
+                    else {
+                        this.setLineChartDataForDwellTime();
+                    }
+                    break;
+                case "ageGroup":
+                    if (chartType === "bar") {
+                        this.setBarChartDataForAgeGroups();
+                    }
+                    else {
+                        this.setLineChartDataForAgeGroups();
+                    }
+                    break;
+                case "visitorTypes":
+                    if (chartType === "bar") {
+                        this.setBarChartDataForVisitorTypes();
+                    }
+                    else {
+                        this.setLineChartDataForVisitorTypes();
+                    }
+                    break;
+                case "activities":
+                    if (chartType === "bar") {
+                        this.setBarChartDataForActivities();
+                    }
+                    else {
+                        this.setLineChartDataForActivities();
+                    }
+                    break;
+                case "daily":
+                    if (chartType === "bar") {
+                        this.setBarChartDataForDailyActivities();
+                    }
+                    else {
+                        this.setLineChartDataForDailyActivities();
+                    }
+                    break;
+                default:
+                    break;
+            }
+        },
+        /**
+         * check if there are data available for the selected location and the selected date
+         * @returns {Boolean} if no data is available
+         */
+        noData () {
+            if (this.chartdata[this.chartType].datasets[0].data.length === 0 && this.chartdata[this.chartType].datasets[1].data.length === 0) {
+                return true;
+            }
+            return false;
         }
     }
 };
@@ -394,12 +571,13 @@ export default {
                         <div class="col">
                             <DatePicker
                                 id="vpi-dashboard-select-date-picker"
-                                v-model="date"
+                                v-model="dates"
                                 aria-label="Datum"
                                 placeholder="Datum"
                                 :disabled-date="disabledDates"
                                 type="date"
                                 format="DD.MM.YYYY"
+                                :range="character === 'activities'"
                                 :multiple="false"
                                 :show-week-number="true"
                                 title-format="DD.MM.YYYY"
@@ -418,24 +596,51 @@ export default {
                     </Button>
                 </div>
                 <div
-                    v-if="showCompareChart"
+                    v-if="showCompareChart && noData()"
+                    class="row d-flex justify-content-center mt-3"
+                >
+                    {{ translate('additional:modules.tools.vpidashboard.compare.noData') }}
+                </div>
+                <div
+                    v-if="showCompareChart && !noData()"
                     class="row d-flex justify-content-center mt-3"
                 >
                     <h4>
                         {{ translate('additional:modules.tools.vpidashboard.compare.location_comparison') }}
                         {{ getComparisonChartLabel(character) }}
                     </h4>
-                    <BarchartItem :data="chartdata.bar" />
+                    <BarchartItem
+                        v-if="chartType === 'bar'"
+                        :data="chartdata.bar"
+                        :given-options="{
+                            animation: false
+                        }"
+                    />
+                    <LinechartItem
+                        v-if="chartType === 'line'"
+                        :data="chartdata.line"
+                        :given-options="{
+                            animation: false
+                        }"
+                    />
+                    <ChangeChartTypeButtons
+                        :chart-type="chartType"
+                        @updateChartType="setChartType"
+                    />
                 </div>
-                <div v-if="showCompareChart">
-                    <table class="table">
+                <div v-if="showCompareChart && !noData()">
+                    <!-- make table horizontally, when max 7 columns (one week selected for activities) for good overview -->
+                    <table
+                        v-if="chartdata[chartType].labels.length < 8"
+                        class="table"
+                    >
                         <thead>
                             <tr>
                                 <th>
                                     {{ translate('additional:modules.tools.vpidashboard.compare.location') }}
                                 </th>
                                 <th
-                                    v-for="header in chartdata.bar.labels"
+                                    v-for="header in chartdata[chartType].labels"
                                     :key="header"
                                 >
                                     {{ header }}
@@ -448,7 +653,7 @@ export default {
                                     {{ location_a.street }}
                                 </td>
                                 <td
-                                    v-for="(columndata, index) in chartdata.bar.datasets[0].data"
+                                    v-for="(columndata, index) in chartdata[chartType].datasets[0].data"
                                     :key="index"
                                 >
                                     {{ columndata.toLocaleString("de-DE") }}
@@ -459,7 +664,7 @@ export default {
                                     {{ location_b.street }}
                                 </td>
                                 <td
-                                    v-for="(columndata, index) in chartdata.bar.datasets[1].data"
+                                    v-for="(columndata, index) in chartdata[chartType].datasets[1].data"
                                     :key="index"
                                 >
                                     {{ columndata.toLocaleString("de-DE") }}
@@ -467,6 +672,47 @@ export default {
                             </tr>
                         </tbody>
                     </table>
+                    <!-- make table vertically, when too many columns so that it can be as high as necessary -->
+                    <table
+                        v-else
+                        class="table"
+                    >
+                        <thead>
+                            <tr>
+                                <th v-if="character !== 'daily'">
+                                    {{ translate('additional:modules.tools.vpidashboard.compare.date') }}
+                                </th>
+                                <th v-else>
+                                    {{ translate('additional:modules.tools.vpidashboard.compare.hour') }}
+                                </th>
+                                <th>
+                                    {{ location_a.street }}
+                                </th>
+                                <th>
+                                    {{ location_b.street }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="(columndata, index) in chartdata.bar.datasets[0].data"
+                                :key="index"
+                            >
+                                <td>
+                                    {{ chartdata.bar.labels[index] }}
+                                </td>
+                                <td class="charttable-center">
+                                    {{ columndata.toLocaleString("de-DE") }}
+                                </td>
+                                <td class="charttable-center">
+                                    {{ chartdata.bar.datasets[1].data[index].toLocaleString("de-DE") }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <span v-if="character === 'ageGroup'">
+                        {{ $t("additional:modules.tools.vpidashboard.tab.ageGroup.footnote") }}
+                    </span>
                 </div>
             </div>
         </div>
@@ -478,5 +724,9 @@ export default {
         height: 1.2em;
         width: 1.2em;
         margin: 10px 5px;
+    }
+
+    td.charttable-center {
+        text-align: center;
     }
 </style>
