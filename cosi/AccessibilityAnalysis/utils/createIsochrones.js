@@ -1,7 +1,6 @@
 import requestIsochrones from "./requestIsochrones";
 import {transformFeatures} from "../../utils/features/transform";
-import {transformCoordinate} from "./transformCoordinates";
-import {polygon as turfPolygon} from "@turf/helpers";
+import {multiPolygon as turfMultiPolygon, polygon as turfPolygon} from "@turf/helpers";
 import {default as turfUnion} from "@turf/union";
 import {default as turfBooleanPointInPolygon} from "@turf/boolean-point-in-polygon";
 import axios from "axios";
@@ -22,11 +21,17 @@ export function getFilterPoly () {
 /**
  *
  * @export
- * @param {*} coords coords
+ * @param {Array} coords coords
+ * @param {String} geomType "MultiPolygon" or "Polygon"
  * @return {void}
  */
-export function setFilterPoly (coords) {
-    filterPoly = turfPolygon(coords);
+export function setFilterPoly (coords, geomType) {
+    if (geomType === "MultiPolygon") {
+        filterPoly = turfMultiPolygon(coords);
+    }
+    else {
+        filterPoly = turfPolygon(coords);
+    }
 }
 
 
@@ -132,7 +137,7 @@ async function createIsochronesPoints (args) {
         coordinatesList = [],
         groupedFeaturesList = [],
         filteredCoordinates = filterPoly === undefined ? args.coordinates :
-            args.coordinates.filter(c => turfBooleanPointInPolygon(transformCoordinate(c, "EPSG:4326", args.projectionCode), filterPoly));
+            args.coordinates.filter(c => turfBooleanPointInPolygon(c, filterPoly));
 
     for (let i = 0; i < filteredCoordinates.length; i += args.batchSize) {
         const arrayItem = filteredCoordinates.slice(i, i + args.batchSize);

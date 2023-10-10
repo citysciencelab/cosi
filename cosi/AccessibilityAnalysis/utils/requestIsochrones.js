@@ -16,7 +16,7 @@ async function requestIsochrones (pathType, coordinates, rangeType, rangeArray, 
     const promises = [],
         format = new GeoJSON(),
         // locations are limited to 5 in the bkg service
-        chunks = splitIntoChunks(coordinates, 5),
+        chunks = splitIntoChunks(coordinates, 2),
         baseUrl_ = baseUrl ? baseUrl : "https://api.openrouteservice.org/v2/";
 
     for (let i = 0; i < chunks.length; i++) {

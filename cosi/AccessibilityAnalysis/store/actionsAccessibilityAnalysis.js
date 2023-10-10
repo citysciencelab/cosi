@@ -40,9 +40,12 @@ export async function loadFilterPoly (url, featureType, projectionCode) {
             srsName: projectionCode
         }),
         wfsReader = new WFS({}),
-        feature = wfsReader.readFeatures(ret)[0];
+        feature = wfsReader.readFeatures(ret, {
+            dataProjection: projectionCode,
+            featureProjection: "EPSG:4326"
+        })[0];
 
-    return feature.getGeometry().getPolygon(0).getCoordinates();
+    return {coords: feature.getGeometry().getCoordinates(), geomType: feature.getGeometry().getType()};
 }
 
 /**
@@ -123,9 +126,9 @@ const actions = {
                 await init({coords: [getters.filterPoly]});
             }
             else if (getters.filterUrl && getters.filterFeatureType) {
-                const coords = await loadFilterPoly(getters.filterUrl, getters.filterFeatureType, rootGetters["Maps/projectionCode"]);
+                const {coords, geomType} = await loadFilterPoly(getters.filterUrl, getters.filterFeatureType, rootGetters["Maps/projectionCode"]);
 
-                await init({coords});
+                await init({coords, geomType});
             }
         }
 

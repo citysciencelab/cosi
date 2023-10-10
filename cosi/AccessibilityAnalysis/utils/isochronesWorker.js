@@ -21,7 +21,7 @@ async function onmessage (self, event) {
             self.postMessage({type: event.data.type, result: new GeoJSON().writeFeatures(features)});
         }
         else if (event.data.type === "init") {
-            setFilterPoly(event.data.coords);
+            setFilterPoly(event.data.coords, event.data.geomType);
             self.postMessage({type, result: "ok"});
         }
         else if (event.data.type === "getFilterPoly") {
