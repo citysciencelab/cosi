@@ -244,8 +244,7 @@ export default {
                         image: new Icon({
                             src: this.imagePath + iconName,
                             scale: 1,
-                            opacity: 1,
-                            imgSize: [50, 50]
+                            opacity: 1
                         }),
                         zIndex: 0
                     });
