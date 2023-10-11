@@ -13,6 +13,7 @@ const state = {
     resizableWindow: true,
     isVisibleInMenu: true,
     deactivateGFI: false,
+    mobileCellsGeoJSON: "",
     chartData: "overview",
     allDataClicked: true,
     sumVisitorsPerMonth: [],

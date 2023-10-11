@@ -68,8 +68,14 @@ export default {
 </script>
 
 <template>
-    <div class="headline mb-2">
+    <div class="locationselectmenu headline mb-2">
+        <label
+            for="locationSelect"
+        >
+            {{ translate('additional:modules.tools.vpidashboard.locationSelectMenu.label') }}
+        </label>
         <Multiselect
+            id="locationSelect"
             v-model="selectedLocation"
             :placeholder="translate('additional:modules.tools.vpidashboard.locationSelectMenu.menuPlaceholder')"
             label="street"
@@ -78,3 +84,16 @@ export default {
         />
     </div>
 </template>
+
+<style scoped>
+    .locationselectmenu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    .locationselectmenu > label {
+        font-size: 16px;
+    }
+</style>

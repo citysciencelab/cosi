@@ -17,6 +17,11 @@ import TabAgeGroups from "./Tabs/TabAgeGroups.vue";
 import LocationSelectMenuVue from "./LocationSelectMenu.vue";
 import TabCompareDatesDashboard from "./Tabs/TabCompareDatesDashboard.vue";
 import {highlightSelectedLocationOnMap} from "../utils/highlightSelectedLocationOnMap";
+import axios from "axios";
+import GeoJSON from "ol/format/GeoJSON";
+import VectorLayer from "ol/layer/Vector";
+import {Vector} from "ol/source.js";
+import {Style, Fill, Stroke} from "ol/style.js";
 
 export default {
     name: "VpiDashboard",
@@ -37,6 +42,9 @@ export default {
         return {
             chartType: "bar",
             layerList: null,
+            map: null,
+            gridLayer: null,
+            gridLayerIsVisible: false,
             TabItems: [
                 {
                     index: 0,
@@ -87,9 +95,13 @@ export default {
     },
     computed: {
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
-        ...mapGetters("Maps", ["getVisibleLayerList"]),
         ...mapGetters("Language", ["currentLocale"]),
         ...mapState("Tools/VpiDashboard", ["allLocationsGeoJson", "allLocationsArray", "showLoader"]),
+        ...mapGetters("Maps", {
+            layerById: "getLayerById",
+            projectionCode: "projectionCode",
+            getVisibleLayerList: "getVisibleLayerList"
+        }),
         showLocationSelectMenu () {
             const selectedTab = this.TabItems.find(tab => tab.selected === true);
 
@@ -157,7 +169,7 @@ export default {
         },
         /**
          * activates the WhatALocation-Locations when the tool is activated
-         * and deactivates the layer when the tool is deactivated.
+         * and deactivates the layer (and the mobile cell grid layer) when the tool is deactivated.
          * @param {boolean} val isToolActive
          * @returns {void}
          */
@@ -174,7 +186,18 @@ export default {
             if (!val) {
                 model.setIsSettingVisible(false);
                 model.setIsSelected(false);
+                this.gridLayerIsVisible = false;
             }
+        },
+        /**
+         * Toggles the mobile cell grid layer.
+         * When the gridLayerIsVisible value is set to true, it shows the layer.
+         * Otherwise hides to layer.
+         * @param {boolean} val gridLayerIsVisible
+         * @returns {void}
+         */
+        gridLayerIsVisible (val) {
+            this.gridLayer?.setVisible(val);
         }
 
     },
@@ -182,8 +205,11 @@ export default {
         this.$on("close", this.close);
     },
     async mounted () {
+        this.map = mapCollection.getMap("2D");
         await this.getAllLocations();
         await this.getWhatALocationData(this.allLocationsArray[0].id);
+        // create the mobile cell grid layer but do not show it yet (will be toggled by checkbox in this dashboard)
+        await this.createGridLayer();
         this.finishedLoading = true;
 
         const model = Radio.request("ModelList", "getModelByAttributes", {id: "vpi"});
@@ -230,6 +256,75 @@ export default {
             this.renderTab = true;
         },
         /**
+         * initiates the asynchronous request for locally stored mobile cell grid geojson
+         * creates VectorLayer from this data and add it to the map, does not show it initially
+         * @returns {void}
+         */
+        async createGridLayer () {
+            const fetch = await axios.get(this.$store.getters["Tools/VpiDashboard/mobileCellsGeoJSON"]),
+                layerId = "vpi-grid-cells";
+
+            let
+                layer = this.map
+                    ? this.map
+                        .getLayers()
+                        .getArray()
+                        .find((l) => {
+                            return l.get("id") === layerId;
+                        })
+                    : undefined;
+
+            if (layer) {
+                layer.setVisible(false);
+                return;
+            }
+
+            this.geoJSONFeatures = new GeoJSON().readFeatures(fetch.data);
+
+            layer = new VectorLayer({
+                id: layerId,
+                name: "GridLayer",
+                source: this.getVectorSourceFeatures(),
+                visible: false
+            });
+
+            layer.setZIndex(12);
+            layer.setStyle(new Style({
+                fill: new Fill({
+                    color: ["255", "255", "255", "0"]
+                }),
+                stroke: new Stroke({
+                    color: ["0", "50", "255", "0.5"],
+                    width: 2
+                })
+            }));
+
+            this.gridLayer = layer;
+
+            this.map.addLayer(layer);
+        },
+        /**
+         * creates a vector source for the layer to add to the map
+         * @returns {Vector} vector the Vector Source for the layer to add to the map
+         */
+        getVectorSourceFeatures () {
+
+            const vector = new Vector();
+
+            [...this.geoJSONFeatures].forEach((feature) => {
+                const geometry = feature.getGeometry();
+                let referenceSystem = feature.get("referenceSystem");
+
+                referenceSystem = referenceSystem === undefined ? "4326" : referenceSystem;
+                if (geometry) {
+                    geometry.transform("EPSG:" + referenceSystem, this.projectionCode);
+                }
+
+                vector.addFeature(feature);
+            });
+            return vector;
+        },
+        /**
          * translates the given key, checkes if the key exists and throws a console warning if not
          * @param {String} key the key to translate
          * @param {Object} [options=null] for interpolation, formating and plurals
@@ -271,6 +366,18 @@ export default {
                     <div class="col-12 col-md-12 col-lg-12 h-100">
                         <div class="h-100">
                             <div>
+                                <div>
+                                    <input
+                                        id="toggleGridLayer"
+                                        v-model="gridLayerIsVisible"
+                                        type="checkbox"
+                                    >
+                                    <label
+                                        for="toggleGridLayer"
+                                    >
+                                        {{ translate("additional:modules.tools.vpidashboard.toggleGridLayer") }}
+                                    </label>
+                                </div>
                                 <LocationSelectMenuVue
                                     v-if="finishedLoading"
                                     v-show="showLocationSelectMenu"
