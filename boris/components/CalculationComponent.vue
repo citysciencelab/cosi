@@ -54,7 +54,6 @@ export default {
          * @return {String} zBauweise that changes the term to singular
          */
         checkForBuildingMatch (option) {
-
             let zBauweise = this.selectedBrwFeature.get("zBauweise");
             const zStrassenLage = this.selectedBrwFeature.get("zStrassenLage");
 
@@ -63,6 +62,9 @@ export default {
             }
             else if (this.selectedBrwFeature.get("zBauweise") === "dh Doppelhaushälften") {
                 zBauweise = "dh Doppelhaushälfte";
+            }
+            else if (this.selectedBrwFeature.get("zBauweise") === "rm Reihenmittelhäuser") {
+                zBauweise = "rm Reihenmittelhaus";
             }
 
             return option === zBauweise || option === zStrassenLage;
