@@ -4,7 +4,7 @@ import sinon from "sinon";
 import pdfMake from "pdfmake";
 
 // const EXAMPLECHAPTERS = [],
-    // EXAMPLEDOCDEF = [];
+// EXAMPLEDOCDEF = [];
 
 describe.skip("actionsExportPDF", () => {
     const downloadStub = sinon.stub();
