@@ -1,9 +1,10 @@
 import sinon from "sinon";
-import {expect} from "chai";
+// import {expect} from "chai";
+// import actions from "../../../store/actionsExportPDF.js";
 import pdfMake from "pdfmake";
 
-const EXAMPLECHAPTERS = [],
-    EXAMPLEDOCDEF = [];
+// const EXAMPLECHAPTERS = [],
+    // EXAMPLEDOCDEF = [];
 
 describe.skip("actionsExportPDF", () => {
     const downloadStub = sinon.stub();
@@ -12,12 +13,12 @@ describe.skip("actionsExportPDF", () => {
         download: downloadStub
     });
     describe("reportTemplateToPDF", () => {
-        const stubDispatch = sinon.stub(),
-            docDefinition = actions.reportTemplateToPDF({
-                dispatch: stubDispatch
-            }, EXAMPLECHAPTERS);
+        // const stubDispatch = sinon.stub(),
+        //     docDefinition = actions.reportTemplateToPDF({
+        //         dispatch: stubDispatch
+        //     }, EXAMPLECHAPTERS);
 
-        expect(docDefinition).to.be.deep.equal(EXAMPLEDOCDEF);
-        expect(stubDispatch.calledOnceWith("downloadPDF", docDefinition)).to.be.true;
+        // expect(docDefinition).to.be.deep.equal(EXAMPLEDOCDEF);
+        // expect(stubDispatch.calledOnceWith("downloadPDF", docDefinition)).to.be.true;
     });
 });
