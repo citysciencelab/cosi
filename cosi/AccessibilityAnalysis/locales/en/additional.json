@@ -26,7 +26,8 @@
                         "cycling-regular": "Bicycle",
                         "cycling-electric": "Bicycle (electric)",
                         "foot-walking": "Walking",
-                        "wheelchair": "Wheelchair"
+                        "wheelchair": "Wheelchair",
+                        "public-transport": "Public Transit"
                     },
                     "scaleUnit": "Unit of distance",
                     "scaleUnits": {

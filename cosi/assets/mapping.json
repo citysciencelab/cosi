@@ -1050,7 +1050,7 @@
     "valueType": "absolute"
   },
   {
-    "category": "wohn_avg_wohnungsgroesse_in_qm_pro_einw",
+    "category": "wohn_avg_wohnflaeche_in_qm_pro_einw",
     "value": "Durchschnittsgröße der Wohnungen in qm pro Einwohner",
     "group": "Wohnen",
     "stat_gebiet": "112233",

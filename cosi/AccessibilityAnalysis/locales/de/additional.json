@@ -26,7 +26,8 @@
                         "cycling-regular": "Rad",
                         "cycling-electric": "Rad (elektrisch)",
                         "foot-walking": "Gehen",
-                        "wheelchair": "Rollstuhl / Kinderwagen"
+                        "wheelchair": "Rollstuhl / Kinderwagen",
+                        "public-transport": "ÖPNV (experimentell)"
                     },
                     "scaleUnit": "Maßeinheit der Entfernung",
                     "scaleUnits": {
