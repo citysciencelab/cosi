@@ -213,5 +213,8 @@
   },
   "wholeCityList": {
     "type": "tool"
+  },
+  "statisticDashboard": {
+    "type": "tool"
   }
 }

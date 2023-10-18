@@ -25,21 +25,10 @@ export default {
 
             <div>
                 <p>
-                    Das Fachportal - Verborgene Potenziale Innenstadt wurde im Rahmen des Förderprojektes
-                    „Verborgene Potenziale – Für ein lebendiges und resilientes Hamburger Zentrum“ umgesetzt.
-                    Ziel des vom Bundesministerium für Wohnen, Stadtentwicklung und Bauwesen sowie der Freien und Hansestadt Hamburg
-                    geförderten Projektes ist es, gemeinsam mit den Akteurinnen und Akteuren die Nutzungsvielfalt in der Hamburger Innenstadt zu stärken.
-                    Weitere Informationen zum Projekt selbst können Sie unter folgendem Link aufrufen: <a href="https://www.hamburg.de/verborgene-potenziale/">https://www.hamburg.de/verborgene-potenziale/</a>
+                    Das Fachportal Verborgene Potenziale Innenstadt wurde im Rahmen des Förderprojektes „Verborgene Potenziale – Für ein lebendiges und resilientes Hamburger Zentrum“ für die Geschäftsstelle zur Innenstadtkoordination umgesetzt. Der Innenstadtkoordination dient das Fachportal als Informationsplattform, Analyseinstrument und zum Austausch mit zentralen Innenstadtakteuren sowie Bürgerinnen und Bürgern. Weitere Informationen zum Projekt selbst können Sie unter folgendem Link aufrufen: <a href="https://www.hamburg.de/verborgene-potenziale/">https://www.hamburg.de/verborgene-potenziale/</a>
                 </p>
                 <p>
-                    Der Innenstadtkoordination dient das Fachportal für den Austausch mit zentralen Innenstadtakteuren
-                    sowie Bürgerinnen und Bürgern. Im Zusammenspiel mit unterschiedlichen Beteiligungsformaten ist es Ziel
-                    des Projektes verborgene Potenziale der Innenstadt zu identifizieren und für den Umbauprozess in der Innenstadt nutzbar zu machen.
-                    Das Fachportal – Verborgene Potenziale baut auf der Masterportal-Technologie des LGV auf.
-                    Bestehende Werkzeuge und Fachdaten der Urban Data Platform werden für den fundierten Austausch in Workshops und
-                    öffentlichen Beteiligungsgelegenheiten nutzbar. Das Portal wird kontinuierlich weiterentwickelt.
-                    Interessierte die sich aktiv an der Entwicklung der Innenstadt beteiligen wollen finden weitere Informationen unter
-                    <a href="https:\\verborgene-potenziale.beteiligung.hamburg">https:\\verborgene-potenziale.beteiligung.hamburg</a>.
+                    Technisch baut das Fachportal auf dem Masterportal des LGV auf. Werkzeuge des Masterportals und Fachdaten der Urban Data Platform werden für den fundierten Austausch in Workshops und öffentlichen Beteiligungsgelegenheiten bereitgestellt. Interessierte, die sich aktiv an der Entwicklung der Innenstadt beteiligen wollen, finden weitere Informationen unter <a href="https:\\verborgene-potenziale.beteiligung.hamburg">https:\\verborgene-potenziale.beteiligung.hamburg</a>.
                 </p>
             </div>
         </div>
@@ -49,184 +38,204 @@ export default {
 
             <div>
                 <p>
-                    Mit dem VPI Dashboard lassen sich für definierte Standorte in den Innenstadt-Stadtteilen Hamburg-Neustadt, -Altstadt und HafenCity
-                    Analysen zu Frequenzdaten wie Aktivitäten, Besucherzahlen, Besuchertypen oder Verweildauer durchführen. Darüber hinaus ermöglicht das
-                    Dashboard den Vergleich unterschiedlicher Standorte und Zeiträume.
+                    Eine spezieller Funktionsbereich des Fachportals ist ein Daten-Dashboard zur Analyse der Besucherfrequenzen in der Hamburger Innenstadt. Das Dashboard wird im Fachportal über den Reiter "VPI-Dashboard" aufgerufen. Mit dem VPI-Dashboard können Aufenthalts-Frequenzdaten aus 20 Mobilfunkzellen in den Stadtteilen Hamburg-Neustadt, Hamburg-Altstadt und HafenCity analysiert werden
                 </p>
                 <p>
-                    Für die Frequenzdaten werden Telekommunikationsdaten (Signaldaten) der Telefónica Deutschland GmbH & Co. OHG genutzt.
-                    Das Bundesamt für Statistik aggregiert die Daten auf die gesamte Bundesbevölkerung innerhalb jeder Zelle hoch. Rund 90-95% werden so erfasst.
-                    Die so für jede Mobilfunkzellen erhoben Daten ermöglichen eine flächendeckende Betrachtung des Passanten/Besucheraufkommens in der gesamten Innenstadt.
+                    Analysierbar sind Besucherzahlen, Besuchertypen, Altersgruppen und die Verweildauer. Auch der Vergleich mehrerer Standorte und Zeiträume ist möglich. Jeder rote Punkt auf der Karte repräsentiert Daten aus einer Funkzelle. Die Daten sind also nicht adressscharf, sondern auf die Zelle bezogen. Das Zellenraster wird in der Karte mit den Standorten angezeigt.
                 </p>
                 <p>
-                    Im Folgenden finden Sie eine Beschreibung der einzelnen Tabs der Anwendung:
-                    <ul>
-                        <li>
-                            <a href="#aktivitaeten">Tab Aktivitäten</a>
-                        </li>
-                        <li>
-                            <a href="#besucher">Tab Besuchertypen</a>
-                        </li>
-                        <li>
-                            <a href="#alter">Tab Altersgruppen</a>
-                        </li>
-                        <li>
-                            <a href="#verweildauer">Tab Verweildauer</a>
-                        </li>
-                        <li>
-                            <a href="#standort">Tab Standorte vergleichen</a>
-                        </li>
-                        <li>
-                            <a href="#zeitraum">Tab Zeitraum vergleichen</a>
-                        </li>
-                    </ul>
+                    Für die Frequenzdaten werden Telekommunikationsdaten (Signaldaten) der Telefónica Deutschland GmbH & Co. OHG genutzt die durch den Datendienstleister WHATALOCATION bereitgestellt und über eine Datenschnittstelle in das Fachportal eingebunden sind. Telefónica anonymisiert und aggregiert die Daten in einem mit dem Bundesbeauftragten für Datenschutz und Informationsfreiheit abgestimmten Verfahren und rechnet sie auf die Gesamtbevölkerung hoch.
                 </p>
                 <p>
-                    Informationen zu den genutzten <a href="#datenquelle">Datenquellen</a> finden Sie am Ende dieses Dokuments.
+                    Die so für jede Mobilfunkzelle errechneten Daten ermöglichen eine flächendeckende Betrachtung des Personenaufkommens in der gesamten Innenstadt. Die Daten zu Besucherzahlen werden mit einem Zeitverzug von ca. 5 Tagen ab dem aktuellen Datum bereitgestellt, die Daten zu Besuchertypen, Altersgruppen und Verweildauer mit einem Zeitverzug von ca. 5 Monaten.
                 </p>
             </div>
         </div>
 
         <div class="section">
-            <h2>Beschreibung der Tabs</h2>
+            <h2>Bedienung des VPI-Dashboards</h2>
 
-            <div
-                id="aktivitaeten"
-                class="listBlock"
-            >
-                <strong class="listHeader">Aktivitäten</strong>
+            <div class="listBlock">
+                <p>
+                    Beim Öffnen des VPI-Dashboards ist zunächst der Standort Jungfernstieg vorausgewählt sowie die Werte für den 01. Januar des jeweiligen Jahres. Der Standort kann sowohl durch Klick auf einen anderen Standort in der Karte als auch durch Eingabe eines anderen Standorts im Adressfeld des Dashboards geändert werden. Das Datum ist in den Kacheln für Jahr, Monat und Wochentag über Pfeiltasten änderbar.
+                </p>
+                <h3>Beschreibung der Funktionen zur Datenanalyse</h3>
+                <strong class="listHeader">Reiter: Aktivitäten</strong>
 
                 <p>
-                    Der Tab Aktivitäten setzt sich aus drei Datenkacheln und einer filterbaren Grafik zusammen.
+                    Die Analysekategorie „Aktivitäten“ ermöglicht die Aufschlüsselung von Registrierungsvorgängen von Mobilfunkgeräten in Mobilfunkzellen. Ein Mobilfunkgerät wird dabei mit einer Person gleichgesetzt. Wie oben dargestellt sind die abgeleiteten Besucherzahlen Näherungswerte, u.a. da nicht alle Personen Mobilfunkgeräte mit sich führen.
+                </p>
+                <p class="paragraph_underline">
+                    Datenkacheln:
                 </p>
                 <p>
-                    Die Datenkacheln zeigen (von links nach rechts) die Aktivitäten (Events) eines Standortes pro Jahr und Monat sowie den Durchschnitt
-                    pro Wochentag für das ausgewählte Kalenderjahr (2019 bis 2023) an. Beim Öffnen des VPI Dashboards wird in den Kacheln das aktuelle Kalenderjahr beginnend im
-                    Januar und mit dem Wochentag Montag initial geladen. Die ausgewählten Merkmale werden grafisch als Diagramm dargestellt.
-                    Über Pfeiltasten in den Kacheln lassen sich die Werte für Jahr, Monat und Wochentag ändern. Die Darstellung im Diagramm passt sich entsprechend an.
-                    Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Die Standortauswahl ist sowohl über die Karte als auch den Adressfilter im Dashboard möglich.
-                </p>
-                <p>
-                    Über die Filterfunktion „Datengrundlage für Grafik auswählen“ können weitere Daten geladen werden.
-                </p>
-
-                <p>Anzahl der monatlichen Besucher im Jahr:</p>
-                <ul>
-                    <li>
-                        zeigt die Anzahl an Aktivitäten/Events je Monat an
-                    </li>
-                </ul>
-
-                <p>Besucher Insgesamt seit 2019:</p>
-                <ul>
-                    <li>
-                        stellt die Anzahl an Aktivitäten/Events über den Gesamtzeitraum seit Januar 2019 dar
-                    </li>
-                </ul>
-
-                <p>durchschnittliche tägliche Aktivitäten im Monat:</p>
-                <ul>
-                    <li>
-                        zeigt die durchschnittlichen Aktivitäten für den jeweiligen Wochentag im ausgewählten Jahr an
-                    </li>
-                </ul>
-
-                <p>Besucher eines bestimmten Tages (stündlich):</p>
-                <ul>
-                    <li>
-                        Stundenweise angezeigt werden die Aktivitäten für einen bestimmten Tag (00:00-24:00). Über die Kalenderfunktion lassen sich die Tage frei auswählen
-                    </li>
-                </ul>
-
-                <p>Besucher einer bestimmten Zeitspanne (täglich):</p>
-                <ul>
-                    <li>
-                        Über die Kalenderfunktion lässt sich ein Zeitraum wählen für den die Aktivitäten angezeigt werden sollen.
-                    </li>
-                </ul>
-            </div>
-
-            <div
-                id="besucher"
-                class="listBlock"
-            >
-                <strong class="listHeader">Besuchertypen</strong>
-
-                <p>
-                    Der Tab Besuchertypen besteht aus drei Datenkacheln und einem Stapeldiagramm. Die Ansicht lässt sich mit den Pfeiltasten über der mittleren Kachel jahresweise verändern.
-                </p>
-                <p>
-                    Im Diagramm werden monatsweise die durchschnittlichen wöchentlichen Besucher im jeweiligen Kalenderjahr angezeigt.
-                    In der Datenkachel Touristen pro Woche wurden Tages und Übernachtungstouristen zusammengefasst. Zur Herleitung der Besuchertypen wird die Mobilität
-                    der Nutzer an mindestens 365 aufeinander folgenden Tagen gemessen. Aus den Mobilitätsmustern werden die Besuchertypen abgeleitet. Folgende Besuchertypen
-                    werden unterschieden:
+                    Die drei Datenkacheln zeigen die Aktivitäten für einen Standort a) pro Jahr, b) pro Monat sowie c) pro durchschnittlichen Wochentag im ausgewählten Monat.
                 </p>
                 <ul>
                     <li>
-                        Hamburger = Besucher kommt aus Hamburg
+                        Auswählbar sind Daten für die Jahre 2019 bis 2023.
                     </li>
                     <li>
-                        Pendler = Besucher die nicht in Hamburg leben aber regelmäßig von außerhalb in die Mobilfunkzelle kommen
+                        Die Werte ändern sich entsprechend der Änderung des Datums.
                     </li>
                     <li>
-                        Tagestouristen = Besucher die sich nicht regelmäßig und lediglich für einen Tag oder stundenweise und ohne Übernachtung in der Mobilfunkzelle aufhalten
+                        Änderungen des Jahres wirken sich auf die Kacheln Monat und Wochentag sowie das untenstehende Datendiagramm aus.
                     </li>
                     <li>
-                        Übernachtungstouristen = Besucher die sich mit Übernachtung für einen oder mehrere Tage in der Mobilfunkzelle aufhalten
+                        Änderungen des Monats wirken sich nur auf den Wochentag aus.
+                    </li>
+                    <li>
+                        Bei den Daten für Wochentage handelt es sich um Durchschnittswerte für diesen Wochentag im ausgewählten Monat.
                     </li>
                 </ul>
-            </div>
 
-            <div
-                id="alter"
-                class="listBlock"
-            >
-                <strong class="listHeader">Altersgruppe</strong>
-
+                <p class="paragraph_underline">
+                    Datendiagramm:
+                </p>
                 <p>
-                    Der Tab Altersgruppen besteht aus zwei Diagrammen die eine jährliche und monatsweise Betrachtung ermöglichen.
-                    Über die Pfeiltasten oberhalb des Kreisdiagramms lassen sich die angezeigten Daten ändern. Dargestellt werden die durchschnittlichen,
-                    wöchentlichen Besucher eines Monats im ausgewählten Kalenderjahr. Angaben zum Alter stammen aus den Mobilfunkverträgen der Besucher.
-                    Diese werden anonymisiert zu Altersklassen aggregiert. Jedes Mobilfunkgerät und somit jeder Besucher der sich in einer Mobilfunkzelle aufhält
-                    wird einmal für den Tag (00-24Uhr) gezählt. Unter 18-Jährige werden nicht erfasst. In der Altersgruppe der 18-19Jährigen bestehen Datenlücken,
-                    weshalb der Datensatz ebenfalls nicht berücksichtigt wurde:
+                    Im Diagramm unter den Datenkacheln werden die Daten zum jeweils ausgewählten Merkmal grafisch dargestellt. In der Darstellung ist ein Wechsel zwischen Balken- und Liniendiagramm möglich.
+                </p>
+                <p>
+                    Über das Dropdown-Menü „Datengrundlage für Grafik auswählen“ können weitere Daten geladen werden, die dann in der Grafik visualisiert werden.
+                </p>
+                <p>
+                    Die Auswahlmöglichkeiten sind:
                 </p>
                 <ul>
                     <li>
-                        20-29
+                        Anzahl der monatlichen Besucher im Jahr X (2019 bis 2023):
+                        <ul>
+                            <li>
+                                zeigt die Anzahl an Aktivitäten je Monat für das ausgewählte Jahr an. Die Auswahl des Jahres erfolgt über Kachel a).
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        30-39
+                        Besucher insgesamt seit 2019:
+                        <ul>
+                            <li>
+                                zeigt die Anzahl an Aktivitäten/Events über den Gesamtzeitraum seit Januar 2019 an.
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        40-49
+                        Durchschnittliche tägliche Aktivitäten pro Monat:
+                        <ul>
+                            <li>
+                                zeigt die Aktivitäten für die Wochentage im Durchschnitt des ausgewählten Monats im ausgewählten Jahr an.
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        50-59
+                        Besucher eines bestimmten Tages (stündlich):
+                        <ul>
+                            <li>
+                                zeigt die Aktivitäten an einem bestimmten Tag in stundenweiser Auflösung an. Der Tag ist über die Kalenderfunktion frei auswählbar.
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        60-69
-                    </li>
-                    <li>
-                        >69
+                        Besucher einer bestimmten Zeitspanne (täglich):
+                        <ul>
+                            <li>
+                                zeigt die Aktivitäten an einem Standort über einen bestimmten Zeitraum an. Der Zeitraum kann über die Kalenderfunktion ausgewählt werden.
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
 
-            <div
-                id="verweildauer"
-                class="listBlock"
-            >
-                <strong class="listHeader">Verweildauer</strong>
+            <div class="listBlock">
+                <strong class="listHeader">Reiter: Besuchertypen</strong>
 
                 <p>
-                    Die Verweildauer gibt an wie lange sich Besucher am jeweiligen Standort aufgehalten haben. Die Datenseite besteht aus zwei Diagrammen
-                    die eine jährliche und monatsweise Betrachtung ermöglichen. Über die Pfeiltasten oberhalb des Kreisdiagramms lassen sich die angezeigten
-                    Daten jahresweise ändern. Gezählt werden die durchschnittlichen wöchentlichen Besucher je Monat im jeweiligen Kalenderjahr.
+                    Die Analysekategorie „Besuchertypen“ zeigt die Mengenverhältnisse unterschiedlicher Besuchertypen an einem ausgewählten Standort. Die Besuchertypen werden von Telefonica durch eine anonymisierte Analyse der Mobilitätsmuster der in der Funkzelle im ausgewählten Zeitraum registrierten Besucher ermittelt. Aus den Mobilitätsmustern werden Besuchertypen abgeleitet.
                 </p>
                 <p>
-                    Die Verweildauer ergibt sich aus der Zeit zwischen eingehendem und ausgehendem Mobilfunksignal je Mobilfunkzelle. Jedes Mobilfunkgerät
-                    das sich in einer Mobilfunkzelle aufhält wird einmal für den Tag (00-24Uhr) gezählt. Die Verweildauer wird in vier Intervallen unterschieden:
+                    Besuchertypen:
+                </p>
+                <ul>
+                    <li>
+                        Hamburger = Person lebt in Hamburg
+                    </li>
+                    <li>
+                        Pendler = Person lebt nicht in Hamburg, kommt aber regelmäßig von außerhalb in die Mobilfunkzelle
+                    </li>
+                    <li>
+                        Tagestouristen = Person hält sich nicht regelmäßig und sonst nur kurzfristig und ohne Übernachtung in der Mobilfunkzelle auf
+                    </li>
+                    <li>
+                        Übernachtungstouristen = Person hält sich mit Übernachtung für einen oder mehrere Tage in der Mobilfunkzelle auf
+                    </li>
+                </ul>
+                <p>
+                    Die Datenseite der Analysekategorie besteht aus drei Datenkacheln und einem Stapeldiagramm.
+                </p>
+                <p>
+                    In den drei Datenkacheln wird für die jeweils ausgewählte Funkzelle a) die Hamburger:innen im wöchentlichen Durchschnitt, b) die Pendler:innen im wöchentlichen Durchschnitt und c) die Tages und Übernachtungstouristen im wöchentlichen Durchschnitt angezeigt.
+                </p>
+                <p>
+                    Mit den Pfeiltasten über der mittleren Kachel lässt sich die Ansicht jahresweise verändern.
+                </p>
+                <p>
+                    Das Stapeldiagramm zeigt für das oben ausgewählte Jahr die monatliche Verteilung der Besuchertypen für eine durchschnittliche Woche im jeweiligen Monat.
+                </p>
+            </div>
+
+            <div class="listBlock">
+                <strong class="listHeader">Reiter: Altersgruppe</strong>
+
+                <p>
+                    In der Analysekategorie „Altersgruppen“ werden Personen, die sich in einer Funkzelle aufgehalten haben nach Altersgruppen aufgeschlüsselt. Die Informationen zum Alter stammen aus den Mobilfunkverträgen der Personen. Diese werden anonymisiert zu Altersklassen aggregiert. Die Daten werden tagesweise erhoben; jedes Mobilfunkgerät und somit jede Person, die sich in einer Mobilfunkzelle aufhält, wird einmal täglich erfasst. Aus Datenschutzgründen werden die tageweisen erhobenen Daten von Telefonica als wöchentlicher Durchschnitt pro Monat ausgegeben. Die Altersgruppen werden in sechs Kohorten unterschieden.
+                </p>
+                <p>
+                    Altersgruppen:
+                </p>
+                <ul>
+                    <li>
+                        20-29 Jahre
+                    </li>
+                    <li>
+                        30-39 Jahre
+                    </li>
+                    <li>
+                        40-49 Jahre
+                    </li>
+                    <li>
+                        50-59 Jahre
+                    </li>
+                    <li>
+                        60-69 Jahre
+                    </li>
+                    <li>
+                        >69 Jahre
+                    </li>
+                </ul>
+                <p>
+                    Die Datenseite der Analysekategorie besteht aus einem Kreis- und einem Stapeldiagramm.
+                </p>
+                <p>
+                    Das Kreisdiagramm zeigt für die jeweils ausgewählte Funkzelle die Verteilung der Altersgruppen pro Jahr als Prozentwert.
+                </p>
+                <p>
+                    Über die Pfeiltasten oberhalb des Kreisdiagramms lassen sich die angezeigten Daten jahresweise verändern.
+                </p>
+                <p>
+                    Das Stapeldiagramm zeigt für das oben ausgewählte Jahr die monatliche Verteilung der Altersgruppen für eine durchschnittliche Woche im jeweiligen Monat.
+                </p>
+                <p>
+                    Unter 18-Jährige werden aus rechtlichen Gründen nicht erfasst. In der Altersgruppe der 18-19Jährigen bestehen Datenlücken, weshalb der Datensatz nicht berücksichtigt wurde.
+                </p>
+            </div>
+
+            <div class="listBlock">
+                <strong class="listHeader">Reiter: Verweildauer</strong>
+
+                <p>
+                    Die Analysekategorie „Verweildauer“ gibt an, wie lange sich Personen (Geräte) in einer Mobilfunkzelle aufgehalten haben. Die Verweildauer wird aus dem Zeitpunkt des Eintreffens eines Geräts in einer Mobilfunkzelle und dem Zeitpunkt des Verlassens der Mobilfunkzelle errechnet. Jedes Mobilfunkgerät, das sich in einer Mobilfunkzelle anmeldet, wird einmal täglich erfasst. Die Verweildauer wird in vier Intervallen unterschieden.
+                </p>
+                <p>
+                    Verweildauern:
                 </p>
                 <ul>
                     <li>
@@ -242,219 +251,276 @@ export default {
                         240+ Minuten
                     </li>
                 </ul>
-            </div>
-
-            <div
-                id="standort"
-                class="listBlock"
-            >
-                <strong class="listHeader">Standorte vergleichen</strong>
-
                 <p>
-                    Ermöglicht den Vergleich zweier Standorte für bestimmte Merkmale. Während Standort (A) standardmäßig vorausgewählt ist kann der Vergleichsstandort (B)
-                    entweder über die Karte oder die Adressauswahl hinzugefügt werden. Ist der Haken im Kästchen „Deaktivieren …“ gesetzt lassen sich nur Adressen zu
-                    Standort B über die Karte hinzufügen. Ist der Haken nicht gesetzt lassen sich auch Standorte für A über die Karte auswählen.
+                    Die Datenseite der Analysekategorie besteht aus einem Kreis- und einem Stapeldiagramm.
                 </p>
                 <p>
-                    Über die Filterfunktion ist das Laden folgender Merkmale möglich:
+                    Das Kreisdiagramm zeigt die Verweildauer der Personen, die sich in dieser Funkzelle aufgehalten haben über ein Jahr als Prozentwert.
+                </p>
+                <p>
+                    Über die Pfeiltasten oberhalb des Kreisdiagramms lassen sich die angezeigten Daten jahresweise ändern.
+                </p>
+                <p>
+                    Das Stapeldiagramm zeigt für das oben ausgewählte Jahr die monatlichen Verweildauern für eine durchschnittliche Woche im jeweiligen Monat.
+                </p>
+            </div>
+
+            <div class="listBlock">
+                <strong class="listHeader">Reiter: Standorte Vergleichen</strong>
+
+                <p>
+                    Die Funktion ermöglicht den Vergleich bestimmter Merkmale für <span class="paragraph_underline">zwei Standorte</span>.
+                </p>
+                <ul>
+                    <li>
+                        Standort (A) ist der jeweils aktive Standort.
+                    </li>
+                    <li>
+                        Standort (B) muss vom Benutzer über die Karte oder die Adressauswahl hinzugefügt werden.
+                    </li>
+                </ul>
+                <p>
+                    Um den Standort (A) zu ändern, muss der Haken im Kästchen „Deaktivieren …“ entfernt werden, sonst kann nur Standort B über die Karte hinzugefügt werden. Ist der Haken nicht gesetzt, lassen sich auch Standorte für A über die Karte auswählen.
+                </p>
+                <p>
+                    Über das Drop-down Menü ist das Laden folgender Merkmale möglich:
                 </p>
                 <p class="paragraph_underline">
                     Besucher einer bestimmten Zeitspanne (täglich):
                 </p>
+                <p>
+                    Dargestellt wird ein Vergleich des täglichen Besucheraufkommens von zwei Standorten über einen bestimmten Zeitraum.
+                </p>
                 <ul>
                     <li>
-                        Über die Kalenderfunktion lässt sich ein Zeitraum wählen, für den die Aktivitäten von Standort A und B in einem Diagramm angezeigt werden. Der Wechsel in der Darstellung zwischen Balken- und Liniendiagramm ist möglich. Unterhalb des Diagramms werden die Werte für Standort A und B zudem tabellarisch angezeigt.
+                        Der Zeitraum ist über die Kalenderfunktion auswählbar.
+                    </li>
+                    <li>
+                        Analysierbare Daten sind ab ca. 5 Tagen vor dem jeweils aktuellen Daten verfügbar.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte für Standort A und B tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
                     Besucher eines bestimmten Tages (stündlich):
                 </p>
+                <p>
+                    Dargestellt wird ein Vergleich des stündlichen Besucheraufkommens von zwei Standorten für einen bestimmten Tag.
+                </p>
                 <ul>
                     <li>
-                        Für die Standorte A und B werden die Aktivitäten für einen bestimmten Tag (00:00-24:00) stundenweise angezeigt. Über die Kalenderfunktion lassen sich die Tage frei auswählen. In der Darstellung ist ein Wechsle zwischen Balken- und Liniendiagramm möglich. Unterhalb des Diagramms werden stundengenau die Werte für Standort A und B tabellarisch angezeigt.
+                        Das Datum ist über die Kalenderfunktion frei auswählbar.
+                    </li>
+                    <li>
+                        Analysierbare Daten sind ab ca. 5 Tagen vor dem jeweils aktuellen Daten verfügbar.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte für Standort A und B stundengenau tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
                     Altersgruppe:
                 </p>
                 <p>
-                    Über die Kalenderfunktion lassen sich für Standort A und B die durchschnittlichen wöchentlichen Besucher je Monat im ausgewählten Kalenderjahr anzeigen. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Unterhalb des Diagramms werden die Werte nach Altersgruppen für Standort A und B tabellarisch angezeigt. Unter 18-Jährige werden nicht erfasst. In der Altersgruppe der 18-19Jährigen bestehen Datenlücken, weshalb der Datensatz ebenfalls nicht berücksichtigt wurde.
+                    Dargestellt wird ein Vergleich der Altersgruppen der Besucher von zwei Standorten im wöchentlichen Durchschnitt eines ausgewählten Monats.
                 </p>
                 <ul>
                     <li>
-                        20-29
+                        Die Auswahl des Monats erfolgt über die Kalenderfunktion.
                     </li>
                     <li>
-                        30-39
+                        Die Zahlenwerte auf der Y-Achse geben den Besucherdurchschnitt pro Woche an.
                     </li>
                     <li>
-                        40-49
+                        Analysierbare Daten sind ab ca. 5 Monaten vor dem jeweils aktuellen Datum verfügbar.
                     </li>
                     <li>
-                        50-59
+                        Die Merkmale der Altersgruppen sind identisch mit denen der Analysekategorie „Altersgruppe“.
                     </li>
                     <li>
-                        60-69
-                    </li>
-                    <li>
-                        >69
+                        Unterhalb des Diagramms werden die Werte nach Altersgruppen für Standort A und B tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
                     Verweildauer:
                 </p>
                 <p>
-                    Über die Kalenderfunktion lassen sich für Standort A und B die durchschnittlichen wöchentlichen Besucher je Monat im ausgewählten Kalenderjahr anzeigen. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Die Verweildauer gibt an wie lange sich Besucher am Standort A oder B aufgehalten haben. Unterhalb des Diagramms werden die Werte nach Zeitintervallen für Standort A und B tabellarisch angezeigt. Die Verweildauer unterscheidet zwischen vier Intervallen:
+                    Dargestellt wird ein Vergleich der Verweildauer der Besucher von zwei Standorten im wöchentlichen Durchschnitt eines ausgewählten Monats.
                 </p>
                 <ul>
                     <li>
-                        30-60 Minuten
+                        Die Auswahl des Monats erfolgt über die Kalenderfunktion.
                     </li>
                     <li>
-                        60-120 Minuten
+                        Die Zahlenwerte auf der Y-Achse geben den Besucherdurchschnitt pro Woche an.
                     </li>
                     <li>
-                        120-240 Minuten
+                        Analysierbare Daten sind ab ca. 5 Monaten vor dem jeweils aktuellen Datum verfügbar.
                     </li>
                     <li>
-                        240+ Minuten
+                        Die Merkmale der Intervalle sind identisch mit denen der Analysekategorie „Verweildauer“.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte nach Zeitintervallen für Standort A und B tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
                     Besuchertypen:
                 </p>
                 <p>
-                    Über die Kalenderfunktion lassen sich für Standort A und B die durchschnittlichen wöchentlichen Besucher je Monat im ausgewählten Kalenderjahr anzeigen. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Folgende Besuchertypen werden unterschieden:
+                    Dargestellt wird ein Vergleich der Besuchertypen von zwei Standorten im wöchentlichen Durchschnitt eines ausgewählten Monats.
                 </p>
                 <ul>
                     <li>
-                        Einwohner = Besucher kommt aus Hamburg
+                        Die Auswahl des Monats erfolgt über die Kalenderfunktion.
                     </li>
                     <li>
-                        Pendler = Besucher die nicht in Hamburg leben aber regelmäßig von außerhalb in die Mobilfunkzelle kommen
+                        Die Zahlenwerte auf der Y-Achse geben den Besucherdurchschnitt pro Woche an.
                     </li>
                     <li>
-                        Tagestouristen = Besucher die sich nicht regelmäßig und lediglich für einen Tag oder stundenweise und ohne Übernachtung in der Mobilfunkzelle aufhalten
+                        Analysierbare Daten sind ab ca. 5 Monaten vor dem jeweils aktuellen Datum verfügbar.
                     </li>
                     <li>
-                        Übernachtungstouristen = Besucher die sich mit Übernachtung für einen oder mehrere Tage in der Mobilfunkzelle aufhalten
+                        Die Merkmale der Besuchertypen sind identisch mit denen der Analysekategorie „Besuchertypen“.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte nach Besuchertypen für Standort A und B tabellarisch angezeigt.
                     </li>
                 </ul>
             </div>
-            <div
-                id="zeitraum"
-                class="listBlock"
-            >
-                <strong class="listHeader">Zeitraum vergleichen</strong>
+            <div class="listBlock">
+                <strong class="listHeader">Reiter: Zeitpunkte Vergleichen</strong>
 
                 <p>
-                    Ermöglicht die Betrachtung/den Vergleich spezifischer Merkmale eines Standortes zu unterschiedlichen Zeitpunkten. Über die Filterfunktion lassen sich folgende Merkmale laden:
+                    Die Funktion „Zeitpunkte Vergleichen“ ermöglicht den Vergleich spezifischer Merkmale <span class="paragraph_underline">eines Standortes</span> zu unterschiedlichen Zeitpunkten. Die Auswahl des Standorts erfolgt über die Karte oder über das Adressfeld.
+                </p>
+                <p>
+                    Über die Filterfunktion lassen sich folgende Merkmale laden:
                 </p>
                 <p class="paragraph_underline">
-                    Besucher einer bestimmten Zeitspanne (täglich):
+                    Besucher eines Standorts an zwei verschiedenen Tagen:
+                </p>
+                <p>
+                    Angezeigt werden die Aktivitäten an einem Standort für zwei Zeitpunkte (Tage) im Vergleich.
                 </p>
                 <ul>
                     <li>
-                        Mit den Kalenderfunktionen lassen sich zwei Zeiträume bestimmen für die Aktivitäten im Diagramm angezeigt werden. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Unterhalb des Diagramms werden die Werte für Basisdatum und das Vergleichsdatum tabellarisch angezeigt.
+                        Die Auswahl der Tage erfolgt über die Kalenderfunktion.
+                    </li>
+                    <li>
+                        Analysierbare Daten sind ab ca. 5 Tagen vor dem jeweils aktuellen Datum verfügbar.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte für das Basisdatum und das Vergleichsdatum tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
-                    Besucher eines bestimmten Tages (stündlich):
+                    Besucher eines Standort an zwei verschiedenen Tagen (stündlich):
+                </p>
+                <p>
+                    Angezeigt werden die Aktivitäten an einem Standort für zwei bestimmte Tage in stundenweiser Auflösung.
                 </p>
                 <ul>
                     <li>
-                        Stundenweise angezeigt werden die Aktivitäten für einen bestimmten Tag (00:00-24:00) für das Basis- und das Vergleichsdatum. Über die Kalenderfunktion lassen sich die Tage frei auswählen. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Unterhalb des Diagramms werden die stundengenauen Werte für Standort A und B tabellarisch angezeigt
+                        Die Auswahl der Tage erfolgt über die Kalenderfunktion.
+                    </li>
+                    <li>
+                        Analysierbare Daten sind ab ca. 5 Tagen vor dem jeweils aktuellen Datum verfügbar.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte für das Basisdatum und das Vergleichsdatum tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
                     Altersgruppe:
                 </p>
                 <p>
-                    Über die Kalenderfunktion lassen sich für Standort A und B die durchschnittlichen wöchentlichen Besucher je Monat anzeigen. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Unterhalb des Diagramms werden die Werte nach Altersgruppen für das Basisdatum und das Vergleichsdatum tabellarisch angezeigt. Unter 18-Jährige werden nicht erfasst. In der Altersgruppe der 18-19Jährigen bestehen Datenlücken, weshalb der Datensatz ebenfalls nicht berücksichtigt wurde.
+                    Angezeigt wird die Verteilung der Altersgruppen an einem Standort in zwei Monaten im wöchentlichen Durchschnitt im Vergleich.
                 </p>
                 <ul>
                     <li>
-                        20-29
+                        Die Auswahl der Monate erfolgt über die Kalenderfunktion.
                     </li>
                     <li>
-                        30-39
+                        Die Zahlenwerte auf der Y-Achse geben den Besucherdurchschnitt pro Woche an.
                     </li>
                     <li>
-                        40-49
+                        Analysierbare Daten sind ab ca. 5 Monaten vor dem jeweils aktuellen Datum verfügbar.
                     </li>
                     <li>
-                        50-59
+                        Die Merkmale der Altersgruppen sind identisch mit denen der Analysekategorie „Altersgruppe“.
                     </li>
                     <li>
-                        60-69
-                    </li>
-                    <li>
-                        >69
+                        Unterhalb des Diagramms werden die Werte nach Altersgruppen für das Basisdatum und das Vergleichsdatum tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
                     Verweildauer:
                 </p>
                 <p>
-                    Über die Kalenderfunktion lassen sich für Basis- und Vergleichsdatum die durchschnittlichen wöchentlichen Besucher je Monat anzeigen. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Die Verweildauer gibt an wie lange sich Besucher am Basis- und Vergleichsdatum aufgehalten haben. Unterhalb des Diagramms werden die Werte nach Zeitintervallen für tabellarisch angezeigt. Die Verweildauer unterscheidet zwischen vier Intervallen:
+                    Angezeigt wird die Verweildauer von Besuchern eines Standorts in zwei Monaten im wöchentlichen Durchschnitt im Vergleich.
                 </p>
                 <ul>
                     <li>
-                        30-60 Minuten
+                        Die Auswahl der Monate erfolgt über die Kalenderfunktion.
                     </li>
                     <li>
-                        60-120 Minuten
+                        Die Zahlenwerte auf der Y-Achse geben den Besucherdurchschnitt pro Woche an.
                     </li>
                     <li>
-                        120-240 Minuten
+                        Analysierbare Daten sind ab ca. 5 Monaten vor dem jeweils aktuellen Datum verfügbar.
                     </li>
                     <li>
-                        240+ Minuten
+                        Die Merkmale der Zeitintervalle sind identisch mit denen der Analysekategorie „Verweildauer“.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte nach Zeitintervallen für das Basisdatum und das Vergleichsdatum tabellarisch angezeigt.
                     </li>
                 </ul>
                 <p class="paragraph_underline">
                     Besuchertypen:
                 </p>
                 <p>
-                    Über die Kalenderfunktion lassen sich für das Basis- und das Vergleichsdatum die durchschnittlichen wöchentlichen Besucher je Monat anzeigen. Der Wechsel zwischen Balken- und Liniendiagramm ist möglich. Folgende Besuchertypen werden unterschieden:
+                    Angezeigt werden die Besuchertypen eines Standorts für in zwei Monaten im wöchentlichen Durchschnitt im Vergleich.
                 </p>
                 <ul>
                     <li>
-                        Einwohner = Besucher kommt aus Hamburg
+                        Die Auswahl der Monate erfolgt über die Kalenderfunktion.
                     </li>
                     <li>
-                        Pendler = Besucher die nicht in Hamburg leben aber regelmäßig von außerhalb in die Mobilfunkzelle kommen
+                        Die Zahlenwerte auf der Y-Achse geben den Besucherdurchschnitt pro Woche an.
                     </li>
                     <li>
-                        Tagestouristen = Besucher die sich nicht regelmäßig und lediglich für einen Tag oder stundenweise und ohne Übernachtung in der Mobilfunkzelle aufhalten
+                        Analysierbare Daten sind ab ca. 5 Monaten vor dem jeweils aktuellen Datum verfügbar.
                     </li>
                     <li>
-                        Übernachtungstouristen = Besucher die sich mit Übernachtung für einen oder mehrere Tage in der Mobilfunkzelle aufhalten
+                        Die Merkmale der Besuchertypen sind identisch mit denen der Analysekategorie „Besuchertypen“.
+                    </li>
+                    <li>
+                        Unterhalb des Diagramms werden die Werte nach Besuchertypen für das Basisdatum und das Vergleichsdatum tabellarisch angezeigt.
                     </li>
                 </ul>
             </div>
         </div>
 
         <div class="section">
-            <h2 id="datenquelle">
+            <h2>
                 Datenquellen
             </h2>
 
             <div>
                 <p>
-                    Als Datengrundlage dienen Signalisierungsdaten der Telefónica Deutschland GmbH & Co. OHG, welche anonymisiert über den Dienstleister WhatAlocation und via API-Schnittstelle im VPI Dashboard bereitgestellt werden. Erfasst werden sogenannte Events, die im regulären Geschäftsbetrieb standardmäßig als Kommunikation zwischen Mobilfunkgerät und Mobilfunkzelle anfallen. Die mittlere Anzahl an Events pro Gerät beträgt täglich etwa 270. Für die Darstellung der Aktivitäten eines Standorts wird die Gesamtzahl der Events pro Gerät innerhalb einer Mobilfunkzelle genutzt. Dieses Vorgehen ist mit anderen Erhebungsmethoden wie Laserscanning oder der visuellen Passanten Zählung vergleichbar bei denen ebenfalls nicht die Personen sondern die Anzahl an Aktivitäten erfasst werden. Bei den Merkmalen Besuchertypen, Altersgruppe und Verweildauer bildet die Anzahl an Geräten innerhalb einer Mobilfunkzelle die entsprechende Bezugsgröße, weshalb die Werte im Vergleich zu den Aktivitäten niedriger ausfallen. Die Daten für Besuchertypen, Altersgruppen und Verweildauer werden mit einer zeitlichen Verzögerung von einigen Monaten bereitgestellt. Daten zu Aktivitäten können mit einer zeitlichen Verzögerung von bis zu 7 Tagen bereitgestellt werden.
+                    Als Datengrundlage dienen Signalisierungsdaten der Telefónica Deutschland GmbH & Co. OHG, welche anonymisiert über den Dienstleister WHATALOCATION über elektronische Schnittstellen im VPI-Dashboard bereitgestellt werden.
                 </p>
                 <p>
-                    WhatAlocation ist ein in Deutschland ansässiges Unternehmen, welches die Signaldaten in einem mit dem Bundesbeauftragten für Datenschutz und die Informationsfreiheit (BfDI) abgestimmten Verfahren DSGVO-Konform anonymisiert und aggregiert bereitstellt, um daraus Erkenntnisse zu Aufenthalts- und Bewegungsverhalten zu generieren.
+                    WHATALOCATION ist ein in Deutschland ansässiges Unternehmen, welches die aufbereiteten und anonymisierten Signalisierungsdaten der Telefónica Deutschland GmbH & Co. OHG für eine Web-Applikation nutzt. Diese beinhaltet ein Dashboard mit der sich Analysen zu Aufenthalts- und Bewegungsverhalten durchführen lassen. Das Dashboard und die in der Web-Applikation definierten Merkmale bildeten die Grundlage für die Entwicklung des Fachportals Verborgene Potenziale Innenstadt.
                 </p>
-                <p>
-                    Für das Anlegen und Erstellen der im Dashboard angezeigten Standorte wird die Applikation von WhatAlocation genutzt.
-                    <a
-                        href="https://www.whatalocation.ai/"
-                        target="_blank"
-                        rel="nofollow noopener"
-                    >WHATALOCATION.ai</a>
-                </p>
+                <a
+                    href="https://www.whatalocation.ai/"
+                    target="_blank"
+                    rel="nofollow noopener"
+                >WHATALOCATION.ai</a>
             </div>
         </div>
     </div>
