@@ -216,8 +216,8 @@ function getLegendValue (val) {
                     "name": i18next.t("additional:modules.tools.statisticDashboard.legend.between", {minimum: thousandsSeparator(Math.round(data)), maximum: thousandsSeparator(Math.round(val.value[index + 1]))})
                 };
                 style = {
-                    "polygonFillColor": val.color[index + 1],
-                    "polygonStrokeColor": val.color[index + 1],
+                    "polygonFillColor": val.color[index],
+                    "polygonStrokeColor": val.color[index],
                     "polygonStrokeWidth": 3
                 };
             }
