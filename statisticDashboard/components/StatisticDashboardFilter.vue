@@ -293,7 +293,7 @@ export default {
                                             type="button"
                                             class="btn btn-link btn-sm px-2 py-2 dropdown-item"
                                             :class="Object.prototype.hasOwnProperty.call(selectedStatistics, key) ? 'selected' : ''"
-                                            @click="toggleStatistic(stat, selectedStatistics, key)"
+                                            @click.stop="toggleStatistic(stat, selectedStatistics, key)"
                                         >
                                             {{ stat.name }}
                                         </button>
