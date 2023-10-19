@@ -216,5 +216,17 @@
   },
   "statisticDashboard": {
     "type": "tool"
+  },
+  "dsmTemplateManager": {
+    "path": "dsm/dsmTemplateManager",
+    "type": "tool"
+  },
+  "dsmTemplateAdmin": {
+    "path": "dsm/dsmTemplateAdmin",
+    "type": "tool"
+  },
+  "dsmDashboard": {
+    "path": "dsm/dsmDashboard",
+    "type": "tool"
   }
 }
