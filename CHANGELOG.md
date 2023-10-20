@@ -8,6 +8,10 @@
 
 ### Added
 
+## v2.38.0 - 2023-10-20
+### Added
+- The new addon [statisticDashboard](https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/statisticDashboard/) A tool to display statistical data. Further details: [statisticDashboard documentation](https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/statisticDashboard/doc/config.json.md)
+
 ### Changed
 
 ### Deprecated
