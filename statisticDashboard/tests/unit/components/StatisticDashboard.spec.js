@@ -122,6 +122,28 @@ describe("addons/StatisticDashboard.vue", () => {
             expect(wrapper.findComponent(LegendComponent).exists()).to.be.true;
             wrapper.destroy();
         });
+        it("should render legend if showNoLegendData is true", async () => {
+            const wrapper = shallowMount(StatisticDashboard, {
+                localVue,
+                store
+            });
+
+            await wrapper.setData({showNoLegendData: true});
+
+            expect(wrapper.findComponent(LegendComponent).exists()).to.be.true;
+            wrapper.destroy();
+        });
+        it("should not render legend if showNoLegendData is false", async () => {
+            const wrapper = shallowMount(StatisticDashboard, {
+                localVue,
+                store
+            });
+
+            await wrapper.setData({showNoLegendData: false});
+
+            expect(wrapper.findComponent(LegendComponent).exists()).to.be.false;
+            wrapper.destroy();
+        });
     });
 
     describe("watchers", () => {

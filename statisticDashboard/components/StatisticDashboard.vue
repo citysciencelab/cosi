@@ -65,7 +65,8 @@ export default {
             referenceFeatures: {},
             selectedColumn: undefined,
             colorArrayDifference: ["#E28574", "#89C67F"],
-            legendValue: []
+            legendValue: [],
+            showNoLegendData: false
         };
     },
     computed: {
@@ -415,6 +416,7 @@ export default {
 
             if (this.selectedStatisticsNames.length === 1) {
                 this.updateFeatureStyle(this.selectedColumn || dates[0], differenceMode, this.selectedReferenceData);
+                this.showNoLegendData = false;
             }
             else {
                 this.layer.getSource().clear();
@@ -425,6 +427,7 @@ export default {
                 filteredFeatures.map(feature => {
                     return FeaturesHandler.styleFeature(feature);
                 });
+                this.showNoLegendData = true;
             }
         },
 
@@ -730,6 +733,7 @@ export default {
             this.currentChart = {};
             this.showGrid = false;
             this.legendValue = [];
+            this.showNoLegendData = false;
         },
         /**
          * Checks if at least one description is present in the statistics.
@@ -919,11 +923,11 @@ export default {
                 </div>
             </div>
             <LegendComponent
-                v-if="Array.isArray(legendValue) && legendValue.length"
+                v-if="Array.isArray(legendValue) && legendValue.length || showNoLegendData"
                 class="mt-3"
                 :legend-value="legendValue"
                 :title="selectedStatisticsNames[0]"
-                :show-notice-text="selectedStatisticsNames.length > 1"
+                :show-notice-text="showNoLegendData"
             />
             <Controls
                 v-if="loadedReferenceData"
