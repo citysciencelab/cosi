@@ -31,7 +31,7 @@
               },
               "reference": {
                 "title": "Referenzart",
-                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod,",
+                "description": "Differenzwerte darstellen, bezogen auf ein Referenzjahr oder Gebiet",
                 "placeholder": "Bitte wählen Sie eine Option!",
                 "tagLabel": "Referenz"
               },

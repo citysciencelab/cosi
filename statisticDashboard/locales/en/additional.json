@@ -31,7 +31,7 @@
               },
               "reference": {
                 "title": "Reference type",
-                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod",
+                "description": "Difference value represented based on a reference year or area",
                 "placeholder": "Please choose an option!",
                 "tagLabel": "Reference"
               },
