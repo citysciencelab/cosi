@@ -1,0 +1,11 @@
+{
+  "modules": {
+      "tools": {
+        "cosi": {
+          "templateAdmin": {
+            "title": "Vorlage Admin"
+          }
+        }
+      }
+  }
+}

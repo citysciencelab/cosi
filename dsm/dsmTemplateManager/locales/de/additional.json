@@ -1,9 +1,0 @@
-{
-  "modules": {
-      "tools": {
-          "dsmTemplateManager": {
-              "title": "Vorlage Manager"
-          }
-      }
-  }
-}

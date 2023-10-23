@@ -1,9 +1,0 @@
-{
-  "modules": {
-      "tools": {
-          "dsmTemplateAdmin": {
-              "title": "Vorlage Admin"
-          }
-      }
-  }
-}

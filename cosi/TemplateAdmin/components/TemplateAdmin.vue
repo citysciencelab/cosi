@@ -1,24 +1,24 @@
 <script>
 import ToolTemplate from "../../../../src/modules/tools/ToolTemplate.vue";
 import {mapGetters, mapMutations} from "vuex";
-import getters from "../store/gettersDsmTemplateManager";
-import mutations from "../store/mutationsDsmTemplateManager";
+import getters from "../store/gettersTemplateAdmin";
+import mutations from "../store/mutationsTemplateAdmin";
 import {getComponent} from "../../../../src/utils/getComponent";
 
 export default {
-    name: "DsmTemplateManager",
+    name: "TemplateAdmin",
     components: {
         ToolTemplate
     },
     computed: {
-        ...mapGetters("Tools/DsmTemplateManager", Object.keys(getters))
+        ...mapGetters("Tools/TemplateAdmin", Object.keys(getters))
     },
     created () {
         this.$on("close", this.close);
     },
 
     methods: {
-        ...mapMutations("Tools/DsmTemplateManager", Object.keys(mutations)),
+        ...mapMutations("Tools/TemplateAdmin", Object.keys(mutations)),
 
         close () {
             this.setActive(false);
@@ -43,7 +43,7 @@ export default {
         :focus-to-close-icon="true"
     >
         <template #toolBody>
-            Das ist dsm template manager Component
+            Das ist dsm template admin Component
         </template>
     </ToolTemplate>
 </template>

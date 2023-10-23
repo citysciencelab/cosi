@@ -1,7 +1,7 @@
 /**
  * Shadow tool state definition.
  * @typedef {Object} ContactState
- * @property {Boolean} active If true, dsmTemplateManager will be rendered.
+ * @property {Boolean} active If true, TemplateAdmin will be rendered.
  * @property {String} id Id of the Contact component.
  * @property {String} name Displayed as the title. (config-param)
  * @property {String} icon Icon next to the title. (config-param)
@@ -12,8 +12,8 @@
  */
 const state = {
     active: false,
-    id: "dsmTemplateManager",
-    name: "additional:modules.tools.dsmTemplateManager.title",
+    id: "TemplateAdmin",
+    name: "additional:modules.tools.TemplateAdmin.title",
     icon: "bi-folder2-open",
     renderToWindow: true,
     resizableWindow: true,

@@ -1,5 +1,5 @@
 import {generateSimpleMutations} from "../../../../src/app-store/utils/generators";
-import initialState from "./stateDsmTemplateManager";
+import initialState from "./stateTemplateAdmin";
 
 const mutations = {
     ...generateSimpleMutations(initialState)
