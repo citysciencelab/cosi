@@ -125,6 +125,10 @@ export default {
 
             this.loadSessionData(_template);
             this.setActive(false);
+
+            if (typeof this.toolToOpen === "string") {
+                this.$store.dispatch("Tools/setToolActive", {id: this.toolToOpen, active: true});
+            }
         },
 
         showTemplateInfo (template) {

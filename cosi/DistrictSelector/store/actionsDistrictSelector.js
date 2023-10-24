@@ -75,13 +75,11 @@ const actions = {
             });
             LoaderOverlay.hide();
         }
-
         else {
             dispatch("updateDistricts");
             dispatch("Alerting/cleanup", null, {root: true});
             LoaderOverlay.hide();
         }
-
     },
 
     setDistrictsByName ({getters, commit}, {districtNames, fromExternal = true, zoomToExtent = true}) {

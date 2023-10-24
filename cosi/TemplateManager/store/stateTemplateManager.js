@@ -8,6 +8,7 @@
  * @property {String} [name="Sitzung speichern"] - The name of the tool (config-param).
  * @property {Boolean} [renderToWindow=true] - Renders tool in a window if true, otherwise in the sidebar (config-param).
  * @property {Boolean} [resizableWindow=false] - If True, window is resizable (config-param).
+ * @property {String} toolToOpen - the tool to be open after this tool is closed.
  */
 const state = {
     active: false,
@@ -25,7 +26,8 @@ const state = {
     readmeUrl: {
         "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/015templates.md",
         "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/015vorlagen.md"
-    }
+    },
+    toolToOpen: undefined
 };
 
 export default state;

@@ -126,6 +126,10 @@ export default {
                 if (this.selectedNames.length === 0) {
                     styleSelectedDistrictLevels(this.districtLevels);
                 }
+
+                if (typeof this.toolToOpen === "string") {
+                    this.$store.dispatch("Tools/setToolActive", {id: this.toolToOpen, active: true});
+                }
             }
         },
         /**
