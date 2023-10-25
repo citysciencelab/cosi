@@ -4,6 +4,7 @@
             "cosi": {
                 "templateManager": {
                     "title": "Templates",
+                    "importTemplate": "Import Template",
                     "loadFromTemplate": "Load templates",
                     "infoLoadFromTemplates": "Load basic thematic configurations for specific types of analyses. You can find the data which will be loaded in the templates' overview. Some templates include the selection of areas, some require you to select areas yourself in beforehand.",
                     "noInfo": "No description available.",
@@ -13,7 +14,12 @@
                     "districtLevel": "District Level",
                     "selectedDistricts": "Selected Districts",
                     "activeTool": "Active Tool",
-                    "categories": "Statistical Data"
+                    "categories": "Statistical Data",
+                    "errors": {
+                      "default": "File could not be loaded",
+                      "invalid": "File could not be readed",
+                      "wrongFileFormat": "The file is not in the correct format."
+                    }
                 }
             }
         }

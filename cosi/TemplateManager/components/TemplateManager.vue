@@ -6,13 +6,15 @@ import getters from "../store/gettersTemplateManager";
 import mutations from "../store/mutationsTemplateManager";
 import actions from "../store/actionsTemplateManager";
 import ToolInfo from "../../components/ToolInfo.vue";
+import TemplateManagerImport from "./TemplateManagerImport.vue";
 import axios from "axios";
 
 export default {
     name: "TemplateManager",
     components: {
         Tool,
-        ToolInfo
+        ToolInfo,
+        TemplateManagerImport
     },
     data () {
         return {
@@ -166,6 +168,15 @@ export default {
 
         getCalculations (template) {
             return template.state.Tools?.Dashboard?.calculations || [];
+        },
+
+        /**
+         * Adds a template to the list of templates.
+         * @param {Object} template - The template to add.
+         * @returns {void}
+         */
+        addTemplate (template) {
+            this.templates.push(template);
         }
     }
 };
@@ -185,20 +196,25 @@ export default {
             v-if="active"
             #toolBody
         >
-            <v-app class="clamp-40vw">
-                <v-container>
-                    <ToolInfo
-                        :url="readmeUrl"
-                        :locale="currentLocale"
-                    />
-                    <div class="mb-2">
-                        {{ $t("additional:modules.tools.cosi.templateManager.infoLoadFromTemplates") }}
-                    </div>
-                    <v-divider />
-                    <div>
+            <v-app
+                id="template-manager"
+                class="clamp-40vw"
+            >
+                <ToolInfo
+                    :url="readmeUrl"
+                    :locale="currentLocale"
+                    :summary="$t('additional:modules.tools.cosi.templateManager.infoLoadFromTemplates')"
+                />
+                <div>
+                    <div class="mb-3">
                         <span class="text-subtitle-2">
                             {{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}
                         </span>
+                        <TemplateManagerImport
+                            v-if="useImport"
+                            class="float-end"
+                            @addTemplate="addTemplate"
+                        />
                     </div>
                     <v-list dense>
                         <v-list-group
@@ -220,7 +236,6 @@ export default {
                                 <v-list-item-content class="no-flex">
                                     <v-row>
                                         <v-simple-table
-                                            class="info-table"
                                             dense
                                         >
                                             <template #default>
@@ -325,42 +340,46 @@ export default {
                                     </v-row>
                                     <v-divider />
                                     <v-row justify="end">
-                                        <v-col class="right-text">
-                                            <v-btn
-                                                id="load"
-                                                dense
-                                                small
-                                                tile
-                                                color="grey lighten-1"
-                                                :title="$t('additional:modules.tools.cosi.saveSession.infoLoadFromTemplates')"
+                                        <v-col>
+                                            <button
+                                                class="btn btn-outline lh-1 fs-5 mb-3 rounded"
                                                 @click="loadFromTemplate(template, i)"
                                             >
-                                                <v-icon left>
-                                                    mdi-open-in-app
-                                                </v-icon>
-                                                {{ $t('additional:modules.tools.cosi.saveSession.loadFromTemplate') }}
-                                            </v-btn>
+                                                <i class="bi bi-upload pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}
+                                            </button>
                                         </v-col>
                                     </v-row>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list-group>
                     </v-list>
-                </v-container>
+                </div>
             </v-app>
         </template>
     </Tool>
 </template>
 
 <style lang="scss" scoped>
-    @import "../../utils/variables.scss";
+    @import "~variables";
 
-    .hidden {
-        display: hidden;
+    #template-manager {
+        font-family: $font_family_default;
+
+        .btn-outline {
+            border-color: $light_blue;
+            color: $light_blue;
+        }
+       .btn-outline:hover {
+            cursor: pointer;
+            background-color: $light_blue;
+            color: $white;
+       }
+
+       th {
+            font-family: $font_family_accent;
+       }
     }
-    .template-info-button {
-        margin-right: 20px;
-    }
+
     .info-table {
         max-width: 640px;
     }

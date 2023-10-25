@@ -4,6 +4,7 @@
             "cosi": {
                 "templateManager": {
                     "title": "Vorlagen",
+                    "importTemplate": "Vorlage importieren",
                     "loadFromTemplate": "Vorlage laden",
                     "infoLoadFromTemplates": "Laden Sie eine thematische Basis-Konfiguration für fachspezifische Analysen. Welche Inhalte durch die Vorlage geladen werden entnehmen Sie der Vorlagenübersicht. Manche Vorlagen beinhalten eine Gebietsauswahl, bei anderen können Sie das Gebiet zuvor selbst auswählen.",
                     "noInfo": "Keine Beschreibung verfügbar",
@@ -14,7 +15,12 @@
                     "selectedDistricts": "Ausgewählte Gebiete",
                     "activeTool": "Aktive Werkzeuge",
                     "categories": "Statistische Daten",
-                    "calculations": "Berechnungen"
+                    "calculations": "Berechnungen",
+                    "errors": {
+                      "default": "Datei konnte nicht geladen werden",
+                      "invalid": "Datei konnte nicht gelesen werden",
+                      "wrongFileFormat": "Die Datei hat nicht das richtige Format."
+                    }
                 }
             }
         }

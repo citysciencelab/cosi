@@ -9,6 +9,7 @@
  * @property {Boolean} [renderToWindow=true] - Renders tool in a window if true, otherwise in the sidebar (config-param).
  * @property {Boolean} [resizableWindow=false] - If True, window is resizable (config-param).
  * @property {String} toolToOpen - the tool to be open after this tool is closed.
+ * @property {Boolean} [useImport=false] - If true, it is possible to import templates.
  */
 const state = {
     active: false,
@@ -27,7 +28,8 @@ const state = {
         "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/015templates.md",
         "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/015vorlagen.md"
     },
-    toolToOpen: undefined
+    toolToOpen: undefined,
+    useImport: false
 };
 
 export default state;
