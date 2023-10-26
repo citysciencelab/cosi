@@ -45,9 +45,14 @@ export default {
             this.selectedStatData = this.selectedStatData.filter(badge => badge !== name);
             return this.selectedStatData;
         },
+
+        /**
+         * Removes the selected tool
+         * @param {String} name - the tool label as name
+         * @returns {void}
+         */
         removeToolData (name) {
-            this.selectedToolData = this.selectedToolData.filter(badge => badge !== name);
-            return this.selectedToolData;
+            this.selectedToolData = this.selectedToolData.filter(badge => badge?.value !== name);
         }
     }
 };
@@ -246,6 +251,8 @@ export default {
                 :multiple="true"
                 :show-labels="false"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+                track-by="value"
+                label="label"
             >
                 <template
                     slot="selection"
@@ -261,17 +268,16 @@ export default {
         </div>
         <div class="mb-4">
             <button
-                v-for="index in selectedToolData"
+                v-for="(tool, index) in selectedToolData"
                 :key="index"
                 class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mt-1 me-2 btn-pb"
                 aria-label="Close"
-                @click="removeToolData(index)"
+                @click.prevent="removeToolData(tool.value)"
             >
-                {{ index }}
+                {{ tool.label }}
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
         </div>
-
         <button
             class="btn btn-outline-primary"
         >

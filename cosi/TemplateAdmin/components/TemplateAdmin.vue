@@ -1,10 +1,12 @@
 <script>
 import ToolTemplate from "../../../../src/modules/tools/ToolTemplate.vue";
-import {mapGetters, mapMutations} from "vuex";
+import {mapGetters, mapMutations, mapState} from "vuex";
 import getters from "../store/gettersTemplateAdmin";
 import mutations from "../store/mutationsTemplateAdmin";
 import {getComponent} from "../../../../src/utils/getComponent";
 import TemplateAdminForm from "./TemplateAdminForm.vue";
+import isObject from "../../../../src/utils/isObject";
+import {sort} from "../../../../src/utils/sort";
 
 export default {
     name: "TemplateAdmin",
@@ -16,15 +18,16 @@ export default {
         return {
             dataOptions: ["Select option", "options", "selected", "multiple", "label", "searchable", "clearOnSelect", "hideSelected", "maxHeight", "allowEmpty", "showLabels", "onChange", "touched"],
             statOptions: ["data1", "data2", "data3"],
-            toolOptions: ["tool1", "tool2", "tool3"],
             currentTab: "#add-template-tab"
         };
     },
     computed: {
-        ...mapGetters("Tools/TemplateAdmin", Object.keys(getters))
+        ...mapGetters("Tools/TemplateAdmin", Object.keys(getters)),
+        ...mapState(["Tools"])
     },
     created () {
         this.$on("close", this.close);
+        this.toolOptions = this.getToolList(this.Tools);
     },
 
     methods: {
@@ -37,6 +40,28 @@ export default {
             if (model) {
                 model.set("isActive", false);
             }
+        },
+
+        /**
+         * Gets all the tools from Masterportal
+         * @param {Object} tools - the tools object from MP state
+         * @returns {Object[]} the tool list with the key and the title as label
+         */
+        getToolList (tools) {
+            if (!isObject(tools)) {
+                return [];
+            }
+            let toolList = [];
+
+            Object.entries(tools).forEach(([key, value]) => {
+                if (typeof value.name !== "undefined") {
+                    toolList.push({value: key, label: i18next.t(value.name)});
+                }
+            });
+
+            toolList = sort("", toolList, "label");
+
+            return toolList;
         }
     }
 };
@@ -135,6 +160,7 @@ export default {
                         <TemplateAdminForm
                             :geo-data="dataOptions"
                             :stat-data="statOptions"
+                            :tool-data="toolOptions"
                             :show-edit-template="true"
                         />
                     </div>
