@@ -3,7 +3,23 @@
       "tools": {
         "cosi": {
           "templateAdmin": {
-            "title": "Vorlage Admin"
+            "title": "Vorlagen Admin",
+            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+            "button": {
+              "addTemplate": "Vorlage erstellen",
+              "editTemplate": "Vorlage bearbeiten",
+              "uploadTemplate": "Vorlage hochladen",
+              "downloadTemplate": "Exportieren"
+          },
+          "label": {
+            "selectTemplate": "Vorlage auswählen",
+            "name": "Name",
+            "description": "Beschreibung (optional)",
+            "addGeoData": "Geodaten hinzufügen",
+            "addStatisticalData": "Statistische Daten hinzufügen",
+            "addTools": "Werkzeuge hinzufügen (optional)",
+            "placeholder": "Daten auswählen"
+          }
           }
         }
       }

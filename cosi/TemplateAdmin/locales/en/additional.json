@@ -3,7 +3,23 @@
     "tools": {
       "cosi": {
         "templateAdmin": {
-          "title": "Template Admin"
+          "title": "Template Admin",
+          "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          "button": {
+              "addTemplate": "Add Template",
+              "editTemplate": "Edit Template",
+              "uploadTemplate": "Upload Template",
+              "downloadTemplate": "Download Template"
+          },
+          "label": {
+            "selectTemplate": "Select Template",
+            "name": "Name",
+            "description": "Description (optional)",
+            "addGeoData": "Add Geo Data",
+            "addStatisticalData": "Add statistical data",
+            "addTools": "Add Tools (optional)",
+            "placeholder": "Select Option"
+          }
         }
       }
     }
