@@ -13,7 +13,7 @@
           "distance": "Distance",
           "compare": "Locations Comparison",
           "info": "Informations",
-          "compare_dates": "Time Period Comparison"
+          "compare_dates": "Time Stamp Comparison"
         },
         "time": {
           "months": [
@@ -127,7 +127,8 @@
           },
           "compareDates": {
             "dropdown": {
-              "activities": "Visitors of a single day",
+              "activities": "Visitors of a location on two different days",
+              "daily_hours": "Visitors of a location on two different days (hourly)",
               "ageGroup": "Age groups",
               "dwellTime": "Dwell Time",
               "visitorTypes": "Visitor Types"

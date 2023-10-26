@@ -416,7 +416,7 @@ export default {
                     </li>
                 </ul>
                 <p class="paragraph_underline">
-                    Besucher eines Standort an zwei verschiedenen Tagen (stündlich):
+                    Besucher eines Standorts an zwei verschiedenen Tagen (stündlich):
                 </p>
                 <p>
                     Angezeigt werden die Aktivitäten an einem Standort für zwei bestimmte Tage in stundenweiser Auflösung.

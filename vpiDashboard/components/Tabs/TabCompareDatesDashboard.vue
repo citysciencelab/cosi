@@ -28,7 +28,7 @@ export default {
                 },
                 {
                     id: "daily",
-                    name: this.translate("additional:modules.tools.vpidashboard.unique.hourly")
+                    name: this.translate("additional:modules.tools.vpidashboard.tab.compareDates.dropdown.daily_hours")
                 },
                 {
                     id: "ageGroup",

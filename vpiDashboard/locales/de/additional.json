@@ -13,7 +13,7 @@
           "distance": "Entfernung",
           "compare": "Standorte Vergleichen",
           "info": "Informationen",
-          "compare_dates": "Zeitraum Vergleichen"
+          "compare_dates": "Zeitpunkte Vergleichen"
         },
         "time": {
           "months": [
@@ -127,7 +127,8 @@
           },
           "compareDates": {
             "dropdown": {
-              "activities": "Besucher eines bestimmten Tages",
+              "activities": "Besucher eines Standorts an zwei verschiedenen Tagen",
+              "daily_hours": "Besucher eines Standorts an zwei verschiedenen Tagen (stündlich)",
               "ageGroup": "Altersgruppen",
               "dwellTime": "Verweildauer",
               "visitorTypes": "Besuchertypen"
