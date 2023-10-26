@@ -7,6 +7,7 @@ import {getComponent} from "../../../../src/utils/getComponent";
 import TemplateAdminForm from "./TemplateAdminForm.vue";
 import isObject from "../../../../src/utils/isObject";
 import {sort} from "../../../../src/utils/sort";
+import mapping from "../../assets/mapping.json";
 
 export default {
     name: "TemplateAdmin",
@@ -17,19 +18,29 @@ export default {
     data () {
         return {
             dataOptions: ["Select option", "options", "selected", "multiple", "label", "searchable", "clearOnSelect", "hideSelected", "maxHeight", "allowEmpty", "showLabels", "onChange", "touched"],
-            statOptions: ["data1", "data2", "data3"],
+            statOptions: [],
+            toolOptions: ["tool1", "tool2", "tool3"],
             currentTab: "#add-template-tab"
         };
     },
     computed: {
         ...mapGetters("Tools/TemplateAdmin", Object.keys(getters)),
-        ...mapState(["Tools"])
+        ...mapState(["Tools"]),
+        ...mapGetters("Tools/DistrictSelector", ["selectedDistrictLevel", "selectedDistrictLevelId", "selectedDistrictsCollection", "selectedDistrictNames"])
+    },
+    watch: {
+        active (value) {
+            if (value) {
+                const filteredPropertyNames = this.getFilteredPropertyNames(this.selectedDistrictLevel?.propertyNameList, this.ignorePropertyNames);
+
+                this.statOptions = this.getMappedLabelByValue(filteredPropertyNames, mapping);
+            }
+        }
     },
     created () {
         this.$on("close", this.close);
         this.toolOptions = this.getToolList(this.Tools);
     },
-
     methods: {
         ...mapMutations("Tools/TemplateAdmin", Object.keys(mutations)),
 
@@ -62,6 +73,60 @@ export default {
             toolList = sort("", toolList, "label");
 
             return toolList;
+        },
+
+        /**
+         * Gets the property names filtered by the given list of strings to ignore.
+         * @param {Array<String[]>} propertyNamesOfEachLayer List of property name lists for each layer.
+         * @param {String[]} propertyNamesToIgnore List of strings to ignore.
+         * @returns {Array<String[]>} A list of strings for each layer.
+         */
+        getFilteredPropertyNames (propertyNamesOfEachLayer, propertyNamesToIgnore) {
+            if (!Array.isArray(propertyNamesOfEachLayer) || !Array.isArray(propertyNamesToIgnore)) {
+                return [];
+            }
+            const result = [];
+
+            propertyNamesOfEachLayer.forEach(propertyNamesForLayer => {
+                if (!Array.isArray(propertyNamesForLayer)) {
+                    return;
+                }
+                const resultForLayer = propertyNamesForLayer.filter(
+                    propertyName => !propertyNamesToIgnore.includes(propertyName)
+                );
+
+                result.push(resultForLayer);
+            });
+            return result;
+        },
+
+        /**
+         * Gets a list of objects with mapped propertyNames and labels.
+         * @param {Array<String[]>} propertyNamesOfEachLayer List of property name lists for each layer.
+         * @param {Object[]} mappingList The list of objects to use for mapping.
+         * @returns {Object[]} A list of objects with following format: {propertyName: x, label: y}
+         */
+        getMappedLabelByValue (propertyNamesOfEachLayer, mappingList) {
+            if (!Array.isArray(propertyNamesOfEachLayer) || !Array.isArray(mappingList)) {
+                return [];
+            }
+            const result = [];
+
+            propertyNamesOfEachLayer.forEach(propertiesForLayer => {
+                if (!Array.isArray(propertiesForLayer)) {
+                    return;
+                }
+                propertiesForLayer.forEach(property => {
+                    const foundObject = mappingList.find(mappingObject => mappingObject?.category === property);
+
+                    if (!isObject(foundObject) || !Object.prototype.hasOwnProperty.call(foundObject, "value")) {
+                        result.push({propertyName: property, label: property});
+                        return;
+                    }
+                    result.push({propertyName: property, label: foundObject.value});
+                });
+            });
+            return result;
         }
     }
 };

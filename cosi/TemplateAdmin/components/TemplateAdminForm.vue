@@ -41,9 +41,13 @@ export default {
             this.selectedData = this.selectedData.filter(badge => badge !== name);
             return this.selectedData;
         },
+        /**
+         * Removes the statistic data by the given propertyName.
+         * @param {String} name The property name.
+         * @returns {void}
+         */
         removeStatData (name) {
-            this.selectedStatData = this.selectedStatData.filter(badge => badge !== name);
-            return this.selectedStatData;
+            this.selectedStatData = this.selectedStatData.filter(badge => badge?.propertyName !== name);
         },
 
         /**
@@ -199,6 +203,8 @@ export default {
                 :show-labels="false"
                 :clear-on-select="false"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+                label="label"
+                track-by="propertyName"
             >
                 <template
                     slot="selection"
@@ -214,13 +220,13 @@ export default {
         </div>
         <div class="mb-4">
             <button
-                v-for="index in selectedStatData"
-                :key="index"
+                v-for="(statDataObj, idx) in selectedStatData"
+                :key="idx"
                 class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mt-1 me-2 btn-pb"
                 aria-label="Close"
-                @click="removeStatData(index)"
+                @click.prevent="removeStatData(statDataObj.propertyName)"
             >
-                {{ index }}
+                {{ statDataObj.label }}
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
         </div>

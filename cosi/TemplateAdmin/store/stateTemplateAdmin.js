@@ -18,7 +18,8 @@ const state = {
     renderToWindow: true,
     resizableWindow: true,
     isVisibleInMenu: true,
-    deactivateGFI: true
+    deactivateGFI: true,
+    ignorePropertyNames: []
 };
 
 export default state;
