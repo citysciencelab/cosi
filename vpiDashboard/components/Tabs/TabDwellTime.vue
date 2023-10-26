@@ -114,6 +114,19 @@ export default {
             this.currentlySelectedYear = 2019 + index;
             this.getCurrentChartData();
             this.timestamp = window.performance.now();
+        },
+        /**
+         * translates the given key, checkes if the key exists and throws a console warning if not
+         * @param {String} key the key to translate
+         * @param {Object} [options=null] for interpolation, formating and plurals
+         * @returns {String} the translation or the key itself on error
+         */
+        translate (key, options = null) {
+            if (key === "additional:" + this.$t(key)) {
+                console.warn("the key " + JSON.stringify(key) + " is unknown to the additional translation");
+            }
+
+            return this.$t(key, options);
         }
     }
 };
@@ -146,6 +159,7 @@ export default {
                     <!-- Bar Chart -->
                     <div v-if="chartType === 'bar'">
                         <div class="row bar">
+                            <h2> {{ translate("additional:modules.tools.vpidashboard.tab.dwelltime.lineBarChartTitle", { year: currentlySelectedYear }) }} </h2>
                             <BarchartItem
                                 :key="timestamp"
                                 :data="chartdata.bar"
@@ -171,6 +185,7 @@ export default {
                     <!-- Line Chart -->
                     <div v-if="chartType === 'line'">
                         <div class="row line">
+                            <h2> {{ translate("additional:modules.tools.vpidashboard.tab.dwelltime.lineBarChartTitle", { year: currentlySelectedYear }) }} </h2>
                             <LinechartItem
                                 :key="timestamp"
                                 :data="chartdata.line"

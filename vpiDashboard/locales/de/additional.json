@@ -102,10 +102,11 @@
         },
         "tab": {
           "dwelltime": {
-            "chartTitle": "Verweildauer in Minuten"
+            "chartTitle": "Verweildauer in % pro Jahr",
+            "lineBarChartTitle": "Ø wöchentliche Verweildauer je Besucher pro Monat im Jahr {{year}}"
           },
           "visitorTypes": {
-            "chartTitle": "Besuchertypen pro Woche",
+            "chartTitle": "Ø wöchentliche Besucher pro Monat",
             "chartLabels": {
               "residents": "Hamburger",
               "commuters": "Pendler",
@@ -120,9 +121,9 @@
             "footnote": "(*) Touristen beinhalten Tages- und Übernachtungstouristen."
           },
           "ageGroup": {
-            "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat (*)",
+            "chartTitle": "Altersgruppe in % pro Jahr (*)",
             "pieChartTitle": "Altersgruppen pro Jahr",
-            "lineBarChartTitle": "Wöchentliche Besucher je Altersgruppe im Jahr {{year}}",
+            "lineBarChartTitle": "Ø wöchentliche Besucher je Altersgruppe pro Monat im Jahr {{year}}",
             "footnote": "(*) Unter 18 Jährige werden nicht erfasst. In der Altersgruppe der 18-19Jährigen bestehen Datenlücken, weshalb der Datensatz nicht berücksichtigt wurde."
           },
           "compareDates": {

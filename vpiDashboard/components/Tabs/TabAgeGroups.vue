@@ -200,7 +200,7 @@ export default {
                             <div
                                 class="row chart bar"
                             >
-                                <h4> {{ translate("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle", { year: currentlySelectedYear }) }} </h4>
+                                <h2> {{ translate("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle", { year: currentlySelectedYear }) }} </h2>
                                 <BarchartItem
                                     v-if="showChart"
                                     :key="timestamp"
@@ -229,7 +229,7 @@ export default {
                             <div
                                 class="row chart line"
                             >
-                                <h4> {{ translate("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle", { year: currentlySelectedYear }) }} </h4>
+                                <h2> {{ translate("additional:modules.tools.vpidashboard.tab.ageGroup.lineBarChartTitle", { year: currentlySelectedYear }) }} </h2>
                                 <LinechartItem
                                     :key="timestamp"
                                     :data="chartdata.line"

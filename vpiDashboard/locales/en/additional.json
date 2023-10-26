@@ -102,10 +102,11 @@
         },
         "tab": {
           "dwelltime": {
-            "chartTitle": "Dwell time in minutes"
+            "chartTitle": "Dwell time in % per year",
+            "lineBarChartTitle": "Ø weekly dwell time per visitor per month in year {{year}}"
           },
           "visitorTypes": {
-            "chartTitle": "Visitor Types per week",
+            "chartTitle": "Ø weekly visitors per month",
             "chartLabels": {
               "residents": "Hamburger",
               "commuters": "Commuters",
@@ -120,9 +121,9 @@
             "footnote": "(*) Tourists contain day tourists and overnight tourists."
           },
           "ageGroup": {
-            "chartTitle": "Age groups by year and by year and month (*)",
+            "chartTitle": "Age group in % per year (*)",
             "pieChartTitle": "Age groups by year",
-            "lineBarChartTitle": "Weekly visitors per age group in year {{year}}",
+            "lineBarChartTitle": "Ø weekly visitors per age group and month in year {{year}}",
             "footnote": "(*) People under 18 years are not displayed. The age group of 18-19 contains data leaks. Therefore the dataset will not be included."
           },
           "compareDates": {
