@@ -321,6 +321,7 @@ export default {
             }
 
             districtStats.years = [...getTimestamps(districtStats, this.timestampPrefix)];
+            districtStats.id = districtStats.category + districtStats.groupIndex;
             this.timestamps = districtStats.years.reduce((timestamps, timestamp) => {
                 return timestamps.includes(timestamp) ? timestamps : [timestamp, ...timestamps].sort().reverse();
             }, this.timestamps);
@@ -696,7 +697,7 @@ export default {
                                 fixed-header
                                 dense
                                 show-select
-                                item-key="category"
+                                item-key="id"
                                 class="dashboard-table"
                                 @current-items="setCurrentItems"
                                 @hook:mounted="collapseAllGroups"

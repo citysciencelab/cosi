@@ -10,6 +10,7 @@
  * @property {Boolean} [resizableWindow=false] - If True, window is resizable (config-param).
  * @property {String} toolToOpen - the tool to be open after this tool is closed.
  * @property {Boolean} [useImport=false] - If true, it is possible to import templates.
+ * @property {Boolean} [useTemplatesForMapping=false] - If true, the mapping is overwritten with the statistic data from the templates.
  */
 const state = {
     active: false,
@@ -29,7 +30,8 @@ const state = {
         "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/015vorlagen.md"
     },
     toolToOpen: undefined,
-    useImport: false
+    useImport: false,
+    useTemplatesForMapping: false
 };
 
 export default state;

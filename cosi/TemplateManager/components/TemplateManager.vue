@@ -8,6 +8,7 @@ import actions from "../store/actionsTemplateManager";
 import ToolInfo from "../../components/ToolInfo.vue";
 import TemplateManagerImport from "./TemplateManagerImport.vue";
 import axios from "axios";
+import mapping from "../../assets/mapping.json";
 
 export default {
     name: "TemplateManager",
@@ -61,6 +62,7 @@ export default {
     methods: {
         ...mapMutations("Tools/TemplateManager", Object.keys(mutations)),
         ...mapActions("Tools/TemplateManager", Object.keys(actions)),
+        ...mapMutations("Tools/DistrictSelector", ["setMapping"]),
         ...mapActions("Tools/SaveSession", ["loadSessionData"]),
 
         /**
@@ -123,7 +125,13 @@ export default {
         },
 
         loadFromTemplate (template, index) {
+            template.meta.isActive = true;
+
             const _template = this.applyFilters(template, index);
+
+            if (this.useTemplatesForMapping) {
+                this.createMappingByTemplates(this.templates, mapping);
+            }
 
             this.loadSessionData(_template);
             this.setActive(false);
@@ -131,14 +139,6 @@ export default {
             if (typeof this.toolToOpen === "string") {
                 this.$store.dispatch("Tools/setToolActive", {id: this.toolToOpen, active: true});
             }
-        },
-
-        showTemplateInfo (template) {
-            this.addSingleAlert({
-                content: template.meta?.info,
-                category: "Info",
-                displayClass: "info"
-            });
         },
 
         getActiveLayerList (template) {
@@ -177,6 +177,39 @@ export default {
          */
         addTemplate (template) {
             this.templates.push(template);
+        },
+
+        /*
+         * Creates a new mapping based on the statistical data in the templates.
+         * The name of the template is used as the name of the group.
+         * @param {Object[]} templates - All available templates.
+         * @param {Object[]} initMapping - The mapping array for statistical data.
+         * @returns {void}
+         */
+        createMappingByTemplates (templates, initMapping) {
+            const activeTemplates = templates.filter(template => template.meta.isActive),
+                newMapping = [];
+
+            activeTemplates.forEach(template => {
+                if (template.state?.Tools?.Dashboard?.statsFeatureFilter) {
+                    template.state.Tools.Dashboard.statsFeatureFilter.forEach(statName => {
+                        const mappingObject = initMapping.find(obj => obj.value === statName);
+
+                        if (mappingObject) {
+                            newMapping.push({
+                                "category": mappingObject.category,
+                                "value": statName,
+                                "group": template.meta.title,
+                                "stat_gebiet": "112233"
+                            });
+                        }
+                    });
+                }
+            });
+
+            if (newMapping.length > 0) {
+                this.setMapping(newMapping);
+            }
         }
     }
 };
