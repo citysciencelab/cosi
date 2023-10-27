@@ -19,14 +19,13 @@ export default {
         return {
             dataOptions: ["Select option", "options", "selected", "multiple", "label", "searchable", "clearOnSelect", "hideSelected", "maxHeight", "allowEmpty", "showLabels", "onChange", "touched"],
             statOptions: [],
-            toolOptions: ["tool1", "tool2", "tool3"],
             currentTab: "#add-template-tab"
         };
     },
     computed: {
         ...mapGetters("Tools/TemplateAdmin", Object.keys(getters)),
-        ...mapState(["Tools"]),
-        ...mapGetters("Tools/DistrictSelector", ["selectedDistrictLevel", "selectedDistrictLevelId", "selectedDistrictsCollection", "selectedDistrictNames"])
+        ...mapGetters("Tools/DistrictSelector", ["selectedDistrictLevel", "selectedDistrictLevelId", "selectedDistrictsCollection", "selectedDistrictNames"]),
+        ...mapState(["Tools"])
     },
     watch: {
         active (value) {
@@ -110,7 +109,7 @@ export default {
             if (!Array.isArray(propertyNamesOfEachLayer) || !Array.isArray(mappingList)) {
                 return [];
             }
-            const result = [];
+            let result = [];
 
             propertyNamesOfEachLayer.forEach(propertiesForLayer => {
                 if (!Array.isArray(propertiesForLayer)) {
@@ -126,6 +125,9 @@ export default {
                     result.push({propertyName: property, label: foundObject.value});
                 });
             });
+
+            result = sort("", result, "label");
+
             return result;
         }
     }

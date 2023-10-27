@@ -13,7 +13,7 @@
 const state = {
     active: false,
     id: "TemplateAdmin",
-    name: "additional:modules.tools.TemplateAdmin.title",
+    name: "additional:modules.tools.cosi.TemplateAdmin.title",
     icon: "bi-folder2-open",
     renderToWindow: true,
     resizableWindow: true,
