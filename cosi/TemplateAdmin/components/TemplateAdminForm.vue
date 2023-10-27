@@ -74,6 +74,7 @@ export default {
                 <div class="col col-md mb-2">
                     <button
                         class="template-upload btn btn-outline-primary"
+                        @click.prevent=""
                     >
                         <i class="bi bi-upload" />
                         {{ $t("additional:modules.tools.cosi.templateAdmin.button.uploadTemplate") }}
@@ -286,6 +287,7 @@ export default {
         </div>
         <button
             class="btn btn-outline-primary"
+            @click.prevent=""
         >
             <i class="bi bi-download fs-6 pe-2" />
             {{ $t("additional:modules.tools.cosi.templateAdmin.button.downloadTemplate") }}
