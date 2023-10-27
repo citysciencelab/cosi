@@ -127,7 +127,7 @@ export default {
                     styleSelectedDistrictLevels(this.districtLevels);
                 }
 
-                if (typeof this.toolToOpen === "string") {
+                if (this.selectedNames.length && typeof this.toolToOpen === "string") {
                     this.$store.dispatch("Tools/setToolActive", {id: this.toolToOpen, active: true});
                 }
             }
