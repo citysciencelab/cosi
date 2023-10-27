@@ -38,8 +38,7 @@ export default {
     },
     methods: {
         removeData (name) {
-            this.selectedData = this.selectedData.filter(badge => badge !== name);
-            return this.selectedData;
+            this.selectedData = this.selectedData.filter(badge => badge?.propertyName !== name);
         },
         /**
          * Removes the statistic data by the given propertyName.
@@ -146,6 +145,8 @@ export default {
                 :clear-on-select="false"
                 :preserve-search="true"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+                label="label"
+                track-by="propertyName"
             >
                 <template
                     slot="selection"
@@ -161,13 +162,13 @@ export default {
         </div>
         <div class="mb-4">
             <button
-                v-for="index in selectedData"
-                :key="index"
+                v-for="(geoDataObj, idx) in selectedData"
+                :key="idx"
                 class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
                 aria-label="Close"
-                @click="removeData(index)"
+                @click="removeData(geoDataObj.propertyName)"
             >
-                {{ index }}
+                {{ geoDataObj.label }}
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
         </div>

@@ -17,7 +17,7 @@ export default {
     },
     data () {
         return {
-            dataOptions: ["Select option", "options", "selected", "multiple", "label", "searchable", "clearOnSelect", "hideSelected", "maxHeight", "allowEmpty", "showLabels", "onChange", "touched"],
+            dataOptions: [],
             statOptions: [],
             currentTab: "#add-template-tab"
         };
@@ -30,9 +30,11 @@ export default {
     watch: {
         active (value) {
             if (value) {
-                const filteredPropertyNames = this.getFilteredPropertyNames(this.selectedDistrictLevel?.propertyNameList, this.ignorePropertyNames);
+                const filteredPropertyNames = this.getFilteredPropertyNames(this.selectedDistrictLevel?.propertyNameList, this.ignorePropertyNames),
+                    layers = Radio.request("Parser", "getItemsByAttributes", {type: "layer"});
 
                 this.statOptions = this.getMappedLabelByValue(filteredPropertyNames, mapping);
+                this.dataOptions = this.getLayerNames(layers);
             }
         }
     },
@@ -129,6 +131,29 @@ export default {
             result = sort("", result, "label");
 
             return result;
+        },
+
+        /**
+         * Returns a list of layer names.
+         * @param {Object} layers the Layers from the card.
+         * @returns {Object[]} A list of objects with following format: {propertyName: x, label: y}
+         */
+        getLayerNames (layers) {
+            let layerNames = [];
+
+            if (!Array.isArray(layers)) {
+                return [];
+            }
+
+            layers.forEach(layer => {
+                if (typeof layer?.name !== "undefined" && layer.isNeverVisibleInTree !== true) {
+                    layerNames.push({propertyName: layer.id, label: layer.name});
+                }
+            });
+
+            layerNames = sort("", layerNames, "label");
+
+            return layerNames;
         }
     }
 };

@@ -289,5 +289,80 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                 wrapper.destroy();
             });
         });
+        describe("getLayerNames", () => {
+            it("should return an empty array", () => {
+                const wrapper = shallowMount(TemplateAdmin, {store, localVue}),
+                    layers = [],
+                    layerNames = wrapper.vm.getLayerNames(layers);
+
+                expect(layerNames).to.be.an("array").that.is.empty;
+                wrapper.destroy();
+            });
+            it("should return an array", () => {
+                const wrapper = shallowMount(TemplateAdmin, {store, localVue}),
+                    layers = [
+                        {
+                            "isSelected": false,
+                            "format": "image/png",
+                            "isBaseLayer": true,
+                            "level": 0,
+                            "parentId": "Baselayer",
+                            "type": "layer",
+                            "styleId": "default",
+                            "id": "13534",
+                            "name": "Geobasiskarten (Schriftplatte)",
+                            "url": "https://geodienste.hamburg.de/HH_WMS_Geobasiskarten_Schriftplatte",
+                            "typ": "WMS"
+                        }
+                    ],
+                    layerNames = wrapper.vm.getLayerNames(layers);
+
+                expect(layerNames).to.be.an("array").that.is.not.empty;
+                wrapper.destroy();
+            });
+            it("should return arrays with correct properties", () => {
+                const wrapper = shallowMount(TemplateAdmin, {store, localVue}),
+                    layers = [
+                        {
+                            "isSelected": false,
+                            "format": "image/png",
+                            "isBaseLayer": true,
+                            "level": 0,
+                            "parentId": "Baselayer",
+                            "type": "layer",
+                            "styleId": "default",
+                            "id": "13534",
+                            "name": "Geobasiskarten",
+                            "url": "https://geodienste.hamburg.de/HH_WMS_Geobasiskarten_Schriftplatte",
+                            "typ": "WMS"
+                        },
+                        {
+                            "isSelected": false,
+                            "format": "image/png",
+                            "isBaseLayer": true,
+                            "level": 0,
+                            "parentId": "Baselayer",
+                            "type": "layer",
+                            "styleId": "default",
+                            "id": "23534",
+                            "name": "Schriftplatte",
+                            "url": "https://geodienste.hamburg.de/HH_WMS_Geobasiskarten_Schriftplatte",
+                            "typ": "WMS"
+                        }
+                    ],
+                    expected = [
+                        {
+                            propertyName: "13534", label: "Geobasiskarten"
+                        },
+                        {
+                            propertyName: "23534", label: "Schriftplatte"
+                        }
+                    ],
+                    layerNames = wrapper.vm.getLayerNames(layers);
+
+                expect(layerNames).to.deep.equal(expected);
+                wrapper.destroy();
+            });
+        });
     });
 });
