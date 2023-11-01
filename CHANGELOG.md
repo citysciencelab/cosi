@@ -3,22 +3,9 @@
 
 [Semantic versioning](https://semver.org/spec/v2.0.0.html) is used.
 
-## Unreleased - in development
-### __Breaking Changes__
-
-### Added
-
-## v2.38.0 - 2023-10-20
+## v2.39.0 - 2023-11-01
 ### Added
 - The new addon [statisticDashboard](https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/statisticDashboard/) A tool to display statistical data. Further details: [statisticDashboard documentation](https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/statisticDashboard/doc/config.json.md)
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
 
 ---
 ## v2.34.0 - 2023-06-07
