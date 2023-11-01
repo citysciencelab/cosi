@@ -166,7 +166,7 @@ export default {
                         <button
                             id="add-template-tab"
                             :class="currentTab === '#add-template-tab' ? 'active' : ''"
-                            class="nav-link"
+                            class="nav-link fs-6"
                             data-bs-toggle="tab"
                             data-bs-target="#add-template"
                             type="button"
@@ -175,7 +175,7 @@ export default {
                             aria-selected="true"
                             @click="currentTab = '#add-template-tab'"
                         >
-                            <i class="bi bi-plus-square" />
+                            <i class="bi bi-plus-square pe-2" />
                             {{ $t("additional:modules.tools.cosi.templateAdmin.button.addTemplate") }}
                         </button>
                     </li>
@@ -186,7 +186,7 @@ export default {
                         <button
                             id="edit-template-tab"
                             :class="currentTab === '#edit-template-tab' ? 'active' : ''"
-                            class="nav-link"
+                            class="nav-link fs-6"
                             data-bs-toggle="tab"
                             data-bs-target="#edit-template"
                             type="button"
@@ -195,7 +195,7 @@ export default {
                             aria-selected="false"
                             @click="currentTab = '#edit-template-tab'"
                         >
-                            <i class="bi bi-pencil-square" />
+                            <i class="bi bi-pencil-square pe-2" />
                             {{ $t("additional:modules.tools.cosi.templateAdmin.button.editTemplate") }}
                         </button>
                     </li>
@@ -244,14 +244,11 @@ export default {
     color: $light_blue;
     font-family: "MasterPortalFont Bold";
     background-color: white;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
 }
 
 .nav-tabs, .nav-link  {
     background-color: #F3F3F3;
     color: $secondary_icon_button;
-
 }
 
 </style>

@@ -65,41 +65,36 @@ export default {
 
 <template lang="html">
     <!-- Form -->
-    <form>
+    <form id="template-admin-form">
         <div
             v-if="showEditTemplate"
             class="mt-3"
         >
-            <div class="row">
-                <div class="col col-md mb-2">
-                    <button
-                        class="template-upload btn btn-outline-primary"
-                        @click.prevent=""
-                    >
-                        <i class="bi bi-upload" />
-                        {{ $t("additional:modules.tools.cosi.templateAdmin.button.uploadTemplate") }}
-                    </button>
-                    <label
-                        class="col col-md form-label ps-0 pb-0 pt-4 m-0"
-                        for="select-template"
-                    >
-                        {{ $t("additional:modules.tools.cosi.templateAdmin.label.selectTemplate") }}
-                    </label>
-                    <Multiselect
-                        id="select-template"
-                        v-model="selectedTemplate"
-                        class="col col-md ps-0 pt-0"
-                        :options="[]"
-                        :close-on-select="true"
-                        :show-labels="false"
-                        :allow-empty="true"
-                        :multiple="false"
-                        :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
-                    />
-                </div>
-            </div>
+            <button
+                class="template-upload btn btn-outline-primary fs-5 lh-1"
+                @click.prevent=""
+            >
+                <i class="bi bi-upload pe-2" />
+                {{ $t("additional:modules.tools.cosi.templateAdmin.button.uploadTemplate") }}
+            </button>
+            <label
+                class="col col-md form-label ps-0 pb-0 pt-4 m-0"
+                for="select-template"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.label.selectTemplate") }}
+            </label>
+            <Multiselect
+                id="select-template"
+                v-model="selectedTemplate"
+                :options="[]"
+                :close-on-select="true"
+                :show-labels="false"
+                :allow-empty="true"
+                :multiple="false"
+                :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+            />
         </div>
-        <div class="my-3 ">
+        <div class="my-3">
             <label
                 for="form-name"
                 class="form-label mb-0"
@@ -109,7 +104,7 @@ export default {
             <input
                 id="form-name"
                 type="text"
-                class="form-control"
+                class="form-control rounded-0"
             >
         </div>
         <div class="my-3">
@@ -121,7 +116,7 @@ export default {
             </label>
             <textarea
                 id="form-description"
-                class="form-control"
+                class="form-control rounded-0"
                 rows="3"
             />
         </div>
@@ -131,7 +126,7 @@ export default {
         >
             {{ $t("additional:modules.tools.cosi.templateAdmin.label.addGeoData") }}
         </label>
-        <div class="row no-gutters mb-1">
+        <div class="row no-gutters mb-2">
             <button
                 class="col col-md-1 align-items-center justify-content-center search-button"
                 type="button"
@@ -169,7 +164,7 @@ export default {
             <button
                 v-for="index in selectedData"
                 :key="index"
-                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mt-1 me-2 btn-pb"
+                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
                 aria-label="Close"
                 @click="removeData(index)"
             >
@@ -184,7 +179,7 @@ export default {
             {{ $t("additional:modules.tools.cosi.templateAdmin.label.addStatisticalData") }}
         </label>
 
-        <div class="row no-gutters mb-1">
+        <div class="row no-gutters mb-2">
             <button
                 class="col col-md-1 align-items-center justify-content-center search-button"
                 type="button"
@@ -223,7 +218,7 @@ export default {
             <button
                 v-for="(statDataObj, idx) in selectedStatData"
                 :key="idx"
-                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mt-1 me-2 btn-pb"
+                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
                 aria-label="Close"
                 @click.prevent="removeStatData(statDataObj.propertyName)"
             >
@@ -238,7 +233,7 @@ export default {
             {{ $t("additional:modules.tools.cosi.templateAdmin.label.addTools") }}
         </label>
 
-        <div class="row no-gutters mb-1">
+        <div class="row no-gutters mb-2">
             <button
                 class="col col-md-1 align-items-center justify-content-center search-button"
                 type="button"
@@ -277,7 +272,7 @@ export default {
             <button
                 v-for="(tool, index) in selectedToolData"
                 :key="index"
-                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mt-1 me-2 btn-pb"
+                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
                 aria-label="Close"
                 @click.prevent="removeToolData(tool.value)"
             >
@@ -286,10 +281,10 @@ export default {
             </button>
         </div>
         <button
-            class="btn btn-outline-primary"
+            class="btn btn-outline-primary fs-5 lh-1"
             @click.prevent=""
         >
-            <i class="bi bi-download fs-6 pe-2" />
+            <i class="bi bi-download pe-2" />
             {{ $t("additional:modules.tools.cosi.templateAdmin.button.downloadTemplate") }}
         </button>
     </form>
@@ -301,66 +296,77 @@ export default {
 .btn-outline-primary, .btn-outline-primary:focus-visible {
     color: $light_blue;
     border-color: $light_blue;
-    font-size: 12px;
 }
+
 .btn-outline-primary:hover{
-        color: $white;
-    }
-label {
-    color: $secondary_icon_button;
+    color: $white;
+    background-color: $light_blue;
 }
-#form-name, #form-description {
-    border-radius: 4px;
-}
+
 .search-icon {
     font-size: 15px;
     color: $light_blue;
+    position: relative;
+    top: 2px;
 }
+
 .search-button {
-   border: 1px solid #ced4da;
-   border-top-left-radius: 4px;
-   border-bottom-left-radius: 4px;
-   background-color: #F3F3F3;
+    border: 1px solid #ced4da;
+    border-right: 0;
+    background-color: $light_grey;
 }
+
 .btn-outline-secondary, label {
-        color: $dark_grey;
-    }
+    color: $dark_grey;
+}
+
+.btn-pb {
+    padding-bottom: 2px;
+}
 
 </style>
 
 <style lang="scss">
 @import "~variables";
 
-form .multiselect, form .multiselect__input, form .multiselect__single {
-    font-family: inherit;
-    font-size: 11px;
-}
+#template-admin-form {
 
-form .multiselect__strong{
-    font-family: "MasterPortalFont Bold";
-}
-
-form {
-    .multiselect__option--selected.multiselect__option--highlight,
-   .multiselect__option--selected.multiselect__option--highlight:after,
-   .multiselect__option:after,
-   .multiselect__option--selected,
-   .multiselect__option--selected:after {
-  background: $light_blue;
-  color: $white;
-  font-weight: normal;
+    .multiselect, .multiselect__input, .multiselect__single {
+        font-family: inherit;
+        font-size: 12px;
     }
-}
 
-form {
+    .multiselect__option--selected.multiselect__option--highlight,
+    .multiselect__option--selected.multiselect__option--highlight:after,
+    .multiselect__option:after,
+    .multiselect__option--selected,
+    .multiselect__option--selected:after {
+        background: $light_blue;
+        color: $white;
+        font-weight: normal;
+    }
+
     .multiselect__option--highlight,
     .multiselect__option--highlight:after {
         background: $light_grey;
         color: $black;
     }
-}
 
-form .multiselect__select {
-    height: 30px;
+
+    .multiselect__select {
+        padding: 4px 8px 10px 8px;
+    }
+
+    .multiselect__tags {
+        border-radius: 0;
+    }
+
+    .multiselect__placeholder {
+        margin-bottom: 7px
+    }
+
+    .multiselect__option--selected {
+        font-family: $font_family_accent
+    }
 }
 </style>

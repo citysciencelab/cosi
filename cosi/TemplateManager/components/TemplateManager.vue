@@ -375,7 +375,7 @@ export default {
                                     <v-row justify="end">
                                         <v-col>
                                             <button
-                                                class="btn btn-outline lh-1 fs-5 mb-3 rounded"
+                                                class="btn btn-outline lh-1 fs-5 mb-3"
                                                 @click="loadFromTemplate(template, i)"
                                             >
                                                 <i class="bi bi-upload pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}

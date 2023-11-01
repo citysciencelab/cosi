@@ -66,7 +66,7 @@ export default {
 <template lang="html">
     <div id="template-manager-import">
         <button
-            class="btn btn-outline lh-1 fs-5 mb-3 rounded"
+            class="btn btn-outline lh-1 fs-5 mb-3"
             @click="triggerFileInput"
         >
             <i class="bi bi-upload pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.importTemplate") }}
