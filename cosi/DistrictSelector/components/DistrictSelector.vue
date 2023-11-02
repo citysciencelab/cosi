@@ -557,6 +557,7 @@ export default {
                         @input="updateSelectedFeatures"
                     />
                     <v-text-field
+                        v-if="enableBuffer"
                         v-model="bufferVal"
                         :label="$t('additional:modules.tools.cosi.districtSelector.inputLabel')"
                         outlined

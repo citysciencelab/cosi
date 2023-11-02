@@ -18,6 +18,7 @@ Mit dem DistrictSelector (Gebietsauswahl) wird ein Gebiet auf Basis einer Verwal
 |districtLevels[i].districtNamesMap|nein|Object| |Benutzerdefiniertes dictionary zum bereitstellen von synonymen Gebietsnamen|
 |additionalInfoLayers|nein|Object| |Zusätzliche Info Layer die beim Nutzen des Tools angezeigt werden können. Der Key ist der angezeigte Bezeichner, der Value die Liste an Layer IDs|
 |toolToOpen|nein|String| |Das Werkzeug, das nach dem Schließen des DistrictSelector geöffnet wird.|
+|enableBuffer|nein|Boolean|true|Legt fest, ob der Puffer als InputFeld angezeigt wird.|
 
 **Beispiel**
 ```
@@ -25,6 +26,7 @@ Mit dem DistrictSelector (Gebietsauswahl) wird ein Gebiet auf Basis einer Verwal
   "active": true,
   "name": "Gebietsauswahl",
   "toolToOpen": "templateManager",
+  "enableBuffer": true,
   "districtLevels": [
     {
       "layerId": "6071",
