@@ -127,7 +127,8 @@ export default {
         loadFromTemplate (template, index) {
             template.meta.isActive = true;
 
-            const _template = this.applyFilters(template, index);
+            const _template = this.applyFilters(template, index),
+                startingTool = template?.state?.Tools?.toolToOpen;
 
             if (this.useTemplatesForMapping) {
                 this.createMappingByTemplates(this.templates, mapping);
@@ -135,8 +136,20 @@ export default {
 
             this.loadSessionData(_template);
             this.setActive(false);
+            this.openTool(startingTool);
 
-            if (typeof this.toolToOpen === "string") {
+        },
+
+        /**
+         * Opening a tool after loading the template
+         * @param {String} startingTool - the starting tool to open after loading the template
+         * @returns {void}
+         */
+        openTool (startingTool) {
+            if (typeof startingTool === "string") {
+                this.$store.dispatch("Tools/setToolActive", {id: startingTool, active: true});
+            }
+            else if (typeof this.toolToOpen === "string") {
                 this.$store.dispatch("Tools/setToolActive", {id: this.toolToOpen, active: true});
             }
         },
