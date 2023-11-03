@@ -200,6 +200,7 @@ export default {
                                 "category": mappingObject.category,
                                 "value": statName,
                                 "group": template.meta.title,
+                                "valueType": mappingObject.valueType,
                                 "stat_gebiet": "112233"
                             });
                         }

@@ -423,4 +423,14 @@ describe("addons/cosi/Dashboard/components/Dashboard.vue", () => {
             expect(spyUpdateDistricts.callCount).to.equal(1);
         });
     });
+
+    describe("Methods", () => {
+        describe("getSelectedDistrictsLabels", async () => {
+            await factory.initialize(shallowMount);
+
+            const selectedLabels = wrapper.vm.getSelectedDistrictsLabels(selectedDistrictLevel.districts);
+
+            expect(selectedLabels).to.deep.equal(["Wolkenkuckucksheim (Statgebiet)"]);
+        });
+    });
 });

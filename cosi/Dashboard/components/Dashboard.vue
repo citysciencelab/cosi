@@ -120,7 +120,6 @@ export default {
         ...mapGetters("Tools/DistrictSelector", [
             "selectedDistrictLevel",
             "selectedDistrictNames",
-            "selectedDistrictLabels",
             "keyOfAttrNameStats",
             "mapping",
             "loadend",
@@ -262,6 +261,18 @@ export default {
         ...mapMutations("Tools/ColorCodeMap", ["setSelectedYear"]),
         ...mapActions("Tools/ChartGenerator", ["channelGraphData"]),
         ...mapActions("Tools/DistrictSelector", ["updateDistricts"]),
+
+        /**
+         * Returns the labels of the selected districts.
+         * @param {Object[]} districts - The districts of the selected district level.
+         * @returns {String[]} The labels.
+         */
+        getSelectedDistrictsLabels (districts) {
+            const selectedDistricts = districts.filter(district => district.isSelected === true);
+
+            return selectedDistricts.map(district => district.getLabel());
+        },
+
         /**
          * Generates the table data for the v-data-table (headers/columns, items/rows)
          * @listens #Change:DistrictSelector/loadend on DistrictSelector/loadend
@@ -281,7 +292,6 @@ export default {
          */
         getRows () {
             let counter = 0;
-
 
             return this.mapping.reduce((rows, category, index, array) => {
                 if (!category[this.keyOfAttrNameStats]) {
@@ -404,7 +414,7 @@ export default {
         },
 
         getAverageAsString (item, timestamp) {
-            const average = this.getAverage(item, this.selectedDistrictLabels, timestamp, this.timestampPrefix);
+            const average = this.getAverage(item, this.getSelectedDistrictsLabels(this.selectedDistrictLevel.districts), timestamp, this.timestampPrefix);
 
             return average.toLocaleString(this.currentLocale);
         },
@@ -413,13 +423,13 @@ export default {
             return Object.fromEntries(
                 item.years.map(timestamp => [
                     this.timestampPrefix + timestamp,
-                    this.getAverage(item, this.selectedDistrictLabels, timestamp, this.timestampPrefix)
+                    this.getAverage(item, this.getSelectedDistrictsLabels(this.selectedDistrictLevel.districts), timestamp, this.timestampPrefix)
                 ])
             );
         },
 
         getTotalAsString (item, timestamp) {
-            const total = this.getTotal(item, this.selectedDistrictLabels, timestamp, this.timestampPrefix);
+            const total = this.getTotal(item, this.getSelectedDistrictsLabels(this.selectedDistrictLevel.districts), timestamp, this.timestampPrefix);
 
             return total.toLocaleString(this.currentLocale);
         },
@@ -428,7 +438,7 @@ export default {
             return Object.fromEntries(
                 item.years.map(timestamp => [
                     this.timestampPrefix + timestamp,
-                    this.getTotal(item, this.selectedDistrictLabels, timestamp, this.timestampPrefix)
+                    this.getTotal(item, this.getSelectedDistrictsLabels(this.selectedDistrictLevel.districts), timestamp, this.timestampPrefix)
                 ])
             );
         },
