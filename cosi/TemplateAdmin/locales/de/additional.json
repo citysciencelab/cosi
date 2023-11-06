@@ -1,15 +1,15 @@
 {
   "modules": {
-      "tools": {
-        "cosi": {
-          "templateAdmin": {
-            "title": "Vorlagen Admin",
-            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-            "button": {
-              "addTemplate": "Vorlage erstellen",
-              "editTemplate": "Vorlage bearbeiten",
-              "uploadTemplate": "Vorlage hochladen",
-              "downloadTemplate": "Exportieren"
+    "tools": {
+      "cosi": {
+        "templateAdmin": {
+          "title": "Vorlagen Admin",
+          "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          "button": {
+            "addTemplate": "Vorlage erstellen",
+            "editTemplate": "Vorlage bearbeiten",
+            "uploadTemplate": "Vorlage hochladen",
+            "downloadTemplate": "Exportieren"
           },
           "label": {
             "selectTemplate": "Vorlage auswählen",
@@ -19,9 +19,11 @@
             "addStatisticalData": "Statistische Daten hinzufügen",
             "addTools": "Starter Werkzeug hinzufügen (optional)",
             "placeholder": "Daten auswählen"
-          }
-          }
+          },
+          "required": "Pflichtfelder",
+          "hint": "Dies ist ein Pflichtfeld."
         }
       }
+    }
   }
 }

@@ -19,7 +19,9 @@
             "addStatisticalData": "Add statistical data",
             "addTools": "Add starting Tool (optional)",
             "placeholder": "Select Option"
-          }
+          },
+          "required": "Required",
+          "hint": "This is a required field."
         }
       }
     }

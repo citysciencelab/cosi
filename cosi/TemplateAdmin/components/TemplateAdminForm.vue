@@ -28,10 +28,15 @@ export default {
     },
     data () {
         return {
+            templateName: "",
             selectedData: [],
             selectedStatData: [],
             selectedToolData: [],
-            selectedTemplate: ""
+            selectedTemplate: "",
+            isNameValidating: false,
+            isGeoDataValidating: false,
+            isStatDataValidating: false,
+            isValidated: false
         };
     },
     computed: {
@@ -55,6 +60,74 @@ export default {
          */
         removeToolData () {
             this.selectedToolData = [];
+        },
+
+        /**
+         * Validating the form
+         * @returns {void}
+         */
+        validateForm () {
+            this.setIsNameValidating(true);
+            this.setIsGeoDataValidating(true);
+            this.setIsStatDataValidating(true);
+
+            if (this.templateName.trim() !== "" && this.selectedData.length && this.selectedStatData.length) {
+                this.isValidated = true;
+            }
+            else {
+                this.isValidated = false;
+            }
+
+            if (this.templateName.trim() !== "") {
+                this.setIsNameValidating(false);
+            }
+
+            if (this.selectedData.length) {
+                this.setIsGeoDataValidating(false);
+            }
+
+            if (this.selectedStatData.length) {
+                this.setIsStatDataValidating(false);
+            }
+
+            if (this.isValidated) {
+                this.exportForm();
+            }
+        },
+
+        /**
+         * Exports the form in json format
+         * @returns {Object} the form in json format
+         */
+        exportForm () {
+            return {};
+        },
+
+        /**
+         * Sets the isNameValidating
+         * @param {Boolean} value true or false
+         * @returns {void}
+         */
+        setIsNameValidating (value) {
+            this.isNameValidating = value;
+        },
+
+        /**
+         * Sets the isGeoDataValidating
+         * @param {Boolean} value true or false
+         * @returns {void}
+         */
+        setIsGeoDataValidating (value) {
+            this.isGeoDataValidating = value;
+        },
+
+        /**
+         * Sets the isStatDataValidating
+         * @param {Boolean} value true or false
+         * @returns {void}
+         */
+        setIsStatDataValidating (value) {
+            this.isStatDataValidating = value;
         }
     }
 };
@@ -97,13 +170,21 @@ export default {
                 for="form-name"
                 class="form-label mb-0"
             >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.label.name") }}
+                {{ $t("additional:modules.tools.cosi.templateAdmin.label.name") }} *
             </label>
             <input
                 id="form-name"
+                v-model="templateName"
                 type="text"
-                class="form-control rounded-0"
+                :class="['form-control', 'rounded-0', isNameValidating && templateName.trim() === '' ? 'novalidate' : '']"
+                @input="setIsNameValidating(false)"
             >
+            <span
+                v-if="isNameValidating && templateName.trim() === ''"
+                class="hint"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
+            </span>
         </div>
         <div class="my-3">
             <label
@@ -122,7 +203,7 @@ export default {
             class="form-label mb-0"
             for="add-geo-data"
         >
-            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addGeoData") }}
+            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addGeoData") }} *
         </label>
         <div class="row no-gutters mb-2">
             <button
@@ -136,7 +217,7 @@ export default {
             <Multiselect
                 id="add-geo-data"
                 v-model="selectedData"
-                class="col col-md"
+                :class="['col', 'col-md', isGeoDataValidating && !selectedData.length ? 'novalidate' : '']"
                 :options="geoData"
                 :searchable="true"
                 :close-on-select="false"
@@ -144,9 +225,11 @@ export default {
                 :show-labels="false"
                 :clear-on-select="false"
                 :preserve-search="true"
+                :allow-empty="false"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
                 label="label"
                 track-by="propertyName"
+                @input="setIsGeoDataValidating(false)"
             >
                 <template
                     slot="selection"
@@ -166,19 +249,24 @@ export default {
                 :key="idx"
                 class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
                 aria-label="Close"
-                @click="removeData(geoDataObj.propertyName)"
+                @click.prevent="removeData(geoDataObj.propertyName)"
             >
                 {{ geoDataObj.label }}
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
+            <span
+                v-if="isGeoDataValidating && !selectedData.length"
+                class="hint"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
+            </span>
         </div>
         <label
             class="form-label mb-0"
             for="add-statistic-data"
         >
-            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addStatisticalData") }}
+            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addStatisticalData") }} *
         </label>
-
         <div class="row no-gutters mb-2">
             <button
                 class="col col-md-1 align-items-center justify-content-center search-button"
@@ -191,16 +279,18 @@ export default {
             <Multiselect
                 id="add-statistic-data"
                 v-model="selectedStatData"
-                class="col col-md"
+                :class="['col', 'col-md', isStatDataValidating && !selectedStatData.length ? 'novalidate' : '']"
                 :options="statData"
                 :searchable="true"
                 :close-on-select="false"
                 :multiple="true"
                 :show-labels="false"
                 :clear-on-select="false"
+                :allow-empty="false"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
                 label="label"
                 track-by="propertyName"
+                @input="setIsStatDataValidating(false)"
             >
                 <template
                     slot="selection"
@@ -225,6 +315,12 @@ export default {
                 {{ statDataObj.label }}
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
+            <span
+                v-if="isStatDataValidating && !selectedStatData.length"
+                class="hint"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
+            </span>
         </div>
         <label
             class="form-label mb-0"
@@ -279,9 +375,12 @@ export default {
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
         </div>
+        <div class="mb-4">
+            * {{ $t("additional:modules.tools.cosi.templateAdmin.required") }}
+        </div>
         <button
-            class="btn btn-outline-primary fs-5 lh-1"
-            @click.prevent=""
+            class="export-template btn btn-outline-primary fs-5 lh-1"
+            @click.prevent="validateForm"
         >
             <i class="bi bi-download pe-2" />
             {{ $t("additional:modules.tools.cosi.templateAdmin.button.downloadTemplate") }}
@@ -321,6 +420,20 @@ export default {
 
 .btn-pb {
     padding-bottom: 2px;
+}
+
+.novalidate {
+    outline: 0;
+    box-shadow: inset 0 1px 2px rgba(225, 0, 25, 0.075), 0 0 0 0.25rem rgba(225, 0, 25, 0.25);
+}
+
+.hint {
+    display: block;
+    color: $danger;
+}
+
+#form-name + .hint {
+    margin-top: 8px;
 }
 
 </style>
