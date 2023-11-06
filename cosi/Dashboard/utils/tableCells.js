@@ -9,7 +9,7 @@ import Feature from "ol/Feature";
  * @param {*} item - item
  * @param {*} header - header
  * @param {*} timestamp - year
- * @param {Object} districts - All districts of the current level.
+ * @param {Object[]} districts - All districts of the current level.
  * @param {String} [timestampPrefix="jahr_"] - The string the timestamps start with (e.g. jahr_).
  * @returns {String} The value as Sring for the cell or "-" if no value is available.
  */

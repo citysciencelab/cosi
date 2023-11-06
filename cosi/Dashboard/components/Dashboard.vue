@@ -30,6 +30,7 @@ import exportXlsx from "../../utils/exportXlsx";
 import DashboardToolbar from "./DashboardToolbar.vue";
 import ToolInfo from "../../components/ToolInfo.vue";
 import TableCell from "./TableCell.vue";
+import isObject from "../../../../src/utils/isObject";
 
 export default {
     name: "Dashboard",
@@ -228,8 +229,8 @@ export default {
 
                     // this.currentItems = items;
                     let data = this.exportTimeline
-                        ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.timestampPrefix)
-                        : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.timestampPrefix);
+                        ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.timestampPrefix, this.exportGrouped)
+                        : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.timestampPrefix, this.exportGrouped);
 
                     data = JSON.parse(JSON.stringify(data)); // cleans the object to pure JSON (rather than array of getters and setters)
                     // eslint-disable-next-line no-unused-vars
@@ -285,6 +286,7 @@ export default {
         ...mapMutations("Tools/ColorCodeMap", ["setSelectedYear"]),
         ...mapActions("Tools/ChartGenerator", ["channelGraphData"]),
         ...mapActions("Tools/DistrictSelector", ["updateDistricts"]),
+        ...mapActions("Alerting", ["addSingleAlert"]),
 
         /**
          * Returns the labels of the selected districts.
@@ -563,20 +565,38 @@ export default {
          * @returns {void}
          */
         exportTable (exportTimeline = false) {
+            let exportedData = null,
+                iniHeader = null,
+                fixedHeaderStart = null,
+                fixedHeaderEnd = null,
+                header = null;
             const items = this.selectedItems.length > 0 ? this.selectedItems : this.currentItems,
                 preparedItems = this.ignoreColumnsByExport ? this.getPreparedItems(items) : items,
                 prefix = this.prefixExportFilename,
                 rawData = exportTimeline
-                    ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.keyMap, this.timestampPrefix)
-                    : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.keyMap, this.timestampPrefix),
-                filename = composeFilename(this.$t("additional:modules.tools.cosi.dashboard.exportFilename", {prefix})),
-                exportedData = this.sanitizeData(JSON.parse(JSON.stringify(rawData)), [...this.excludedPropsForExport, ...this.unselectedColumnLabels]),
-                iniHeader = Object.keys(exportedData[0]),
-                fixedHeaderStart = ["Kategorie", "Gruppe", "Datentyp"],
-                fixedHeaderEnd = iniHeader.includes(this.getColumnHeader("orientationValue")) ? [this.getColumnHeader("orientationValue"), "Gesamt", "Durchschnitt", "Jahr"] : ["Gesamt", "Durchschnitt", "Jahr"],
-                header = fixedHeaderStart.concat(iniHeader.filter((value) => {
-                    return !fixedHeaderStart.includes(value) && !fixedHeaderEnd.includes(value);
-                }), fixedHeaderEnd);
+                    ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.keyMap, this.timestampPrefix, this.exportGrouped)
+                    : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.keyMap, this.timestampPrefix, this.exportGrouped),
+                filename = composeFilename(this.$t("additional:modules.tools.cosi.dashboard.exportFilename", {prefix}));
+
+            try {
+                exportedData = this.sanitizeData(JSON.parse(JSON.stringify(rawData)), [...this.excludedPropsForExport, ...this.unselectedColumnLabels]);
+                iniHeader = this.exportGrouped ?
+                    Object.keys(Object.values(exportedData)[0][0]) : Object.keys(exportedData[0]);
+            }
+            catch (error) {
+                this.addSingleAlert({
+                    content: this.$t("additional:modules.tools.cosi.dashboard.tableDataParsingError"),
+                    class: "Info",
+                    displayClass: "info"
+                });
+                return;
+            }
+
+            fixedHeaderStart = iniHeader.includes("Gruppe") ? ["Kategorie", "Gruppe", "Datentyp"] : ["Kategorie", "Datentyp"];
+            fixedHeaderEnd = iniHeader.includes(this.getColumnHeader("orientationValue")) ? [this.getColumnHeader("orientationValue"), "Gesamt", "Durchschnitt", "Jahr"] : ["Gesamt", "Durchschnitt", "Jahr"];
+            header = fixedHeaderStart.concat(iniHeader.filter((value) => {
+                return !fixedHeaderStart.includes(value) && !fixedHeaderEnd.includes(value);
+            }), fixedHeaderEnd);
 
             exportXlsx(header, exportedData, filename);
         },
@@ -588,13 +608,20 @@ export default {
          * @returns {Object[]} the sanitized data
          */
         sanitizeData (json, exclude) {
-            if (exclude) {
-                json.forEach(column => {
-                    exclude.forEach(key => {
-                        delete column[key];
-                    });
-                });
+            if (!exclude) {
+                return json;
             }
+            if (isObject(json)) {
+                Object.values(json).forEach(objectsToSanitize => {
+                    this.sanitizeData(objectsToSanitize, exclude);
+                });
+                return json;
+            }
+            json.forEach(column => {
+                exclude.forEach(key => {
+                    delete column[key];
+                });
+            });
 
             return json;
         },

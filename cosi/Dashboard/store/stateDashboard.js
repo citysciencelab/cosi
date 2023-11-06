@@ -35,7 +35,8 @@ const state = {
     toolBridgeOut: {}, // pass current settings to toolBridge - must have a *getter*,
     prefixExportFilename: "CoSI",
     columnHeader: {},
-    ignoreColumnsByExport: false
+    ignoreColumnsByExport: false,
+    exportGrouped: false
 };
 
 export default state;

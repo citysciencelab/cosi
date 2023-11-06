@@ -1,4 +1,5 @@
 import * as XLSX from "xlsx";
+import isObject from "../../../src/utils/isObject.js";
 
 /**
  * @description returns the width definition for the table columns by reading out the headers char-length
@@ -14,43 +15,32 @@ function generateColOptions (headers, multiply) {
     }));
 }
 
-/**
- * converts an object to an array of objects
- * @param {Object} data - the input data
- * @returns {Object[]} the converted array
- */
-function convertObject (data) {
-    const objArr = [];
-    let row;
-
-    for (const key in data) {
-        row = {id: key, ...data[key]};
-        objArr.push(row);
-    }
-
-    return objArr;
-}
 
 /**
  * @description Converts a json array of objects to an styled and exportable XLSX format.
  * @param {String[]} header - the column header
  * @param {Object[]} json - the array of objects to export
  * @param {Object} [options={}] - (optional) sheetname: name of the worksheet, tablename: name of the table, creator: editor of the document, theme: the styletheme of the table
+ * @param {module:exceljs/workbook} workbook The workbook to parse the data to
  * @param {String} conversionType[json_to_sheet] -
- * @returns {module:exceljs/workbook} returns the XLSX workbook
+ * @returns {void}
  */
-export function parseJsonToXlsx (header, json, options, conversionType = "json_to_sheet") {
+export function parseJsonToXlsx (header, json, options, workbook, conversionType = "json_to_sheet") {
+    if (isObject(json)) {
+        Object.entries(json).forEach(([groupName, valuesOfGroup]) => {
+            options.sheetname = groupName;
+            parseJsonToXlsx(header, valuesOfGroup, options, workbook, conversionType);
+        });
+        return;
+    }
     const sheetname = options.sheetname.substring(0, 31) || "Neues Arbeitsblatt", // no names longer than 31 chars allowed
         colOptions = options.colOptions || header ? generateColOptions(header, options.multiplyColWidth) : undefined,
         rowOptions = options.rowOptions,
-        workbook = XLSX.utils.book_new(),
         sheet = XLSX.utils[conversionType](json, {header});
 
     sheet["!cols"] = colOptions;
     sheet["!rows"] = rowOptions;
     XLSX.utils.book_append_sheet(workbook, sheet, sheetname);
-
-    return workbook;
 }
 
 /**
@@ -63,37 +53,21 @@ export function parseJsonToXlsx (header, json, options, conversionType = "json_t
  * @returns {void}
  */
 export default async function exportXlsx (header, json, filename, options = {}, conversionType = "json_to_sheet") {
-    let _json = json;
-
     // catch not provided data
-    if (!_json || _json.length === 0) {
+    if (!json || json.length === 0) {
         console.warn("Die zu exportierende Tabelle ist leer oder existiert nicht, bitte überprüfen Sie Ihre Einstellungen");
         return false;
     }
 
-    // catch wrong data formats
-    if (_json.constructor !== Array) {
-
-        // convert if data is a dictionary
-        if (_json.constructor === Object) {
-            _json = convertObject(_json);
-            console.warn("Die exportierenden Daten liegen nicht als Array Of Object vor. Sie werden automatisch konvertiert.");
-        }
-
-        // break if other format
-        else {
-            console.warn("Die zu exportierenden Daten müssen als Array of Objects vorliegen. Bitte überprüfen Sie die Daten. Input: ", json);
-            return false;
-        }
-    }
-
     // convert to XLSX
-    const workbook = parseJsonToXlsx(header, _json, {
+    const workbook = XLSX.utils.book_new();
+
+    parseJsonToXlsx(header, json, {
         sheetname: options.sheetname || filename,
         rowOptions: options.rowOptions,
         colOptions: options.colOptions,
         multiplyColWidth: options.multiplyColWidth
-    }, conversionType);
+    }, workbook, conversionType);
 
     // open download dialog
     XLSX.writeFile(workbook, filename + ".xlsx");

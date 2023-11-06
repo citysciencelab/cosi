@@ -14,12 +14,16 @@ const valuesMap = {
  * @param {Number} timestamp - timestamp
  * @param {Object} keyMap - key map object
  * @param {String} timestampPrefix - timestamp prefix
+ * @param {Boolean} exportGrouped - true if table should be exported in seperate groups
  * @returns {Object[]} data for export
  */
-export function prepareTableExport (data, districtNames, timestamp, keyMap, timestampPrefix = "jahr_") {
+export function prepareTableExport (data, districtNames, timestamp, keyMap, timestampPrefix = "jahr_", exportGrouped = false) {
     if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
+    }
+    if (exportGrouped) {
+        delete keyMap.group;
     }
     const exportData = data.map(item => {
         const _item = replaceValues(renameKeys(keyMap, item), valuesMap);
@@ -45,7 +49,7 @@ export function prepareTableExport (data, districtNames, timestamp, keyMap, time
         return _item;
     });
 
-    return exportData;
+    return exportGrouped ? groupDataByKey(exportData, "group") : exportData;
 }
 
 /**
@@ -55,14 +59,17 @@ export function prepareTableExport (data, districtNames, timestamp, keyMap, time
  * @param {Number[]} timestamps - timestamps
  * @param {Object} keyMap - key map object
  * @param {String} timestampPrefix - timestamp prefix
+ * @param {Boolean} exportGrouped - true if table should be exported in seperate groups
  * @returns {Object[]} data for export
  */
-export function prepareTableExportWithTimeline (data, districtNames, timestamps, keyMap, timestampPrefix) {
+export function prepareTableExportWithTimeline (data, districtNames, timestamps, keyMap, timestampPrefix, exportGrouped = false) {
     if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
     }
-
+    if (exportGrouped) {
+        delete keyMap.group;
+    }
     const
         ctimestamps = timestamps.slice().reverse(),
         exportData = data.reduce((items, item) => {
@@ -95,5 +102,35 @@ export function prepareTableExportWithTimeline (data, districtNames, timestamps,
             return [...items, ...categoryRows];
         }, []);
 
-    return exportData;
+    return exportGrouped ? groupDataByKey(exportData, "group") : exportData;
+}
+/**
+ * Groups an array of objects by the given keys. It also removes the entry of the given key on each data object.
+ * @param {Object[]} data The array of data.
+ * @param {String} key The key to group by.
+ * @returns {Object|null} an object with following structure: {group1: [], ..., additional: []}
+ */
+export function groupDataByKey (data, key) {
+    if (!Array.isArray(data) || typeof key !== "string") {
+        return null;
+    }
+    const result = {};
+
+    data.forEach(obj => {
+        if (!Object.prototype.hasOwnProperty.call(obj, key)) {
+            if (!Array.isArray(result.additional)) {
+                result.additional = [];
+            }
+            result.additional.push(obj);
+            return;
+        }
+        const valueOfKey = obj[key];
+
+        delete obj[key];
+        if (!Array.isArray(result[valueOfKey])) {
+            result[valueOfKey] = [];
+        }
+        result[valueOfKey].push(obj);
+    });
+    return result;
 }

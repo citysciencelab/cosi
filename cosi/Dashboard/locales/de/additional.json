@@ -19,6 +19,7 @@
                     "minimizeCol": "Spalte aus-/einblenden",
                     "nameCalc": "Berechnung benennen",
                     "titleForCalculatedStatistic": "Die mit rot gekennzeichneten Werte sind automatisch berechnet",
+                    "tableDataParsingError": "Beim lesen der Daten ist ein Fehler aufgetreten",
                     "tableRowMenu": {
                         "expandTooltip": "Alle Jahre ein-/ausblenden",
                         "visualize": "In der Karte visualisieren",

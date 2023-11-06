@@ -19,6 +19,7 @@
                     "minimizeCol": "Hide column",
                     "nameCalc": "Name Calculation",
                     "titleForCalculatedStatistic": "The values marked in red are calculated automatically",
+                    "tableDataParsingError": "An error occurred while reading the data",
                     "tableRowMenu": {
                         "expandTooltip": "Show/Hide all years",
                         "visualize": "Show on the map",
