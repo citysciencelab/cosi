@@ -17,7 +17,7 @@
             "description": "Description (optional)",
             "addGeoData": "Add Geo Data",
             "addStatisticalData": "Add statistical data",
-            "addTools": "Add Tools (optional)",
+            "addTools": "Add starting Tool (optional)",
             "placeholder": "Select Option"
           }
         }
