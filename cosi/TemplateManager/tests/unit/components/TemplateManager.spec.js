@@ -134,18 +134,21 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                             category: "bev_insgesamt",
                             value: "Bevölkerung insgesamt",
                             group: "Vielfalt für alle",
+                            valueType: "absolute",
                             stat_gebiet: "112233"
                         },
                         {
                             category: "bev_ab65",
                             value: "Bevölkerung ab 65 Jahren",
                             group: "Vielfalt für alle",
+                            valueType: "absolute",
                             stat_gebiet: "112233"
                         },
                         {
                             category: "bev_insgesamt",
                             value: "Bevölkerung insgesamt",
                             group: "Alle für alle",
+                            valueType: "absolute",
                             stat_gebiet: "112233"
                         }
                     ];
