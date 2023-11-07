@@ -212,7 +212,7 @@ export default {
 <template>
     <div
         :id="`card` + title"
-        class="card statistic-card"
+        class="vpicard statistic-card"
     >
         <h4>{{ title }}</h4>
         <div v-if="navigation">
@@ -244,7 +244,7 @@ export default {
 </template>
 
 <style lang="scss">
-.card {
+.vpicard {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -257,14 +257,14 @@ export default {
     border: none;
 }
 
-.card h4 {
+.vpicard h4 {
     font-size: 0.7rem;
     text-align: center;
     margin-bottom: 0;
 
 }
 
-.card .card-buttons {
+.vpicard .card-buttons {
     width: 100%;
     display: flex;
     justify-content: center;
