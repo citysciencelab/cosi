@@ -214,9 +214,22 @@ export default {
                                 "value": statName,
                                 "group": template.meta.title,
                                 "valueType": mappingObject.valueType,
-                                "stat_gebiet": "112233"
+                                "stat_gebiet": "112233",
+                                "stadtteil": "11223344"
                             });
                         }
+                    });
+                }
+                else {
+                    initMapping.forEach(mapp => {
+                        newMapping.push({
+                            "category": mapp.category,
+                            "value": mapp.value,
+                            "group": template.meta.title,
+                            "valueType": mapp.valueType,
+                            "stat_gebiet": "112233",
+                            "stadtteil": "11223344"
+                        });
                     });
                 }
             });

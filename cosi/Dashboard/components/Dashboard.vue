@@ -7,7 +7,6 @@ import mutations from "../store/mutationsDashboard";
 import actions from "../store/actionsDashboard";
 import {getTimestamps} from "../../utils/timeline";
 import beautifyKey from "../../../../src/utils/beautifyKey";
-import groupMapping from "../../utils/groupMapping";
 import TableRowMenu from "./TableRowMenu.vue";
 import EditForReportTemplate from "../../components/EditForReportTemplate.vue";
 import {
@@ -137,9 +136,6 @@ export default {
         valueColumns () {
             return [...this.districtColumns, ...this.aggregateColumns];
         },
-        statsMapping () {
-            return this.groupMapping(this.mapping);
-        },
         selectedColumns () {
             const selectedCols = this.valueColumns.filter(col => col.selected);
 
@@ -165,6 +161,9 @@ export default {
             if (v) {
                 this.toolOffset = 0.4 * window.innerWidth;
                 this.calculateAll();
+                if (this.loadend) {
+                    this.generateTable();
+                }
             }
         },
         loadend (v) {
@@ -535,7 +534,6 @@ export default {
         calculateAll,
         calculateStats,
         calculateCorrelation,
-        groupMapping,
         sumUpSelected,
         divideSelected,
         deleteStats,
@@ -645,13 +643,13 @@ export default {
 
         collapseAllGroups () {
             // The second half of the solution is not clear to me but found that it is one way to achieve
-            const groupStates = this.$refs["dashboard-table"]?.$vnode.componentInstance.openCache;
+            // const groupStates = this.$refs["dashboard-table"]?.$vnode.componentInstance.openCache;
 
-            if (groupStates) {
-                for (const e in groupStates) {
-                    groupStates[e] = false;
-                }
-            }
+            // if (groupStates) {
+            //     for (const e in groupStates) {
+            //         groupStates[e] = false;
+            //     }
+            // }
         }
 
     }

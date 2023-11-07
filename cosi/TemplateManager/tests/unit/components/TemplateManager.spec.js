@@ -135,26 +135,54 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                             value: "Bevölkerung insgesamt",
                             group: "Vielfalt für alle",
                             valueType: "absolute",
-                            stat_gebiet: "112233"
+                            stat_gebiet: "112233",
+                            stadtteil: "11223344"
                         },
                         {
                             category: "bev_ab65",
                             value: "Bevölkerung ab 65 Jahren",
                             group: "Vielfalt für alle",
                             valueType: "absolute",
-                            stat_gebiet: "112233"
+                            stat_gebiet: "112233",
+                            stadtteil: "11223344"
                         },
                         {
                             category: "bev_insgesamt",
                             value: "Bevölkerung insgesamt",
                             group: "Alle für alle",
                             valueType: "absolute",
-                            stat_gebiet: "112233"
+                            stat_gebiet: "112233",
+                            stadtteil: "11223344"
                         }
                     ];
 
                 wrapper.vm.createMappingByTemplates(templates, mapping);
                 expect(stubSetMapping.calledWith({}, expectedValues)).to.be.true;
+                sinon.restore();
+                wrapper.destroy();
+            });
+
+            it("should change the group of all stats in the mapping to the title of the template", () => {
+                let newMapping = [],
+                    mappingGroup = "";
+
+                const templatesWithNoStats = [
+                        {
+                            meta: {
+                                isActive: true,
+                                title: "Keine Stats to filter"
+                            },
+                            state: {
+                                Tools: {}
+                            }
+                        }
+                    ],
+                    wrapper = factory.getMount();
+
+                wrapper.vm.createMappingByTemplates(templatesWithNoStats, mapping);
+                newMapping = stubSetMapping.getCall(0).args[1];
+                mappingGroup = newMapping.every(mappingObject => mappingObject.group === "Keine Stats to filter");
+                expect(mappingGroup).to.be.true;
                 sinon.restore();
                 wrapper.destroy();
             });

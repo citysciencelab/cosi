@@ -78,6 +78,13 @@ export default {
                         case "Draw/layer":
                             this.parseDrawFeatures(state, mutation, key, attr);
                             break;
+                        case "Dashboard/statsFeatureFilter": {
+                            /* eslint-disable max-depth */
+                            if (!this.useTemplatesForMapping) {
+                                this.commitState(mutation, attr, state[key][attr]);
+                            }
+                            break;
+                        }
                         default:
                             this.commitState(mutation, attr, state[key][attr]);
                     }

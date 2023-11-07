@@ -118,7 +118,8 @@ export default {
         ...mapGetters("Tools/ScenarioBuilder", {simGuideLayer: "guideLayer"}),
         ...mapGetters("Tools/ResidentialSimulation", {simNeighborhoodLayer: "drawingLayer"}),
         ...mapGetters("Tools/DistrictSelector", ["selectedDistrictLevel", "districtLevels"]),
-        ...mapGetters("Maps", ["getLayerById"])
+        ...mapGetters("Maps", ["getLayerById"]),
+        ...mapGetters("Tools/TemplateManager", ["useTemplatesForMapping"])
     },
     watch: {
         /**
