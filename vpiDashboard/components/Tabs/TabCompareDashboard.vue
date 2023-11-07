@@ -70,6 +70,7 @@ export default {
     computed: {
         ...mapState("Tools/VpiDashboard", ["selectedLocationId", "selectedLocationB"]),
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
+        ...mapGetters("Language", ["currentLocale"]),
         locations_b () {
             return this.locations_a.filter(location => location.location_id !== this.location_a.location_id);
         },
@@ -417,6 +418,24 @@ export default {
             return returnValue;
         },
         /**
+         * Return the translated subtitle for the selected comparison.
+         * @param {String} id current selected comparison id from dropdown
+         * @return {string} the label for the selected comparison type
+         */
+        getComparisonSubtitle (id) {
+            if (id === "activities" || id === "daily") {
+                return "";
+            }
+
+            const selectedItem = id.toLowerCase(),
+                month = dayjs(this.dates).locale(this.currentLocale).format("MMMM"),
+                year = dayjs(this.dates).format("YYYY"),
+                returnValue = this.translate("additional:modules.tools.vpidashboard.compare.chartsubtitle." + selectedItem, {month: month, year: year});
+
+
+            return returnValue;
+        },
+        /**
          * define, which charttype shall be displayed
          * @param {String} chartType an be one of "bar" or "line"
          * @returns {void}
@@ -609,6 +628,9 @@ export default {
                         {{ translate('additional:modules.tools.vpidashboard.compare.location_comparison') }}
                         {{ getComparisonChartLabel(character) }}
                     </h4>
+                    <h5>
+                        {{ getComparisonSubtitle(character) }}
+                    </h5>
                     <BarchartItem
                         v-if="chartType === 'bar'"
                         :data="chartdata.bar"

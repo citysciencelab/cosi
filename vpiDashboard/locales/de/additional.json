@@ -98,7 +98,12 @@
           "date_comparison": "Vergleich Datumswerte",
           "selectLocationBinMap": "Anklicken um Standort B aus der Karte auszuwählen",
           "deselectLocationBinMap": "Deaktivieren um Standort A aus der Karte auszuwählen",
-          "noData": "Für Ihre Auswahl sind aktuell keine Daten vorhanden. Bitte verändern Sie Merkmal oder Datum!"
+          "noData": "Für Ihre Auswahl sind aktuell keine Daten vorhanden. Bitte verändern Sie Merkmal oder Datum!",
+          "chartsubtitle": {
+            "dwelltime": "Ø wöchentliche Verweildauer je Besucher im {{month}} {{year}}",
+            "agegroup": "Ø wöchentliche Besucher je Altersgruppe im {{month}} {{year}}",
+            "visitortypes": "Ø wöchentliche Besucher im {{month}} {{year}}"
+          }
         },
         "tab": {
           "dwelltime": {
@@ -133,6 +138,11 @@
               "ageGroup": "Altersgruppen",
               "dwellTime": "Verweildauer",
               "visitorTypes": "Besuchertypen"
+            },
+            "chartsubtitle": {
+              "dwelltime": "Ø wöchentliche Verweildauer je Besucher im {{month1}} {{year1}} und {{month2}} {{year2}}",
+              "agegroup": "Ø wöchentliche Besucher je Altersgruppe im {{month1}} {{year1}} und {{month2}} {{year2}}",
+              "visitortypes": "Ø wöchentliche Besucher im {{month1}} {{year1}} und {{month2}} {{year2}}"
             }
           }
         },

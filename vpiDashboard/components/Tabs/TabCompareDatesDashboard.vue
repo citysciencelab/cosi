@@ -64,6 +64,7 @@ export default {
     computed: {
         ...mapGetters("Tools/VpiDashboard", Object.keys(getters)),
         ...mapState("Tools/VpiDashboard", ["showLoader", "selectedLocationId"]),
+        ...mapGetters("Language", ["currentLocale"]),
         showCompareButton () {
             if (this.date_a !== null && this.date_b !== null) {
                 return true;
@@ -410,6 +411,25 @@ export default {
                 return true;
             }
             return false;
+        },
+        /**
+         * Return the translated subtitle for the selected comparison.
+         * @return {string} the subtitle for the selected comparison type
+         */
+        getComparisonSubtitle () {
+            if (this.character === "activities" || this.character === "daily") {
+                return "";
+            }
+
+            const selectedItem = this.character.toLowerCase(),
+                month_a = dayjs(this.date_a).locale(this.currentLocale).format("MMMM"),
+                year_a = dayjs(this.date_a).format("YYYY"),
+                month_b = dayjs(this.date_b).locale(this.currentLocale).format("MMMM"),
+                year_b = dayjs(this.date_b).format("YYYY"),
+                returnValue = this.translate("additional:modules.tools.vpidashboard.tab.compareDates.chartsubtitle." + selectedItem, {month1: month_a, year1: year_a, month2: month_b, year2: year_b});
+
+
+            return returnValue;
         }
     }
 };
@@ -519,6 +539,9 @@ export default {
                         class="row d-flex justify-content-center mt-3"
                     >
                         <h4>{{ translate('additional:modules.tools.vpidashboard.compare.date_comparison') }} {{ characterName }}</h4>
+                        <h5>
+                            {{ getComparisonSubtitle(characterName) }}
+                        </h5>
                         <BarchartItem
                             v-if="chartType === 'bar'"
                             :data="chartdata.bar"
