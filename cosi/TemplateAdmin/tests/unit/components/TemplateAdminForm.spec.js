@@ -188,8 +188,8 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
             });
 
             wrapper.setData({templateName: "test"});
-            wrapper.setData({selectedData: "layerId"});
-            wrapper.setData({selectedStatData: "feature"});
+            wrapper.setData({selectedGeoData: [{layerId: "layerId"}]});
+            wrapper.setData({selectedStatData: [{propertyName: "feature"}]});
             await wrapper.find(".export-template").trigger("click");
             await wrapper.vm.$nextTick();
 
@@ -227,13 +227,40 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
             });
 
             wrapper.setData({templateName: "test"});
-            wrapper.setData({selectedData: "layerId"});
-            wrapper.setData({selectedStatData: "feature"});
+            wrapper.setData({selectedGeoData: [{layerId: "layerId"}]});
+            wrapper.setData({selectedStatData: [{propertyName: "feature"}]});
             await wrapper.find(".export-template").trigger("click");
             await wrapper.vm.$nextTick();
 
             expect(wrapper.vm.isValidated).to.be.true;
             wrapper.destroy();
+        });
+    });
+    describe("Methods", () => {
+        describe("getExportedData", () => {
+            it("should return the right exported data", async () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    }),
+                    templateName = "name",
+                    templateDes = "description",
+                    paraGeoData = [{layerId: "1001", label: "layer1"}, {layerId: "1002", label: "layer2"}],
+                    paraStatData = [{propertyName: "prop1", label: "prop1"}, {propertyName: "prop2", label: "prop2"}],
+                    toolData = {toolId: "print", label: "print"};
+
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).meta.title).to.be.equal("name");
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).meta.info).to.be.equal("description");
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).state.Maps.layerIds).to.be.deep.equal(["1001", "1002"]);
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).state.Tools.toolToOpen).to.be.equal("print");
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).state.Tools.Dashboard.statsFeatureFilter).to.be.deep.equal(["prop1", "prop2"]);
+                wrapper.destroy();
+            });
         });
     });
 });

@@ -67,7 +67,7 @@ export default {
 
             Object.entries(tools).forEach(([key, value]) => {
                 if (typeof value.name !== "undefined") {
-                    toolList.push({value: key, label: i18next.t(value.name)});
+                    toolList.push({toolId: key, label: i18next.t(value.name)});
                 }
             });
 
@@ -147,7 +147,7 @@ export default {
 
             layers.forEach(layer => {
                 if (typeof layer?.name !== "undefined" && layer.isNeverVisibleInTree !== true) {
-                    layerNames.push({propertyName: layer.id, label: layer.name});
+                    layerNames.push({layerId: layer.id, label: layer.name});
                 }
             });
 

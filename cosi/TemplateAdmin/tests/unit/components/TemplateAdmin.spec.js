@@ -125,8 +125,8 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                     };
 
                 expect(wrapper.vm.getToolList(tools)).to.be.deep.equal([
-                    {value: "gfi", label: "Information"},
-                    {value: "print", label: "Print tool"}
+                    {toolId: "gfi", label: "Information"},
+                    {toolId: "print", label: "Print tool"}
                 ]);
                 wrapper.destroy();
             });
@@ -142,7 +142,7 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                     };
 
                 expect(wrapper.vm.getToolList(tools)).to.be.deep.equal([
-                    {value: "print", label: "Print tool"}
+                    {toolId: "print", label: "Print tool"}
                 ]);
                 wrapper.destroy();
             });
@@ -352,10 +352,10 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                     ],
                     expected = [
                         {
-                            propertyName: "13534", label: "Geobasiskarten"
+                            layerId: "13534", label: "Geobasiskarten"
                         },
                         {
-                            propertyName: "23534", label: "Schriftplatte"
+                            layerId: "23534", label: "Schriftplatte"
                         }
                     ],
                     layerNames = wrapper.vm.getLayerNames(layers);

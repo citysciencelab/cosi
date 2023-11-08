@@ -1,5 +1,6 @@
 <script>
 import Multiselect from "vue-multiselect";
+import dayjs from "dayjs";
 
 export default {
     name: "TemplateAdminForm",
@@ -29,7 +30,8 @@ export default {
     data () {
         return {
             templateName: "",
-            selectedData: [],
+            templateDes: "",
+            selectedGeoData: [],
             selectedStatData: [],
             selectedToolData: [],
             selectedTemplate: "",
@@ -39,12 +41,16 @@ export default {
             isValidated: false
         };
     },
-    computed: {
-    },
     methods: {
-        removeData (name) {
-            this.selectedData = this.selectedData.filter(badge => badge?.propertyName !== name);
+        /**
+         * Removes the geo data by the given layerId.
+         * @param {String} layerId The layerId.
+         * @returns {void}
+         */
+        removeGeoData (layerId) {
+            this.selectedGeoData = this.selectedGeoData.filter(badge => badge?.layerId !== layerId);
         },
+
         /**
          * Removes the statistic data by the given propertyName.
          * @param {String} name The property name.
@@ -71,18 +77,18 @@ export default {
             this.setIsGeoDataValidating(true);
             this.setIsStatDataValidating(true);
 
-            if (this.templateName.trim() !== "" && this.selectedData.length && this.selectedStatData.length) {
+            if (this.templateName !== "" && this.selectedGeoData.length && this.selectedStatData.length) {
                 this.isValidated = true;
             }
             else {
                 this.isValidated = false;
             }
 
-            if (this.templateName.trim() !== "") {
+            if (this.templateName !== "") {
                 this.setIsNameValidating(false);
             }
 
-            if (this.selectedData.length) {
+            if (this.selectedGeoData.length) {
                 this.setIsGeoDataValidating(false);
             }
 
@@ -91,16 +97,70 @@ export default {
             }
 
             if (this.isValidated) {
-                this.exportForm();
+                const exportedData = this.getExportedData(this.templateName, this.templateDes, this.selectedGeoData, this.selectedStatData, this.selectedToolData);
+
+                this.exportFile(this.templateName, exportedData);
             }
         },
 
         /**
-         * Exports the form in json format
-         * @returns {Object} the form in json format
+         * Gets the exported data
+         * @param {String} templateName The template name
+         * @param {String} templateDes The template description.
+         * @param {Object[]} geoData The geo data.
+         * @param {Object[]} statData The statistical data.
+         * @param {Object[]} toolData The tool data.
+         * @returns {Object} the exported data
          */
-        exportForm () {
-            return {};
+        getExportedData (templateName, templateDes, geoData, statData, toolData) {
+            const createdDate = dayjs(new Date()).format("DD.MM.YYYY, HH:mm:ss"),
+                formatedDate = dayjs(new Date()).format("YYYY-MM-DD, HH:mm:ss").replace(", ", "T") + ".174Z",
+                layerIds = geoData.map(data => data.layerId),
+                toolId = toolData?.toolId,
+                statsFeaturePropertyName = statData.map(data => data.propertyName);
+
+            return {
+                "meta": {
+                    "title": templateName,
+                    "info": templateDes,
+                    "created": createdDate,
+                    "date": formatedDate,
+                    "icon": "mdi-filter"
+                },
+                "state": {
+                    "Maps": {
+                        "layerIds": layerIds
+                    },
+                    "Tools": {
+                        "toolToOpen": toolId,
+                        "Dashboard": {
+                            "statsFeatureFilter": statsFeaturePropertyName
+                        }
+                    }
+                }
+            };
+        },
+
+        /**
+         * Exports the exported data
+         * @param {String} name The template name
+         * @param {Object} data The exported data
+         * @returns {void}
+         */
+        exportFile (name, data) {
+            const filename = name + ".json",
+                jsonStr = JSON.stringify(data),
+                element = document.createElement("a");
+
+            element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(jsonStr));
+            element.setAttribute("download", filename);
+
+            element.style.display = "none";
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
         },
 
         /**
@@ -174,13 +234,13 @@ export default {
             </label>
             <input
                 id="form-name"
-                v-model="templateName"
+                v-model.trim="templateName"
                 type="text"
-                :class="['form-control', 'rounded-0', isNameValidating && templateName.trim() === '' ? 'novalidate' : '']"
+                :class="['form-control', 'rounded-0', isNameValidating && templateName === '' ? 'novalidate' : '']"
                 @input="setIsNameValidating(false)"
             >
             <span
-                v-if="isNameValidating && templateName.trim() === ''"
+                v-if="isNameValidating && templateName === ''"
                 class="hint"
             >
                 {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
@@ -195,6 +255,7 @@ export default {
             </label>
             <textarea
                 id="form-description"
+                v-model.trim="templateDes"
                 class="form-control rounded-0"
                 rows="3"
             />
@@ -216,8 +277,8 @@ export default {
             </button>
             <Multiselect
                 id="add-geo-data"
-                v-model="selectedData"
-                :class="['col', 'col-md', isGeoDataValidating && !selectedData.length ? 'novalidate' : '']"
+                v-model="selectedGeoData"
+                :class="['col', 'col-md', isGeoDataValidating && !selectedGeoData.length ? 'novalidate' : '']"
                 :options="geoData"
                 :searchable="true"
                 :close-on-select="false"
@@ -228,7 +289,7 @@ export default {
                 :allow-empty="false"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
                 label="label"
-                track-by="propertyName"
+                track-by="layerId"
                 @input="setIsGeoDataValidating(false)"
             >
                 <template
@@ -245,17 +306,17 @@ export default {
         </div>
         <div class="mb-4">
             <button
-                v-for="(geoDataObj, idx) in selectedData"
+                v-for="(geoDataObj, idx) in selectedGeoData"
                 :key="idx"
                 class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
                 aria-label="Close"
-                @click.prevent="removeData(geoDataObj.propertyName)"
+                @click.prevent="removeGeoData(geoDataObj.layerId)"
             >
                 {{ geoDataObj.label }}
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
             <span
-                v-if="isGeoDataValidating && !selectedData.length"
+                v-if="isGeoDataValidating && !selectedGeoData.length"
                 class="hint"
             >
                 {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
@@ -349,7 +410,7 @@ export default {
                 :multiple="false"
                 :show-labels="false"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
-                track-by="value"
+                track-by="toolId"
                 label="label"
             >
                 <template
@@ -369,7 +430,7 @@ export default {
                 v-if="Object.keys(selectedToolData).length"
                 class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
                 aria-label="Close"
-                @click.prevent="removeToolData(selectedToolData.value)"
+                @click.prevent="removeToolData(selectedToolData.toolId)"
             >
                 {{ selectedToolData.label }}
                 <i class="bi bi-x fs-5 align-middle" />
