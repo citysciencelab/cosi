@@ -170,7 +170,6 @@ export default {
          */
         removeReference () {
             this.setSelectedReferenceData(undefined);
-            this.referenceTag = undefined;
         }
     }
 };

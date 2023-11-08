@@ -122,7 +122,9 @@ export default {
         selectedReferenceData () {
             // this.checkFilterSettings(this.selectedRegionsValues, this.selectedDatesValues, this.selectedReferenceData);
             // why??
-            this.checkFilterSettings(getters.selectedRegionsValues(null, {selectedRegions: this.selectedRegions}), getters.selectedDatesValues(null, {selectedDates: this.selectedDates}), this.selectedReferenceData);
+            if (this.selectedRegionsValues.length && this.selectedDates.length) {
+                this.checkFilterSettings(getters.selectedRegionsValues(null, {selectedRegions: this.selectedRegions}), getters.selectedDatesValues(null, {selectedDates: this.selectedDates}), this.selectedReferenceData);
+            }
         },
         active (value) {
             if (!value) {
