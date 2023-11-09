@@ -1,11 +1,13 @@
 <script>
 import Multiselect from "vue-multiselect";
+import TemplateAdminFormCard from "./TemplateAdminFormCard.vue";
 import dayjs from "dayjs";
 
 export default {
     name: "TemplateAdminForm",
     components: {
-        Multiselect
+        Multiselect,
+        TemplateAdminFormCard
     },
     props: {
         geoData: {
@@ -38,8 +40,18 @@ export default {
             isNameValidating: false,
             isGeoDataValidating: false,
             isStatDataValidating: false,
-            isValidated: false
+            isValidated: false,
+            limitReferenceValues: false
         };
+    },
+    computed: {
+        /**
+         * Returns true or false, depending on the number of statistics.
+         * @returns {Boolean} True if the number of statistics are more than two.
+         */
+        countSelectedStatistics () {
+            return this.selectedStatData.length > 2;
+        }
     },
     methods: {
         /**
@@ -366,22 +378,39 @@ export default {
             </Multiselect>
         </div>
         <div class="mb-4">
-            <button
-                v-for="(statDataObj, idx) in selectedStatData"
-                :key="idx"
-                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
-                aria-label="Close"
-                @click.prevent="removeStatData(statDataObj.propertyName)"
-            >
-                {{ statDataObj.label }}
-                <i class="bi bi-x fs-5 align-middle" />
-            </button>
             <span
                 v-if="isStatDataValidating && !selectedStatData.length"
                 class="hint"
             >
                 {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
             </span>
+            <div
+                class="row mb-1 g-0"
+            >
+                <TemplateAdminFormCard
+                    v-for="(statDataObj, idx) in selectedStatData"
+                    :key="idx"
+                    :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
+                    class="col-sm-6"
+                    :title="statDataObj.label"
+                    :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
+                    unit="%"
+                    @removeCard="removeStatData(statDataObj.propertyName)"
+                />
+                <div
+                    v-if="countSelectedStatistics"
+                    class="col align-self-end p-0"
+                >
+                    <button
+                        id="more-button"
+                        type="button"
+                        class="col col-md-auto btn btn-link btn-sm pt-0"
+                        @click="limitReferenceValues = !limitReferenceValues"
+                    >
+                        {{ limitReferenceValues ? $t("additional:modules.tools.cosi.templateAdmin.button.showMore") : $t("additional:modules.tools.cosi.templateAdmin.button.showLess") }}
+                    </button>
+                </div>
+            </div>
         </div>
         <label
             class="form-label mb-0"
@@ -496,6 +525,12 @@ export default {
 #form-name + .hint {
     margin-top: 8px;
 }
+#more-button {
+    text-align: left;
+}
+.more-statistics {
+        display: none;
+    }
 
 </style>
 

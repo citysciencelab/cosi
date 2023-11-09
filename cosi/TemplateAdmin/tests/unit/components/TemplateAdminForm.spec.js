@@ -145,6 +145,42 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
             expect(wrapper.find(".template-upload").exists()).to.be.true;
             wrapper.destroy();
         });
+        it("should render more-button if more than two statistics are selected", async () => {
+            const wrapper = shallowMount(TemplateAdminForm, {
+                propsData: {
+                    geoData,
+                    statData
+                },
+                localVue,
+                store
+            });
+
+            wrapper.setData({showReferenceValues: true});
+            wrapper.setData({selectedStatData: [{propertyName: "feature"}, {propertyName: "feature2"}, {propertyName: "feature3"}]});
+
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.find("#more-button").exists()).to.be.true;
+            wrapper.destroy();
+        });
+        it("should not render more-button if no statistic is selected", async () => {
+            const wrapper = shallowMount(TemplateAdminForm, {
+                propsData: {
+                    geoData,
+                    statData
+                },
+                localVue,
+                store
+            });
+
+            wrapper.setData({showReferenceValues: true});
+            wrapper.setData({selectedStatData: [{}]});
+
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.find("#more-button").exists()).to.be.false;
+            wrapper.destroy();
+        });
         it("should not find hint text for required field", () => {
             const wrapper = shallowMount(TemplateAdminForm, {
                 propsData: {
@@ -197,6 +233,28 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
             wrapper.destroy();
         });
     });
+    describe("Computed", () => {
+        describe("countSelectedStatistics", () => {
+            it("should return true, if more than two statistics are selected", async () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData
+                    },
+                    localVue,
+                    store
+                });
+
+                wrapper.setData({selectedStatData: [{propertyName: "feature0"}, {propertyName: "feature1"}, {propertyName: "feature2"}]});
+
+                await wrapper.vm.$nextTick();
+
+                expect(wrapper.vm.countSelectedStatistics).to.be.true;
+                wrapper.destroy();
+            });
+        });
+    });
+
     describe("Interaction", () => {
         it("should set isValidated false", async () => {
             const wrapper = shallowMount(TemplateAdminForm, {

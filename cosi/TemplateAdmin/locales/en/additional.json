@@ -9,7 +9,9 @@
               "addTemplate": "Add Template",
               "editTemplate": "Edit Template",
               "uploadTemplate": "Upload Template",
-              "downloadTemplate": "Download Template"
+              "downloadTemplate": "Download Template",
+              "showMore": "show more...",
+              "showLess": "show less..."
           },
           "label": {
             "selectTemplate": "Select Template",
@@ -18,7 +20,8 @@
             "addGeoData": "Add Geo Data",
             "addStatisticalData": "Add statistical data",
             "addTools": "Add starting Tool (optional)",
-            "placeholder": "Select Option"
+            "placeholder": "Select Option",
+            "existingAreas": "existing areas with SozErhVO"
           },
           "required": "Required",
           "hint": "This is a required field."

@@ -9,7 +9,9 @@
             "addTemplate": "Vorlage erstellen",
             "editTemplate": "Vorlage bearbeiten",
             "uploadTemplate": "Vorlage hochladen",
-            "downloadTemplate": "Exportieren"
+            "downloadTemplate": "Exportieren",
+            "showMore": "mehr anzeigen...",
+            "showLess": "weniger anzeigen..."
           },
           "label": {
             "selectTemplate": "Vorlage auswählen",
@@ -18,7 +20,8 @@
             "addGeoData": "Geodaten hinzufügen",
             "addStatisticalData": "Statistische Daten hinzufügen",
             "addTools": "Starter Werkzeug hinzufügen (optional)",
-            "placeholder": "Daten auswählen"
+            "placeholder": "Daten auswählen",
+            "existingAreas": "Bestehende Gebiete mit SozErhVO"
           },
           "required": "Pflichtfelder",
           "hint": "Dies ist ein Pflichtfeld."
