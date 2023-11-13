@@ -153,6 +153,14 @@ export default {
             set (v) {
                 this.setSelectedYear(v);
             }
+        },
+
+        /**
+         * Checks whether there is at least one object with an orientation value in the mapping json.
+         * @returns {Boolean} True if there is an orientation value.
+         */
+        hasMappingOrientationValue () {
+            return this.mapping.some(obj => typeof obj.orientationValue !== "undefined");
         }
     },
 
@@ -279,6 +287,7 @@ export default {
          */
         generateTable () {
             this.timestamps = [];
+            this.handleOrientationColumn(this.hasMappingOrientationValue, this.aggregateColumns);
             this.districtColumns = this.getColumns(this.selectedDistrictLevel, this.selectedDistrictNames, []);
             this.rows = this.getRows();
             this.items = this.getData();
@@ -307,7 +316,8 @@ export default {
                         valueType: category.valueType,
                         isTemp: category.isTemp,
                         calculation: category.calculation,
-                        groupIndex: array[index].group !== array[index + 1]?.group ? counter++ : counter
+                        groupIndex: array[index].group !== array[index + 1]?.group ? counter++ : counter,
+                        orientationValue: category.orientationValue
                     }
                 ];
             }, []);
@@ -635,6 +645,29 @@ export default {
                 result = arr.map((item) => ({...def, ...item}));
 
             return result;
+        },
+
+        /**
+         * Adds a column for the orientations values if it is not yet available and
+         * there is at least one orientation value in the mapping json.
+         * @param {Boolean} hasMappingOrientationValue - True if there is an orientation value.
+         * @param {Object[]} aggregateColumns - Columns for total and average values.
+         * @returns {void}
+         */
+        handleOrientationColumn (hasMappingOrientationValue, aggregateColumns) {
+            const hasOrientationColumn = aggregateColumns.find(col => col.value === "orientationValue");
+
+            if (hasMappingOrientationValue && !hasOrientationColumn) {
+                this.aggregateColumns.splice(0, 0, {
+                    text: "Orientierungswert",
+                    value: "orientationValue",
+                    align: "end",
+                    sortable: false,
+                    groupable: false,
+                    selected: false,
+                    isAggregation: true
+                });
+            }
         },
 
         /**

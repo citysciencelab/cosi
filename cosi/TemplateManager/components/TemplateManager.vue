@@ -204,32 +204,31 @@ export default {
                 newMapping = [];
 
             activeTemplates.forEach(template => {
-                if (template.state?.Tools?.Dashboard?.statsFeatureFilter) {
+                const statsFeatures = template.state?.Tools?.Dashboard?.statsFeatureFilter,
+                    orientationValues = template.state?.Tools?.Dashboard?.orientationValues;
+
+                if (statsFeatures) {
                     template.state.Tools.Dashboard.statsFeatureFilter.forEach(statName => {
-                        const mappingObject = initMapping.find(obj => obj.value === statName);
+                        const mappingObject = initMapping.find(obj => obj.value === statName),
+                            newMappingObject = {};
 
                         if (mappingObject) {
-                            newMapping.push({
-                                "category": mappingObject.category,
-                                "value": statName,
-                                "group": template.meta.title,
-                                "valueType": mappingObject.valueType,
-                                "stat_gebiet": "112233",
-                                "stadtteil": "11223344"
-                            });
+                            Object.assign(newMappingObject, mappingObject);
+                            newMappingObject.value = statName;
+                            newMappingObject.group = template.meta.title;
+                            if (orientationValues && Array.isArray(orientationValues) && orientationValues.length > 0) {
+                                newMappingObject.orientationValue = this.getOrientationValueByStatistic(orientationValues, statName);
+                            }
+                            newMapping.push(newMappingObject);
                         }
                     });
                 }
                 else {
                     initMapping.forEach(mapp => {
-                        newMapping.push({
-                            "category": mapp.category,
-                            "value": mapp.value,
-                            "group": template.meta.title,
-                            "valueType": mapp.valueType,
-                            "stat_gebiet": "112233",
-                            "stadtteil": "11223344"
-                        });
+                        const newMappingObject = Object.assign({}, mapp);
+
+                        newMappingObject.group = template.meta.title;
+                        newMapping.push(newMappingObject);
                     });
                 }
             });
@@ -237,6 +236,17 @@ export default {
             if (newMapping.length > 0) {
                 this.setMapping(newMapping);
             }
+        },
+
+        /**
+         * Gets the orientation value for a statistic.
+         * @param {Object[]} orientationValues - The orientation values.
+         * @param {String} stat - The statistic for which the value is looked for.
+         * @returns {String} The value of the statistic or "-" if none is available.
+         */
+        getOrientationValueByStatistic (orientationValues, stat) {
+            return orientationValues.find(orientation => orientation.statisticName === stat)?.value || "-";
+
         }
     }
 };

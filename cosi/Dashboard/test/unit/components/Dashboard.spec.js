@@ -432,5 +432,30 @@ describe("addons/cosi/Dashboard/components/Dashboard.vue", () => {
 
             expect(selectedLabels).to.deep.equal(["Wolkenkuckucksheim (Statgebiet)"]);
         });
+
+        describe("handleOrientationColumn", () => {
+            it("should not add a column for orientation values if no orientation values available", async () => {
+                await factory.initialize(shallowMount);
+
+                wrapper.vm.handleOrientationColumn(false, []);
+                expect(wrapper.vm.aggregateColumns.length).to.be.equal(2);
+            });
+
+            it("should not add a columns for orientation if it already exists", async () => {
+                await factory.initialize(shallowMount);
+
+                wrapper.vm.aggregateColumns.push({value: "orientationValue"});
+                wrapper.vm.handleOrientationColumn(true, wrapper.vm.aggregateColumns);
+                expect(wrapper.vm.aggregateColumns.length).to.be.equal(3);
+            });
+
+            it("should add a column for orientation values", async () => {
+                await factory.initialize(shallowMount);
+
+                wrapper.vm.handleOrientationColumn(true, [1, 2]);
+                expect(wrapper.vm.aggregateColumns.length).to.be.equal(3);
+            });
+
+        });
     });
 });
