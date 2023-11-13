@@ -41,7 +41,8 @@ export default {
             isGeoDataValidating: false,
             isStatDataValidating: false,
             isValidated: false,
-            limitReferenceValues: false
+            limitReferenceValues: false,
+            referenceValueList: []
         };
     },
     computed: {
@@ -109,7 +110,7 @@ export default {
             }
 
             if (this.isValidated) {
-                const exportedData = this.getExportedData(this.templateName, this.templateDes, this.selectedGeoData, this.selectedStatData, this.selectedToolData);
+                const exportedData = this.getExportedData(this.templateName, this.templateDes, this.selectedGeoData, this.selectedStatData, this.selectedToolData, this.referenceValueList);
 
                 this.exportFile(this.templateName, exportedData);
             }
@@ -122,9 +123,10 @@ export default {
          * @param {Object[]} geoData The geo data.
          * @param {Object[]} statData The statistical data.
          * @param {Object[]} toolData The tool data.
+         * @param {Object[]} referenceValueList The reference value list.
          * @returns {Object} the exported data
          */
-        getExportedData (templateName, templateDes, geoData, statData, toolData) {
+        getExportedData (templateName, templateDes, geoData, statData, toolData, referenceValueList) {
             const createdDate = dayjs(new Date()).format("DD.MM.YYYY, HH:mm:ss"),
                 formatedDate = dayjs(new Date()).format("YYYY-MM-DD, HH:mm:ss").replace(", ", "T") + ".174Z",
                 layerIds = geoData.map(data => data.layerId),
@@ -146,7 +148,8 @@ export default {
                     "Tools": {
                         "toolToOpen": toolId,
                         "Dashboard": {
-                            "statsFeatureFilter": statsFeaturePropertyName
+                            "statsFeatureFilter": statsFeaturePropertyName,
+                            "orientationValues": referenceValueList
                         }
                     }
                 }
@@ -200,6 +203,21 @@ export default {
          */
         setIsStatDataValidating (value) {
             this.isStatDataValidating = value;
+        },
+
+        /**
+         * Sets the reference value list
+         * @param {object} value the reference value
+         * @returns {void}
+         */
+        setReferenceValueList (value) {
+            this.referenceValueList = this.referenceValueList.filter(item => {
+                return item.statisticName !== value.statisticName;
+            });
+
+            if (value.value !== "") {
+                this.referenceValueList.push(value);
+            }
         }
     }
 };
@@ -396,6 +414,7 @@ export default {
                     :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
                     unit="%"
                     @removeCard="removeStatData(statDataObj.propertyName)"
+                    @setReferenceValueList="setReferenceValueList"
                 />
                 <div
                     v-if="countSelectedStatistics"

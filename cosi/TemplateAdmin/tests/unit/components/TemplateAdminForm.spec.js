@@ -295,6 +295,71 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
         });
     });
     describe("Methods", () => {
+        describe("setReferenceValueList", () => {
+            it("should set the new reference value list", async () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    }),
+                    referenceValue = {statName: "prop1", value: "11"};
+
+                await wrapper.setData({
+                    referenceValueList: []
+                });
+
+                await wrapper.vm.setReferenceValueList(referenceValue);
+                expect(wrapper.vm.referenceValueList).to.be.deep.equal([referenceValue]);
+                wrapper.destroy();
+            });
+
+            it("should set the reference value list by replacing one object element", async () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    }),
+                    referenceValue = {statisticName: "prop1", value: "11"};
+
+                await wrapper.setData({
+                    referenceValueList: [{statisticName: "prop1", value: "12"}, {statisticName: "prop2", value: "13"}]
+                });
+
+                await wrapper.vm.setReferenceValueList(referenceValue);
+                expect(wrapper.vm.referenceValueList).to.be.deep.equal([{statisticName: "prop2", value: "13"}, {statisticName: "prop1", value: "11"}]);
+                wrapper.destroy();
+            });
+
+            it("should set the reference value list by deleting one object element", async () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    }),
+                    referenceValue = {statisticName: "prop1", value: ""};
+
+                await wrapper.setData({
+                    referenceValueList: [{statisticName: "prop1", value: "12"}, {statisticName: "prop2", value: "13"}]
+                });
+
+                await wrapper.vm.setReferenceValueList(referenceValue);
+                expect(wrapper.vm.referenceValueList).to.be.deep.equal([{statisticName: "prop2", value: "13"}]);
+                wrapper.destroy();
+            });
+        });
+
         describe("getExportedData", () => {
             it("should return the right exported data", async () => {
                 const wrapper = shallowMount(TemplateAdminForm, {
@@ -310,13 +375,15 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                     templateDes = "description",
                     paraGeoData = [{layerId: "1001", label: "layer1"}, {layerId: "1002", label: "layer2"}],
                     paraStatData = [{propertyName: "prop1", label: "prop1"}, {propertyName: "prop2", label: "prop2"}],
-                    toolData = {toolId: "print", label: "print"};
+                    toolData = {toolId: "print", label: "print"},
+                    referenceValueList = [{statisticName: "prop1", value: "11"}, {statisticName: "prop2", value: "12"}];
 
-                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).meta.title).to.be.equal("name");
-                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).meta.info).to.be.equal("description");
-                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).state.Maps.layerIds).to.be.deep.equal(["1001", "1002"]);
-                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).state.Tools.toolToOpen).to.be.equal("print");
-                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData).state.Tools.Dashboard.statsFeatureFilter).to.be.deep.equal(["prop1", "prop2"]);
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData, referenceValueList).meta.title).to.be.equal("name");
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData, referenceValueList).meta.info).to.be.equal("description");
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData, referenceValueList).state.Maps.layerIds).to.be.deep.equal(["1001", "1002"]);
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData, referenceValueList).state.Tools.toolToOpen).to.be.equal("print");
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData, referenceValueList).state.Tools.Dashboard.statsFeatureFilter).to.be.deep.equal(["prop1", "prop2"]);
+                expect(wrapper.vm.getExportedData(templateName, templateDes, paraGeoData, paraStatData, toolData, referenceValueList).state.Tools.Dashboard.orientationValues).to.be.deep.equal(referenceValueList);
                 wrapper.destroy();
             });
         });

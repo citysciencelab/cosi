@@ -1,5 +1,4 @@
 <script>
-
 export default {
     name: "TemplateAdminFormCard",
     components: {
@@ -23,6 +22,19 @@ export default {
         return {
             referenceValue: ""
         };
+    },
+    methods: {
+        /**
+         * Emits the setReferenceValueList function in TemplateAdminForm component
+         * @returns {void}
+         */
+        emitSetReferenceValue () {
+            this.$emit("setReferenceValueList", {
+                statisticName: this.title,
+                value: this.referenceValue
+            });
+
+        }
     }
 };
 
@@ -54,10 +66,11 @@ export default {
                     <div class="input-group input-group-sm w-50">
                         <input
                             id="referenceValue"
+                            v-model.trim="referenceValue"
                             type="text"
                             class="form-control border-end-0"
-                            :value="referenceValue"
                             maxlength="6"
+                            @change="emitSetReferenceValue"
                         >
                         <span
                             v-if="unit"
