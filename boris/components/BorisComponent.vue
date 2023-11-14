@@ -19,8 +19,17 @@ export default {
         FloorComponent
     },
     computed: {
-        ...mapGetters("Tools/BorisComponent", ["active", "id", "icon", "renderToWindow", "resizableWindow", "initialWidth", "initialWidthMobile", "keepOpen", "filteredLayerList", "isAreaLayer", "isStripesLayer", "textIds", "selectedPolygon", "selectedLayerName", "selectedLanduse", "selectedBrwFeature", "convertedBrw", "buttonValue", "buildingDesigns", "positionsToStreet", "selectedOption", "isProcessFromParametricUrl", "paramUrlParams"]),
-        ...mapGetters("Tools/Print", ["printFileReady", "fileDownloadUrl", "filename", "printStarted", "progressWidth"]),
+        ...mapGetters("Tools/BorisComponent", [
+            "active", "id", "icon", "renderToWindow", "resizableWindow", "initialWidth",
+            "initialWidthMobile", "keepOpen", "filteredLayerList", "isAreaLayer",
+            "isStripesLayer", "textIds", "selectedPolygon", "selectedLayerName",
+            "selectedLanduse", "selectedBrwFeature", "convertedBrw", "buttonValue",
+            "buildingDesigns", "positionsToStreet", "isProcessFromParametricUrl",
+            "paramUrlParams", "selectedBuildDesign", "selectedPositionToStreet"
+        ]),
+        ...mapGetters("Tools/Print", [
+            "printFileReady", "fileDownloadUrl", "filename", "printStarted", "progressWidth"
+        ]),
         /**
          * Gets a list of layers without the stripes-layers
          * @return {Array} filteredListWithoutStripes which is used to select by date
@@ -128,8 +137,14 @@ export default {
             }
         },
         selectedLayerName () {
-            this.setBuildingDesigns(["eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)", "rm Reihenmittelhaus", "rm Reihenmittelhäuser", "re Reihenendhaus", "g geschlossene Bauweise", "a abweichende Bauweise (Gartenhofhaus)"]);
-            this.setPositionsToStreet(["F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück", "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"]);
+            this.setBuildingDesigns([
+                "eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)",
+                "rm Reihenmittelhaus", "rm Reihenmittelhäuser", "re Reihenendhaus", "g geschlossene Bauweise",
+                "a abweichende Bauweise (Gartenhofhaus)"]);
+            this.setPositionsToStreet([
+                "F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück",
+                "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"
+            ]);
         }
     },
     created () {
@@ -179,15 +194,28 @@ export default {
             }
         },
         /**
-         * Handles option-change for individual property conversion
+         * Handles option-change of the building design for the individual property conversion
          * @param {String} event the selected option
          * @param {String} subject contains subject information for the select: building design oder position to street
          * @returns {void}
          */
-        handleOptionChange (event, subject) {
+        handleBuildingDesignOptionChange (event, subject) {
             const eventValue = event.target.value;
 
-            this.setSelectedOption(eventValue);
+            this.setSelectedBuildDesign(eventValue);
+            this.updateSelectedBrwFeature({converted: subject, brw: eventValue});
+            this.sendWpsConvertRequest({state: this});
+        },
+        /**
+         * Handles option-change of positon to street for the individual property conversion
+         * @param {String} event the selected option
+         * @param {String} subject contains subject information for the select: building design oder position to street
+         * @returns {void}
+         */
+        handlePositionToStreetOptionChange (event, subject) {
+            const eventValue = event.target.value;
+
+            this.setSelectedPositionToStreet(eventValue);
             this.updateSelectedBrwFeature({converted: subject, brw: eventValue});
             this.sendWpsConvertRequest({state: this});
         },
@@ -405,7 +433,7 @@ export default {
                                     :text-id="2"
                                     :text="$t('additional:modules.tools.boris.landCalculation.buildingDesignsInfo')"
                                     :toggle-info-text="toggleInfoText"
-                                    :handle-change="handleOptionChange"
+                                    :handle-change="handleBuildingDesignOptionChange"
                                     :subject="'zBauweise'"
                                     :type="'select'"
                                 />
@@ -421,7 +449,7 @@ export default {
                                     :text-id="3"
                                     :text="$t('additional:modules.tools.boris.landCalculation.positionToStreetInfo')"
                                     :toggle-info-text="toggleInfoText"
-                                    :handle-change="handleOptionChange"
+                                    :handle-change="handlePositionToStreetOptionChange"
                                     :subject="'zStrassenLage'"
                                     :type="'select'"
                                 />

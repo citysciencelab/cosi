@@ -28,7 +28,8 @@
  * @property {String} buttonValue - html value of button that indicates which further information are displayed
  * @property {Object} buildingDesigns - list of building designs that are options for the conversion to individual property
  * @property {Object} positionsToStreet - list of positions to streets that are options for the conversion to individual property
- * @property {String} selectedOption - is the selected option of building designs or positions to street
+ * @property {String} selectedBuildingDesign - is the selected option of building designs
+ * @property {String} selectedPositionToStreet - is the selected option of positions to street
  * @property {String} wpsId - the id of the used web processing service
  * @property {String} fmwProcess - the FME process triggered via the WPS
  */
@@ -60,9 +61,17 @@ const state = {
     isProcessFromParametricUrl: false,
     paramUrlParams: {},
     buttonValue: "info",
-    buildingDesigns: ["eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)", "rm Reihenmittelhaus", "re Reihenendhaus", "g geschlossene Bauweise", "a abweichende Bauweise (Gartenhofhaus)"],
-    positionsToStreet: ["F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück", "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"],
-    selectedOption: "",
+    buildingDesigns: [
+        "eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)",
+        "rm Reihenmittelhaus", "re Reihenendhaus", "g geschlossene Bauweise",
+        "a abweichende Bauweise (Gartenhofhaus)"
+    ],
+    positionsToStreet: [
+        "F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück",
+        "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"
+    ],
+    selectedBuildDesign: "eh Einzelhaus (freistehend)",
+    selectedPositionToStreet: "F Frontlage",
     wpsId: "1001",
     fmwProcess: "BRWConvert.fmw"
 };

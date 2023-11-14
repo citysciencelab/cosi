@@ -249,15 +249,15 @@ describe("ADDONS: addons/boris/components/BorisComponent.vue", () => {
         });
     });
     describe("handle input and option change methods", () => {
-        it("handleOptionChange", () => {
+        it("handle option change: handleBuildingDesignOptionChange", () => {
             const event = {target: {value: store.state.Tools.BorisComponent.buildingDesigns[1]}, get: () => "value"},
                 subject = "zBauweise";
 
             store.state.Tools.BorisComponent.active = true;
             wrapper = shallowMount(BorisComponent, {store, localVue});
-            wrapper.vm.handleOptionChange(event, subject);
+            wrapper.vm.handleBuildingDesignOptionChange(event, subject);
 
-            expect(store.state.Tools.BorisComponent.selectedOption).to.equal(store.state.Tools.BorisComponent.buildingDesigns[1]);
+            expect(store.state.Tools.BorisComponent.selectedBuildDesign).to.equal(store.state.Tools.BorisComponent.buildingDesigns[1]);
             expect(Boris.actions.updateSelectedBrwFeature.calledOnce).to.equal(true);
             expect(Boris.actions.sendWpsConvertRequest.calledOnce).to.equal(true);
 
