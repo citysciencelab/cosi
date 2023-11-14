@@ -29,11 +29,27 @@ export default {
          * @returns {void}
          */
         emitSetReferenceValue () {
+            this.referenceValue = this.referenceValue.replace(/^[,\s]+|[,\s]+$/g, "").replace(/,[,\s]*,/g, ",");
+
             this.$emit("setReferenceValueList", {
                 statisticName: this.title,
                 value: this.referenceValue
             });
+        },
 
+        /**
+         * Checks if the input is number or comma
+         * @param {event} e the keypress event
+         * @returns {Boolean} true if the input letter is number or comma
+         */
+        checkNumber (e) {
+            const char = String.fromCharCode(e.keyCode);
+
+            if ((/^\d*,?\d{0,2}$/).test(char)) {
+                return true;
+            }
+            e.preventDefault();
+            return false;
         }
     }
 };
@@ -71,6 +87,7 @@ export default {
                             class="form-control border-end-0"
                             maxlength="6"
                             @change="emitSetReferenceValue"
+                            @keypress="checkNumber($event)"
                         >
                         <span
                             v-if="unit"
