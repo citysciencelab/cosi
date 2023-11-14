@@ -28,12 +28,11 @@
  * @property {String} buttonValue - html value of button that indicates which further information are displayed
  * @property {Object} buildingDesigns - list of building designs that are options for the conversion to individual property
  * @property {Object} positionsToStreet - list of positions to streets that are options for the conversion to individual property
-<<<<<<< HEAD
  * @property {String} selectedBuildingDesign - is the selected option of building designs
  * @property {String} selectedPositionToStreet - is the selected option of positions to street
-=======
  * @property {String} selectedOption - is the selected option of building designs or positions to street
->>>>>>> ed140a35 (BG-4505 rm Reihenmittelhaeuser merged with singular form)
+ * @property {String} selectedBuildingDesign - is the selected option of building designs
+ * @property {String} selectedPositionToStreet - is the selected option of positions to street
  * @property {String} wpsId - the id of the used web processing service
  * @property {String} fmwProcess - the FME process triggered via the WPS
  */
