@@ -74,14 +74,6 @@ export default {
         },
 
         /**
-         * Removes the selected tool
-         * @returns {void}
-         */
-        removeToolData () {
-            this.selectedToolData = [];
-        },
-
-        /**
          * Validating the form
          * @returns {void}
          */
@@ -472,17 +464,6 @@ export default {
                     > {{ }} </span>
                 </template>
             </Multiselect>
-        </div>
-        <div class="mb-4">
-            <button
-                v-if="Object.keys(selectedToolData).length"
-                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
-                aria-label="Close"
-                @click.prevent="removeToolData(selectedToolData.toolId)"
-            >
-                {{ selectedToolData.label }}
-                <i class="bi bi-x fs-5 align-middle" />
-            </button>
         </div>
         <div class="mb-4">
             * {{ $t("additional:modules.tools.cosi.templateAdmin.required") }}

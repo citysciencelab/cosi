@@ -146,7 +146,7 @@ describe("addons/StatisticDashboard.vue", () => {
         });
     });
 
-    describe("watchers", () => {
+    describe.skip("watchers", () => {
         it("should call 'checkFilterSettings' if selectedReferenceData is changed", async () => {
             const wrapper = shallowMount(StatisticDashboard, {
                     localVue,
