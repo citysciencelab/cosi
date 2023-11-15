@@ -131,7 +131,7 @@ export default {
                 formatedDate = dayjs(new Date()).format("YYYY-MM-DD, HH:mm:ss").replace(", ", "T") + ".174Z",
                 layerIds = geoData.map(data => data.layerId),
                 toolId = toolData?.toolId,
-                statsFeaturePropertyName = statData.map(data => data.propertyName);
+                statsFeatureLable = statData.map(data => data.label);
 
             return {
                 "meta": {
@@ -148,7 +148,7 @@ export default {
                     "Tools": {
                         "toolToOpen": toolId,
                         "Dashboard": {
-                            "statsFeatureFilter": statsFeaturePropertyName,
+                            "statsFeatureFilter": statsFeatureLable,
                             "orientationValues": referenceValueList
                         }
                     }
