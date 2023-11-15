@@ -10,6 +10,7 @@
  * @property {Boolean} [resizableWindow=false] - If True, window is resizable (config-param).
  * @property {object} toolBridgeIn: {settings: {}, type: "", outputCallback: ()=>{}} accepts settings from toolBridge (must have a *watcher*)
  * @property {object} toolBridgeOut: {}  pass current settings to toolBridge (must have a *getter*)
+ * @property {String} prefixExportFilename - The prefix of exported file name.
  */
 const state = {
     active: false,
@@ -30,7 +31,8 @@ const state = {
     reportTemplateMode: null,
     // these two variables are required to make this addon compatible with the toolBridge addon (for details see toolBridge documentation)
     toolBridgeIn: {settings: {}, type: "", outputCallback: null}, // accepts settings from toolBridge - must have a *watcher*
-    toolBridgeOut: {} // pass current settings to toolBridge - must have a *getter*
+    toolBridgeOut: {}, // pass current settings to toolBridge - must have a *getter*,
+    prefixExportFilename: "CoSI"
 };
 
 export default state;

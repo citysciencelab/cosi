@@ -531,10 +531,11 @@ export default {
          */
         exportTable (exportTimeline = false) {
             const items = this.selectedItems.length > 0 ? this.selectedItems : this.currentItems,
+                prefix = this.prefixExportFilename,
                 data = exportTimeline
                     ? this.prepareTableExportWithTimeline(items, this.selectedDistrictNames, this.timestamps, this.timestampPrefix)
                     : this.prepareTableExport(items, this.selectedDistrictNames, this.selectedYear, this.timestampPrefix),
-                filename = composeFilename(this.$t("additional:modules.tools.cosi.dashboard.exportFilename"));
+                filename = composeFilename(this.$t("additional:modules.tools.cosi.dashboard.exportFilename", {prefix}));
 
             exportXlsx(data, filename, {exclude: [...this.excludedPropsForExport, ...this.unselectedColumnLabels]});
         },

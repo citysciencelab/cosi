@@ -12,7 +12,7 @@
                     "search": "Tabelle durchsuchen",
                     "exportTable": "Tabelle exportieren",
                     "exportTableTimeline": "alle Jahre exportieren",
-                    "exportFilename": "CoSI_Dashboard-Tabelle",
+                    "exportFilename": "{{prefix}}_Dashboard-Tabelle",
                     "modifiedTooltip": "Dieses Datum wurde durch Simulationsfunktionen verändert.",
                     "moveColLeft": "Spalte nach links verschieben",
                     "moveColRight": "Spalte nach rechts verschieben",
