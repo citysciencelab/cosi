@@ -401,7 +401,7 @@ export default {
                     v-for="(statDataObj, idx) in selectedStatData"
                     :key="idx"
                     :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
-                    class="col-sm-6"
+                    class="col-sm-12"
                     :title="statDataObj.label"
                     :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
                     unit="%"
