@@ -371,30 +371,30 @@ export default {
                         class="d-flex mb-2"
                     >
                         <button
-                            class="btn btn-primary bi-info-circle-fill col me-1"
-                            :class="(buttonValue === 'info') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-info-circle-fill col me-1"
+                            :class="(buttonValue === 'info') ? 'btn btn-primary' : 'btn btn-default'"
                             value="info"
                             :title="$t('additional:modules.tools.boris.detailInformation.title')"
                             @click="setButtonValue($event.target.value)"
                         />
                         <button
-                            class="btn btn-primary bi-geo-alt-fill col me-1"
-                            :class="(buttonValue === 'lage') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-geo-alt-fill col me-1"
+                            :class="(buttonValue === 'lage') ? 'btn btn-primary' : 'btn btn-default'"
                             value="lage"
                             :title="$t('additional:modules.tools.boris.locationDescription.title')"
                             @click="setButtonValue($event.target.value)"
                         />
                         <button
-                            class="btn btn-primary bi-currency-euro col "
-                            :class="(buttonValue === 'euro') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-currency-euro col "
+                            :class="(buttonValue === 'euro') ? 'btn btn-primary' : 'btn btn-default'"
                             value="euro"
                             :title="$t('additional:modules.tools.boris.landCalculation.title')"
                             @click="setButtonValue($event.target.value)"
                         />
                         <button
                             v-if="selectedBrwFeature.get('schichtwert')"
-                            class="btn btn-primary bi-list-ul col ms-1"
-                            :class="(buttonValue === 'liste') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-list-ul col ms-1"
+                            :class="(buttonValue === 'liste') ? 'btn btn-primary' : 'btn btn-default'"
                             value="liste"
                             :title="$t('additional:modules.tools.boris.floorValues.title')"
                             @click="setButtonValue($event.target.value)"
