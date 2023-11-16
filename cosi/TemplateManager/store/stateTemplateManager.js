@@ -18,6 +18,7 @@ const state = {
     icon: "bi-folder2-open",
     id: "templateManager",
     isVisibleInMenu: true,
+    importedFileNames: [],
     name: "Vorlagen",
     renderToWindow: true,
     resizableWindow: true,

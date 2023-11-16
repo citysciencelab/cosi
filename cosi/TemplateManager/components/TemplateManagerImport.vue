@@ -1,8 +1,12 @@
 <script>
-import {mapActions} from "vuex";
+import {mapGetters, mapActions} from "vuex";
+import getters from "../store/gettersTemplateManager";
 
 export default {
     name: "TemplateManagerImport",
+    computed: {
+        ...mapGetters("Tools/TemplateManager", Object.keys(getters))
+    },
     methods: {
         ...mapActions("Alerting", ["addSingleAlert"]),
 
@@ -34,6 +38,7 @@ export default {
                 reader.onload = this.parseFileContent;
                 reader.readAsText(file);
             }
+            this.$refs.form.reset();
         },
 
         /**
@@ -42,10 +47,10 @@ export default {
          * @returns {void}
          */
         parseFileContent (evt) {
-            try {
-                const template = JSON.parse(evt.target.result);
+            let template = {};
 
-                this.$emit("addTemplate", template);
+            try {
+                template = JSON.parse(evt?.target?.result);
             }
             catch (err) {
                 this.addSingleAlert({
@@ -53,13 +58,34 @@ export default {
                     category: "Warning",
                     displayClass: "warning"
                 });
-                console.error(err);
+                return;
             }
+
+            if (!Object.prototype.hasOwnProperty.call(template, "meta") ||
+                !Object.prototype.hasOwnProperty.call(template?.meta, "title")) {
+
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+                return;
+            }
+
+            if (Array.isArray(this.importedFileNames) && this.importedFileNames.includes(template?.meta?.title)) {
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.templateName")} ${template?.meta?.title} ${this.$t("additional:modules.tools.cosi.templateManager.errors.isLoaded")}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+
+                return;
+            }
+            this.importedFileNames.push(template?.meta?.title);
+
+            this.$emit("addTemplate", template);
         }
-
-
     }
-
 };
 </script>
 
@@ -71,15 +97,17 @@ export default {
         >
             <i class="bi bi-upload pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.importTemplate") }}
         </button>
-        <label for="file-input">
-            <input
-                id="file-input"
-                type="file"
-                multiple
-                class="d-none"
-                @change="loadFiles"
-            >
-        </label>
+        <form ref="form">
+            <label for="file-input">
+                <input
+                    id="file-input"
+                    type="file"
+                    multiple
+                    class="d-none"
+                    @change="loadFiles"
+                >
+            </label>
+        </form>
     </div>
 </template>
 

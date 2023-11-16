@@ -2,6 +2,8 @@ import {config, shallowMount, createLocalVue} from "@vue/test-utils";
 import {expect} from "chai";
 import Vuex from "vuex";
 import TemplateManagerImport from "../../../components/TemplateManagerImport.vue";
+import TemplateManagerStore from "../../../store/indexTemplateManager";
+
 import sinon from "sinon";
 
 config.mocks.$t = key => key;
@@ -32,6 +34,12 @@ describe("addons/cosi/TemplateManager/components/TemplateManagerImport.vue", () 
                     namespaced: true,
                     actions: {
                         addSingleAlert: stubAddSingleAlert
+                    }
+                },
+                Tools: {
+                    namespaced: true,
+                    modules: {
+                        TemplateManager: TemplateManagerStore
                     }
                 }
             }
@@ -117,19 +125,7 @@ describe("addons/cosi/TemplateManager/components/TemplateManagerImport.vue", () 
         });
 
         describe("parseFileContent", () => {
-            it("should call the 'addSingleAlert' if file content can not be parsed", () => {
-                const obj = {
-                        target: {
-                            result: {}
-                        }
-                    },
-                    wrapper = factory.getShallowMount();
-
-                wrapper.vm.parseFileContent(obj);
-                expect(stubAddSingleAlert.calledOnce).to.be.true;
-            });
-
-            it("should parse the given string to a json and emit it", () => {
+            it("should call the 'addSingleAlert' if file content is not correct.", () => {
                 const obj = {
                         target: {
                             result: "{}"
@@ -138,7 +134,42 @@ describe("addons/cosi/TemplateManager/components/TemplateManagerImport.vue", () 
                     wrapper = factory.getShallowMount();
 
                 wrapper.vm.parseFileContent(obj);
-                expect(wrapper.emitted().addTemplate[0]).to.deep.equal([{}]);
+                expect(stubAddSingleAlert.calledOnce).to.be.true;
+            });
+
+            it("should call the 'addSingleAlert' if template name is already loaded", () => {
+                const obj1 = {
+                        target: {
+                            result: JSON.stringify({meta: {title: "title-1"}})
+                        }
+                    },
+                    obj2 = {
+                        target: {
+                            result: JSON.stringify({meta: {title: "title-1"}})
+                        }
+                    },
+                    wrapper = factory.getShallowMount();
+
+                wrapper.vm.parseFileContent(obj1);
+                wrapper.vm.parseFileContent(obj2);
+                expect(stubAddSingleAlert.calledOnce).to.be.true;
+            });
+
+            it("should parse the given string to a json and emit it", () => {
+                const obj = {
+                        target: {
+                            result: JSON.stringify({meta: {title: "title"}})
+                        }
+                    },
+                    expected = {
+                        meta: {
+                            title: "title"
+                        }
+                    },
+                    wrapper = factory.getShallowMount();
+
+                wrapper.vm.parseFileContent(obj);
+                expect(wrapper.emitted().addTemplate[0]).to.deep.equal([expected]);
             });
         });
     });

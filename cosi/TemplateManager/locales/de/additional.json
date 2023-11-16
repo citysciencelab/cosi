@@ -19,7 +19,9 @@
                     "errors": {
                       "default": "Datei konnte nicht geladen werden",
                       "invalid": "Datei konnte nicht gelesen werden",
-                      "wrongFileFormat": "Die Datei hat nicht das richtige Format."
+                      "wrongFileFormat": "Die Datei hat nicht das richtige Format.",
+                      "templateName": "Eine Vorlage mit dem Namen: ",
+                      "isLoaded": "ist bereits geladen."
                     }
                 }
             }
