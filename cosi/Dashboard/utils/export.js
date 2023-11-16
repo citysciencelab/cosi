@@ -9,12 +9,14 @@ const
         timestamp: "Jahr",
         hamburg_gesamt: "Hamburg gesamt",
         total: "Gesamt",
-        average: "Durchschnitt"
+        average: "Durchschnitt",
+        orientationValue: "Orientierungswert"
     },
     valuesMap = {
         absolute: "absolut",
         relative: "relativ"
-    };
+    },
+    keysToIgnore = ["id"];
 
 /**
  * Prepares the table data for an XLSX export, just the table as displayed
@@ -32,6 +34,9 @@ export function prepareTableExport (data, districtNames, timestamp, timestampPre
     const exportData = data.map(item => {
         const _item = replaceValues(renameKeys(keyMap, item), valuesMap);
 
+        keysToIgnore.forEach(keyToIgnore => {
+            delete _item[keyToIgnore];
+        });
         for (const col in _item) {
             if (typeof _item[col] === "object") {
                 const val = parseFloat(_item[col][timestampPrefix + timestamp]);
@@ -73,6 +78,10 @@ export function prepareTableExportWithTimeline (data, districtNames, timestamps,
             const _item = replaceValues(renameKeys(keyMap, item), valuesMap),
                 categoryRows = ctimestamps.map(timestamp => {
                     const el = {..._item};
+
+                    keysToIgnore.forEach(keyToIgnore => {
+                        delete el[keyToIgnore];
+                    });
 
                     for (const col in el) {
                         if (typeof _item[col] === "object") {
