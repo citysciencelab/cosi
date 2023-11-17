@@ -119,7 +119,6 @@ export default {
         ...mapGetters("Tools/DistrictSelector", [
             "selectedDistrictLevel",
             "selectedDistrictNames",
-            "keyOfAttrNameStats",
             "mapping",
             "loadend",
             "remoteMetadata"
@@ -302,10 +301,6 @@ export default {
             let counter = 0;
 
             return this.mapping.reduce((rows, category, index, array) => {
-                if (!category[this.keyOfAttrNameStats]) {
-                    return rows;
-                }
-
                 return [
                     ...rows,
                     {
