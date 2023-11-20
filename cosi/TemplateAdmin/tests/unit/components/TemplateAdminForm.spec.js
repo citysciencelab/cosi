@@ -387,5 +387,262 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                 wrapper.destroy();
             });
         });
+
+        describe("getTemplateText", () => {
+            it("should return empty string", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getTemplateText(null)).to.be.equal("");
+                expect(wrapper.vm.getTemplateText(0)).to.be.equal("");
+                expect(wrapper.vm.getTemplateText(true)).to.be.equal("");
+                expect(wrapper.vm.getTemplateText(undefined)).to.be.equal("");
+                expect(wrapper.vm.getTemplateText({})).to.be.equal("");
+                expect(wrapper.vm.getTemplateText([])).to.be.equal("");
+                wrapper.destroy();
+            });
+
+            it("should return string", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getTemplateText("text")).to.be.equal("text");
+                wrapper.destroy();
+            });
+        });
+
+        describe("getSelectedGeoData", () => {
+            it("should return empty array", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getSelectedGeoData(null)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData(0)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData(true)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData(undefined)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData({})).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData("")).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData([])).to.be.deep.equal([]);
+                wrapper.destroy();
+            });
+
+            it("should return selected geo data", () => {
+                const localGeoData = [
+                        {layerId: "123", label: "layer1"},
+                        {layerId: "124", label: "layer2"}
+                    ],
+                    wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData: localGeoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    });
+
+                expect(wrapper.vm.getSelectedGeoData(["123"])).to.be.deep.equal([{layerId: "123", label: "layer1"}]);
+                wrapper.destroy();
+            });
+        });
+
+        describe("getSelectedStatData", () => {
+            it("should return empty array", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getSelectedGeoData(null)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData(0)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData(true)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData(undefined)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData({})).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData("")).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedGeoData([])).to.be.deep.equal([]);
+                wrapper.destroy();
+            });
+
+            it("should return selected geo data", () => {
+                const localGeoData = [
+                        {layerId: "123", label: "layer1"},
+                        {layerId: "124", label: "layer2"}
+                    ],
+                    wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData: localGeoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    });
+
+                expect(wrapper.vm.getSelectedGeoData(["123"])).to.be.deep.equal([{layerId: "123", label: "layer1"}]);
+                wrapper.destroy();
+            });
+        });
+
+        describe("getImportedReferenceValueList", () => {
+            it("should return empty Array", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getImportedReferenceValueList(null)).to.be.deep.equal([]);
+                expect(wrapper.vm.getImportedReferenceValueList(0)).to.be.deep.equal([]);
+                expect(wrapper.vm.getImportedReferenceValueList(true)).to.be.deep.equal([]);
+                expect(wrapper.vm.getImportedReferenceValueList(undefined)).to.be.deep.equal([]);
+                expect(wrapper.vm.getImportedReferenceValueList({})).to.be.deep.equal([]);
+                expect(wrapper.vm.getImportedReferenceValueList("")).to.be.deep.equal([]);
+                wrapper.destroy();
+            });
+
+            it("should return parameter", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getImportedReferenceValueList(["test"])).to.be.deep.equal(["test"]);
+                wrapper.destroy();
+            });
+        });
+
+        describe("getSelectedToolData", () => {
+            it("should return empty array", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getSelectedToolData(null)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedToolData(0)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedToolData(true)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedToolData(undefined)).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedToolData({})).to.be.deep.equal([]);
+                expect(wrapper.vm.getSelectedToolData([])).to.be.deep.equal([]);
+                wrapper.destroy();
+            });
+
+            it("should return selected tool data", () => {
+                const option = "FileImport",
+                    toolData = [
+                        {toolId: "FileImport", label: "File Import"},
+                        {toolId: "saveSession", label: "Save Session"}
+                    ],
+                    wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            toolData: toolData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    });
+
+                expect(wrapper.vm.getSelectedToolData(option)).to.be.deep.equal({toolId: "FileImport", label: "File Import"});
+                wrapper.destroy();
+            });
+        });
+
+        describe("getImportedReferenceValue", () => {
+            it("should return empty string", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getImportedReferenceValue(null)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue(0)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue(true)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue(undefined)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue({})).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue("", null)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue("", 0)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue("", true)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue("", undefined)).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue("", {})).to.be.equal("");
+                expect(wrapper.vm.getImportedReferenceValue("", [])).to.be.equal("");
+                wrapper.destroy();
+            });
+
+            it("should return value", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    }),
+                    referenceValueList = [
+                        {
+                            "statisticName": "Anteil an der Bevölkerung 15 bis 24 Jahren",
+                            "value": "12"
+                        },
+                        {
+                            "statisticName": "Anteil an der Bevölkerung unter 15 Jahren",
+                            "value": "22"
+                        },
+                        {
+                            "statisticName": "Anteil der Arbeitslosen 15 bis 24 Jahren",
+                            "value": "33"
+                        }
+                    ];
+
+                expect(wrapper.vm.getImportedReferenceValue("Anteil an der Bevölkerung 15 bis 24 Jahren", referenceValueList)).to.be.equal("12");
+                wrapper.destroy();
+            });
+        });
     });
 });

@@ -23,6 +23,9 @@
             "placeholder": "Daten auswählen",
             "existingAreas": "Bestehende Gebiete mit SozErhVO"
           },
+          "errors": {
+            "wrongFormat": "Die Datei hat nicht das richtige Format."
+          },
           "required": "Pflichtfelder",
           "hint": "Dies ist ein Pflichtfeld."
         }

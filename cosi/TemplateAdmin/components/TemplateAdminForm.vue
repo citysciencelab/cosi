@@ -3,6 +3,8 @@ import Multiselect from "vue-multiselect";
 import TemplateAdminFormCard from "./TemplateAdminFormCard.vue";
 import dayjs from "dayjs";
 import Draggable from "vuedraggable";
+import {mapActions} from "vuex";
+import isObject from "../../../../src/utils/isObject";
 
 export default {
     name: "TemplateAdminForm",
@@ -44,7 +46,8 @@ export default {
             isStatDataValidating: false,
             isValidated: false,
             limitReferenceValues: false,
-            referenceValueList: []
+            referenceValueList: [],
+            importedReferenceValueList: []
         };
     },
     computed: {
@@ -57,6 +60,8 @@ export default {
         }
     },
     methods: {
+        ...mapActions("Alerting", ["addSingleAlert"]),
+
         /**
          * Removes the geo data by the given layerId.
          * @param {String} layerId The layerId.
@@ -212,6 +217,146 @@ export default {
             if (value.value !== "") {
                 this.referenceValueList.push(value);
             }
+        },
+
+        /**
+         * Importing the template from local storage.
+         * @param {Event} evt - An input change event.
+         * @returns {void}
+         */
+        importTemplate (evt) {
+            if (!Array.isArray(Object.keys(evt?.target?.files)) || !Object.keys(evt?.target?.files).length) {
+                return;
+            }
+
+            if (Object.keys(evt?.target?.files).length === 1) {
+                this.parseTemplate(evt.target.files[0]);
+            }
+        },
+
+        /**
+         * Parsing the template from imported file
+         * @param {Object} file - the imported file
+         * @returns {void}
+         */
+        parseTemplate (file) {
+            const reader = new FileReader();
+            let fileContent = null;
+
+            reader.onload = this.parseFileContent;
+            reader.readAsText(file);
+
+            if (file.name.includes(".json")) {
+                reader.onload = (res) => {
+                    fileContent = JSON.parse(res.target.result);
+                    this.loadingTemplate(fileContent);
+                };
+                reader.onerror = (err) => console.error(err);
+            }
+            else {
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateAdmin.errors.wrongFormat")}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+            }
+        },
+
+        /**
+         * Loading the template and assign the value to different field
+         * @param {Object} content - the parsed json format content
+         * @returns {void}
+         */
+        loadingTemplate (content) {
+            if (!isObject(content)) {
+                return;
+            }
+
+            this.templateName = this.getTemplateText(content.meta?.title);
+            this.templateDes = this.getTemplateText(content.meta?.info);
+            this.selectedGeoData = this.getSelectedGeoData(content.state?.Maps?.layerIds);
+            this.selectedStatData = this.getSelectedStatData(content.state?.Tools?.Dashboard);
+            this.selectedToolData = this.getSelectedToolData(content.state?.Tools?.toolToOpen);
+            this.importedReferenceValueList = this.getImportedReferenceValueList(content.state?.Tools?.Dashboard?.orientationValues);
+        },
+
+        /**
+         * Gets the template attributes if it is in string type
+         * @param {String} txt - the text
+         * @returns {string} the text
+         */
+        getTemplateText (txt) {
+            return typeof txt === "string" ? txt : "";
+        },
+
+        /**
+         * Gets the selected Geo data.
+         * @param {String[]} layerId - the layer Id
+         * @returns {Object} the selected geo data
+         */
+        getSelectedGeoData (layerId) {
+            const geoData = [];
+
+            if (Array.isArray(layerId)) {
+                layerId.forEach(id => {
+                    geoData.push(this.geoData.find(data => data?.layerId === id));
+                });
+            }
+
+            return geoData;
+        },
+
+        /**
+         * Gets the selected statistical data.
+         * @param {Object} dashboard - the dashboard object
+         * @returns {Object} the selected stats data
+         */
+        getSelectedStatData (dashboard) {
+            const statData = [];
+
+            if (Array.isArray(dashboard?.statsFeatureFilter)) {
+                dashboard.statsFeatureFilter.forEach(stat => {
+                    statData.push(this.statData.find(data => data?.label === stat));
+                });
+            }
+
+            return statData;
+        },
+
+        /**
+         * Gets the selected template tool option.
+         * @param {String} option - the option
+         * @returns {Object} the selected tool data
+         */
+        getSelectedToolData (option) {
+            if (typeof option === "string") {
+                return this.toolData.find(data => data?.toolId === option);
+            }
+
+            return [];
+        },
+
+        /**
+         * Gets the reference value list
+         * @param {Object[]} val - the reference value list
+         * @returns {string} the reference value list
+         */
+        getImportedReferenceValueList (val) {
+            return Array.isArray(val) ? val : [];
+        },
+
+        /**
+         * Gets the imported reference value for each reference input field.
+         * @param {String} name - the statistical data name
+         * @param {Object[]} referenceValueList - the reference value list
+         * @returns {Object} the selected tool data
+         */
+        getImportedReferenceValue (name, referenceValueList) {
+            if (typeof name !== "string" || !Array.isArray(referenceValueList) || !referenceValueList.length) {
+                return "";
+            }
+
+            return referenceValueList.find(data => data?.statisticName === name)?.value;
         }
     }
 };
@@ -227,11 +372,21 @@ export default {
         >
             <button
                 class="template-upload btn btn-outline-primary fs-5 lh-1"
-                @click.prevent=""
+                @click.prevent="$refs.templateImport.click()"
             >
                 <i class="bi bi-upload pe-2" />
                 {{ $t("additional:modules.tools.cosi.templateAdmin.button.uploadTemplate") }}
             </button>
+            <label for="template-import">
+                <input
+                    id="template-import"
+                    ref="templateImport"
+                    type="file"
+                    multiple
+                    class="d-none"
+                    @change="importTemplate"
+                >
+            </label>
             <label
                 class="col col-md form-label ps-0 pb-0 pt-4 m-0"
                 for="select-template"
@@ -406,6 +561,7 @@ export default {
                     :key="idx"
                     :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
                     :title="statDataObj.label"
+                    :imported-reference-value="getImportedReferenceValue(statDataObj.label, importedReferenceValueList)"
                     :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
                     unit="%"
                     @removeCard="removeStatData(statDataObj.propertyName)"

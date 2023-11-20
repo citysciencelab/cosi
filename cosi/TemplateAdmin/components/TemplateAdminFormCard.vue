@@ -12,6 +12,11 @@ export default {
             type: String,
             required: true
         },
+        importedReferenceValue: {
+            type: String,
+            required: false,
+            default: ""
+        },
         unit: {
             type: [String, Boolean],
             required: false,
@@ -22,6 +27,14 @@ export default {
         return {
             referenceValue: ""
         };
+    },
+    watch: {
+        referenceValue () {
+            this.emitSetReferenceValue();
+        }
+    },
+    mounted () {
+        this.referenceValue = typeof this.importedReferenceValue !== "undefined" ? this.importedReferenceValue : "";
     },
     methods: {
         /**
