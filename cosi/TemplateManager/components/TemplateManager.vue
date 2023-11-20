@@ -9,6 +9,7 @@ import ToolInfo from "../../components/ToolInfo.vue";
 import TemplateManagerImport from "./TemplateManagerImport.vue";
 import axios from "axios";
 import mapping from "../../assets/mapping.json";
+import {getItemsByAttributes} from "../../utils/radioBridge";
 
 export default {
     name: "TemplateManager",
@@ -27,8 +28,7 @@ export default {
         ...mapGetters("Language", ["currentLocale"]),
         ...mapGetters("Tools/TemplateManager", Object.keys(getters)),
         ...mapGetters("Tools/SaveSession", []),
-        ...mapGetters("Tools/DistrictSelector", ["districtLevels"]),
-        ...mapGetters("Tools/FeaturesList", ["flatLayerMapping"])
+        ...mapGetters("Tools/DistrictSelector", ["districtLevels"])
     },
     watch: {
         /**
@@ -92,7 +92,7 @@ export default {
 
         createFilterObjects () {
             this.filters = this.templates.map(template => ({
-                activeLayerList: Object.fromEntries(this.getActiveLayerList(template).map(el => [el.layerId, true])),
+                activeLayerList: Object.fromEntries(this.getActiveLayerList(template).map(el => [el.id, true])),
                 selectedDistrictNames: Object.fromEntries(this.getSelectedDistricts(template).map(el => [el, true])),
                 statsCategories: Object.fromEntries(this.getStatsCategories(template).map(el => [el, true])),
                 calculations: Object.fromEntries(this.getCalculations(template).map(el => [el.id, true]))
@@ -155,8 +155,8 @@ export default {
         },
 
         getActiveLayerList (template) {
-            return this.flatLayerMapping
-                .filter(layer => (template.state?.Maps?.layerIds || []).includes(layer.layerId));
+            return getItemsByAttributes({typ: "WFS"})
+                .filter(layer => (template.state?.Maps?.layerIds || []).includes(layer.id));
         },
 
         getActiveTool (template) {
@@ -327,9 +327,9 @@ export default {
                                                                 class="ma-1"
                                                                 small
                                                             >
-                                                                {{ layerMap.id }}
+                                                                {{ layerMap.name }}
                                                                 <v-checkbox
-                                                                    v-model="filters[i].activeLayerList[layerMap.layerId]"
+                                                                    v-model="filters[i].activeLayerList[layerMap.id]"
                                                                     small
                                                                 />
                                                             </v-chip>
