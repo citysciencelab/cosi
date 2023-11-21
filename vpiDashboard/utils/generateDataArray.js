@@ -88,6 +88,14 @@ const generateDataArray = {
 
                 sum_num_visitors.push(Math.ceil(data[dataKey] / 100) * 100);
             });
+
+            if (endpoint === "visitorTypes") {
+                labels.forEach((l, index) => {
+                    if (l === "Einwohner") {
+                        labels[index] = i18next.t("additional:modules.tools.vpidashboard.tab.visitorTypes.chartLabels.residents");
+                    }
+                });
+            }
         }
 
         // eslint-disable-next-line
