@@ -80,7 +80,8 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                 {
                     meta: {
                         isActive: true,
-                        title: "Vielfalt für alle"
+                        title: "Vielfalt für alle",
+                        time: 1700555383001
                     },
                     state: {
                         Tools: {
@@ -93,7 +94,8 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                 {
                     meta: {
                         isActive: true,
-                        title: "Alle für alle"
+                        title: "Alle für alle",
+                        time: 1700555362955
                     },
                     state: {
                         Tools: {
@@ -106,7 +108,8 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                 {
                     meta: {
                         isActive: false,
-                        title: "Alle für Vielfalt"
+                        title: "Alle für Vielfalt",
+                        time: 1700555344885
                     },
                     state: {
                         Tools: {

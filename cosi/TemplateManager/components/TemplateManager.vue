@@ -131,6 +131,7 @@ export default {
                 startingTool = template?.state?.Tools?.toolToOpen;
 
             if (this.useTemplatesForMapping) {
+                template.meta.time = new Date().getTime();
                 this.createMappingByTemplates(this.templates, mapping);
             }
 
@@ -201,9 +202,10 @@ export default {
          */
         createMappingByTemplates (templates, initMapping) {
             const activeTemplates = templates.filter(template => template.meta.isActive),
+                sortedTemplates = activeTemplates.sort((a, b) => b.meta.time - a.meta.time),
                 newMapping = [];
 
-            activeTemplates.forEach(template => {
+            sortedTemplates.forEach(template => {
                 const statsFeatures = template.state?.Tools?.Dashboard?.statsFeatureFilter,
                     orientationValues = template.state?.Tools?.Dashboard?.orientationValues;
 
