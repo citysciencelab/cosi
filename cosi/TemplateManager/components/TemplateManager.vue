@@ -10,17 +10,20 @@ import TemplateManagerImport from "./TemplateManagerImport.vue";
 import axios from "axios";
 import mapping from "../../assets/mapping.json";
 import {getItemsByAttributes} from "../../utils/radioBridge";
+import Multiselect from "vue-multiselect";
 
 export default {
     name: "TemplateManager",
     components: {
         Tool,
         ToolInfo,
-        TemplateManagerImport
+        TemplateManagerImport,
+        Multiselect
     },
     data () {
         return {
             templates: [],
+            selectedTemplateName: false,
             filters: []
         };
     },
@@ -28,7 +31,39 @@ export default {
         ...mapGetters("Language", ["currentLocale"]),
         ...mapGetters("Tools/TemplateManager", Object.keys(getters)),
         ...mapGetters("Tools/SaveSession", []),
-        ...mapGetters("Tools/DistrictSelector", ["districtLevels"])
+        ...mapGetters("Tools/DistrictSelector", ["districtLevels"]),
+
+        /**
+         * Checks whether at least one template is available.
+         * @returns {Boolean} True if it is.
+         */
+        hasTemplates () {
+            return this.templates.length > 0;
+        },
+
+        /**
+         * Gets the current selected template.
+         * @returns {Object} The selected template.
+         */
+        selectedTemplate () {
+            return this.templates.find(template => template.meta.title === this.selectedTemplateName);
+        },
+
+        /**
+         * Gets the index of the selected template.
+         * @returns {Number} The index.
+         */
+        selectedTemplateIndex () {
+            return this.templates.findIndex(template => template.meta.title === this.selectedTemplateName);
+        },
+
+        /**
+         * Gets the titles of all templates.
+         * @returns {String[]} The titles.
+         */
+        templateTitles () {
+            return this.templates.map(template => template.meta.title);
+        }
     },
     watch: {
         /**
@@ -88,10 +123,12 @@ export default {
             }
 
             this.templates = templates;
+            this.selectedTemplateName = this.templates[0].meta.title;
         },
 
         createFilterObjects () {
             this.filters = this.templates.map(template => ({
+                name: template.meta.title,
                 activeLayerList: Object.fromEntries(this.getActiveLayerList(template).map(el => [el.id, true])),
                 selectedDistrictNames: Object.fromEntries(this.getSelectedDistricts(template).map(el => [el, true])),
                 statsCategories: Object.fromEntries(this.getStatsCategories(template).map(el => [el, true])),
@@ -99,10 +136,9 @@ export default {
             }));
         },
 
-        applyFilters (template, index) {
+        applyFilters (template, filter) {
             const
                 _template = JSON.parse(JSON.stringify(template)),
-                filter = this.filters[index],
                 activeLayerList = Object.keys(filter.activeLayerList).filter(key => filter.activeLayerList[key]),
                 selectedDistrictNames = Object.keys(filter.selectedDistrictNames).filter(key => filter.selectedDistrictNames[key]),
                 statsCategories = Object.keys(filter.statsCategories).filter(key => filter.statsCategories[key]),
@@ -127,7 +163,7 @@ export default {
         loadFromTemplate (template, index) {
             template.meta.isActive = true;
 
-            const _template = this.applyFilters(template, index),
+            const _template = this.applyFilters(template, this.filters[index]),
                 startingTool = template?.state?.Tools?.toolToOpen;
 
             if (this.useTemplatesForMapping) {
@@ -157,7 +193,7 @@ export default {
 
         getActiveLayerList (template) {
             return getItemsByAttributes({typ: "WFS"})
-                .filter(layer => (template.state?.Maps?.layerIds || []).includes(layer.id));
+                ?.filter(layer => (template.state?.Maps?.layerIds || []).includes(layer.id)) || [];
         },
 
         getActiveTool (template) {
@@ -167,21 +203,25 @@ export default {
         },
 
         getActiveDistrictLevel (template) {
-            const layerId = template.state.Tools?.DistrictSelector?.selectedDistrictLevelId;
+            const layerId = template?.state?.Tools?.DistrictSelector?.selectedDistrictLevelId;
 
-            return this.districtLevels.find(districtLevel => districtLevel.layerId === layerId)?.label;
+            return this.districtLevels?.find(districtLevel => districtLevel.layerId === layerId)?.label;
         },
 
         getSelectedDistricts (template) {
-            return template.state.Tools?.DistrictSelector?.selectedDistrictNames || [];
+            return template?.state?.Tools?.DistrictSelector?.selectedDistrictNames || [];
         },
 
         getStatsCategories (template) {
-            return template.state.Tools?.Dashboard?.statsFeatureFilter || [];
+            return template?.state?.Tools?.Dashboard?.statsFeatureFilter || [];
+        },
+
+        getInitTool (template) {
+            return template?.state?.Tools?.toolToOpen;
         },
 
         getCalculations (template) {
-            return template.state.Tools?.Dashboard?.calculations || [];
+            return template?.state?.Tools?.Dashboard?.calculations || [];
         },
 
         /**
@@ -191,6 +231,7 @@ export default {
          */
         addTemplate (template) {
             this.templates.push(template);
+            this.selectedTemplateName = template.meta.title;
         },
 
         /*
@@ -206,11 +247,13 @@ export default {
                 newMapping = [];
 
             sortedTemplates.forEach(template => {
-                const statsFeatures = template.state?.Tools?.Dashboard?.statsFeatureFilter,
-                    orientationValues = template.state?.Tools?.Dashboard?.orientationValues;
+                const filterForTemplate = this.filters.find(filter => filter.name === template.meta.title),
+                    _template = this.applyFilters(template, filterForTemplate),
+                    statsFeatures = _template.state?.Tools?.Dashboard?.statsFeatureFilter,
+                    orientationValues = _template.state?.Tools?.Dashboard?.orientationValues;
 
                 if (statsFeatures) {
-                    template.state.Tools.Dashboard.statsFeatureFilter.forEach(statName => {
+                    statsFeatures.forEach(statName => {
                         const mappingObject = initMapping.find(obj => obj.value === statName),
                             newMappingObject = {};
 
@@ -263,170 +306,187 @@ export default {
         :render-to-window="renderToWindow"
         :resizable-window="resizableWindow"
         :deactivate-gfi="deactivateGFI"
+        :initial-width="700"
     >
         <template
             v-if="active"
             #toolBody
         >
-            <v-app
+            <div
                 id="template-manager"
-                class="clamp-40vw"
+                class="container"
             >
                 <ToolInfo
                     :url="readmeUrl"
                     :locale="currentLocale"
                     :summary="$t('additional:modules.tools.cosi.templateManager.infoLoadFromTemplates')"
                 />
-                <div>
-                    <div class="mb-3">
-                        <span class="text-subtitle-2">
-                            {{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}
-                        </span>
-                        <TemplateManagerImport
-                            v-if="useImport"
-                            class="float-end"
-                            @addTemplate="addTemplate"
-                        />
-                    </div>
-                    <v-list dense>
-                        <v-list-group
-                            v-for="(template, i) in templates"
-                            :key="i"
-                            color="primary"
-                            :prepend-icon="template.meta.icon"
-                            no-action
-                        >
-                            <template #activator>
-                                <v-list-item-content>
-                                    <v-list-item-title>
-                                        {{ template.meta.title }}
-                                    </v-list-item-title>
-                                </v-list-item-content>
-                            </template>
-
-                            <v-list-item class="template">
-                                <v-list-item-content class="no-flex">
-                                    <v-row>
-                                        <v-simple-table
-                                            dense
-                                        >
-                                            <template #default>
-                                                <tbody>
-                                                    <tr>
-                                                        <th v-text="$t('additional:modules.tools.cosi.templateManager.created')" />
-                                                        <td v-text="template.meta.created" />
-                                                    </tr>
-                                                    <tr>
-                                                        <th v-text="$t('additional:modules.tools.cosi.templateManager.info')" />
-                                                        <td v-html="template.meta.info || $t('additional:modules.tools.cosi.templateManager.noInfo')" />
-                                                    </tr>
-                                                    <tr>
-                                                        <th v-text="$t('additional:modules.tools.cosi.templateManager.layers')" />
-                                                        <td>
-                                                            <v-chip
-                                                                v-for="layerMap in getActiveLayerList(template)"
-                                                                :key="template.meta.title + layerMap.id"
-                                                                class="ma-1"
-                                                                small
-                                                            >
-                                                                {{ layerMap.name }}
-                                                                <v-checkbox
-                                                                    v-model="filters[i].activeLayerList[layerMap.id]"
-                                                                    small
-                                                                />
-                                                            </v-chip>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="getActiveDistrictLevel(template)">
-                                                        <th>
-                                                            {{ $t("additional:modules.tools.cosi.templateManager.districtLevel") }}
-                                                        </th>
-                                                        <td>
-                                                            {{ getActiveDistrictLevel(template) }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="getSelectedDistricts(template).length > 0">
-                                                        <th>
-                                                            {{ $t("additional:modules.tools.cosi.templateManager.selectedDistricts") }}
-                                                        </th>
-                                                        <td>
-                                                            <v-chip
-                                                                v-for="districtName in getSelectedDistricts(template)"
-                                                                :key="template.meta.title + districtName"
-                                                                class="ma-1"
-                                                                small
-                                                            >
-                                                                {{ districtName }}
-                                                                <v-checkbox
-                                                                    v-model="filters[i].selectedDistrictNames[districtName]"
-                                                                    small
-                                                                />
-                                                            </v-chip>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="getStatsCategories(template).length > 0">
-                                                        <th v-text="$t('additional:modules.tools.cosi.templateManager.categories')" />
-                                                        <td>
-                                                            <v-chip
-                                                                v-for="category in getStatsCategories(template)"
-                                                                :key="template.meta.title + category"
-                                                                class="ma-1"
-                                                                small
-                                                            >
-                                                                {{ category }}
-                                                                <v-checkbox
-                                                                    v-model="filters[i].statsCategories[category]"
-                                                                    small
-                                                                />
-                                                            </v-chip>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="getCalculations(template).length > 0">
-                                                        <th v-text="$t('additional:modules.tools.cosi.templateManager.calculations')" />
-                                                        <td>
-                                                            <v-chip
-                                                                v-for="(calculation, j) in getCalculations(template)"
-                                                                :key="template.meta.title + 'calculation' + j"
-                                                                class="ma-1"
-                                                                small
-                                                            >
-                                                                {{ calculation.id }}
-                                                                <v-checkbox
-                                                                    v-model="filters[i].calculations[calculation.id]"
-                                                                    small
-                                                                />
-                                                            </v-chip>
-                                                        </td>
-                                                    </tr>
-                                                    <tr v-if="getActiveTool(template)">
-                                                        <th>
-                                                            {{ $t("additional:modules.tools.cosi.templateManager.activeTool") }}
-                                                        </th>
-                                                        <td>
-                                                            {{ getActiveTool(template) }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </template>
-                                        </v-simple-table>
-                                    </v-row>
-                                    <v-divider />
-                                    <v-row justify="end">
-                                        <v-col>
-                                            <button
-                                                class="btn btn-outline lh-1 fs-5 mb-3"
-                                                @click="loadFromTemplate(template, i)"
-                                            >
-                                                <i class="bi bi-upload pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}
-                                            </button>
-                                        </v-col>
-                                    </v-row>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-list-group>
-                    </v-list>
+                <TemplateManagerImport
+                    v-if="useImport"
+                    @addTemplate="addTemplate"
+                />
+                <label
+                    class="col col-md form-label p-0 m-0"
+                    for="select-template"
+                >
+                    {{ $t("additional:modules.tools.cosi.templateManager.label.selectTemplate") }}
+                </label>
+                <Multiselect
+                    v-if="hasTemplates"
+                    id="select-template"
+                    v-model="selectedTemplateName"
+                    class="mb-4"
+                    :options="templateTitles"
+                    :close-on-select="true"
+                    :show-labels="false"
+                    :allow-empty="true"
+                    :multiple="false"
+                    :placeholder="$t('additional:modules.tools.cosi.templateManager.label.selectTemplate')"
+                />
+                <div class="mb-4">
+                    <label for="selected-template-created">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.created") }}
+                    </label>
+                    <p id="selected-template-created">
+                        {{ selectedTemplate?.meta?.created || $t('additional:modules.tools.cosi.templateManager.noInfo') }}
+                    </p>
                 </div>
-            </v-app>
+                <div class="mb-4">
+                    <label for="selected-template-title">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.name") }}
+                    </label>
+                    <p id="selected-template-title">
+                        {{ selectedTemplate?.meta?.title || $t('additional:modules.tools.cosi.templateManager.noInfo') }}
+                    </p>
+                </div>
+                <div
+                    v-if="selectedTemplate?.meta?.info"
+                    class="mb-4"
+                >
+                    <label for="selected-template-description">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.description") }}
+                    </label>
+                    <p id="selected-template-description">
+                        {{ selectedTemplate?.meta?.info }}
+                    </p>
+                </div>
+                <div
+                    v-if="getActiveLayerList(selectedTemplate).length > 0"
+                    class="mb-4"
+                >
+                    <label for="selected-template-layer">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.layers") }}
+                    </label>
+                    <div id="selected-template-layer">
+                        <v-chip
+                            v-for="layerMap in getActiveLayerList(selectedTemplate)"
+                            :key="selectedTemplate.meta.title + layerMap.id"
+                            class="m-1"
+                            small
+                        >
+                            {{ layerMap.name }}
+                            <v-checkbox
+                                v-model="filters[selectedTemplateIndex].activeLayerList[layerMap.id]"
+                                small
+                            />
+                        </v-chip>
+                    </div>
+                </div>
+                <div
+                    v-if="getActiveDistrictLevel(selectedTemplate)"
+                    class="mb-4"
+                >
+                    <label for="selected-template-level">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.districtLevel") }}
+                    </label>
+                    <p id="selected-template-level">
+                        {{ getActiveDistrictLevel(selectedTemplate) }}
+                    </p>
+                </div>
+                <div
+                    v-if="getSelectedDistricts(selectedTemplate).length > 0"
+                    class="mb-4"
+                >
+                    <label for="selected-template-districts">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.selectedDistricts") }}
+                    </label>
+                    <div id="selected-template-districts">
+                        <v-chip
+                            v-for="districtName in getSelectedDistricts(selectedTemplate)"
+                            :key="selectedTemplate.meta.title + districtName"
+                            class="m-1"
+                            small
+                        >
+                            {{ districtName }}
+                            <v-checkbox
+                                v-model="filters[selectedTemplateIndex].selectedDistrictNames[districtName]"
+                                small
+                            />
+                        </v-chip>
+                    </div>
+                </div>
+                <div
+                    v-if="getStatsCategories(selectedTemplate).length > 0"
+                    class="mb-4"
+                >
+                    <label for="selected-template-statistics">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.categories") }}
+                    </label>
+                    <div id="selected-template-statistics">
+                        <v-chip
+                            v-for="category in getStatsCategories(selectedTemplate)"
+                            :key="selectedTemplate.meta.title + category"
+                            class="m-1"
+                            small
+                        >
+                            {{ category }}
+                            <v-checkbox
+                                v-model="filters[selectedTemplateIndex].statsCategories[category]"
+                                small
+                            />
+                        </v-chip>
+                    </div>
+                </div>
+                <div
+                    v-if="getInitTool(selectedTemplate)"
+                    class="mb-4"
+                >
+                    <label for="selected-template-tool">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.addTool") }}
+                    </label>
+                    <p id="selected-template-tool">
+                        {{ getInitTool(selectedTemplate) }}
+                    </p>
+                </div>
+                <div
+                    v-if="getCalculations(selectedTemplate).length > 0"
+                    class="mb-4"
+                >
+                    <label for="selected-template-calculations">
+                        {{ $t("additional:modules.tools.cosi.templateManager.label.calculations") }}
+                    </label>
+                    <div id="selected-template-calculations">
+                        <v-chip
+                            v-for="(calculation, j) in getCalculations(selectedTemplate)"
+                            :key="selectedTemplate.meta.title + 'calculation' + j"
+                            class="m-1"
+                            small
+                        >
+                            {{ calculation.id }}
+                            <v-checkbox
+                                v-model="filters[selectedTemplateIndex].calculations[calculation.id]"
+                                small
+                            />
+                        </v-chip>
+                    </div>
+                </div>
+                <button
+                    class="btn btn-outline lh-1 fs-5"
+                    @click="loadFromTemplate(selectedTemplate, selectedTemplateIndex)"
+                >
+                    <i class="bi bi-upload pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}
+                </button>
+            </div>
         </template>
     </Tool>
 </template>
@@ -437,6 +497,11 @@ export default {
     #template-manager {
         font-family: $font_family_default;
 
+        label {
+            color: $dark_grey;
+            font-family: $font_family_accent;
+        }
+
         .btn-outline {
             border-color: $light_blue;
             color: $light_blue;
@@ -446,19 +511,49 @@ export default {
             background-color: $light_blue;
             color: $white;
        }
+    }
+</style>
 
-       th {
-            font-family: $font_family_accent;
-       }
-    }
+<style lang="scss">
+    @import "~variables";
 
-    .info-table {
-        max-width: 640px;
-    }
-    .clamp-40vw .v-list-group--no-action >.v-list-group__items >.v-list-item.template {
-        padding-left: 0;
-    }
-    .no-flex {
-        display: block;
+    #template-manager {
+        .multiselect, .multiselect__input, .multiselect__single {
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .multiselect__option--selected.multiselect__option--highlight,
+        .multiselect__option--selected.multiselect__option--highlight:after,
+        .multiselect__option:after,
+        .multiselect__option--selected,
+        .multiselect__option--selected:after {
+            background: $light_blue;
+            color: $white;
+            font-weight: normal;
+        }
+
+        .multiselect__option--highlight,
+        .multiselect__option--highlight:after {
+            background: $light_grey;
+            color: $black;
+        }
+
+
+        .multiselect__select {
+            padding: 4px 8px 10px 8px;
+        }
+
+        .multiselect__tags {
+            border-radius: 0;
+        }
+
+        .multiselect__placeholder {
+            margin-bottom: 7px
+        }
+
+        .multiselect__option--selected {
+            font-family: $font_family_accent
+        }
     }
 </style>

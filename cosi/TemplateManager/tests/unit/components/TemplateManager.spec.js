@@ -48,6 +48,9 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                         TemplateManager: TemplateManagerStore,
                         DistrictSelector: {
                             namespaced: true,
+                            getters: {
+                                districtLevels: () => []
+                            },
                             mutations: {
                                 setMapping: stubSetMapping
                             }
@@ -71,6 +74,60 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                 uiStyle: () => true,
                 mobile: () => sinon.stub()
             }
+        });
+    });
+    describe("Computed Properties", () => {
+        const templates = [{
+            meta: {
+                title: "one"
+            }
+        },
+        {
+            meta: {
+                title: "two"
+            }
+        }];
+
+        it("should update 'hasTemplates' if 'templates' was changed", async () => {
+            const wrapper = factory.getMount();
+
+            expect(wrapper.vm.hasTemplates).to.be.false;
+            await wrapper.setData({
+                templates,
+                selectedTemplateName: "two"
+            });
+            expect(wrapper.vm.hasTemplates).to.be.true;
+        });
+
+        it("should update 'selectedTemplate' if 'selectedTemplateName' was changed", async () => {
+            const wrapper = factory.getMount();
+
+            await wrapper.setData({
+                templates,
+                selectedTemplateName: "two"
+            });
+            expect(wrapper.vm.selectedTemplate).to.deep.equal(wrapper.vm.templates[1]);
+        });
+
+        it("should update 'selectedTemplateIndex' if 'selectedTemplateName' was changed", async () => {
+            const wrapper = factory.getMount();
+
+            await wrapper.setData({
+                templates,
+                selectedTemplateName: "two"
+            });
+
+            expect(wrapper.vm.selectedTemplateIndex).to.be.equal(1);
+        });
+
+        it("should update 'templateTitles' if 'templates' was changed", async () => {
+            const wrapper = factory.getMount();
+
+            await wrapper.setData({
+                templates
+            });
+
+            expect(wrapper.vm.templateTitles).to.deep.equal(["one", "two"]);
         });
     });
 
@@ -121,16 +178,19 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                 }
             ];
 
-            it("should call 'setMapping' if this function is called", () => {
+            it("should call 'setMapping' if this function is called", async () => {
                 const wrapper = factory.getMount();
 
-                wrapper.vm.createMappingByTemplates(templates, mapping);
+                await wrapper.setData({
+                    templates
+                });
+                wrapper.vm.createMappingByTemplates(wrapper.vm.templates, mapping);
                 expect(stubSetMapping.calledOnce).to.be.true;
                 sinon.restore();
                 wrapper.destroy();
             });
 
-            it("should call 'setMapping' with the expected values", () => {
+            it("should call 'setMapping' with the expected values", async () => {
                 const wrapper = factory.getMount(),
                     expectedValues = [
                         {
@@ -163,13 +223,16 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                         }
                     ];
 
-                wrapper.vm.createMappingByTemplates(templates, mapping);
+                await wrapper.setData({
+                    templates
+                });
+                wrapper.vm.createMappingByTemplates(wrapper.vm.templates, mapping);
                 expect(stubSetMapping.calledWith({}, expectedValues)).to.be.true;
                 sinon.restore();
                 wrapper.destroy();
             });
 
-            it("should change the group of all stats in the mapping to the title of the template", () => {
+            it("should change the group of all stats in the mapping to the title of the template", async () => {
                 let newMapping = [],
                     mappingGroup = "";
 
@@ -186,7 +249,10 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                     ],
                     wrapper = factory.getMount();
 
-                wrapper.vm.createMappingByTemplates(templatesWithNoStats, mapping);
+                await wrapper.setData({
+                    templates: templatesWithNoStats
+                });
+                wrapper.vm.createMappingByTemplates(wrapper.vm.templates, mapping);
                 newMapping = stubSetMapping.getCall(0).args[1];
                 mappingGroup = newMapping.every(mappingObject => mappingObject.group === "Keine Stats to filter");
                 expect(mappingGroup).to.be.true;
@@ -194,7 +260,7 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                 wrapper.destroy();
             });
 
-            it("should call 'setMapping' with the correct values including orientation values", () => {
+            it("should call 'setMapping' with the correct values including orientation values", async () => {
                 const templatesWithOrientationValues = [
                         {
                             meta: {
@@ -245,7 +311,10 @@ describe("addons/cosi/TemplateManager/components/TemplateManager.vue", () => {
                         }
                     ];
 
-                wrapper.vm.createMappingByTemplates(templatesWithOrientationValues, mapping);
+                await wrapper.setData({
+                    templates: templatesWithOrientationValues
+                });
+                wrapper.vm.createMappingByTemplates(wrapper.vm.templates, mapping);
                 expect(stubSetMapping.calledWith({}, expectedValues)).to.be.true;
                 sinon.restore();
                 wrapper.destroy();

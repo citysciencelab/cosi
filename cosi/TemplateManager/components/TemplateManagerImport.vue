@@ -126,6 +126,10 @@ export default {
             background-color: $light_blue;
             color: $white;
        }
+
+       form {
+            height: 0;
+       }
     }
 
 </style>
