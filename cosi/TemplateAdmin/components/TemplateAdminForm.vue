@@ -2,12 +2,14 @@
 import Multiselect from "vue-multiselect";
 import TemplateAdminFormCard from "./TemplateAdminFormCard.vue";
 import dayjs from "dayjs";
+import Draggable from "vuedraggable";
 
 export default {
     name: "TemplateAdminForm",
     components: {
         Multiselect,
-        TemplateAdminFormCard
+        TemplateAdminFormCard,
+        Draggable
     },
     props: {
         geoData: {
@@ -394,33 +396,34 @@ export default {
             >
                 {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
             </span>
-            <div
-                class="row mb-1 g-0"
+            <Draggable
+                v-model="selectedStatData"
+                class="mt-3"
+                handle=".handle"
             >
                 <TemplateAdminFormCard
                     v-for="(statDataObj, idx) in selectedStatData"
                     :key="idx"
                     :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
-                    class="col-sm-12"
                     :title="statDataObj.label"
                     :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
                     unit="%"
                     @removeCard="removeStatData(statDataObj.propertyName)"
                     @setReferenceValueList="setReferenceValueList"
                 />
-                <div
-                    v-if="countSelectedStatistics"
-                    class="col align-self-end p-0"
+            </Draggable>
+            <div
+                v-if="countSelectedStatistics"
+                class="align-self-end p-0"
+            >
+                <button
+                    id="more-button"
+                    type="button"
+                    class="btn btn-link btn-sm pt-1"
+                    @click="limitReferenceValues = !limitReferenceValues"
                 >
-                    <button
-                        id="more-button"
-                        type="button"
-                        class="col col-md-auto btn btn-link btn-sm pt-0"
-                        @click="limitReferenceValues = !limitReferenceValues"
-                    >
-                        {{ limitReferenceValues ? $t("additional:modules.tools.cosi.templateAdmin.button.showMore") : $t("additional:modules.tools.cosi.templateAdmin.button.showLess") }}
-                    </button>
-                </div>
+                    {{ limitReferenceValues ? $t("additional:modules.tools.cosi.templateAdmin.button.showMore") : $t("additional:modules.tools.cosi.templateAdmin.button.showLess") }}
+                </button>
             </div>
         </div>
         <label

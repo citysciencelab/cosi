@@ -57,44 +57,53 @@ export default {
 </script>
 
 <template lang="html">
-    <div>
-        <div
-            class="card"
-        >
-            <button
-                class="close-button shadow-none p-0 align-self-end"
-                aria-label="Close"
-                @click.prevent="$emit('removeCard')"
-            >
-                <i class="bi bi-x pt-1" />
-            </button>
-            <div
-                class="card-body pt-0 pe-1 ps-2"
-            >
-                <h5 class="card-title p-0">
-                    {{ title }}
-                </h5>
-                <div class="card-text p-0">
-                    <label
-                        for="referenceValue"
-                        class="pb-1 px-0"
-                    > {{ label }} </label>
-                    <div class="input-group input-group-sm w-50">
-                        <input
-                            id="referenceValue"
-                            v-model.trim="referenceValue"
-                            type="text"
-                            class="form-control border-end-0"
-                            maxlength="6"
-                            @change="emitSetReferenceValue"
-                            @keypress="checkNumber($event)"
-                        >
-                        <span
-                            v-if="unit"
-                            class="input-group-text"
-                        >
-                            {{ unit }}
-                        </span>
+    <div
+        class="card mb-3"
+    >
+        <div class="row g-0">
+            <div class="col-md-1 pe-0">
+                <button
+                    class="btn drag-and-drop shadow-none ps-0 pe-0 pt-3 align-items-center handle"
+                    type="button"
+                    @click.prevent=""
+                >
+                    <i class="bi bi-grip-vertical mt-1" />
+                </button>
+            </div>
+            <div class="col-md-10">
+                <button
+                    class="close-button shadow-none"
+                    aria-label="Close"
+                    @click.prevent="$emit('removeCard')"
+                >
+                    <i class="bi bi-x align-middle" />
+                </button>
+                <div class="card-body ps-2 pe-2 pb-0 pt-3">
+                    <h5 class="card-title">
+                        {{ title }}
+                    </h5>
+                    <div class="card-text row align-items-center">
+                        <label
+                            for="referenceValue"
+                            class=""
+                        > {{ label }} </label>
+                        <div class="col col-md-3 input-group input-group-sm pb-3 px-0">
+                            <input
+                                id="referenceValue"
+                                v-model.trim="referenceValue"
+                                type="text"
+                                class="form-control border-end-0 pb-0"
+                                maxlength="6"
+                                @change="emitSetReferenceValue"
+                                @keypress="checkNumber($event)"
+                            >
+                            <span
+                                v-if="unit"
+                                class="input-group-text"
+                            >
+                                {{ unit }}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,13 +115,19 @@ export default {
 @import "~variables";
 
 .card {
-    height: 100%;
-    border-left: 5px solid #ced4da;
+    max-width: 100%;
       &:hover {
         border-color: $light_blue;
         .card-title {
            color: $light_blue;
-    }
+        }
+        .drag-and-drop {
+            background-color: $light_blue;
+            border-right: 1px solid $light_blue;
+            i {
+                color: $white;
+            }
+        }
     }
     .card-title {
         font-size: 12px;
@@ -127,11 +142,24 @@ export default {
         border-left: none;
     }
 
-    .close-button i {
-        font-size: 15px;
+    .close-button {
+        position: absolute;
+        right: 0;
+        i {
+            font-size: 14px;
+        }
         &:hover {
             background-color: $light_blue;
             color: $white;
+        }
+    }
+    .drag-and-drop {
+        background-color: #F3F3F3;
+        height: 100%;
+        border-right: 1px solid rgba(0,0,0,.125);
+        i {
+            font-size: 30px;
+            color: #C2C2C2;
         }
     }
 }

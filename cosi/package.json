@@ -33,6 +33,7 @@
     "vue-inline-svg": "^2.1.0",
     "vue-json-excel": "^0.3.0",
     "vuetify": "^2.5.1",
+    "vuedraggable": "^2.24.3",
     "xlsx": "^0.16.9"
   }
 }
