@@ -150,10 +150,11 @@ export default {
 
         /**
          * @description Watches Layer visiblity changes to determine whether the addtional info layers are active
+         * @param {module:ol/layer[]} layerList - An array of visible layers.
          * @returns {void}
          */
-        getVisibleLayerList () {
-            this.checkAdditionalLayers();
+        getVisibleLayerList (layerList) {
+            this.checkAdditionalLayers(layerList);
         },
 
         /**
@@ -447,20 +448,21 @@ export default {
         /**
          * @description Checks if the additional info layers are visible on mounted.
          * @todo Refactor to vue when MP Core is updated
+         * @param {module:ol/layer[]} layerList - An array of visible layers.
          * @returns {boolean} the state of at least one of the addtional layers
          */
-        checkAdditionalLayers () {
+        checkAdditionalLayers (layerList) {
             let state, states, oldState, newState;
 
             for (const key in this.additionalInfoLayers) {
                 states = [];
 
                 for (const layerId of this.additionalInfoLayers[key]) {
-                    state = getModelByAttributes({id: layerId})?.get("isSelected");
+                    state = layerList.some(layer => typeof layer?.get === "function" && layer.get("id") === layerId);
                     states = states.includes(state) ? states : [...states, state];
                 }
 
-                if (states.length === 1) {
+                if (states.length === 1 || states.includes(true)) {
                     oldState = this.visibleInfoLayers.includes(key);
                     newState = states[0];
                     if (newState && !oldState) {
@@ -469,6 +471,9 @@ export default {
                     else if (!newState && oldState) {
                         this.visibleInfoLayers = this.visibleInfoLayers.filter(e => e !== key);
                     }
+                }
+                else {
+                    this.visibleInfoLayers = [];
                 }
             }
         },
