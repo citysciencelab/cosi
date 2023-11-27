@@ -72,7 +72,7 @@ export default {
                 return;
             }
 
-            if (Array.isArray(this.importedFileNames) && this.importedFileNames.includes(template?.meta?.title)) {
+            if (Array.isArray(this.importedTemplateNames) && this.importedTemplateNames.includes(template?.meta?.title)) {
                 this.addSingleAlert({
                     content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.templateName")} ${template?.meta?.title} ${this.$t("additional:modules.tools.cosi.templateManager.errors.isLoaded")}`,
                     category: "Warning",
@@ -81,7 +81,7 @@ export default {
 
                 return;
             }
-            this.importedFileNames.push(template?.meta?.title);
+            this.importedTemplateNames.push(template?.meta?.title);
 
             this.$emit("addTemplate", template);
         }

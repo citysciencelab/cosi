@@ -19,7 +19,9 @@ const state = {
     resizableWindow: true,
     isVisibleInMenu: true,
     deactivateGFI: true,
-    ignorePropertyNames: []
+    ignorePropertyNames: [],
+    importedTemplateNames: [],
+    savedTemplateContents: []
 };
 
 export default state;

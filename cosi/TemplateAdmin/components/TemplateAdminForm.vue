@@ -1,9 +1,10 @@
 <script>
 import Multiselect from "vue-multiselect";
 import TemplateAdminFormCard from "./TemplateAdminFormCard.vue";
+import getters from "../store/gettersTemplateAdmin";
 import dayjs from "dayjs";
 import Draggable from "vuedraggable";
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import isObject from "../../../../src/utils/isObject";
 
 export default {
@@ -51,17 +52,36 @@ export default {
         };
     },
     computed: {
+        ...mapGetters("Tools/TemplateAdmin", Object.keys(getters)),
+
         /**
          * Returns true or false, depending on the number of statistics.
          * @returns {Boolean} True if the number of statistics are more than two.
          */
         countSelectedStatistics () {
             return this.selectedStatData.length > 2;
+        },
+        uploadedTemplates () {
+            return this.importedTemplateNames;
         }
     },
     methods: {
         ...mapActions("Alerting", ["addSingleAlert"]),
 
+        /**
+         * Changes the selected template.
+         * @param {String} id - the index of the saved template.
+         * @returns {void}
+         */
+        changeSelectedTemplate (id) {
+            if (!Array.isArray(this.savedTemplateContents) ||
+                typeof id !== "string" ||
+                !isObject(this.savedTemplateContents[id])) {
+                return;
+            }
+
+            this.loadingTemplate(this.savedTemplateContents[id]);
+        },
         /**
          * Removes the geo data by the given layerId.
          * @param {String} layerId The layerId.
@@ -221,7 +241,7 @@ export default {
 
         /**
          * Importing the template from local storage.
-         * @param {Event} evt - An input change event.
+         * @param {Event} evt - An input change event
          * @returns {void}
          */
         importTemplate (evt) {
@@ -229,33 +249,100 @@ export default {
                 return;
             }
 
-            if (Object.keys(evt?.target?.files).length === 1) {
-                this.parseTemplate(evt.target.files[0]);
-            }
+            this.prepareTemplate(evt?.target?.files);
+            this.$refs.form.reset();
         },
 
         /**
-         * Parsing the template from imported file
-         * @param {Object} file - the imported file
+         * Prepares the template.
+         * @param {Object} files - The imported files.
          * @returns {void}
          */
-        parseTemplate (file) {
-            const reader = new FileReader();
+        prepareTemplate (files) {
+            if (!(files instanceof FileList) || Object.values(files).length === 0) {
+                return;
+            }
+
+            Object.values(files).forEach(file => {
+                this.handleFile(file);
+            });
+        },
+
+        /**
+         * Handles the given file and loads the template with its content.
+         * @param {Object} file - The given file
+         * @returns {void|undefined} returns undefined, if the given file is not correct
+         */
+        handleFile (file) {
+            if (!(file instanceof File)) {
+                return;
+            }
+
+            const fileName = file?.name ? file.name : "",
+                fileType = fileName !== "" ? fileName.substring(fileName.length - 4, fileName.length) : "undefined",
+                reader = new FileReader();
+
+            if (fileName === "") {
+                console.warn("The file is corrupt.");
+                return;
+            }
+            if (fileType !== "json") {
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateAdmin.errors.wrongFormat")}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+                return;
+            }
+
+            reader.readAsText(file);
+            reader.onload = (res) => {
+                const fileContent = this.parseResult(res);
+
+                if (fileContent !== null) {
+                    this.loadingTemplate(fileContent);
+                    this.addTemplate(fileContent);
+                }
+            };
+            reader.onerror = (err) => console.error(err);
+        },
+
+        /**
+         * Parses the given object.
+         * @param {Object} res - The given content of the file
+         * @returns {String|null} - returns the file content as string or null
+         */
+        parseResult (res) {
             let fileContent = null;
 
-            reader.onload = this.parseFileContent;
-            reader.readAsText(file);
+            try {
+                fileContent = JSON.parse(res?.target?.result);
+            }
+            catch (error) {
+                console.warn("jsonParse failed: could not parse\"" + res?.target?.result + "\" to JSON: " + error);
+            }
 
-            if (file.name.includes(".json")) {
-                reader.onload = (res) => {
-                    fileContent = JSON.parse(res.target.result);
-                    this.loadingTemplate(fileContent);
-                };
-                reader.onerror = (err) => console.error(err);
+            return fileContent;
+        },
+
+        /**
+         * Adds the name of the imported template and saves the content of the uploaded file.
+         * @param {String} fileContent - The content of the uploaded file
+         * @returns {void}
+         */
+        addTemplate (fileContent) {
+            if (typeof this.getTemplateText(fileContent.meta?.title) !== "string" ||
+                this.getTemplateText(fileContent.meta?.title).length === 0) {
+                return;
+            }
+
+            if (!this.importedTemplateNames.includes(this.getTemplateText(fileContent.meta?.title))) {
+                this.importedTemplateNames.push(this.getTemplateText(fileContent.meta?.title));
+                this.savedTemplateContents[this.getTemplateText(fileContent.meta?.title)] = fileContent;
             }
             else {
                 this.addSingleAlert({
-                    content: `${this.$t("additional:modules.tools.cosi.templateAdmin.errors.wrongFormat")}`,
+                    content: `${this.$t("additional:modules.tools.cosi.templateAdmin.errors.templateName")} ${fileContent.meta?.title} ${this.$t("additional:modules.tools.cosi.templateAdmin.errors.isLoaded")}`,
                     category: "Warning",
                     displayClass: "warning"
                 });
@@ -271,7 +358,7 @@ export default {
             if (!isObject(content)) {
                 return;
             }
-
+            this.selectedTemplate = this.getTemplateText(content.meta?.title);
             this.templateName = this.getTemplateText(content.meta?.title);
             this.templateDes = this.getTemplateText(content.meta?.info);
             this.selectedGeoData = this.getSelectedGeoData(content.state?.Maps?.layerIds);
@@ -385,16 +472,18 @@ export default {
                 <i class="bi bi-upload pe-2" />
                 {{ $t("additional:modules.tools.cosi.templateAdmin.button.uploadTemplate") }}
             </button>
-            <label for="template-import">
-                <input
-                    id="template-import"
-                    ref="templateImport"
-                    type="file"
-                    multiple
-                    class="d-none"
-                    @change="importTemplate"
-                >
-            </label>
+            <form ref="form">
+                <label for="template-import">
+                    <input
+                        id="template-import"
+                        ref="templateImport"
+                        type="file"
+                        multiple
+                        class="d-none"
+                        @change="importTemplate"
+                    >
+                </label>
+            </form>
             <label
                 class="col col-md form-label ps-0 pb-0 pt-4 m-0"
                 for="select-template"
@@ -404,12 +493,13 @@ export default {
             <Multiselect
                 id="select-template"
                 v-model="selectedTemplate"
-                :options="[]"
+                :options="uploadedTemplates"
                 :close-on-select="true"
                 :show-labels="false"
                 :allow-empty="true"
                 :multiple="false"
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+                @input="changeSelectedTemplate"
             />
         </div>
         <div class="my-3">

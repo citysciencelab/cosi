@@ -24,7 +24,9 @@
             "existingAreas": "Bestehende Gebiete mit SozErhVO"
           },
           "errors": {
-            "wrongFormat": "Die Datei hat nicht das richtige Format."
+            "wrongFormat": "Die Datei hat nicht das richtige Format.",
+            "templateName": "Eine Vorlage mit dem Namen: ",
+            "isLoaded": "ist bereits geladen."
           },
           "required": "Pflichtfelder",
           "hint": "Dies ist ein Pflichtfeld."

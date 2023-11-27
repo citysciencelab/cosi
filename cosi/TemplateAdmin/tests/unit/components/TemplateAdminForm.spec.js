@@ -644,5 +644,58 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                 wrapper.destroy();
             });
         });
+        describe("handleFile", () => {
+            it("should return undefined, if the given file is not a File", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                    propsData: {
+                        geoData,
+                        statData,
+                        showEditTemplate: true
+                    },
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.handleFile(null)).to.be.undefined;
+                expect(wrapper.vm.handleFile(0)).to.be.undefined;
+                expect(wrapper.vm.handleFile(true)).to.be.undefined;
+                expect(wrapper.vm.handleFile(undefined)).to.be.undefined;
+                expect(wrapper.vm.handleFile({})).to.be.undefined;
+                expect(wrapper.vm.handleFile([])).to.be.undefined;
+                expect(wrapper.vm.handleFile("")).to.be.undefined;
+
+                wrapper.destroy();
+            });
+            it("should return undefined, if the file format is not json", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    }),
+                    file = new File([""], "test.js");
+
+                expect(wrapper.vm.handleFile(file)).to.be.undefined;
+                wrapper.destroy();
+            });
+            it("should return undefined, if the file name doesn't exist", () => {
+                const wrapper = shallowMount(TemplateAdminForm, {
+                        propsData: {
+                            geoData,
+                            statData,
+                            showEditTemplate: true
+                        },
+                        localVue,
+                        store
+                    }),
+                    file = new File([""], "");
+
+                expect(wrapper.vm.handleFile(file)).to.be.undefined;
+                wrapper.destroy();
+            });
+        });
     });
 });

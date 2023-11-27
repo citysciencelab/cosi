@@ -24,7 +24,9 @@
             "existingAreas": "existing areas with SozErhVO"
           },
           "errors": {
-            "wrongFormat": "The file is not in the correct format."
+            "wrongFormat": "The file is not in the correct format.",
+            "templateName": "A template with the name: ",
+            "isLoaded": "is already loaded."
           },
           "required": "Required",
           "hint": "This is a required field."
