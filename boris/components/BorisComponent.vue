@@ -137,14 +137,8 @@ export default {
             }
         },
         selectedLayerName () {
-            this.setBuildingDesigns([
-                "eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)",
-                "rm Reihenmittelhaus", "rm Reihenmittelhäuser", "re Reihenendhaus", "g geschlossene Bauweise",
-                "a abweichende Bauweise (Gartenhofhaus)"]);
-            this.setPositionsToStreet([
-                "F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück",
-                "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"
-            ]);
+            this.setBuildingDesigns(this.buildingDesigns);
+            this.setPositionsToStreet(this.positionsToStreet);
         }
     },
     created () {

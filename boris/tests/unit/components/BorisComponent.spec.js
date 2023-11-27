@@ -262,6 +262,19 @@ describe("ADDONS: addons/boris/components/BorisComponent.vue", () => {
             expect(Boris.actions.sendWpsConvertRequest.calledOnce).to.equal(true);
 
         });
+        it("handle option change: handlePositionToStreetOptionChange", () => {
+            const event = {target: {value: store.state.Tools.BorisComponent.positionsToStreet[1]}, get: () => "value"},
+                subject = "zStrassenLage";
+
+            store.state.Tools.BorisComponent.active = true;
+            wrapper = shallowMount(BorisComponent, {store, localVue});
+            wrapper.vm.handlePositionToStreetOptionChange(event, subject);
+
+            expect(store.state.Tools.BorisComponent.selectedPositionToStreet).to.equal(store.state.Tools.BorisComponent.positionsToStreet[1]);
+            expect(Boris.actions.updateSelectedBrwFeature.calledOnce).to.equal(true);
+            expect(Boris.actions.sendWpsConvertRequest.calledOnce).to.equal(true);
+
+        });
         it("handleInputChange", () => {
             const event = {type: "change", key: "Enter", currentTarget: {value: "12,34"}},
                 subject = "345";
