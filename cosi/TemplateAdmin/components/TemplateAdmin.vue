@@ -105,7 +105,7 @@ export default {
          * Gets a list of objects with mapped propertyNames and labels.
          * @param {Array<String[]>} propertyNamesOfEachLayer List of property name lists for each layer.
          * @param {Object[]} mappingList The list of objects to use for mapping.
-         * @returns {Object[]} A list of objects with following format: {propertyName: x, label: y}
+         * @returns {Object[]} A list of objects with following format: {propertyName: x, label: y, valueType: z}
          */
         getMappedLabelByValue (propertyNamesOfEachLayer, mappingList) {
             if (!Array.isArray(propertyNamesOfEachLayer) || !Array.isArray(mappingList)) {
@@ -121,10 +121,10 @@ export default {
                     const foundObject = mappingList.find(mappingObject => mappingObject?.category === property);
 
                     if (!isObject(foundObject) || !Object.prototype.hasOwnProperty.call(foundObject, "value")) {
-                        result.push({propertyName: property, label: property});
+                        result.push({propertyName: property, label: property, valueType: foundObject?.valueType || false});
                         return;
                     }
-                    result.push({propertyName: property, label: foundObject.value});
+                    result.push({propertyName: property, label: foundObject.value, valueType: foundObject.valueType || false});
                 });
             });
 

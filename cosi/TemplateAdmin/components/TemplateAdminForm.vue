@@ -357,6 +357,14 @@ export default {
             }
 
             return referenceValueList.find(data => data?.statisticName === name)?.value;
+        },
+        /**
+         * Returns the unit or false depending on valueType.
+         * @param {String} valueType - the value type ("relative", "absolute" or false) of the selected statistics.
+         * @returns {String|Boolean} the unit if the valueType is "relative" otherwise false.
+         */
+        showUnit (valueType) {
+            return valueType === "relative" ? "%" : false;
         }
     }
 };
@@ -563,7 +571,7 @@ export default {
                     :title="statDataObj.label"
                     :imported-reference-value="getImportedReferenceValue(statDataObj.label, importedReferenceValueList)"
                     :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
-                    unit="%"
+                    :unit="showUnit(statDataObj.valueType)"
                     @removeCard="removeStatData(statDataObj.propertyName)"
                     @setReferenceValueList="setReferenceValueList"
                 />

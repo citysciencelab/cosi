@@ -2,7 +2,7 @@
   {
     "category": "bev_insgesamt",
     "value": "Bevölkerung insgesamt",
-    "group": "Bevölkerung",    
+    "group": "Bevölkerung",
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
@@ -11,7 +11,7 @@
   {
     "category": "bev_weiblich",
     "value": "Bevölkerung weiblich",
-    "group": "Bevölkerung",    
+    "group": "Bevölkerung",
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
@@ -20,7 +20,7 @@
   {
     "category": "bev_maennlich",
     "value": "Bevölkerung männlich",
-    "group": "Bevölkerung",    
+    "group": "Bevölkerung",
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
@@ -53,7 +53,7 @@
     "stadtteil": "11223344",
     "bezirk": "1122334455",
     "summable": true,
-    "valueType": "absolute"
+    "valueType": "relative"
   },
   {
     "category": "bev_ab80",
@@ -126,7 +126,7 @@
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
-    "valueType": "absolute"
+    "valueType": "relative"
   },
   {
     "category": "bev_u65",
@@ -1065,7 +1065,7 @@
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
-    "valueType": "absolute"
+    "valueType": "relative"
   },
   {
     "category": "wohn_ant_sozwohn_mit_bindungauslauf_an_allen_sozwohn",
@@ -1074,7 +1074,7 @@
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
-    "valueType": "absolute"
+    "valueType": "relative"
   },
   {
     "category": "wohn_avg_immobiliengrundstueckspreis_euro_pro_qm",
@@ -1206,7 +1206,7 @@
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
-    "valueType": "absolute"
+    "valueType": "relative"
   },
   {
     "category": "inf_schueler_in_gymn_an_allen_sekundarstufe_1_proz",
@@ -1215,7 +1215,7 @@
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
     "bezirk": "1122334455",
-    "valueType": "absolute"
+    "valueType": "relative"
   },
   {
     "category": "inf_niedergelassene_aerzte_anz",

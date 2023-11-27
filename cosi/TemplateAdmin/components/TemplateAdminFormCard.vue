@@ -100,7 +100,10 @@ export default {
                             for="referenceValue"
                             class=""
                         > {{ label }} </label>
-                        <div class="col col-md-3 input-group input-group-sm pb-3 px-0">
+                        <div
+                            v-if="unit"
+                            class="col col-md-3 input-group input-group-sm pb-3 px-0"
+                        >
                             <input
                                 id="referenceValue"
                                 v-model.trim="referenceValue"
@@ -111,11 +114,24 @@ export default {
                                 @keypress="checkNumber($event)"
                             >
                             <span
-                                v-if="unit"
                                 class="input-group-text"
                             >
                                 {{ unit }}
                             </span>
+                        </div>
+                        <div
+                            v-else
+                            class="col col-md-3 pb-3 px-0"
+                        >
+                            <input
+                                id="referenceValue"
+                                v-model.trim="referenceValue"
+                                type="text"
+                                class="form-control pb-0"
+                                maxlength="6"
+                                @change="emitSetReferenceValue"
+                                @keypress="checkNumber($event)"
+                            >
                         </div>
                     </div>
                 </div>

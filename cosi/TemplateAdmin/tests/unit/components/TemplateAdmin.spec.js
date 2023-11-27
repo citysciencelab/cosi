@@ -222,8 +222,8 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
             it("should return array of objects with propertyName as value of the first param and as label the value property of second param", () => {
                 const wrapper = shallowMount(TemplateAdmin, {store, localVue}),
                     expected = [
-                        {propertyName: "bar", label: "BAR"},
-                        {propertyName: "foo", label: "FOO"}
+                        {propertyName: "bar", label: "BAR", valueType: false},
+                        {propertyName: "foo", label: "FOO", valueType: false}
                     ],
                     mappingList = [
                         {
@@ -243,9 +243,9 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
             it("should return array of objects with propertyName as value of the first param and as label the value property of second param for two nested lists", () => {
                 const wrapper = shallowMount(TemplateAdmin, {store, localVue}),
                     expected = [
-                        {propertyName: "bar", label: "BAR"},
-                        {propertyName: "foo", label: "FOO"},
-                        {propertyName: "fow", label: "FOW"}
+                        {propertyName: "bar", label: "BAR", valueType: false},
+                        {propertyName: "foo", label: "FOO", valueType: false},
+                        {propertyName: "fow", label: "FOW", valueType: false}
                     ],
                     mappingList = [
                         {
@@ -266,12 +266,36 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                 expect(wrapper.vm.getMappedLabelByValue(filteredList, mappingList)).to.deep.equal(expected);
                 wrapper.destroy();
             });
+            it("should return array of objects if valueType is given", () => {
+                const wrapper = shallowMount(TemplateAdmin, {store, localVue}),
+                    expected = [
+                        {propertyName: "bar", label: "BAR", valueType: "absolute"},
+                        {propertyName: "foo", label: "FOO", valueType: "relative"},
+                        {propertyName: "fow", label: "fow", valueType: false}
+                    ],
+                    mappingList = [
+                        {
+                            category: "foo",
+                            value: "FOO",
+                            valueType: "relative"
+                        },
+                        {
+                            category: "bar",
+                            value: "BAR",
+                            valueType: "absolute"
+                        }
+                    ],
+                    filteredList = [["foo", "bar", "fow"]];
+
+                expect(wrapper.vm.getMappedLabelByValue(filteredList, mappingList)).to.deep.equal(expected);
+                wrapper.destroy();
+            });
             it("should return an array of objects with value from first array as propertyName and as label if not exists in second param", () => {
                 const wrapper = shallowMount(TemplateAdmin, {store, localVue}),
                     expected = [
-                        {propertyName: "bar", label: "BAR"},
-                        {propertyName: "foo", label: "FOO"},
-                        {propertyName: "fow", label: "fow"}
+                        {propertyName: "bar", label: "BAR", valueType: false},
+                        {propertyName: "foo", label: "FOO", valueType: false},
+                        {propertyName: "fow", label: "fow", valueType: false}
                     ],
                     mappingList = [
                         {

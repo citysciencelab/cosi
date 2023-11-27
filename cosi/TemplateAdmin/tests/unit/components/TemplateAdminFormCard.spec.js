@@ -56,7 +56,7 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminFormCard.vue", () =>
             expect(wrapper.find(".close-button").exists()).to.be.true;
             wrapper.destroy();
         });
-        it("should render input field", () => {
+        it("should render input group", () => {
             const wrapper = shallowMount(TemplateAdminFormCard, {
                 propsData: {
                     title: "Card Title",
@@ -67,7 +67,21 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminFormCard.vue", () =>
                 store
             });
 
-            expect(wrapper.find("#referenceValue").exists()).to.be.true;
+            expect(wrapper.find(".input-group").exists()).to.be.true;
+            wrapper.destroy();
+        });
+        it("should not render input group if unit is false", () => {
+            const wrapper = shallowMount(TemplateAdminFormCard, {
+                propsData: {
+                    title: "Card Title",
+                    label: "Label",
+                    unit: false
+                },
+                localVue,
+                store
+            });
+
+            expect(wrapper.find(".input-group").exists()).to.be.false;
             wrapper.destroy();
         });
     });
