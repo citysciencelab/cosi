@@ -31,6 +31,10 @@ export default {
         tooltipOffset: {
             type: Number,
             default: 0
+        },
+        items: {
+            type: Array,
+            required: true
         }
     },
     methods: {
@@ -56,7 +60,7 @@ export default {
                 v-on="on"
             >
                 <StatsTrend
-                    v-if="getValue(item, header, currentTimestamp) !== '-'"
+                    v-if="getValue(item, header, currentTimestamp, items) !== '-'"
                     :item="item"
                     :header="header"
                     :current-timestamp="currentTimestamp"
@@ -74,7 +78,7 @@ export default {
                                 :title="getValueTooltip(item, header, year)"
                                 :class="getValueClass(item, header, year)"
                             >
-                                {{ getValue(item, header, year) }}
+                                {{ getValue(item, header, year, items) }}
                             </span>
                         </li>
                     </ul>
@@ -84,7 +88,7 @@ export default {
                         :title="getValueTooltip(item, header, currentTimestamp)"
                         :class="getValueClass(item, header, currentTimestamp)"
                     >
-                        {{ getValue(item, header, currentTimestamp) }}
+                        {{ getValue(item, header, currentTimestamp, items) }}
                     </span>
                 </template>
             </div>

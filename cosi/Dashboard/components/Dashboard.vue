@@ -862,6 +862,7 @@ export default {
                                         :timestamp-prefix="timestampPrefix"
                                         :current-locale="currentLocale"
                                         :tooltip-offset="toolOffset"
+                                        :items="items"
                                     />
                                 </template>
 

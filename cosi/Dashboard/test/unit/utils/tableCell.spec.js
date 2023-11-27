@@ -10,6 +10,28 @@ describe("Dashboard/utils/tableCells", () => {
             "39003": {
                 "undefined2020": "2266",
                 "isModified": 2020
+            },
+            "49004": {
+                "undefined2020": "10"
+            },
+            "category": "one"
+        },
+        itemTwo = {
+            "49004": {
+                "undefined2020": "150"
+            },
+            "category": "two"
+        },
+        itemThree = {
+            "49004": {
+                "undefined2012": "150"
+            },
+            "valueType": "relative",
+            "calculation": {
+                "operation": "divide",
+                "category_A": "one",
+                "category_B": "two",
+                "modifier": 100
             }
         },
         header = {value: "39003"},
@@ -21,8 +43,22 @@ describe("Dashboard/utils/tableCells", () => {
             expect(getValue({}, {})).to.be.equal("-");
             expect(getValue({}, {}, "")).to.be.equal("-");
         });
+
+        it("should return default '-' if no object is given", () => {
+            expect(getValue([])).to.be.equal("-");
+            expect(getValue(true)).to.be.equal("-");
+            expect(getValue(666)).to.be.equal("-");
+            expect(getValue("666")).to.be.equal("-");
+            expect(getValue(undefined)).to.be.equal("-");
+            expect(getValue(null)).to.be.equal("-");
+        });
+
         it("should return the parsed value", () => {
             expect(getValue.call({currentLocale: "de-DE"}, item, header, timestamp)).to.be.equal("2.266");
+        });
+
+        it("should return the calculated value", () => {
+            expect(getValue(itemThree, {value: "49004"}, timestamp, [item, itemTwo, itemThree])).to.be.equal("6,67");
         });
     });
 
