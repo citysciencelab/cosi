@@ -146,8 +146,8 @@ describe("addons/StatisticDashboard.vue", () => {
         });
     });
 
-    describe.skip("watchers", () => {
-        it("should call 'checkFilterSettings' if selectedReferenceData is changed", async () => {
+    describe("watchers", () => {
+        it("should not call 'checkFilterSettings' if selectedReferenceData is changed", async () => {
             const wrapper = shallowMount(StatisticDashboard, {
                     localVue,
                     store
@@ -156,8 +156,77 @@ describe("addons/StatisticDashboard.vue", () => {
 
             store.commit("Tools/StatisticDashboard/setSelectedReferenceData", "foo");
             await wrapper.vm.$nextTick();
+            expect(spyCheckFilterSettings.calledOnce).to.be.false;
+            sinon.restore();
+        });
+
+        it("should call 'checkFilterSettings' if selectedReferenceData is changed", async () => {
+            const newStore = new Vuex.Store({
+                    namespaced: true,
+                    modules: {
+                        Tools: {
+                            namespaced: true,
+                            modules: {
+                                StatisticDashboard: {
+                                    namespaced: true,
+                                    state: {
+                                        selectedReferenceData: undefined
+                                    },
+                                    getters: {
+                                        active: () => true,
+                                        name: () => "test",
+                                        icon: () => "bi-speedometer",
+                                        renderToWindow: () => false,
+                                        resizableWindow: () => true,
+                                        isVisibleInMenu: () => true,
+                                        deactivateGFI: () => true,
+                                        colorScheme: () => undefined,
+                                        data: () => [],
+                                        selectedReferenceData: (state) => state.selectedReferenceData,
+                                        selectedCategories: () => [],
+                                        selectedReferenceValueTag: () => undefined,
+                                        selectedRegions: () => [],
+                                        selectedDates: () => ["test"],
+                                        selectedStatistics: () => undefined,
+                                        chartTableToggle: () => "table",
+                                        legendData: () => [],
+                                        selectedRegionsValues: () => ["test"]
+                                    },
+                                    mutations: {
+                                        setSelectedReferenceData (state, value) {
+                                            state.selectedReferenceData = value;
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Maps: {
+                            namespaced: true,
+                            getters: {
+                                projection: () => "EPSG:25832"
+                            },
+                            actions: {
+                                addNewLayerIfNotExists: () => {
+                                    return Promise.resolve({
+                                        getSource: () => sourceStub
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }),
+                wrapper = shallowMount(StatisticDashboard, {
+                    localVue,
+                    store: newStore
+                }),
+                spyCheckFilterSettings = sinon.stub(wrapper.vm, "checkFilterSettings");
+
+            newStore.commit("Tools/StatisticDashboard/setSelectedReferenceData", "too");
+            await wrapper.vm.$nextTick();
+
             expect(spyCheckFilterSettings.calledOnce).to.be.true;
             sinon.restore();
+            wrapper.destroy();
         });
     });
 
