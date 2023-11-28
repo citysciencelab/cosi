@@ -430,6 +430,7 @@ export default {
                                     :handle-change="handleBuildingDesignOptionChange"
                                     :subject="'zBauweise'"
                                     :type="'select'"
+                                    :selected-option="selectedBuildDesign"
                                 />
                             </div>
                             <div
@@ -446,6 +447,7 @@ export default {
                                     :handle-change="handlePositionToStreetOptionChange"
                                     :subject="'zStrassenLage'"
                                     :type="'select'"
+                                    :selected-option="selectedPositionToStreet"
                                 />
                             </div>
                             <div

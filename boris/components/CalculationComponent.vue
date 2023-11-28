@@ -42,11 +42,17 @@ export default {
         type: {
             type: String,
             required: true
+        },
+        selectedOption: {
+            type: String,
+            default: "",
+            required: false
         }
     }
-
 };
+
 </script>
+
 
 <template>
     <div id="calculation-component">
@@ -66,8 +72,10 @@ export default {
             </dt>
             <dd>
                 <select
+                    :value="selectedOption"
                     class="form-select"
                     :aria-label="$t('additional:modules.tools.boris.landCalculation.ariaLabelBuildingDesigns')"
+                    @select="$emit('select', $event.target.value)"
                     @change="handleChange($event, subject)"
                 >
                     <option
