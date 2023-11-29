@@ -589,7 +589,7 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
             });
         });
 
-        describe("getImportedReferenceValue", () => {
+        describe("getReferenceValue", () => {
             it("should return empty string", () => {
                 const wrapper = shallowMount(TemplateAdminForm, {
                     propsData: {
@@ -601,17 +601,17 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                     store
                 });
 
-                expect(wrapper.vm.getImportedReferenceValue(null)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue(0)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue(true)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue(undefined)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue({})).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue("", null)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue("", 0)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue("", true)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue("", undefined)).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue("", {})).to.be.equal("");
-                expect(wrapper.vm.getImportedReferenceValue("", [])).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue(null)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue(0)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue(true)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue(undefined)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue({})).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue("", null)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue("", 0)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue("", true)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue("", undefined)).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue("", {})).to.be.equal("");
+                expect(wrapper.vm.getReferenceValue("", [])).to.be.equal("");
                 wrapper.destroy();
             });
 
@@ -640,7 +640,7 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                         }
                     ];
 
-                expect(wrapper.vm.getImportedReferenceValue("Anteil an der Bevölkerung 15 bis 24 Jahren", referenceValueList)).to.be.equal("12");
+                expect(wrapper.vm.getReferenceValue("Anteil an der Bevölkerung 15 bis 24 Jahren", referenceValueList)).to.be.equal("12");
                 wrapper.destroy();
             });
         });

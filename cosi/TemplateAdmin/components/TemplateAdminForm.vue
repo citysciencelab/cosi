@@ -64,6 +64,13 @@ export default {
             return this.importedTemplateNames;
         }
     },
+    watch: {
+        selectedStatData (val) {
+            const label = val.map(v => v.label);
+
+            this.referenceValueList = this.referenceValueList.filter(badge => label.includes(badge?.statisticName));
+        }
+    },
     methods: {
         ...mapActions("Alerting", ["addSingleAlert"]),
 
@@ -418,12 +425,12 @@ export default {
         },
 
         /**
-         * Gets the imported reference value for each reference input field.
+         * Gets the reference value for each reference input field.
          * @param {String} name - the statistical data name
          * @param {Object[]} referenceValueList - the reference value list
          * @returns {Object} the selected tool data
          */
-        getImportedReferenceValue (name, referenceValueList) {
+        getReferenceValue (name, referenceValueList) {
             if (typeof name !== "string" || !Array.isArray(referenceValueList) || !referenceValueList.length) {
                 return "";
             }
@@ -637,7 +644,8 @@ export default {
                     :key="idx"
                     :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
                     :title="statDataObj.label"
-                    :imported-reference-value="getImportedReferenceValue(statDataObj.label, importedReferenceValueList)"
+                    :imported-reference-value="getReferenceValue(statDataObj.label, importedReferenceValueList)"
+                    :origin-reference-value="getReferenceValue(statDataObj.label, referenceValueList)"
                     :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
                     :unit="showUnit(statDataObj.valueType)"
                     @removeCard="removeStatData(statDataObj.propertyName)"

@@ -17,6 +17,11 @@ export default {
             required: false,
             default: ""
         },
+        originReferenceValue: {
+            type: String,
+            required: false,
+            default: ""
+        },
         unit: {
             type: [String, Boolean],
             required: false,
@@ -31,6 +36,9 @@ export default {
     watch: {
         referenceValue () {
             this.emitSetReferenceValue();
+        },
+        originReferenceValue (val) {
+            this.referenceValue = val;
         }
     },
     mounted () {
