@@ -155,5 +155,24 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminFormCard.vue", () =>
                 wrapper.destroy();
             });
         });
+        describe("checkComma", () => {
+            it("should remove the last several comma", async () => {
+                const wrapper = shallowMount(TemplateAdminFormCard, {
+                    propsData: {
+                        title: "Card Title",
+                        label: "Label",
+                        unit: "%"
+                    },
+                    localVue,
+                    store
+                });
+
+                wrapper.setData({referenceValue: "2,3,,,,,,"});
+                await wrapper.vm.$nextTick();
+                await wrapper.vm.checkComma();
+                expect(wrapper.vm.referenceValue).to.be.equal("2,3");
+                wrapper.destroy();
+            });
+        });
     });
 });

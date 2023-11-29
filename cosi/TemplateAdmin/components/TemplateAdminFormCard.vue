@@ -42,8 +42,6 @@ export default {
          * @returns {void}
          */
         emitSetReferenceValue () {
-            this.referenceValue = this.referenceValue.replace(/^[,\s]+|[,\s]+$/g, "").replace(/,[,\s]*,/g, ",");
-
             this.$emit("setReferenceValueList", {
                 statisticName: this.title,
                 value: this.referenceValue
@@ -63,6 +61,14 @@ export default {
             }
             e.preventDefault();
             return false;
+        },
+
+        /**
+         * Checks if the last several strings are comma
+         * @returns {void}
+         */
+        checkComma () {
+            this.referenceValue = this.referenceValue.replace(/^[,\s]+|[,\s]+$/g, "").replace(/,[,\s]*,/g, ",");
         }
     }
 };
@@ -110,7 +116,7 @@ export default {
                                 type="text"
                                 class="form-control border-end-0 pb-0"
                                 maxlength="6"
-                                @change="emitSetReferenceValue"
+                                @change="checkComma"
                                 @keypress="checkNumber($event)"
                             >
                             <span
@@ -129,7 +135,7 @@ export default {
                                 type="text"
                                 class="form-control pb-0"
                                 maxlength="6"
-                                @change="emitSetReferenceValue"
+                                @change="checkComma"
                                 @keypress="checkNumber($event)"
                             >
                         </div>
