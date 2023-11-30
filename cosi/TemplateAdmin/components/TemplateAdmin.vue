@@ -25,6 +25,7 @@ export default {
     computed: {
         ...mapGetters("Tools/TemplateAdmin", Object.keys(getters)),
         ...mapGetters("Tools/DistrictSelector", ["selectedDistrictLevel", "selectedDistrictLevelId", "selectedDistrictsCollection", "selectedDistrictNames"]),
+        ...mapGetters("Tools", ["getConfiguredToolNames"]),
         ...mapState(["Tools"])
     },
     watch: {
@@ -40,7 +41,10 @@ export default {
     },
     created () {
         this.$on("close", this.close);
-        this.toolOptions = this.getToolList(this.Tools);
+        const toIgnoreTools = ["TemplateAdmin", "TemplateManager"];
+
+        this.toolOptions = this.getToolList(this.Tools, Array.isArray(this.getConfiguredToolNames)
+            ? this.getConfiguredToolNames.filter(toolNames => !toIgnoreTools.includes(toolNames)) : []);
     },
     methods: {
         ...mapMutations("Tools/TemplateAdmin", Object.keys(mutations)),
@@ -55,18 +59,19 @@ export default {
         },
 
         /**
-         * Gets all the tools from Masterportal
+         * Gets all the tools from Masterportal filtered by the configured list of tools.
          * @param {Object} tools - the tools object from MP state
+         * @param {String[]} toolsToIgnore - list of strings where each string represent tool key
          * @returns {Object[]} the tool list with the key and the title as label
          */
-        getToolList (tools) {
-            if (!isObject(tools)) {
+        getToolList (tools, toolsToIgnore) {
+            if (!isObject(tools) || !Array.isArray(toolsToIgnore)) {
                 return [];
             }
             let toolList = [];
 
             Object.entries(tools).forEach(([key, value]) => {
-                if (typeof value.name !== "undefined") {
+                if (typeof value.name !== "undefined" && value.isVisibleInMenu !== false && toolsToIgnore.includes(key)) {
                     toolList.push({toolId: key, label: i18next.t(value.name)});
                 }
             });

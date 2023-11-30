@@ -113,6 +113,20 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                 expect(wrapper.vm.getToolList(["test"])).to.be.deep.equal([]);
                 wrapper.destroy();
             });
+            it("should return an empty array if second param is not an array", () => {
+                const wrapper = shallowMount(TemplateAdmin, {
+                    localVue,
+                    store
+                });
+
+                expect(wrapper.vm.getToolList({}, undefined)).to.be.an("array").that.is.empty;
+                expect(wrapper.vm.getToolList({}, {})).to.be.an("array").that.is.empty;
+                expect(wrapper.vm.getToolList({}, null)).to.be.an("array").that.is.empty;
+                expect(wrapper.vm.getToolList({}, true)).to.be.an("array").that.is.empty;
+                expect(wrapper.vm.getToolList({}, false)).to.be.an("array").that.is.empty;
+                expect(wrapper.vm.getToolList({}, 1234)).to.be.an("array").that.is.empty;
+                expect(wrapper.vm.getToolList({}, "1234")).to.be.an("array").that.is.empty;
+            });
 
             it("should return the tool list with ascending order", () => {
                 const wrapper = shallowMount(TemplateAdmin, {
@@ -122,9 +136,10 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                     tools = {
                         print: {name: "Print tool"},
                         gfi: {name: "Information"}
-                    };
+                    },
+                    toolsToFilter = ["print", "gfi"];
 
-                expect(wrapper.vm.getToolList(tools)).to.be.deep.equal([
+                expect(wrapper.vm.getToolList(tools, toolsToFilter)).to.be.deep.equal([
                     {toolId: "gfi", label: "Information"},
                     {toolId: "print", label: "Print tool"}
                 ]);
@@ -139,9 +154,48 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdmin.vue", () => {
                     tools = {
                         print: {name: "Print tool"},
                         gfi: {icon: "bi-icon"}
-                    };
+                    },
+                    toolsToFilter = ["print", "gfi"];
 
-                expect(wrapper.vm.getToolList(tools)).to.be.deep.equal([
+                expect(wrapper.vm.getToolList(tools, toolsToFilter)).to.be.deep.equal([
+                    {toolId: "print", label: "Print tool"}
+                ]);
+                wrapper.destroy();
+            });
+
+            it("should return the tool list with ascending order without the hidden tool", () => {
+                const wrapper = shallowMount(TemplateAdmin, {
+                        localVue,
+                        store
+                    }),
+                    tools = {
+                        print: {name: "Print tool"},
+                        gfi: {name: "Information"},
+                        draw: {name: "Draw tool", isVisibleInMenu: false}
+                    },
+                    toolsToFilter = ["print", "gfi", "draw"];
+
+                expect(wrapper.vm.getToolList(tools, toolsToFilter)).to.be.deep.equal([
+                    {toolId: "gfi", label: "Information"},
+                    {toolId: "print", label: "Print tool"}
+                ]);
+                wrapper.destroy();
+            });
+
+            it("should return the tool list with ascending order filtered", () => {
+                const wrapper = shallowMount(TemplateAdmin, {
+                        localVue,
+                        store
+                    }),
+                    tools = {
+                        print: {name: "Print tool"},
+                        gfi: {name: "Information"},
+                        draw: {name: "Draw tool"}
+                    },
+                    toolsToFilter = ["print", "gfi"];
+
+                expect(wrapper.vm.getToolList(tools, toolsToFilter)).to.be.deep.equal([
+                    {toolId: "gfi", label: "Information"},
                     {toolId: "print", label: "Print tool"}
                 ]);
                 wrapper.destroy();
