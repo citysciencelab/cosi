@@ -16,10 +16,10 @@
           "label": {
             "selectTemplate": "Select Template",
             "name": "Name",
-            "description": "Description (optional)",
+            "description": "Description",
             "addGeoData": "Add Geo Data",
             "addStatisticalData": "Add statistical data",
-            "addTools": "Add starting Tool (optional)",
+            "addTools": "Add starting Tool",
             "placeholder": "Select Option",
             "existingAreas": "existing areas with SozErhVO"
           },

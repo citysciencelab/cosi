@@ -16,10 +16,10 @@
           "label": {
             "selectTemplate": "Vorlage auswählen",
             "name": "Name",
-            "description": "Beschreibung (optional)",
+            "description": "Beschreibung",
             "addGeoData": "Geodaten hinzufügen",
             "addStatisticalData": "Statistische Daten hinzufügen",
-            "addTools": "Starter Werkzeug hinzufügen (optional)",
+            "addTools": "Starter Werkzeug hinzufügen",
             "placeholder": "Daten auswählen",
             "existingAreas": "Bestehende Gebiete mit SozErhVO"
           },

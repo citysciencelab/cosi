@@ -43,7 +43,6 @@ export default {
             selectedToolData: [],
             selectedTemplate: "",
             isNameValidating: false,
-            isGeoDataValidating: false,
             isStatDataValidating: false,
             isValidated: false,
             limitReferenceValues: false,
@@ -106,10 +105,9 @@ export default {
          */
         validateForm () {
             this.setIsNameValidating(true);
-            this.setIsGeoDataValidating(true);
             this.setIsStatDataValidating(true);
 
-            if (this.templateName !== "" && this.selectedGeoData.length && this.selectedStatData.length) {
+            if (this.templateName !== "" && this.selectedStatData.length) {
                 this.isValidated = true;
             }
             else {
@@ -118,10 +116,6 @@ export default {
 
             if (this.templateName !== "") {
                 this.setIsNameValidating(false);
-            }
-
-            if (this.selectedGeoData.length) {
-                this.setIsGeoDataValidating(false);
             }
 
             if (this.selectedStatData.length) {
@@ -204,15 +198,6 @@ export default {
          */
         setIsNameValidating (value) {
             this.isNameValidating = value;
-        },
-
-        /**
-         * Sets the isGeoDataValidating
-         * @param {Boolean} value true or false
-         * @returns {void}
-         */
-        setIsGeoDataValidating (value) {
-            this.isGeoDataValidating = value;
         },
 
         /**
@@ -528,7 +513,7 @@ export default {
                 for="form-description"
                 class="form-label mb-0"
             >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.label.description") }}
+                {{ $t("additional:modules.tools.cosi.templateAdmin.label.description") }} (optional)
             </label>
             <textarea
                 id="form-description"
@@ -541,7 +526,7 @@ export default {
             class="form-label mb-0"
             for="add-geo-data"
         >
-            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addGeoData") }} *
+            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addGeoData") }} (optional)
         </label>
         <div class="row no-gutters mb-2">
             <button
@@ -555,7 +540,7 @@ export default {
             <Multiselect
                 id="add-geo-data"
                 v-model="selectedGeoData"
-                :class="['col', 'col-md', isGeoDataValidating && !selectedGeoData.length ? 'novalidate' : '']"
+                class="col col-md"
                 :options="geoData"
                 :searchable="true"
                 :close-on-select="false"
@@ -567,7 +552,6 @@ export default {
                 :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
                 label="label"
                 track-by="layerId"
-                @input="setIsGeoDataValidating(false)"
             >
                 <template
                     slot="selection"
@@ -592,12 +576,6 @@ export default {
                 {{ geoDataObj.label }}
                 <i class="bi bi-x fs-5 align-middle" />
             </button>
-            <span
-                v-if="isGeoDataValidating && !selectedGeoData.length"
-                class="hint"
-            >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
-            </span>
         </div>
         <label
             class="form-label mb-0"
@@ -684,7 +662,7 @@ export default {
             class="form-label mb-0"
             for="add-tools"
         >
-            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addTools") }}
+            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addTools") }} (optional)
         </label>
 
         <div class="row no-gutters mb-2">
