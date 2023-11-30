@@ -213,9 +213,22 @@ export default {
             }
         },
 
+        /**
+         * Returns active layerList
+         * @param {Object} template - The template.
+         * @returns {Array} array of layer
+         */
         getActiveLayerList (template) {
-            return getItemsByAttributes({typ: "WFS"})
-                ?.filter(layer => (template.state?.Maps?.layerIds || []).includes(layer.id)) || [];
+            if (Array.isArray(template?.state?.Maps?.layerIds) && template.state.Maps.layerIds.length === 0) {
+                return [];
+            }
+            const layers = getItemsByAttributes({type: "layer"});
+
+            if (!Array.isArray(layers)) {
+                return [];
+            }
+
+            return layers.filter(layer => template.state.Maps.layerIds.includes(layer.id));
         },
 
         getActiveTool (template) {
