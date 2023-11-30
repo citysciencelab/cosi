@@ -9,7 +9,7 @@ import ToolInfo from "../../components/ToolInfo.vue";
 import TemplateManagerImport from "./TemplateManagerImport.vue";
 import axios from "axios";
 import mapping from "../../assets/mapping.json";
-import {getItemsByAttributes} from "../../utils/radioBridge";
+import {getItemsByAttributes, addModelsByAttributes, getModelByAttributes} from "../../utils/radioBridge";
 import Multiselect from "vue-multiselect";
 
 export default {
@@ -174,7 +174,29 @@ export default {
             this.loadSessionData(_template);
             this.setActive(false);
             this.openTool(startingTool);
+            this.loadLayer(_template?.state?.Maps?.layerIds);
 
+        },
+
+        /**
+         * Loading the layers from id
+         * @param {String[]} layerIds The layer Id list
+         * @returns {void}
+         */
+        loadLayer (layerIds) {
+            if (Array.isArray(layerIds) && layerIds.length) {
+                layerIds.forEach(layerId => {
+                    if (!getModelByAttributes({id: layerId})) {
+                        addModelsByAttributes({id: layerId});
+                    }
+
+                    const model = getModelByAttributes({id: layerId});
+
+                    if (model) {
+                        model.set("isSelected", true);
+                    }
+                });
+            }
         },
 
         /**
