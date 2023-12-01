@@ -18,6 +18,7 @@
                     "moveColRight": "Move column to the right",
                     "minimizeCol": "Hide column",
                     "nameCalc": "Name Calculation",
+                    "titleForCalculatedStatistic": "The values marked in red are calculated automatically",
                     "tableRowMenu": {
                         "expandTooltip": "Show/Hide all years",
                         "visualize": "Show on the map",

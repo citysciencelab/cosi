@@ -59,3 +59,16 @@ export function getValueClass (item, header, timestamp) {
 export function getValueTooltip (item, header, timestamp) {
     return item[header.value]?.isModified <= timestamp ? this.$t("additional:modules.tools.cosi.dashboard.modifiedTooltip") : undefined;
 }
+
+/**
+ * Returns if the value is calculated or not.
+ * @param {Object} item The item.
+ * @param {Object} header The header.
+ * @returns {Boolean} true if the value is calculated, false if not.
+ */
+export function isValueCalculated (item, header) {
+    if (!isObject(item) || !isObject(header)) {
+        return false;
+    }
+    return item[header.value]?.isCalculated === true;
+}

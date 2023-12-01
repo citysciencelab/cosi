@@ -1,7 +1,8 @@
 import {
     getValue,
     getValueClass,
-    getValueTooltip
+    getValueTooltip,
+    isValueCalculated
 } from "../../../utils/tableCells.js";
 import {expect} from "chai/index";
 
@@ -85,6 +86,30 @@ describe("Dashboard/utils/tableCells", () => {
             expect(getValueTooltip(item, header, false)).to.be.undefined;
             expect(getValueTooltip(item, header, {})).to.be.undefined;
             expect(getValueTooltip(item, header, [])).to.be.undefined;
+        });
+    });
+
+    describe("isValueCalculated", () => {
+        it("should return false if first param is not an object", () => {
+            expect(isValueCalculated(undefined)).to.be.false;
+            expect(isValueCalculated([])).to.be.false;
+            expect(isValueCalculated(null)).to.be.false;
+            expect(isValueCalculated(true)).to.be.false;
+            expect(isValueCalculated(false)).to.be.false;
+            expect(isValueCalculated(1234)).to.be.false;
+            expect(isValueCalculated("1234")).to.be.false;
+        });
+        it("should return false if the second param is not an object", () => {
+            expect(isValueCalculated({}, undefined)).to.be.false;
+            expect(isValueCalculated({}, [])).to.be.false;
+            expect(isValueCalculated({}, null)).to.be.false;
+            expect(isValueCalculated({}, true)).to.be.false;
+            expect(isValueCalculated({}, false)).to.be.false;
+            expect(isValueCalculated({}, 1234)).to.be.false;
+            expect(isValueCalculated({}, "1234")).to.be.false;
+        });
+        it("should return true if the value is calculated", () => {
+            expect(isValueCalculated({foo: {isCalculated: true}}, {value: "foo"})).to.be.true;
         });
     });
 });

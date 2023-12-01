@@ -18,6 +18,7 @@
                     "moveColRight": "Spalte nach rechts verschieben",
                     "minimizeCol": "Spalte aus-/einblenden",
                     "nameCalc": "Berechnung benennen",
+                    "titleForCalculatedStatistic": "Die mit rot gekennzeichneten Werte sind automatisch berechnet",
                     "tableRowMenu": {
                         "expandTooltip": "Alle Jahre ein-/ausblenden",
                         "visualize": "In der Karte visualisieren",
