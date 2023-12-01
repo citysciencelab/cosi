@@ -454,6 +454,12 @@ export default {
     <!-- Form -->
     <form id="template-admin-form">
         <div
+            v-if="!showEditTemplate || showEditTemplate && uploadedTemplates.length !== 0"
+            class="required mt-2"
+        >
+            * {{ $t("additional:modules.tools.cosi.templateAdmin.required") }}
+        </div>
+        <div
             v-if="showEditTemplate"
             class="mt-3"
         >
@@ -464,6 +470,11 @@ export default {
                 <i class="bi bi-upload pe-2" />
                 {{ $t("additional:modules.tools.cosi.templateAdmin.button.uploadTemplate") }}
             </button>
+            <span
+                class="row form-text pt-3 ps-3"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.label.supportedFormats") }}
+            </span>
             <form ref="form">
                 <label for="template-import">
                     <input
@@ -476,248 +487,255 @@ export default {
                     >
                 </label>
             </form>
-            <label
-                class="col col-md form-label ps-0 pb-0 pt-4 m-0"
-                for="select-template"
-            >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.label.selectTemplate") }}
-            </label>
-            <Multiselect
-                id="select-template"
-                v-model="selectedTemplate"
-                :options="uploadedTemplates"
-                :close-on-select="true"
-                :show-labels="false"
-                :allow-empty="true"
-                :multiple="false"
-                :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
-                @input="changeSelectedTemplate"
-            />
-        </div>
-        <div class="my-3">
-            <label
-                for="form-name"
-                class="form-label mb-0"
-            >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.label.name") }} *
-            </label>
-            <input
-                id="form-name"
-                v-model.trim="templateName"
-                type="text"
-                :class="['form-control', 'rounded-0', isNameValidating && templateName === '' ? 'novalidate' : '']"
-                @input="setIsNameValidating(false)"
-            >
-            <span
-                v-if="isNameValidating && templateName === ''"
-                class="hint"
-            >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
-            </span>
-        </div>
-        <div class="my-3">
-            <label
-                for="form-description"
-                class="form-label mb-0"
-            >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.label.description") }} (optional)
-            </label>
-            <textarea
-                id="form-description"
-                v-model.trim="templateDes"
-                class="form-control rounded-0"
-                rows="3"
-            />
-        </div>
-        <label
-            class="form-label mb-0"
-            for="add-geo-data"
-        >
-            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addGeoData") }} (optional)
-        </label>
-        <div class="row no-gutters mb-2">
-            <button
-                class="col col-md-1 align-items-center justify-content-center search-button"
-                type="button"
-                aria-disabled="true"
-                disabled
-            >
-                <i class="bi bi-search search-icon" />
-            </button>
-            <Multiselect
-                id="add-geo-data"
-                v-model="selectedGeoData"
-                class="col col-md"
-                :options="geoData"
-                :searchable="true"
-                :close-on-select="false"
-                :multiple="true"
-                :show-labels="false"
-                :clear-on-select="false"
-                :preserve-search="true"
-                :allow-empty="false"
-                :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
-                label="label"
-                track-by="layerId"
-            >
-                <template
-                    slot="selection"
-                    slot-scope="{ values, isOpen }"
-                >
-                    <span
-                        v-if="values.length"
-                        v-show="!isOpen"
-                        class="multiselect__input"
-                    > {{ }} </span>
-                </template>
-            </Multiselect>
-        </div>
-        <div class="mb-4">
-            <button
-                v-for="(geoDataObj, idx) in selectedGeoData"
-                :key="idx"
-                class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
-                aria-label="Close"
-                @click.prevent="removeGeoData(geoDataObj.layerId)"
-            >
-                {{ geoDataObj.label }}
-                <i class="bi bi-x fs-5 align-middle" />
-            </button>
-        </div>
-        <label
-            class="form-label mb-0"
-            for="add-statistic-data"
-        >
-            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addStatisticalData") }} *
-        </label>
-        <div class="row no-gutters mb-2">
-            <button
-                class="col col-md-1 align-items-center justify-content-center search-button"
-                type="button"
-                aria-disabled="true"
-                disabled
-            >
-                <i class="bi bi-search search-icon" />
-            </button>
-            <Multiselect
-                id="add-statistic-data"
-                v-model="selectedStatData"
-                :class="['col', 'col-md', isStatDataValidating && !selectedStatData.length ? 'novalidate' : '']"
-                :options="statData"
-                :searchable="true"
-                :close-on-select="false"
-                :multiple="true"
-                :show-labels="false"
-                :clear-on-select="false"
-                :allow-empty="false"
-                :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
-                label="label"
-                track-by="propertyName"
-                @input="setIsStatDataValidating(false)"
-            >
-                <template
-                    slot="selection"
-                    slot-scope="{ values, isOpen }"
-                >
-                    <span
-                        v-if="values.length"
-                        v-show="!isOpen"
-                        class="multiselect__input"
-                    > {{ }} </span>
-                </template>
-            </Multiselect>
-        </div>
-        <div class="mb-4">
-            <span
-                v-if="isStatDataValidating && !selectedStatData.length"
-                class="hint"
-            >
-                {{ $t("additional:modules.tools.cosi.templateAdmin.hint") }}
-            </span>
-            <Draggable
-                v-model="selectedStatData"
-                class="mt-3"
-                handle=".handle"
-            >
-                <TemplateAdminFormCard
-                    v-for="(statDataObj, idx) in selectedStatData"
-                    :key="idx"
-                    :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
-                    :title="statDataObj.label"
-                    :imported-reference-value="getReferenceValue(statDataObj.label, importedReferenceValueList)"
-                    :origin-reference-value="getReferenceValue(statDataObj.label, referenceValueList)"
-                    :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
-                    :unit="showUnit(statDataObj.valueType)"
-                    @removeCard="removeStatData(statDataObj.propertyName)"
-                    @setReferenceValueList="setReferenceValueList"
-                />
-            </Draggable>
             <div
-                v-if="countSelectedStatistics"
-                class="align-self-end p-0"
+                v-if="uploadedTemplates.length !== 0"
             >
-                <button
-                    id="more-button"
-                    type="button"
-                    class="btn btn-link btn-sm pt-1"
-                    @click="limitReferenceValues = !limitReferenceValues"
+                <label
+                    class="col col-md form-label ps-0 pb-0 pt-3 m-0"
+                    for="select-template"
                 >
-                    {{ limitReferenceValues ? $t("additional:modules.tools.cosi.templateAdmin.button.showMore") : $t("additional:modules.tools.cosi.templateAdmin.button.showLess") }}
-                </button>
+                    {{ $t("additional:modules.tools.cosi.templateAdmin.label.selectTemplate") }}
+                </label>
+                <Multiselect
+                    id="select-template"
+                    v-model="selectedTemplate"
+                    class="pb-3"
+                    :options="uploadedTemplates"
+                    :close-on-select="true"
+                    :show-labels="false"
+                    :allow-empty="true"
+                    :multiple="false"
+                    :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.selectTemplate')"
+                    @input="changeSelectedTemplate"
+                />
             </div>
         </div>
-        <label
-            class="form-label mb-0"
-            for="add-tools"
+        <div
+            v-if="!showEditTemplate || showEditTemplate && uploadedTemplates.length !== 0"
         >
-            {{ $t("additional:modules.tools.cosi.templateAdmin.label.addTools") }} (optional)
-        </label>
-
-        <div class="row no-gutters mb-2">
-            <button
-                class="col col-md-1 align-items-center justify-content-center search-button"
-                type="button"
-                aria-disabled="true"
-                disabled
-            >
-                <i class="bi bi-search search-icon" />
-            </button>
-            <Multiselect
-                id="add-tools"
-                v-model="selectedToolData"
-                class="col col-md"
-                :clear-on-select="false"
-                :options="toolData"
-                :searchable="true"
-                :close-on-select="true"
-                :multiple="false"
-                :show-labels="false"
-                :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
-                track-by="toolId"
-                label="label"
-            >
-                <template
-                    slot="selection"
-                    slot-scope="{ values, isOpen }"
+            <div class="mb-3 mt-0">
+                <label
+                    for="form-name"
+                    class="form-label mb-0"
                 >
-                    <span
-                        v-if="values.length"
-                        v-show="!isOpen"
-                        class="multiselect__input"
-                    > {{ }} </span>
-                </template>
-            </Multiselect>
+                    {{ $t("additional:modules.tools.cosi.templateAdmin.label.name") }} *
+                </label>
+                <input
+                    id="form-name"
+                    v-model.trim="templateName"
+                    type="text"
+                    :class="['form-control', 'rounded-0', isNameValidating && templateName === '' ? 'novalidate' : '', showEditTemplate ? 'no-border' : '']"
+                    @input="setIsNameValidating(false)"
+                >
+                <span
+                    v-if="isNameValidating && templateName === ''"
+                    class="hint"
+                >
+                    {{ $t("additional:modules.tools.cosi.templateAdmin.hintName") }}
+                </span>
+            </div>
+            <div class="my-3">
+                <label
+                    for="form-description"
+                    class="form-label mb-0"
+                >
+                    {{ $t("additional:modules.tools.cosi.templateAdmin.label.description") }} (optional)
+                </label>
+                <textarea
+                    id="form-description"
+                    v-model.trim="templateDes"
+                    class="form-control rounded-0"
+                    :class="showEditTemplate ? 'no-border' : ''"
+                    rows="2"
+                />
+            </div>
+            <label
+                class="form-label mb-0"
+                for="add-geo-data"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.label.addGeoData") }} (optional)
+            </label>
+            <div class="row no-gutters mb-2">
+                <button
+                    class="col col-md-1 align-items-center justify-content-center search-button"
+                    type="button"
+                    aria-disabled="true"
+                    disabled
+                >
+                    <i class="bi bi-search search-icon" />
+                </button>
+                <Multiselect
+                    id="add-geo-data"
+                    v-model="selectedGeoData"
+                    class="col col-md"
+                    :options="geoData"
+                    :searchable="true"
+                    :close-on-select="false"
+                    :multiple="true"
+                    :show-labels="false"
+                    :clear-on-select="false"
+                    :preserve-search="true"
+                    :allow-empty="false"
+                    :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+                    label="label"
+                    track-by="layerId"
+                >
+                    <template
+                        slot="selection"
+                        slot-scope="{ values, isOpen }"
+                    >
+                        <span
+                            v-if="values.length"
+                            v-show="!isOpen"
+                            class="multiselect__input"
+                        > {{ }} </span>
+                    </template>
+                </Multiselect>
+            </div>
+            <div class="mb-4">
+                <button
+                    v-for="(geoDataObj, idx) in selectedGeoData"
+                    :key="idx"
+                    class="btn btn-sm btn-outline-secondary lh-1 rounded-pill shadow-none mb-1 me-2 btn-pb"
+                    aria-label="Close"
+                    @click.prevent="removeGeoData(geoDataObj.layerId)"
+                >
+                    {{ geoDataObj.label }}
+                    <i class="bi bi-x fs-5 align-middle" />
+                </button>
+            </div>
+            <label
+                class="form-label mb-0"
+                for="add-statistic-data"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.label.addStatisticalData") }} *
+            </label>
+            <div class="row no-gutters mb-2">
+                <button
+                    class="col col-md-1 align-items-center justify-content-center search-button"
+                    type="button"
+                    aria-disabled="true"
+                    disabled
+                >
+                    <i class="bi bi-search search-icon" />
+                </button>
+                <Multiselect
+                    id="add-statistic-data"
+                    v-model="selectedStatData"
+                    :class="['col', 'col-md', isStatDataValidating && !selectedStatData.length ? 'novalidate' : '']"
+                    :options="statData"
+                    :searchable="true"
+                    :close-on-select="false"
+                    :multiple="true"
+                    :show-labels="false"
+                    :clear-on-select="false"
+                    :allow-empty="false"
+                    :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+                    label="label"
+                    track-by="propertyName"
+                    @input="setIsStatDataValidating(false)"
+                >
+                    <template
+                        slot="selection"
+                        slot-scope="{ values, isOpen }"
+                    >
+                        <span
+                            v-if="values.length"
+                            v-show="!isOpen"
+                            class="multiselect__input"
+                        > {{ }} </span>
+                    </template>
+                </Multiselect>
+            </div>
+            <div class="mb-4">
+                <span
+                    v-if="isStatDataValidating && !selectedStatData.length"
+                    class="hint"
+                >
+                    {{ $t("additional:modules.tools.cosi.templateAdmin.hintStatisticData") }}
+                </span>
+                <Draggable
+                    v-model="selectedStatData"
+                    class="mt-3"
+                    handle=".handle"
+                >
+                    <TemplateAdminFormCard
+                        v-for="(statDataObj, idx) in selectedStatData"
+                        :key="idx"
+                        :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
+                        :title="statDataObj.label"
+                        :imported-reference-value="getReferenceValue(statDataObj.label, importedReferenceValueList)"
+                        :origin-reference-value="getReferenceValue(statDataObj.label, referenceValueList)"
+                        :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
+                        :unit="showUnit(statDataObj.valueType)"
+                        @removeCard="removeStatData(statDataObj.propertyName)"
+                        @setReferenceValueList="setReferenceValueList"
+                    />
+                </Draggable>
+                <div
+                    v-if="countSelectedStatistics"
+                    class="align-self-end p-0"
+                >
+                    <button
+                        id="more-button"
+                        type="button"
+                        class="btn btn-link btn-sm pt-0"
+                        @click="limitReferenceValues = !limitReferenceValues"
+                    >
+                        {{ limitReferenceValues ? $t("additional:modules.tools.cosi.templateAdmin.button.showMore") : $t("additional:modules.tools.cosi.templateAdmin.button.showLess") }}
+                    </button>
+                </div>
+            </div>
+            <label
+                class="form-label mb-0"
+                for="add-tools"
+            >
+                {{ $t("additional:modules.tools.cosi.templateAdmin.label.addTools") }} (optional)
+            </label>
+
+            <div class="row no-gutters mb-4">
+                <button
+                    class="col col-md-1 align-items-center justify-content-center search-button"
+                    type="button"
+                    aria-disabled="true"
+                    disabled
+                >
+                    <i class="bi bi-search search-icon" />
+                </button>
+                <Multiselect
+                    id="add-tools"
+                    v-model="selectedToolData"
+                    class="col col-md"
+                    :clear-on-select="false"
+                    :options="toolData"
+                    :searchable="true"
+                    :close-on-select="true"
+                    :multiple="false"
+                    :show-labels="false"
+                    :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.placeholder')"
+                    track-by="toolId"
+                    label="label"
+                >
+                    <template
+                        slot="selection"
+                        slot-scope="{ values, isOpen }"
+                    >
+                        <span
+                            v-if="values.length"
+                            v-show="!isOpen"
+                            class="multiselect__input"
+                        > {{ }} </span>
+                    </template>
+                </Multiselect>
+            </div>
+            <button
+                class="export-template btn btn-outline-primary fs-5 lh-1"
+                @click.prevent="validateForm"
+            >
+                <i class="bi bi-download pe-2" />
+                {{ $t("additional:modules.tools.cosi.templateAdmin.button.downloadTemplate") }}
+            </button>
         </div>
-        <div class="mb-4">
-            * {{ $t("additional:modules.tools.cosi.templateAdmin.required") }}
-        </div>
-        <button
-            class="export-template btn btn-outline-primary fs-5 lh-1"
-            @click.prevent="validateForm"
-        >
-            <i class="bi bi-download pe-2" />
-            {{ $t("additional:modules.tools.cosi.templateAdmin.button.downloadTemplate") }}
-        </button>
     </form>
 </template>
 
@@ -774,6 +792,18 @@ export default {
 .more-statistics {
         display: none;
     }
+.required {
+    font-size: 11px;
+    text-align: right;
+}
+.no-border {
+    border: 1px solid #ffffff;
+    box-shadow: none;
+     &:hover {
+        border: 1px solid #ced4da;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+     }
+}
 
 </style>
 

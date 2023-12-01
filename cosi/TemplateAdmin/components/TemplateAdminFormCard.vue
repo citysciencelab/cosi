@@ -109,14 +109,14 @@ export default {
                     <h5 class="card-title">
                         {{ title }}
                     </h5>
-                    <div class="card-text row align-items-center">
+                    <div class="card-text row align-items-center pb-2">
                         <label
                             for="referenceValue"
                             class=""
                         > {{ label }} </label>
                         <div
                             v-if="unit"
-                            class="col col-md-3 input-group input-group-sm pb-3 px-0"
+                            class="col-4 input-group input-group-sm pb-0 px-0"
                         >
                             <input
                                 id="referenceValue"
@@ -132,10 +132,15 @@ export default {
                             >
                                 {{ unit }}
                             </span>
+                            <span
+                                class="form-text"
+                            >
+                                {{ $t("additional:modules.tools.cosi.templateAdmin.hintNumber") }}
+                            </span>
                         </div>
                         <div
                             v-else
-                            class="col col-md-3 pb-3 px-0"
+                            class="col col-md-4 pb-0 px-0"
                         >
                             <input
                                 id="referenceValue"
@@ -146,6 +151,11 @@ export default {
                                 @change="checkComma"
                                 @keypress="checkNumber($event)"
                             >
+                            <span
+                                class="form-text"
+                            >
+                                {{ $t("additional:modules.tools.cosi.templateAdmin.hintNumber") }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -204,6 +214,10 @@ export default {
             font-size: 30px;
             color: #C2C2C2;
         }
+    }
+    .form-text {
+        display: block;
+        width: 200px;
     }
 }
 </style>

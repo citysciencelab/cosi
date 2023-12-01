@@ -124,6 +124,9 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                     statData,
                     showEditTemplate: true
                 },
+                computed: {
+                    uploadedTemplates: () => ["TemplateOne"]
+                },
                 localVue,
                 store
             });
@@ -202,6 +205,9 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                     statData,
                     showEditTemplate: true
                 },
+                computed: {
+                    uploadedTemplates: () => ["TemplateOne"]
+                },
                 localVue,
                 store
             });
@@ -218,6 +224,9 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                     geoData,
                     statData,
                     showEditTemplate: true
+                },
+                computed: {
+                    uploadedTemplates: () => ["TemplateOne"]
                 },
                 localVue,
                 store
@@ -263,6 +272,9 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                     statData,
                     showEditTemplate: true
                 },
+                computed: {
+                    uploadedTemplates: () => ["TemplateOne"]
+                },
                 localVue,
                 store
             });
@@ -279,6 +291,9 @@ describe("addons/cosi/TemplateAdmin/components/TemplateAdminForm.vue", () => {
                     geoData,
                     statData,
                     showEditTemplate: true
+                },
+                computed: {
+                    uploadedTemplates: () => ["TemplateOne"]
                 },
                 localVue,
                 store

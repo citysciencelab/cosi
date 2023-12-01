@@ -506,7 +506,7 @@ export default {
                     class="btn btn-outline lh-1 fs-5"
                     @click="loadFromTemplate(selectedTemplate, selectedTemplateIndex)"
                 >
-                    <i class="bi bi-upload pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}
+                    <i class="bi bi-file-earmark-plus pe-2" />{{ $t("additional:modules.tools.cosi.templateManager.loadFromTemplate") }}
                 </button>
             </div>
         </template>

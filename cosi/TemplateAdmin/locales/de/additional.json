@@ -8,7 +8,7 @@
           "button": {
             "addTemplate": "Vorlage erstellen",
             "editTemplate": "Vorlage bearbeiten",
-            "uploadTemplate": "Vorlage hochladen",
+            "uploadTemplate": "Vorlage importieren",
             "downloadTemplate": "Exportieren",
             "showMore": "mehr anzeigen...",
             "showLess": "weniger anzeigen..."
@@ -21,7 +21,8 @@
             "addStatisticalData": "Statistische Daten hinzufügen",
             "addTools": "Starter Werkzeug hinzufügen",
             "placeholder": "Daten auswählen",
-            "existingAreas": "Bestehende Gebiete mit SozErhVO"
+            "existingAreas": "Bestehende Gebiete mit SozErhVO",
+            "supportedFormats": "unterstützes Datei-Format: JSON"
           },
           "errors": {
             "wrongFormat": "Die Datei hat nicht das richtige Format.",
@@ -29,7 +30,9 @@
             "isLoaded": "ist bereits geladen."
           },
           "required": "Pflichtfelder",
-          "hint": "Dies ist ein Pflichtfeld."
+          "hintName": "Bitte geben Sie einen Namen für die Vorlage an.",
+          "hintStatisticData": "Bitte fügen Sie statistische Daten hinzu.",
+          "hintNumber": "nur Zahlen: 0-9"
         }
       }
     }
