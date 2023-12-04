@@ -1,5 +1,7 @@
 import isObject from "../../../../src/utils/isObject";
 import mathutils from "../../utils/math";
+import {getDistrictByName, getStatisticByCategory} from "../../DistrictSelector/utils/districts";
+import Feature from "ol/Feature";
 
 /**
  * Returns the value for the cell.
@@ -7,10 +9,11 @@ import mathutils from "../../utils/math";
  * @param {*} item - item
  * @param {*} header - header
  * @param {*} timestamp - year
- * @param {Object[]} items - The row Items.
+ * @param {Object} districts - All districts of the current level.
+ * @param {String} [timestampPrefix="jahr_"] - The string the timestamps start with (e.g. jahr_).
  * @returns {String} The value as Sring for the cell or "-" if no value is available.
  */
-export function getValue (item, header, timestamp, items) {
+export function getValue (item, header, timestamp, districts, timestampPrefix = "jahr_") {
     let val;
 
     if (!isObject(item)) {
@@ -18,18 +21,19 @@ export function getValue (item, header, timestamp, items) {
     }
 
     if (header?.value && item[header.value]) {
-        val = parseFloat(item[header.value][String(this.timestampPrefix) + timestamp]);
+        val = parseFloat(item[header.value][String(timestampPrefix) + timestamp]);
     }
 
-    if (isNaN(val) && isObject(item.calculation) && item.valueType === "relative") {
-        const field_A = items.find(_item => _item.category === item.calculation.category_A),
-            field_B = items.find(_item => _item.category === item.calculation.category_B);
+    if (isNaN(val) && isObject(item.calculation) && item.valueType === "relative" && item[header.value]) {
+        const foundDistrict = getDistrictByName(districts, header.value),
+            statFeature_A = getStatisticByCategory(foundDistrict, item.calculation.category_A),
+            statFeature_B = getStatisticByCategory(foundDistrict, item.calculation.category_B);
 
         let dividend, divisor, result;
 
-        if (field_A && field_A[header.value] && field_B && field_B[header.value]) {
-            dividend = parseFloat(field_A[header.value][String(this.timestampPrefix) + timestamp]);
-            divisor = parseFloat(field_B[header.value][String(this.timestampPrefix) + timestamp]);
+        if (statFeature_A instanceof Feature && statFeature_B instanceof Feature) {
+            dividend = Number(statFeature_A.get(String(timestampPrefix) + timestamp));
+            divisor = Number(statFeature_B.get(String(timestampPrefix) + timestamp));
             result = mathutils[item.calculation.operation](dividend, divisor) * (item.calculation.modifier || 1);
             val = Number(result.toFixed(2));
             item[header.value].isCalculated = true;

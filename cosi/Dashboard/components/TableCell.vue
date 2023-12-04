@@ -1,6 +1,7 @@
 <script>
 import StatsTrend from "./StatsTrend.vue";
 import {getValue, getValueClass, getValueTooltip, isValueCalculated} from "../utils/tableCells";
+import {mapGetters} from "vuex";
 
 export default {
     name: "TableCell",
@@ -37,6 +38,11 @@ export default {
             required: true
         }
     },
+    computed: {
+        ...mapGetters("Tools/DistrictSelector", [
+            "selectedDistrictLevel"
+        ])
+    },
     methods: {
         getValue,
         getValueClass,
@@ -61,7 +67,7 @@ export default {
                 v-on="on"
             >
                 <StatsTrend
-                    v-if="getValue(item, header, currentTimestamp, items) !== '-'"
+                    v-if="getValue(item, header, currentTimestamp, selectedDistrictLevel.districts) !== '-'"
                     :item="item"
                     :header="header"
                     :current-timestamp="currentTimestamp"
@@ -77,7 +83,7 @@ export default {
                             class="d-flex flex-row justify-end"
                         >
                             <v-icon
-                                v-if="idx === 0 && isValueCalculated(item, header) && getValue(item, header, year, items) !== '-'"
+                                v-if="idx === 0 && isValueCalculated(item, header) && getValue(item, header, year, selectedDistrictLevel.districts) !== '-'"
                                 x-small
                                 :title="$t('additional:modules.tools.cosi.dashboard.titleForCalculatedStatistic')"
                             >
@@ -87,14 +93,14 @@ export default {
                                 :title="getValueTooltip(item, header, year)"
                                 :class="getValueClass(item, header, year)"
                             >
-                                {{ getValue(item, header, year, items) }}
+                                {{ getValue(item, header, year, selectedDistrictLevel.districts) }}
                             </span>
                         </li>
                     </ul>
                 </template>
                 <template v-else>
                     <v-icon
-                        v-if="isValueCalculated(item, header) && getValue(item, header, currentTimestamp, items) !== '-'"
+                        v-if="isValueCalculated(item, header) && getValue(item, header, currentTimestamp, selectedDistrictLevel.districts) !== '-'"
                         x-small
                         :title="$t('additional:modules.tools.cosi.dashboard.titleForCalculatedStatistic')"
                     >
@@ -104,7 +110,7 @@ export default {
                         :title="getValueTooltip(item, header, currentTimestamp)"
                         :class="getValueClass(item, header, currentTimestamp)"
                     >
-                        {{ getValue(item, header, currentTimestamp, items) }}
+                        {{ getValue(item, header, currentTimestamp, selectedDistrictLevel.districts) }}
                     </span>
                 </template>
             </div>

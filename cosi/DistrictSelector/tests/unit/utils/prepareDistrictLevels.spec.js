@@ -116,6 +116,13 @@ describe("addons/DistrictSelector/utils/prepareDistrictLevels.js", () => {
             expect(districts).to.be.an("array").lengthOf(2);
         });
 
+        it("should returns two districts with a 'getName' function", () => {
+            const districts = getDistricts({label: "Stadtteil", layer: layer, keyOfAttrName: "name"});
+
+            expect(districts[0].getName).to.be.a("function");
+            expect(districts[1].getName).to.be.a("function");
+        });
+
         it("should returns a district where the name and the label are the same", () => {
             const districts = getDistricts({label: "Stadtteile", layer: layer, keyOfAttrName: "name"});
 

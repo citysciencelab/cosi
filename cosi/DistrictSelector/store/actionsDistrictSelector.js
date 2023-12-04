@@ -65,7 +65,7 @@ const actions = {
                 }),
                 // reference districts
                 refDistricts = referenceLevel.districts.filter(district => {
-                    return refNames.includes(district.getName());
+                    return refNames.includes(mapDistrictNames(district.getName(), referenceLevel));
                 });
 
             dispatch("loadStatFeatures", {
