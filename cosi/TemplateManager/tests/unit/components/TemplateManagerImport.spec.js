@@ -135,17 +135,83 @@ describe("addons/cosi/TemplateManager/components/TemplateManagerImport.vue", () 
 
                 wrapper.vm.parseFileContent(obj);
                 expect(stubAddSingleAlert.calledOnce).to.be.true;
+                wrapper.destroy();
+            });
+
+            it("should call the 'addSingleAlert' if file content has not the meta property.", () => {
+                const obj = {
+                        target: {
+                            result: JSON.stringify({meta1: {title: "title"}})
+                        }
+                    },
+                    wrapper = factory.getShallowMount();
+
+                wrapper.vm.parseFileContent(obj);
+                expect(stubAddSingleAlert.calledOnce).to.be.true;
+                wrapper.destroy();
+            });
+
+            it("should call the 'addSingleAlert' if file content has not the state property.", () => {
+                const obj = {
+                        target: {
+                            result: JSON.stringify({meta: {title: "title"}})
+                        }
+                    },
+                    wrapper = factory.getShallowMount();
+
+                wrapper.vm.parseFileContent(obj);
+                expect(stubAddSingleAlert.calledOnce).to.be.true;
+                wrapper.destroy();
+            });
+
+            it("should call the 'addSingleAlert' if file content has not the Tools property.", () => {
+                const obj = {
+                        target: {
+                            result: JSON.stringify({meta: {title: "title"}, state: {Maps: {layerIds: []}}})
+                        }
+                    },
+                    wrapper = factory.getShallowMount();
+
+                wrapper.vm.parseFileContent(obj);
+                expect(stubAddSingleAlert.calledOnce).to.be.true;
+                wrapper.destroy();
+            });
+
+            it("should call the 'addSingleAlert' if file content has not the Dashboard property.", () => {
+                const obj = {
+                        target: {
+                            result: JSON.stringify({meta: {title: "title"}, state: {Maps: {layerIds: []}, Tools: {}}})
+                        }
+                    },
+                    wrapper = factory.getShallowMount();
+
+                wrapper.vm.parseFileContent(obj);
+                expect(stubAddSingleAlert.calledOnce).to.be.true;
+                wrapper.destroy();
+            });
+
+            it("should call the 'addSingleAlert' if file content has not the statsFeatureFilter property.", () => {
+                const obj = {
+                        target: {
+                            result: JSON.stringify({meta: {title: "title"}, state: {Maps: {layerIds: []}, Tools: {Dashboard: {}}}})
+                        }
+                    },
+                    wrapper = factory.getShallowMount();
+
+                wrapper.vm.parseFileContent(obj);
+                expect(stubAddSingleAlert.calledOnce).to.be.true;
+                wrapper.destroy();
             });
 
             it("should call the 'addSingleAlert' if template name is already loaded", () => {
                 const obj1 = {
                         target: {
-                            result: JSON.stringify({meta: {title: "title-1"}})
+                            result: JSON.stringify({meta: {title: "title"}, state: {Maps: {layerIds: []}, Tools: {Dashboard: {statsFeatureFilter: ["Alleinerziehende"], orientationValues: []}}}})
                         }
                     },
                     obj2 = {
                         target: {
-                            result: JSON.stringify({meta: {title: "title-1"}})
+                            result: JSON.stringify({meta: {title: "title"}, state: {Maps: {layerIds: []}, Tools: {Dashboard: {statsFeatureFilter: ["Alleinerziehende"], orientationValues: []}}}})
                         }
                     },
                     wrapper = factory.getShallowMount();
@@ -153,23 +219,36 @@ describe("addons/cosi/TemplateManager/components/TemplateManagerImport.vue", () 
                 wrapper.vm.parseFileContent(obj1);
                 wrapper.vm.parseFileContent(obj2);
                 expect(stubAddSingleAlert.calledOnce).to.be.true;
+                wrapper.destroy();
             });
 
             it("should parse the given string to a json and emit it", () => {
                 const obj = {
                         target: {
-                            result: JSON.stringify({meta: {title: "title"}})
+                            result: JSON.stringify({meta: {title: "title-1"}, state: {Maps: {layerIds: []}, Tools: {Dashboard: {statsFeatureFilter: ["Alleinerziehende"], orientationValues: []}}}})
                         }
                     },
                     expected = {
                         meta: {
-                            title: "title"
+                            title: "title-1"
+                        },
+                        state: {
+                            Maps: {
+                                layerIds: []
+                            },
+                            Tools: {
+                                Dashboard: {
+                                    statsFeatureFilter: ["Alleinerziehende"],
+                                    orientationValues: []
+                                }
+                            }
                         }
                     },
                     wrapper = factory.getShallowMount();
 
                 wrapper.vm.parseFileContent(obj);
                 expect(wrapper.emitted().addTemplate[0]).to.deep.equal([expected]);
+                wrapper.destroy();
             });
         });
     });

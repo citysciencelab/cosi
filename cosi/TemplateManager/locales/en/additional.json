@@ -22,11 +22,10 @@
                     },
                     "activeTool": "Active Tool",
                     "errors": {
-                      "default": "File could not be loaded",
-                      "invalid": "File could not be readed",
+                      "default": "File could not be loaded.",
+                      "invalid": "File could not be read.",
                       "wrongFileFormat": "The file is not in the correct format.",
-                      "templateName": "A template with the name: ",
-                      "isLoaded": "is already loaded."
+                      "attErr": " {{attribute}} node does not exist."
                     }
                 }
             }

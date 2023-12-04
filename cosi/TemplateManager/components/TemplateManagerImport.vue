@@ -61,11 +61,61 @@ export default {
                 return;
             }
 
-            if (!Object.prototype.hasOwnProperty.call(template, "meta") ||
-                !Object.prototype.hasOwnProperty.call(template?.meta, "title")) {
+            if (!Object.prototype.hasOwnProperty.call(template, "meta")) {
+                const attribute = "Meta";
 
                 this.addSingleAlert({
-                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")}`,
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")} ${this.$t("additional:modules.tools.cosi.templateManager.errors.attErr", {attribute})}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+                return;
+            }
+            if (!Object.prototype.hasOwnProperty.call(template?.meta, "title")) {
+                const attribute = "Title";
+
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")} ${this.$t("additional:modules.tools.cosi.templateManager.errors.attErr", {attribute})}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+                return;
+            }
+            if (!Object.prototype.hasOwnProperty.call(template, "state")) {
+                const attribute = "State";
+
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")} ${this.$t("additional:modules.tools.cosi.templateManager.errors.attErr", {attribute})}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+                return;
+            }
+            if (!Object.prototype.hasOwnProperty.call(template?.state, "Tools")) {
+                const attribute = "Tools";
+
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")} ${this.$t("additional:modules.tools.cosi.templateManager.errors.attErr", {attribute})}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+                return;
+            }
+            if (!Object.prototype.hasOwnProperty.call(template?.state?.Tools, "Dashboard")) {
+                const attribute = "Dashboard";
+
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")} ${this.$t("additional:modules.tools.cosi.templateManager.errors.attErr", {attribute})}`,
+                    category: "Warning",
+                    displayClass: "warning"
+                });
+                return;
+            }
+            if (!Object.prototype.hasOwnProperty.call(template?.state?.Tools?.Dashboard, "statsFeatureFilter")) {
+                const attribute = "statsFeatureFilter";
+
+                this.addSingleAlert({
+                    content: `${this.$t("additional:modules.tools.cosi.templateManager.errors.invalid")} ${this.$t("additional:modules.tools.cosi.templateManager.errors.attErr", {attribute})}`,
                     category: "Warning",
                     displayClass: "warning"
                 });
