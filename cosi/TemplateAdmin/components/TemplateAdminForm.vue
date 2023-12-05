@@ -4,7 +4,7 @@ import TemplateAdminFormCard from "./TemplateAdminFormCard.vue";
 import getters from "../store/gettersTemplateAdmin";
 import dayjs from "dayjs";
 import Draggable from "vuedraggable";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import isObject from "../../../../src/utils/isObject";
 
 export default {
@@ -41,7 +41,6 @@ export default {
             selectedGeoData: [],
             selectedStatData: [],
             selectedToolData: [],
-            selectedTemplate: "",
             isNameValidating: false,
             isStatDataValidating: false,
             isValidated: false,
@@ -69,10 +68,21 @@ export default {
             const label = val.map(v => v.label);
 
             this.referenceValueList = this.referenceValueList.filter(badge => label.includes(badge?.statisticName));
+        },
+        selectedTemplate (value) {
+            if (this.showEditTemplate) {
+                this.changeSelectedTemplate(value);
+            }
+        }
+    },
+    mounted () {
+        if (this.showEditTemplate && this.selectedTemplate !== undefined) {
+            this.changeSelectedTemplate(this.selectedTemplate);
         }
     },
     methods: {
         ...mapActions("Alerting", ["addSingleAlert"]),
+        ...mapMutations("Tools/TemplateAdmin", ["setSelectedTemplate"]),
 
         /**
          * Changes the selected template.
@@ -350,7 +360,7 @@ export default {
             if (!isObject(content)) {
                 return;
             }
-            this.selectedTemplate = this.getTemplateText(content.meta?.title);
+            this.setSelectedTemplate(this.getTemplateText(content.meta?.title));
             this.templateName = this.getTemplateText(content.meta?.title);
             this.templateDes = this.getTemplateText(content.meta?.info);
             this.selectedGeoData = this.getSelectedGeoData(content.state?.Maps?.layerIds);
@@ -498,15 +508,15 @@ export default {
                 </label>
                 <Multiselect
                     id="select-template"
-                    v-model="selectedTemplate"
+                    :value="selectedTemplate"
                     class="pb-3"
                     :options="uploadedTemplates"
                     :close-on-select="true"
                     :show-labels="false"
-                    :allow-empty="true"
+                    :allow-empty="false"
                     :multiple="false"
                     :placeholder="$t('additional:modules.tools.cosi.templateAdmin.label.selectTemplate')"
-                    @input="changeSelectedTemplate"
+                    @input="setSelectedTemplate"
                 />
             </div>
         </div>

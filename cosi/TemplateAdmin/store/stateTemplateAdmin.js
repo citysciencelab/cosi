@@ -21,7 +21,8 @@ const state = {
     deactivateGFI: true,
     ignorePropertyNames: [],
     importedTemplateNames: [],
-    savedTemplateContents: []
+    savedTemplateContents: [],
+    selectedTemplate: undefined
 };
 
 export default state;
