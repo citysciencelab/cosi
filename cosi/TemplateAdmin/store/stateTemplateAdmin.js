@@ -9,6 +9,7 @@
  * @property {boolean} resizableWindow if true, window is resizable (config-param)
  * @property {boolean} isVisibleInMenu if true, tool is selectable in menu (config-param)
  * @property {boolean} deactivateGFI flag if tool should deactivate gfi (config-param)
+ * @property {String} labelOfOrientationValue the label of orientationValue
  */
 const state = {
     active: false,
@@ -22,7 +23,8 @@ const state = {
     ignorePropertyNames: [],
     importedTemplateNames: [],
     savedTemplateContents: [],
-    selectedTemplate: undefined
+    selectedTemplate: undefined,
+    labelOfOrientationValue: "additional:modules.tools.cosi.TemplateAdmin.label.existingAreas"
 };
 
 export default state;

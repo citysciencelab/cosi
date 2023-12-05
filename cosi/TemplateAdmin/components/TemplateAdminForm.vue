@@ -675,7 +675,7 @@ export default {
                         :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
                         :title="statDataObj.label"
                         :origin-reference-value="getReferenceValue(statDataObj.label, showEditTemplate ? importedReferenceValueList : referenceValueList)"
-                        :label="$t('additional:modules.tools.cosi.templateAdmin.label.existingAreas')"
+                        :label="$t(labelOfOrientationValue)"
                         :unit="showUnit(statDataObj.valueType)"
                         @removeCard="removeStatData(statDataObj.propertyName)"
                         @setReferenceValueList="setReferenceValueList"

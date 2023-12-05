@@ -1,18 +1,7 @@
 import {replaceValues} from "../../utils/modifyObject.js";
 import renameKeys from "../../../../src/utils/renameKeys.js";
 
-const
-    keyMap = {
-        category: "Kategorie",
-        group: "Gruppe",
-        valueType: "Datentyp",
-        timestamp: "Jahr",
-        hamburg_gesamt: "Hamburg gesamt",
-        total: "Gesamt",
-        average: "Durchschnitt",
-        orientationValue: "Orientierungswert"
-    },
-    valuesMap = {
+const valuesMap = {
         absolute: "absolut",
         relative: "relativ"
     },
@@ -23,10 +12,11 @@ const
  * @param {Object[]} data - the feature data from the featuresList
  * @param {String[]} districtNames - keys of the districts
  * @param {Number} timestamp - timestamp
+ * @param {Object} keyMap - key map object
  * @param {String} timestampPrefix - timestamp prefix
  * @returns {Object[]} data for export
  */
-export function prepareTableExport (data, districtNames, timestamp, timestampPrefix = "jahr_") {
+export function prepareTableExport (data, districtNames, timestamp, keyMap, timestampPrefix = "jahr_") {
     if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
@@ -63,10 +53,11 @@ export function prepareTableExport (data, districtNames, timestamp, timestampPre
  * @param {Object[]} data - the feature data from the featuresList
  * @param {String[]} districtNames - keys of the districts
  * @param {Number[]} timestamps - timestamps
+ * @param {Object} keyMap - key map object
  * @param {String} timestampPrefix - timestamp prefix
  * @returns {Object[]} data for export
  */
-export function prepareTableExportWithTimeline (data, districtNames, timestamps, timestampPrefix) {
+export function prepareTableExportWithTimeline (data, districtNames, timestamps, keyMap, timestampPrefix) {
     if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
