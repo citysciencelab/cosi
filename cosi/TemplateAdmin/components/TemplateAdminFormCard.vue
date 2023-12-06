@@ -12,11 +12,6 @@ export default {
             type: String,
             required: true
         },
-        importedReferenceValue: {
-            type: String,
-            required: false,
-            default: ""
-        },
         originReferenceValue: {
             type: String,
             required: false,
@@ -42,7 +37,7 @@ export default {
         }
     },
     mounted () {
-        this.referenceValue = typeof this.importedReferenceValue !== "undefined" ? this.importedReferenceValue : "";
+        this.referenceValue = typeof this.originReferenceValue !== "undefined" ? this.originReferenceValue : "";
     },
     methods: {
         /**
