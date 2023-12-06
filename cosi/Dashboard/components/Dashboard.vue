@@ -134,6 +134,9 @@ export default {
         valueColumns () {
             return [...this.districtColumns, ...this.aggregateColumns];
         },
+        minimizedCols () {
+            return this.districtColumns.filter(col => col.minimized === true);
+        },
         selectedColumns () {
             const selectedCols = this.valueColumns.filter(col => col.selected);
 
@@ -220,14 +223,13 @@ export default {
                     }
                     this.calculateAll(); // make sure the table is updated
                     this.generateTable(); // make sure the table is updated
-                    const items = this.selectedItems.length > 0 ?
-                        this.selectedItems :
-                        this.items.filter(item => this.filterTable(item.category)); // if no rows in the table are selected, act as if all rows are selected
+                    const items = this.selectedItems.length > 0 ? this.selectedItems : this.items.filter(item => this.filterTable(item.category)), // if no rows in the table are selected, act as if all rows are selected
+                        preparedItems = this.ignoreColumnsByExport ? this.getPreparedItems(items) : items;
 
                     // this.currentItems = items;
                     let data = this.exportTimeline
-                        ? this.prepareTableExportWithTimeline(items, this.selectedDistrictNames, this.timestamps, this.keyMap, this.timestampPrefix)
-                        : this.prepareTableExport(items, this.selectedDistrictNames, this.selectedYear, this.keyMap, this.timestampPrefix);
+                        ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.timestampPrefix)
+                        : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.timestampPrefix);
 
                     data = JSON.parse(JSON.stringify(data)); // cleans the object to pure JSON (rather than array of getters and setters)
                     // eslint-disable-next-line no-unused-vars
@@ -533,6 +535,26 @@ export default {
         },
 
         /**
+         * Returns the items that are not minimized
+         * @param {Object[]}  items to be prepared
+         * @returns {Object[]} prepared items
+         */
+        getPreparedItems (items) {
+            if (!Array.isArray(items) || items.length === 0) {
+                return [];
+            }
+            const clonedItems = JSON.parse(JSON.stringify(items));
+
+            clonedItems.forEach(item => {
+                this.minimizedCols.forEach(minCol => {
+                    delete item[minCol.value];
+                });
+            });
+
+            return clonedItems;
+        },
+
+        /**
          * Export the table as XLSX.
          * Either the simple view for the selected or all years.
          * @param {Boolean} exportTimeline - Whether to include all years.
@@ -542,10 +564,11 @@ export default {
          */
         exportTable (exportTimeline = false) {
             const items = this.selectedItems.length > 0 ? this.selectedItems : this.currentItems,
+                preparedItems = this.ignoreColumnsByExport ? this.getPreparedItems(items) : items,
                 prefix = this.prefixExportFilename,
                 rawData = exportTimeline
-                    ? this.prepareTableExportWithTimeline(items, this.selectedDistrictNames, this.timestamps, this.keyMap, this.timestampPrefix)
-                    : this.prepareTableExport(items, this.selectedDistrictNames, this.selectedYear, this.keyMap, this.timestampPrefix),
+                    ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.keyMap, this.timestampPrefix)
+                    : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.keyMap, this.timestampPrefix),
                 filename = composeFilename(this.$t("additional:modules.tools.cosi.dashboard.exportFilename", {prefix})),
                 exportedData = this.sanitizeData(JSON.parse(JSON.stringify(rawData)), [...this.excludedPropsForExport, ...this.unselectedColumnLabels]),
                 iniHeader = Object.keys(exportedData[0]),
