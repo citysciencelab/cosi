@@ -1,11 +1,12 @@
 import {replaceValues} from "../../utils/modifyObject.js";
 import renameKeys from "../../../../src/utils/renameKeys.js";
+import {getValue} from "./tableCells";
 
 const valuesMap = {
         absolute: "absolut",
         relative: "relativ"
     },
-    keysToIgnore = ["id"];
+    keysToIgnore = ["id", "calculation"];
 
 /**
  * Prepares the table data for an XLSX export, just the table as displayed
@@ -13,11 +14,12 @@ const valuesMap = {
  * @param {String[]} districtNames - keys of the districts
  * @param {Number} timestamp - timestamp
  * @param {Object} keyMap - key map object
+ * @param {Object[]} districts - All districts of the current level.
  * @param {String} timestampPrefix - timestamp prefix
  * @param {Boolean} exportGrouped - true if table should be exported in seperate groups
  * @returns {Object[]} data for export
  */
-export function prepareTableExport (data, districtNames, timestamp, keyMap, timestampPrefix = "jahr_", exportGrouped = false) {
+export function prepareTableExport (data, districtNames, timestamp, keyMap, districts, timestampPrefix = "jahr_", exportGrouped = false) {
     if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
@@ -25,6 +27,7 @@ export function prepareTableExport (data, districtNames, timestamp, keyMap, time
     if (exportGrouped) {
         delete keyMap.group;
     }
+
     const exportData = data.map(item => {
         const _item = replaceValues(renameKeys(keyMap, item), valuesMap);
 
@@ -33,9 +36,7 @@ export function prepareTableExport (data, districtNames, timestamp, keyMap, time
         });
         for (const col in _item) {
             if (typeof _item[col] === "object") {
-                const val = parseFloat(_item[col][timestampPrefix + timestamp]);
-
-                _item[col] = !isNaN(val) ? val : _item[col][timestampPrefix + timestamp];
+                _item[col] = getValue(item, {value: col}, timestamp, districts, timestampPrefix);
             }
         }
 
@@ -58,11 +59,12 @@ export function prepareTableExport (data, districtNames, timestamp, keyMap, time
  * @param {String[]} districtNames - keys of the districts
  * @param {Number[]} timestamps - timestamps
  * @param {Object} keyMap - key map object
+ * @param {Object[]} districts - All districts of the current level.
  * @param {String} timestampPrefix - timestamp prefix
  * @param {Boolean} exportGrouped - true if table should be exported in seperate groups
  * @returns {Object[]} data for export
  */
-export function prepareTableExportWithTimeline (data, districtNames, timestamps, keyMap, timestampPrefix, exportGrouped = false) {
+export function prepareTableExportWithTimeline (data, districtNames, timestamps, keyMap, districts, timestampPrefix, exportGrouped = false) {
     if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
@@ -83,9 +85,7 @@ export function prepareTableExportWithTimeline (data, districtNames, timestamps,
 
                     for (const col in el) {
                         if (typeof _item[col] === "object") {
-                            const val = parseFloat(el[col][timestampPrefix + timestamp]);
-
-                            el[col] = !isNaN(val) ? val : "-";
+                            el[col] = getValue(item, {value: col}, timestamp, districts, timestampPrefix);
                         }
                     }
 

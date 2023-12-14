@@ -225,12 +225,12 @@ export default {
                     this.calculateAll(); // make sure the table is updated
                     this.generateTable(); // make sure the table is updated
                     const items = this.selectedItems.length > 0 ? this.selectedItems : this.items.filter(item => this.filterTable(item.category)), // if no rows in the table are selected, act as if all rows are selected
-                        preparedItems = this.ignoreColumnsByExport ? this.getPreparedItems(items) : items;
+                        preparedItems = this.ignoreColumnsByExport && this.minimizedCols.length ? this.getPreparedItems(items) : items;
 
                     // this.currentItems = items;
                     let data = this.exportTimeline
-                        ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.timestampPrefix, this.exportGrouped)
-                        : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.timestampPrefix, this.exportGrouped);
+                        ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.selectedDistrictLevel.districts, this.timestampPrefix, this.exportGrouped)
+                        : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.selectedDistrictLevel.districts, this.timestampPrefix, this.exportGrouped);
 
                     data = JSON.parse(JSON.stringify(data)); // cleans the object to pure JSON (rather than array of getters and setters)
                     // eslint-disable-next-line no-unused-vars
@@ -571,11 +571,11 @@ export default {
                 fixedHeaderEnd = null,
                 header = null;
             const items = this.selectedItems.length > 0 ? this.selectedItems : this.currentItems,
-                preparedItems = this.ignoreColumnsByExport ? this.getPreparedItems(items) : items,
+                preparedItems = this.ignoreColumnsByExport && this.minimizedCols.length ? this.getPreparedItems(items) : items,
                 prefix = this.prefixExportFilename,
                 rawData = exportTimeline
-                    ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.keyMap, this.timestampPrefix, this.exportGrouped)
-                    : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.keyMap, this.timestampPrefix, this.exportGrouped),
+                    ? this.prepareTableExportWithTimeline(preparedItems, this.selectedDistrictNames, this.timestamps, this.keyMap, this.selectedDistrictLevel.districts, this.timestampPrefix, this.exportGrouped)
+                    : this.prepareTableExport(preparedItems, this.selectedDistrictNames, this.selectedYear, this.keyMap, this.selectedDistrictLevel.districts, this.timestampPrefix, this.exportGrouped),
                 filename = composeFilename(this.$t("additional:modules.tools.cosi.dashboard.exportFilename", {prefix}));
 
             try {
