@@ -374,7 +374,7 @@ export default {
                     :options="templateTitles"
                     :close-on-select="true"
                     :show-labels="false"
-                    :allow-empty="true"
+                    :allow-empty="false"
                     :multiple="false"
                     :placeholder="$t('additional:modules.tools.cosi.templateManager.label.selectTemplate')"
                 />
