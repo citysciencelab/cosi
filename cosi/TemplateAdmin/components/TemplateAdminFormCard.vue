@@ -59,7 +59,7 @@ export default {
         checkNumber (e) {
             const char = String.fromCharCode(e.keyCode);
 
-            if ((/^\d*,?\d{0,2}$/).test(char)) {
+            if ((/^\d*,?\d*-?\d{0,2}$/).test(char)) {
                 return true;
             }
             e.preventDefault();
@@ -118,7 +118,7 @@ export default {
                                 v-model.trim="referenceValue"
                                 type="text"
                                 class="form-control border-end-0 pb-0"
-                                maxlength="6"
+                                maxlength="20"
                                 @change="checkComma"
                                 @keypress="checkNumber($event)"
                             >
@@ -142,7 +142,7 @@ export default {
                                 v-model.trim="referenceValue"
                                 type="text"
                                 class="form-control pb-0"
-                                maxlength="6"
+                                maxlength="20"
                                 @change="checkComma"
                                 @keypress="checkNumber($event)"
                             >
