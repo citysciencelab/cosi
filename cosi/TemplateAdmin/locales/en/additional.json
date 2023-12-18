@@ -4,7 +4,7 @@
       "cosi": {
         "templateAdmin": {
           "title": "Template Admin",
-          "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+          "description": "Create templates for subject-specific analyses. You can configure geodata, statistical data and initial tools in a template. You can also add orientation values to statistical data, which are displayed in the dashboard. Once created, you can export your template and upload it in the \"Templates\" tool.",
           "button": {
               "addTemplate": "Add Template",
               "editTemplate": "Edit Template",
