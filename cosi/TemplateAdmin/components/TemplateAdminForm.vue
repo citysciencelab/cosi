@@ -239,6 +239,8 @@ export default {
             if (value.value !== "") {
                 this.referenceValueList.push(value);
             }
+
+            this.importedReferenceValueList = this.referenceValueList;
         },
 
         /**
@@ -367,6 +369,7 @@ export default {
             this.selectedStatData = this.getSelectedStatData(content.state?.Tools?.Dashboard);
             this.selectedToolData = this.getSelectedToolData(content.state?.Tools?.toolToOpen);
             this.importedReferenceValueList = this.getImportedReferenceValueList(content.state?.Tools?.Dashboard?.orientationValues);
+            this.referenceValueList = this.importedReferenceValueList;
         },
 
         /**
@@ -674,7 +677,8 @@ export default {
                         :key="idx"
                         :class="idx > 1 && limitReferenceValues ? 'more-statistics' : ''"
                         :title="statDataObj.label"
-                        :origin-reference-value="getReferenceValue(statDataObj.label, showEditTemplate ? importedReferenceValueList : referenceValueList)"
+                        :imported-reference-value="getReferenceValue(statDataObj.label, importedReferenceValueList)"
+                        :origin-reference-value="getReferenceValue(statDataObj.label, referenceValueList)"
                         :label="$t(labelOfOrientationValue)"
                         :unit="showUnit(statDataObj.valueType)"
                         @removeCard="removeStatData(statDataObj.propertyName)"

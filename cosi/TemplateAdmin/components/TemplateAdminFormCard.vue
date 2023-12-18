@@ -17,6 +17,11 @@ export default {
             required: false,
             default: ""
         },
+        importedReferenceValue: {
+            type: String,
+            required: false,
+            default: ""
+        },
         unit: {
             type: [String, Boolean],
             required: false,
@@ -37,7 +42,7 @@ export default {
         }
     },
     mounted () {
-        this.referenceValue = typeof this.originReferenceValue !== "undefined" ? this.originReferenceValue : "";
+        this.referenceValue = typeof this.importedReferenceValue !== "undefined" ? this.importedReferenceValue : "";
     },
     methods: {
         /**
