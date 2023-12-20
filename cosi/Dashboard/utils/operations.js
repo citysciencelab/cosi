@@ -1,6 +1,7 @@
 import Feature from "ol/Feature";
 import intersect from "../../utils/array/intersect";
 import mathutils from "../../utils/math";
+import {getDistrictByName, getStatisticByCategory} from "../../DistrictSelector/utils/districts";
 
 const operationSymbols = {
         add: "+",
@@ -348,9 +349,10 @@ export function getTotal (item, districtNames, timestamp, timestampPrefix, simpl
  * @returns {Number} the total
  */
 export function getCulmulativeTotal (item, districtNames, timestamp, timestampPrefix) {
+
     const
-        field_A = this.items.find(_item => _item.category === item.calculation.category_A),
-        field_B = this.items.find(_item => _item.category === item.calculation.category_B),
+        field_A = this.items.find(_item => _item.category === item.calculation.category_A) || createItemForCalc(item.calculation.category_A, districtNames, this.selectedDistrictLevel.districts),
+        field_B = this.items.find(_item => _item.category === item.calculation.category_B) || createItemForCalc(item.calculation.category_B, districtNames, this.selectedDistrictLevel.districts),
         total_A = field_A ? this.getTotal(field_A, districtNames, timestamp, timestampPrefix) : undefined,
         total_B = field_B ? this.getTotal(field_B, districtNames, timestamp, timestampPrefix) : undefined;
 
@@ -359,6 +361,29 @@ export function getCulmulativeTotal (item, districtNames, timestamp, timestampPr
     }
 
     return mathutils[item.calculation.operation](total_A, total_B) * (item.calculation.modifier || 1);
+}
+
+/**
+ * If the information is not available in the items, the information is taken from the districts.
+ * This can happen if the statistics required for the calculation are not displayed/filtered in the dashboard.
+ * @param {String} category - The category of the statistic
+ * @param {String[]} districtNames - All district names of the current district level.
+ * @param {Object[]} districts - All districts of the current district level.
+ * @returns {Object} The item with the required informations.
+ */
+export function createItemForCalc (category, districtNames, districts) {
+    const newItem = {
+        valueType: "absolute"
+    };
+
+    districtNames.forEach(name => {
+        const foundDistrict = getDistrictByName(districts, name),
+            statFeature = getStatisticByCategory(foundDistrict, category);
+
+        newItem[name] = statFeature.getProperties();
+    });
+
+    return newItem;
 }
 
 /**

@@ -669,13 +669,7 @@
     "stat_gebiet": "22936",
     "stadtteil": "22935",
     "bezirk": "22939",
-    "valueType": "relative",
-    "calculation": {
-      "operation": "divide",
-      "category_A": "Sozialversicherungspflichtig Beschäftigte insgesamt",
-      "category_B": "Bevölkerung 15 bis unter 65 Jahren",
-      "modifier": 100
-    }
+    "valueType": "relative"
   },
   {
     "category": "soz_sozverpflichtig_beschaeftigte_maenner",
