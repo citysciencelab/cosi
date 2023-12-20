@@ -304,7 +304,6 @@ export default {
                 const fileContent = this.parseResult(res);
 
                 if (fileContent !== null) {
-                    this.loadingTemplate(fileContent);
                     this.addTemplate(fileContent);
                 }
             };
@@ -343,6 +342,7 @@ export default {
             if (!this.importedTemplateNames.includes(this.getTemplateText(fileContent.meta?.title))) {
                 this.importedTemplateNames.push(this.getTemplateText(fileContent.meta?.title));
                 this.savedTemplateContents[this.getTemplateText(fileContent.meta?.title)] = fileContent;
+                this.loadingTemplate(fileContent);
             }
             else {
                 this.addSingleAlert({
