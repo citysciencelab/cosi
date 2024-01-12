@@ -11,7 +11,8 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["uiStyle"])
+        ...mapGetters(["uiStyle"]),
+        ...mapGetters("Tools/SaveSelection", ["layerVisibilities", "layerIds", "layerTransparencies"])
     },
     methods: {
         /**
@@ -73,12 +74,19 @@ export default {
                 contributionLink = "";
 
             if (!this.isTableStyle()) {
+                const urlParams = "?Map/layerIds=" + this.layerIds +
+                    "&visibility=" + this.layerVisibilities +
+                    "&transparency=" + this.layerTransparencies +
+                    "&Map/center=[" + this.$store.state.Maps.center +
+                    "]&Map/zoomLevel=" + this.$store.state.Maps.zoom;
+
                 parentLocation = document.referrer.split("?")[0];
-                contributionLink = parentLocation.split("#")[0] + "#/contribution/" + nid;
+                contributionLink = parentLocation.split("#")[0] + "#/contribution/" + nid + urlParams;
             }
             else {
                 contributionLink = link;
             }
+
             return contributionLink;
         },
 
@@ -174,7 +182,7 @@ export default {
             border-radius: 2px;
             margin-top: 20px;
             padding: 7px 8px 4px;
-            background-color: $light_grey;
+            background-color: $light_red;
             border-color: #800040;
             color: $accent_contrast;
             font-family: $font_family_accent;
