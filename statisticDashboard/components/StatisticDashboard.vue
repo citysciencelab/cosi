@@ -870,7 +870,7 @@ export default {
     >
         <template #toolBody>
             <div class="row justify-content-between">
-                <div class="col-md-4 d-flex align-items-center">
+                <div class="col-md-12 d-flex align-items-center">
                     <h4 class="mb-0">
                         {{ $t("additional:modules.tools.statisticDashboard.headings.mrhstatistics") }}
                     </h4>

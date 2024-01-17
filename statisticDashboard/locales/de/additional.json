@@ -4,7 +4,7 @@
           "statisticDashboard": {
               "title": "Statistik Dashboard",
               "headings": {
-                "mrhstatistics": "MRH Statistiken",
+                "mrhstatistics": "Zahlen, Daten, Fakten der MRH - Regionalstatistik",
                 "mrhstatisticsTooltip": "Link zu den Metadaten"
               },
               "button": {
