@@ -39,7 +39,7 @@ export function getValue (item, header, timestamp, districts, timestampPrefix = 
             item[header.value].isCalculated = true;
         }
     }
-    return val ? val.toLocaleString(this.currentLocale) : "-";
+    return val ? Math.round(val * 1000) / 1000 : "-";
 }
 
 /**

@@ -43,7 +43,7 @@ export function prepareTableExport (data, districtNames, timestamp, keyMap, dist
         /**
          * @todo localize
          */
-        _item[keyMap.total] = this.getTotal(item, districtNames, timestamp, timestampPrefix);
+        _item[keyMap.total] = Math.round(this.getTotal(item, districtNames, timestamp, timestampPrefix) * 1000) / 1000;
         _item[keyMap.average] = this.getAverage(item, districtNames, timestamp, timestampPrefix);
         _item[keyMap.timestamp] = timestamp;
 

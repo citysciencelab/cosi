@@ -93,7 +93,7 @@ export default {
                                 :title="getValueTooltip(item, header, year)"
                                 :class="getValueClass(item, header, year)"
                             >
-                                {{ getValue(item, header, year, selectedDistrictLevel.districts) }}
+                                {{ getValue(item, header, year, selectedDistrictLevel.districts).toLocaleString(currentLocale) }}
                             </span>
                         </li>
                     </ul>
@@ -110,7 +110,7 @@ export default {
                         :title="getValueTooltip(item, header, currentTimestamp)"
                         :class="getValueClass(item, header, currentTimestamp)"
                     >
-                        {{ getValue(item, header, currentTimestamp, selectedDistrictLevel.districts) }}
+                        {{ getValue(item, header, currentTimestamp, selectedDistrictLevel.districts).toLocaleString(currentLocale) }}
                     </span>
                 </template>
             </div>

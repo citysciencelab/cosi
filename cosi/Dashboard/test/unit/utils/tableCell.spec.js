@@ -46,11 +46,11 @@ describe("Dashboard/utils/tableCells", () => {
         });
 
         it("should return the parsed value", () => {
-            expect(getValue.call({currentLocale: "de-DE"}, item, header, timestamp)).to.be.equal("2.266");
+            expect(getValue.call({currentLocale: "de-DE"}, item, header, timestamp)).to.be.equal(2266);
         });
 
         it("should return the calculated value", () => {
-            expect(getValue(itemTwo, {value: "Wolkenkuckucksheim"}, timestamp, selectedDistrictLevel.districts)).to.be.equal("16,32");
+            expect(getValue(itemTwo, {value: "Wolkenkuckucksheim"}, timestamp, selectedDistrictLevel.districts)).to.be.equal(16.32);
         });
     });
 
