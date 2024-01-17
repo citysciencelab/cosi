@@ -6,10 +6,10 @@ const getters = {
      */
     getVisitorTypesChartJsData: (state) => (chartType, year) => {
         const labels = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true}),
-            data_residents = state.visitorTypesByYearAndTypeComplete[year].Einwohner.map(d => d.sum),
-            data_commuter = state.visitorTypesByYearAndTypeComplete[year].Pendler.map(d => d.sum),
-            data_tourists_day = state.visitorTypesByYearAndTypeComplete[year].Tagestouristen.map(d => d.sum),
-            data_tourists_overnight = state.visitorTypesByYearAndTypeComplete[year].Übernachtungstouristen.map(d => d.sum);
+            data_residents = state.visitorTypesByYearAndTypeComplete[year]?.Einwohner.map(d => d.sum),
+            data_commuter = state.visitorTypesByYearAndTypeComplete[year]?.Pendler.map(d => d.sum),
+            data_tourists_day = state.visitorTypesByYearAndTypeComplete[year]?.Tagestouristen.map(d => d.sum),
+            data_tourists_overnight = state.visitorTypesByYearAndTypeComplete[year]?.Übernachtungstouristen.map(d => d.sum);
 
         let chartData;
 

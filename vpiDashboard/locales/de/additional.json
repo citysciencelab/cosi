@@ -106,6 +106,7 @@
           }
         },
         "tab": {
+          "noData": "(Daten noch nicht verfügbar)",
           "dwelltime": {
             "chartTitle": "Verweildauer in % pro Jahr",
             "lineBarChartTitle": "Ø wöchentliche Verweildauer je Besucher pro Monat im Jahr {{year}}"

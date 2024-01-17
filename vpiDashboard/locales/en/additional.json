@@ -106,6 +106,7 @@
           }
         },
         "tab": {
+          "noData": "(no data yet available)",
           "dwelltime": {
             "chartTitle": "Dwell time in % per year",
             "lineBarChartTitle": "Ø weekly dwell time per visitor per month in year {{year}}"

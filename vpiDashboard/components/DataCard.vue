@@ -92,13 +92,13 @@ export default {
 
             // Cards for Tab "Visitor Types"
             if (this.detail === "visitorTypeCommutersPerWeek" && this.visitorTypesByTypeAndYear?.Pendler) {
-                return this.visitorTypesByTypeAndYear.Pendler[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+                return this.visitorTypesByTypeAndYear.Pendler[this.currentYearIndex + 2019]?.toLocaleString(this.currentLocale) ?? "n/a";
             }
             if (this.detail === "visitorTypeResidentsPerWeek" && this.visitorTypesByTypeAndYear?.Einwohner) {
-                return this.visitorTypesByTypeAndYear.Einwohner[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+                return this.visitorTypesByTypeAndYear.Einwohner[this.currentYearIndex + 2019]?.toLocaleString(this.currentLocale) ?? "n/a";
             }
             if (this.detail === "visitorTypeTouristsPerWeek" && this.visitorTypesByTypeAndYear?.Touristen) {
-                return this.visitorTypesByTypeAndYear.Touristen[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+                return this.visitorTypesByTypeAndYear.Touristen[this.currentYearIndex + 2019]?.toLocaleString(this.currentLocale) ?? "n/a";
             }
 
             return null;

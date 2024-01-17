@@ -24,7 +24,8 @@ export default {
                 bar: {},
                 line: {}
             },
-            dataCardIndex: new Date().getFullYear() - 2019
+            dataCardIndex: new Date().getFullYear() - 2019,
+            noDataAvailable: ""
         };
     },
     computed: {
@@ -86,6 +87,14 @@ export default {
         async getCurrentChartData () {
             this.chartdata.bar = this.getVisitorTypesChartJsData("bar", this.yearList[this.dataCardIndex]);
             this.chartdata.line = this.getVisitorTypesChartJsData("line", this.yearList[this.dataCardIndex]);
+
+            if (!this.chartdata.bar.datasets || !this.chartdata.bar.datasets[0].data || this.chartdata.bar.datasets[0].data.length === 0) {
+
+                this.noDataAvailable = this.$t("additional:modules.tools.vpidashboard.tab.noData");
+            }
+            else {
+                this.noDataAvailable = "";
+            }
         },
         changeIndex (index) {
             this.dataCardIndex = index;
@@ -108,6 +117,12 @@ export default {
                     :start-value-index="yearList.length - 1"
                     @pager="changeIndex"
                 />
+                <span
+                    v-if="noDataAvailable !== ''"
+                    class="noDataAvailableMessage"
+                >
+                    {{ noDataAvailable }}
+                </span>
                 <div
                     v-if="hasEntry"
                     class="row cards"
@@ -188,6 +203,13 @@ export default {
 <style scoped>
 h3 {
     margin: 0 0 1rem 0;
+}
+.visitortypestab {
+    text-align: center;
+}
+.visitortypestab .noDataAvailableMessage {
+    font-size: 16px;
+    font-weight: normal;
 }
 .charts {
     margin: 0 0 1rem 0;

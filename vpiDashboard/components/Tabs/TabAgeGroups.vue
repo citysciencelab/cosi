@@ -77,7 +77,8 @@ export default {
             },
             timestamp: null,
             showChart: false,
-            currentlySelectedYear: new Date().getFullYear()
+            currentlySelectedYear: new Date().getFullYear(),
+            noDataAvailable: ""
         };
     },
     computed: {
@@ -126,6 +127,13 @@ export default {
             this.chartdata.line.labels = this.ageGroupxLabels;
             this.chartdata.pie.datasets = this.ageGroupsYearlyData[this.currentlySelectedYear];
             this.chartdata.pie.labels = this.ageGroupPieChartLabels;
+
+            if (!this.chartdata.pie.datasets || this.chartdata.pie.datasets.length === 0) {
+                this.noDataAvailable = this.$t("additional:modules.tools.vpidashboard.tab.noData");
+            }
+            else {
+                this.noDataAvailable = "";
+            }
         },
         /**
          * define, which charttype shall be displayed
@@ -185,6 +193,12 @@ export default {
                                     :start-value-index="yearList.length - 1"
                                     @pager="changeIndex"
                                 />
+                                <span
+                                    v-if="noDataAvailable !== ''"
+                                    class="noDataAvailableMessage"
+                                >
+                                    {{ noDataAvailable }}
+                                </span>
                                 <PiechartItem
                                     v-if="showChart"
                                     ref="pieChart"
@@ -257,6 +271,12 @@ export default {
     .charts {
         margin: 0 0 1rem 0;
         padding: 1rem;
+        text-align: center;
+    }
+
+    .charts .noDataAvailableMessage {
+        font-size: 16px;
+        font-weight: normal;
     }
 
     .piechart {

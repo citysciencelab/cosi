@@ -47,7 +47,8 @@ export default {
                         }
                     }
                 }
-            }
+            },
+            noDataAvailable: ""
         };
     },
     computed: {
@@ -104,6 +105,13 @@ export default {
             this.chartdata.bar = this.getDwellTimeChartJsData("bar", this.currentlySelectedYear);
             this.chartdata.line = this.getDwellTimeChartJsData("line", this.currentlySelectedYear);
             this.chartdata.pie = this.getDwellTimeChartJsData("pie", this.currentlySelectedYear);
+
+            if (this.chartdata.pie.datasets[0]?.data.length === 0) {
+                this.noDataAvailable = this.$t("additional:modules.tools.vpidashboard.tab.noData");
+            }
+            else {
+                this.noDataAvailable = "";
+            }
         },
         /**
          * reacts on the change of the year paginator
@@ -148,6 +156,12 @@ export default {
                         :start-value-index="yearList.length - 1"
                         @pager="changeIndex"
                     />
+                    <span
+                        v-if="noDataAvailable !== ''"
+                        class="noDataAvailableMessage"
+                    >
+                        {{ noDataAvailable }}
+                    </span>
                     <!-- Pie Chart -->
                     <PiechartItem
                         ref="pieChart"
@@ -214,6 +228,12 @@ h3 {
 
 .charts {
     margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+.charts .noDataAvailableMessage {
+    font-size: 16px;
+    font-weight: normal;
 }
 
 .piechart {

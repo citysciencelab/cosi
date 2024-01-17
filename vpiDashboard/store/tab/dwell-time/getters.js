@@ -6,29 +6,37 @@ const getters = {
      */
     getDwellTimeChartJsData: (state) => (chartType, year) => {
         const labels = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true}),
-            data_30_60 = state.dwellTimesPerDate[year]["30-60"].map(d => d.sum),
-            data_60_120 = state.dwellTimesPerDate[year]["60-120"].map(d => d.sum),
-            data_120_240 = state.dwellTimesPerDate[year]["120-240"].map(d => d.sum),
-            data_240 = state.dwellTimesPerDate[year]["240+"].map(d => d.sum),
-            yearSumForPieData = Object.values(state.dwellTimesPerYear[year]).reduce((a, b) => a + b),
-            pieData = [],
-            pieDataLabels = [],
-            pieDataColors = [],
             colors = {
                 "30-60": "#00AA55",
                 "60-120": "#063970",
                 "120-240": "#B381B3",
                 "240+": "#CC3E00"
-            };
+            },
+            pieData = [],
+            pieDataLabels = [],
+            pieDataColors = [];
 
-        Object.keys(state.dwellTimesPerYear[year]).forEach(dwellTimeGroup => {
-            // Round and also show trailing zeros, e.g. 18 becomes 18,0
-            pieData.push((Math.round(state.dwellTimesPerYear[year][dwellTimeGroup] * 100 / yearSumForPieData * 10) / 10).toFixed(1));
-            pieDataColors.push(colors[dwellTimeGroup]);
-            pieDataLabels.push(dwellTimeGroup);
-        });
+        let data_30_60 = [],
+            data_60_120 = [],
+            data_120_240 = [],
+            data_240 = [],
+            yearSumForPieData = -1,
+            chartData;
 
-        let chartData;
+        if (state.dwellTimesPerDate[year]) {
+            data_30_60 = state.dwellTimesPerDate[year]["30-60"].map(d => d.sum);
+            data_60_120 = state.dwellTimesPerDate[year]["60-120"].map(d => d.sum);
+            data_120_240 = state.dwellTimesPerDate[year]["120-240"].map(d => d.sum);
+            data_240 = state.dwellTimesPerDate[year]["240+"].map(d => d.sum);
+            yearSumForPieData = Object.values(state.dwellTimesPerYear[year]).reduce((a, b) => a + b);
+
+            Object.keys(state.dwellTimesPerYear[year]).forEach(dwellTimeGroup => {
+                // Round and also show trailing zeros, e.g. 18 becomes 18,0
+                pieData.push((Math.round(state.dwellTimesPerYear[year][dwellTimeGroup] * 100 / yearSumForPieData * 10) / 10).toFixed(1));
+                pieDataColors.push(colors[dwellTimeGroup]);
+                pieDataLabels.push(dwellTimeGroup);
+            });
+        }
 
         switch (chartType) {
             case "pie":
