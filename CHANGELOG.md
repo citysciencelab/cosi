@@ -3,17 +3,7 @@
 
 [Semantic versioning](https://semver.org/spec/v2.0.0.html) is used.
 
-## Unreleased - in development
-### __Breaking Changes__
-
-### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
+## v2.41.2 - 2024-01-18
 ### Fixed
 - Boris: In the Calculation tab, the building position is only displayed for EFH
 
