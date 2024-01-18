@@ -98,14 +98,19 @@ export default {
                         newValue === "GR Grünland" ||
                         newValue === "EGA Erwerbsgartenanbaufläche" ||
                         newValue === "F forstwirtschaftliche Fläche" ||
-                        newValue === "LAD Läden (eingeschossig)"
-                    ) {
+                        newValue === "LAD Läden (eingeschossig)") {
                         if (oldValue === "MFH Mehrfamilienhäuser" ||
                             oldValue === "GH Geschäftshäuser (mehrgeschossig, Wertanteil Erdgeschoss)" ||
                             oldValue === "BH Bürohäuser") {
                             this.setButtonValue("info");
                         }
                     }
+                }
+                if (newValue === "EFH Ein- und Zweifamilienhäuser") {
+                    this.setSelectedBuildDesign("eh Einzelhaus (freistehend)");
+                }
+                else {
+                    this.setSelectedBuildDesign("");
                 }
                 this.matchPolygonFeatureWithLanduse({feature: this.selectedPolygon, selectedLanduse: newValue});
             }

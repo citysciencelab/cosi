@@ -15,6 +15,7 @@
 ### Removed
 
 ### Fixed
+- Boris: In the Calculation tab, the building position is only displayed for EFH
 
 ## v2.39.0 - 2023-11-01
 ### Added
