@@ -507,7 +507,7 @@ export default {
                 exportData = withDetails ? prepareDetailsExport(data, this.filterProps) : prepareTableExport(data),
                 filename = composeFilename(this.$t("additional:modules.tools.cosi.featuresList.exportFilename"));
 
-            exportXlsx(exportData, filename, {exclude: this.excludedPropsForExport});
+            exportXlsx([], exportData, filename, {exclude: this.excludedPropsForExport});
         },
 
         /**

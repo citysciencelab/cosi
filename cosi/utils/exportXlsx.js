@@ -33,7 +33,8 @@ export function parseJsonToXlsx (header, json, options, workbook, conversionType
         });
         return;
     }
-    const sheetname = options.sheetname.substring(0, 31) || "Neues Arbeitsblatt", // no names longer than 31 chars allowed
+
+    const sheetname = typeof options?.sheetname === "string" ? options.sheetname.substring(0, 31) : "Neues Arbeitsblatt", // no names longer than 31 chars allowed
         colOptions = options.colOptions || header ? generateColOptions(header, options.multiplyColWidth) : undefined,
         rowOptions = options.rowOptions,
         sheet = XLSX.utils[conversionType](json, {header});
