@@ -8,6 +8,9 @@
 
 ### Added
 
+### Fixed
+- SchoolRoutePlanning: Fixed showing the route with OL 8.2.0.
+
 ### Changed
 
 ### Deprecated

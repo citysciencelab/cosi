@@ -140,11 +140,13 @@ export default {
      */
     parseRoute ({commit}, routeEdges) {
         const wktParser = new WKT(),
-            multiLineString = new MultiLineString({});
+            lineStringArray = [];
+        let multiLineString = "";
 
         routeEdges.forEach(routePart => {
-            multiLineString.appendLineString(wktParser.readGeometry(routePart.wkt));
+            lineStringArray.push(wktParser.readGeometry(routePart.wkt));
         });
+        multiLineString = new MultiLineString(lineStringArray);
 
         commit("setRouteGeometry", multiLineString);
     }
