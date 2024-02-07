@@ -9,13 +9,18 @@
 ### Added
 
 ### Fixed
-- SchoolRoutePlanning: Fixed showing the route with OL 8.2.0.
 
 ### Changed
 
 ### Deprecated
 
 ### Removed
+
+---
+## v2.42.0 - 2024-02-07
+
+### Fixed
+- SchoolRoutePlanning: Fixed showing the route with OL 8.2.0.
 
 ---
 ## v2.41.2 - 2024-01-18
