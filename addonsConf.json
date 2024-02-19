@@ -214,9 +214,6 @@
   "wholeCityList": {
     "type": "tool"
   },
-  "statisticDashboard": {
-    "type": "tool"
-  },
   "TemplateAdmin": {
     "path": "cosi/TemplateAdmin",
     "type": "tool"
