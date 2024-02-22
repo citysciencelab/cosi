@@ -12,7 +12,14 @@ export default {
     },
     computed: {
         ...mapGetters(["uiStyle"]),
-        ...mapGetters("Tools/SaveSelection", ["layerVisibilities", "layerIds", "layerTransparencies"])
+        ...mapGetters("Tools/SaveSelection", ["layerVisibilities", "layerIds", "layerTransparencies"]),
+        cssVars () {
+            return {
+                "--buttonColor": this.feature.getMappedProperties().ButtonBackgroundColor,
+                "--buttonFontColor": this.feature.getMappedProperties().ButtonTextColor,
+                "--buttonHoverColor": this.feature.getMappedProperties().ButtonBackgroundHoverColor
+            };
+        }
     },
     methods: {
         /**
@@ -103,7 +110,10 @@ export default {
 
 
 <template>
-    <div class="dipas-gfi-content">
+    <div
+        class="dipas-gfi-content"
+        :style="cssVars"
+    >
         <div class="dipas-gfi-icon">
             <img
                 :src="calculateIconPath(feature.getMappedProperties().Kategorie)"
@@ -149,6 +159,7 @@ export default {
     .dipas-gfi-content {
         margin: 12px;
         font-family: $font_family_default;
+        max-width: 400px;
         .dipas-gfi-thema {
             font-family: $font_family_default;
             font-size: 14px;
@@ -182,12 +193,15 @@ export default {
             border-radius: 2px;
             margin-top: 20px;
             padding: 7px 8px 4px;
-            background-color: $light_red;
-            border-color: #800040;
-            color: $accent_contrast;
+            background-color: var(--buttonColor, #e10019);
+            color: var(--buttonFontColor, #ffffff);
             font-family: $font_family_accent;
             text-transform: uppercase;
             display: inline-block;
+
+            &:hover {
+                    background-color: var(--buttonHoverColor, #b4081b);
+                }
         }
 }
 
