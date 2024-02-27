@@ -11,6 +11,7 @@
 ### Fixed
 
 ### Changed
+- StreetSmart: if started as control, it is not available in 3D mode.
 
 ### Deprecated
 
