@@ -27,6 +27,24 @@
     "valueType": "absolute"
   },
   {
+    "category": "bev_ab56",
+    "value": "Bevölkerung ab 56 Jahren",
+    "group": "Bevölkerung ab x Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_ab56_proz",
+    "value": "Anteil der Bevölkerung ab 56 Jahren",
+    "group": "Bevölkerung ab x Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "relative"
+  },
+  {
     "category": "bev_ab60",
     "value": "Bevölkerung ab 60 Jahren",
     "group": "Bevölkerung ab x Jahren",
@@ -227,6 +245,15 @@
     "valueType": "absolute"
   },
   {
+    "category": "bev_6_bis_u12",
+    "value": "Bevölkerung 6 bis unter 12 Jahren",
+    "group": "Bevölkerung x bis unter 12 Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
     "category": "bev_6_bis_u18",
     "value": "Bevölkerung 6 bis unter 18 Jahren",
     "group": "Bevölkerung x bis unter 18 Jahren",
@@ -256,6 +283,15 @@
   {
     "category": "bev_13_bis_u16",
     "value": "Bevölkerung 13 bis unter 16 Jahren",
+    "group": "Bevölkerung x bis unter 18 Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_12_bis_u18",
+    "value": "Bevölkerung 12 bis unter 18 Jahren",
     "group": "Bevölkerung x bis unter 18 Jahren",
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
@@ -299,6 +335,24 @@
     "valueType": "absolute"
   },
   {
+    "category": "bev_18_bis_u30",
+    "value": "Bevölkerung 18 bis unter 30 Jahren",
+    "group": "Bevölkerung x bis über 18 Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_18_bis_u30_proz",
+    "value": "Anteil der Bevölkerung 18 bis unter 30 Jahren",
+    "group": "Bevölkerung x bis über 18 Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "relative"
+  },
+  {
     "category": "bev_25_bis_u55",
     "value": "Bevölkerung 25 bis unter 55 Jahren",
     "group": "Bevölkerung x bis über 18 Jahren",
@@ -319,6 +373,24 @@
   {
     "category": "bev_26_bis_u66",
     "value": "Bevölkerung 26 bis unter 66 Jahren",
+    "group": "Bevölkerung x bis über 18 Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_30_bis_u56",
+    "value": "Bevölkerung 30 bis unter 56 Jahren",
+    "group": "Bevölkerung x bis über 18 Jahren",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_30_bis_u56_proz",
+    "value": "Anteil der Bevölkerung 30 bis unter 56 Jahren",
     "group": "Bevölkerung x bis über 18 Jahren",
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
@@ -438,6 +510,42 @@
       "category_B": "Bevölkerung insgesamt",
       "modifier": 100
     }
+  },
+  {
+    "category": "bev_65_bis_u80_migrationshintergrund",
+    "value": "Bevölkerung mit Migrationshintergrund 65 bis unter 80 Jahren",
+    "group": "Bevölkerung Migrationshintergrund",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_65_bis_u80_migrationshintergrund_ant_an_altersgrp_proz",
+    "value": "Anteil der Bevölkerung mit Migrationshintergrund 65 bis unter 80 Jahren",
+    "group": "Bevölkerung Migrationshintergrund",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_ab80_migrationshintergrund",
+    "value": "Bevölkerung mit Migrationshintergrund ab 80 Jahren",
+    "group": "Bevölkerung Migrationshintergrund",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
+  },
+  {
+    "category": "bev_ab80_migrationshintergrund_ant_an_altersgrp_proz",
+    "value": "Anteil der Bevölkerung mit Migrationshintergrund ab 80 Jahren",
+    "group": "Bevölkerung Migrationshintergrund",
+    "stat_gebiet": "112233",
+    "stadtteil": "11223344",
+    "bezirk": "1122334455",
+    "valueType": "absolute"
   },
   {
     "category": "gesamt_unter_6",

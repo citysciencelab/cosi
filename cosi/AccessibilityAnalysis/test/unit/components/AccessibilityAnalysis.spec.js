@@ -158,6 +158,9 @@ describe("AccessibilityAnalysis.vue", () => {
                             namespaced: true,
                             actions: {
                                 addNewSelection: () => sinon.stub()
+                            },
+                            getters: {
+                                activeSelection: sinon.stub()
                             }
                         }
                     }

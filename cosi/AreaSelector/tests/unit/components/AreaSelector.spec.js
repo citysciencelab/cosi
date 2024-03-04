@@ -84,6 +84,12 @@ describe("addons/cosi/AreaSelector/components/AreaSelector.vue", () => {
                                 setActive: sinon.stub(),
                                 setGeometry: sinon.stub()
                             }
+                        },
+                        Filter: {
+                            namespaced: true,
+                            mutations: {
+                                setFilterGeometry: sinon.stub()
+                            }
                         }
                     }
                 },
