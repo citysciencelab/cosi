@@ -3,19 +3,10 @@
 
 [Semantic versioning](https://semver.org/spec/v2.0.0.html) is used.
 
-## Unreleased - in development
-### __Breaking Changes__
-
-### Added
-
-### Fixed
+## v2.43.0 - 2024-03-06
 
 ### Changed
 - StreetSmart: if started as control, it is not available in 3D mode.
-
-### Deprecated
-
-### Removed
 
 ---
 ## v2.42.0 - 2024-02-07
