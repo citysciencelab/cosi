@@ -1,4 +1,5 @@
 import {
+    groupDataByKey,
     prepareTableExport,
     prepareTableExportWithTimeline
 } from "../../../utils/export.js";
@@ -45,6 +46,48 @@ describe("Dashboard/utils/export", () => {
 
             expect(exportData).to.be.eql(expectedExportData);
             expect(timestampsCopy).to.be.eql(timestamps);
+        });
+    });
+
+    describe("groupDataByKey", () => {
+        it("should return null if first param is not an array", () => {
+            expect(groupDataByKey(undefined)).to.be.null;
+            expect(groupDataByKey({})).to.be.null;
+            expect(groupDataByKey(null)).to.be.null;
+            expect(groupDataByKey(true)).to.be.null;
+            expect(groupDataByKey(false)).to.be.null;
+            expect(groupDataByKey(1234)).to.be.null;
+            expect(groupDataByKey("1234")).to.be.null;
+        });
+        it("should return null if second param is not a string", () => {
+            expect(groupDataByKey([], undefined)).to.be.null;
+            expect(groupDataByKey([], {})).to.be.null;
+            expect(groupDataByKey([], [])).to.be.null;
+            expect(groupDataByKey([], null)).to.be.null;
+            expect(groupDataByKey([], true)).to.be.null;
+            expect(groupDataByKey([], false)).to.be.null;
+            expect(groupDataByKey([], 1234)).to.be.null;
+        });
+        it("should return an object with key as group key and value the group values", () => {
+            const tmpData = [
+                    {
+                        "foo": "foo",
+                        "bar": "bar1",
+                        "boo": "boo"
+                    },
+                    {
+                        "foo": "fo1",
+                        "bar": "bar2",
+                        "boo": "bo1"
+                    }
+                ],
+                key = "bar",
+                expected = {
+                    "bar1": [{"foo": "foo", "boo": "boo"}],
+                    "bar2": [{"foo": "fo1", "boo": "bo1"}]
+                };
+
+            expect(groupDataByKey(tmpData, key)).to.deep.equal(expected);
         });
     });
 });

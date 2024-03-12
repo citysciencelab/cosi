@@ -31,7 +31,9 @@ const mutations = {
         }
         else {
             state.activeSelection = payload;
+
         }
+
     },
     /**
      * @param {object} state of this component

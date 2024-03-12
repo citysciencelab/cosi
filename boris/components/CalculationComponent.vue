@@ -1,6 +1,4 @@
 <script>
-import {mapMutations} from "vuex";
-import mutations from "../store/mutationsBoris";
 
 export default {
     name: "CalculationComponent",
@@ -44,33 +42,17 @@ export default {
         type: {
             type: String,
             required: true
-        }
-    },
-    methods: {
-        ...mapMutations("Tools/Boris", Object.keys(mutations)),
-        /**
-         * Check if 'Einzelhäuser' or 'Doppelhäuser' are selected to change the option name to singular
-         * @param {String} option is one option of the options of buildingDesigns or positionsToStreet
-         * @return {String} zBauweise that changes the term to singular
-         */
-        checkForBuildingMatch (option) {
-
-            let zBauweise = this.selectedBrwFeature.get("zBauweise");
-            const zStrassenLage = this.selectedBrwFeature.get("zStrassenLage");
-
-            if (this.selectedBrwFeature.get("zBauweise") === "eh Einzelhäuser") {
-                zBauweise = "eh Einzelhaus (freistehend)";
-            }
-            else if (this.selectedBrwFeature.get("zBauweise") === "dh Doppelhaushälften") {
-                zBauweise = "dh Doppelhaushälfte";
-            }
-
-            return option === zBauweise || option === zStrassenLage;
+        },
+        selectedOption: {
+            type: String,
+            default: "",
+            required: false
         }
     }
-
 };
+
 </script>
+
 
 <template>
     <div id="calculation-component">
@@ -82,6 +64,7 @@ export default {
                 <span> {{ title }}</span>
                 <span
                     class="bootstrap-icon bi-question-circle-fill"
+                    role="button"
                     tabindex="0"
                     @click="toggleInfoText(textId)"
                     @keydown.enter="toggleInfoText(textId)"
@@ -89,15 +72,16 @@ export default {
             </dt>
             <dd>
                 <select
+                    :value="selectedOption"
                     class="form-select"
                     :aria-label="$t('additional:modules.tools.boris.landCalculation.ariaLabelBuildingDesigns')"
+                    @select="$emit('select', $event.target.value)"
                     @change="handleChange($event, subject)"
                 >
                     <option
                         v-for="(option, i) in options"
                         :key="i"
                         :value="option"
-                        :selected="checkForBuildingMatch(option)"
                     >
                         {{ option }}
                     </option>
@@ -118,6 +102,7 @@ export default {
                 <span>{{ title }}</span>
                 <span
                     class="bootstrap-icon bi-question-circle-fill"
+                    role="button"
                     tabindex="0"
                     @click="toggleInfoText(textId)"
                     @keydown.enter="toggleInfoText(textId)"

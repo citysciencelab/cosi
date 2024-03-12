@@ -3,15 +3,15 @@ import Tool from "../../../../src/modules/tools/ToolTemplate.vue";
 import {mapGetters, mapMutations} from "vuex";
 import mutations from "../store/mutationsPolygonStyler";
 import getters from "../store/gettersPolygonStyler";
-import WebGLVectorLayerRenderer from "ol/renderer/webgl/VectorLayer.js";
-import {packColor} from "ol/renderer/webgl/shaders";
-import {getModelByAttributes} from "../../utils/radioBridge.js";
 import PolygonStylerSettings from "./PolygonStylerSettings.vue";
+import {getComponent} from "../../../../src/utils/getComponent";
+import ToolInfo from "../../components/ToolInfo.vue";
 
 export default {
     name: "PolygonStyler",
     components: {
         Tool,
+        ToolInfo,
         PolygonStylerSettings
     },
     data () {
@@ -111,11 +111,8 @@ export default {
     created () {
         this.$on("close", () => {
             this.setActive(false);
-            // set the backbone model to active false for changing css class in menu (menu/desktop/tool/view.toggleIsActiveClass)
-            // else the menu-entry for this tool is always highlighted
-            const model = getModelByAttributes({
-                id: this.$store.state.Tools.QueryDistricts.id
-            });
+
+            const model = getComponent(this.storePath.id);
 
             if (model) {
                 model.set("isActive", false);
@@ -140,7 +137,7 @@ export default {
                 features: foundLayer.getSource().getFeatures(),
                 featureAttributes: this.mapAttributes(foundLayer.get("gfiAttributes")),
                 isVisible: true,
-                defaultRenderer: foundLayer.renderer_,
+                defaultStyle: foundLayer.getSource().getFeatures()[0].styleRule.style,
                 styleList: []
             });
         },
@@ -154,43 +151,6 @@ export default {
         differenceOfTwoArrays (arrFirst, arrSecond) {
             return arrFirst.filter(value => !arrSecond.includes(value))
                 .concat(arrSecond.filter(value => !arrFirst.includes(value)));
-        },
-
-        /**
-         * Gets the render functions for styling features based on the passed attribute.
-         * @param {Object[]} styleList - A list of style objects. For each value of the passed attribute a style object is available.
-         * @param {String} attribute - The attribute to be styled by.
-         * @returns {Object} An object with the render functions for the fill and stroke style.
-         */
-        getRenderFunctions (styleList, attribute) {
-            return {
-                fill: {
-                    attributes: {
-                        color: (feature) => {
-                            const style = styleList.find(color => color.attribute === feature.get(attribute));
-
-                            return packColor(style.fill.color);
-                        },
-                        opacity: (feature) => {
-                            const style = styleList.find(color => color.attribute === feature.get(attribute));
-
-                            return style.fill.opacity;
-                        }
-                    }
-                },
-                stroke: {
-                    attributes: {
-                        color: (feature) => {
-                            const style = styleList.find(color => color.attribute === feature.get(attribute));
-
-                            return packColor(style.stroke.color);
-                        },
-                        width: () => {
-                            return 1;
-                        }
-                    }
-                }
-            };
         },
 
         /**
@@ -253,27 +213,27 @@ export default {
                     attribute: value,
                     text: typeof value === "undefined" ? this.$t("additional:modules.tools.cosi.polygonStyler.noData") : value,
                     fill: {
-                        color: "#898989",
-                        opacity: 0
+                        color: "rgb(137, 137, 137, 0.3)"
                     },
                     stroke: {
-                        color: "#898989",
-                        opacity: 1,
-                        width: 2
+                        color: "rgb(137, 137, 137, 0.8)"
                     }
                 };
             });
         },
 
         /**
-         * Sets a renderer to a layer and update the map.
+         * Sets the default style to the features.
          * @param {ol/layer} layer - The layer to render.
-         * @param {ol/renderer/webgl} renderer - The WebGL vector layer renderer.
+         * @param {Object} defaultStyle - Fill color and stroke color in rgba.
          * @returns {void}
          */
-        setRendererToLayer (layer, renderer) {
-            layer.renderer_ = renderer;
-            mapCollection.getMap("2D").renderSync();
+        setFeaturesDefaultStyle (layer, defaultStyle) {
+            layer.getSource().getFeatures().forEach(feature => {
+                feature.set("FILLCOLOR", defaultStyle.polygonFillColor);
+                feature.set("OPACITY", defaultStyle.polygonFillColor[3]);
+                feature.set("STROKECOLOR", defaultStyle.polygonStrokeColor);
+            });
         },
 
         /**
@@ -286,9 +246,12 @@ export default {
          */
         updateStyle ({layer, styleList, selectedAttribute}) {
             if (selectedAttribute) {
-                const renderer = new WebGLVectorLayerRenderer(layer, this.getRenderFunctions(styleList, selectedAttribute));
+                layer.getSource().getFeatures().forEach(feature => {
+                    const style = styleList.find(color => color.attribute === feature.get(selectedAttribute));
 
-                this.setRendererToLayer(layer, renderer);
+                    feature.set("fillColor", style.fill.color);
+                    feature.set("strokeColor", style.stroke.color);
+                });
             }
             this.settingsDialog = false;
         },
@@ -325,6 +288,11 @@ export default {
             #toolBody
         >
             <v-app id="polygon-styler">
+                <ToolInfo
+                    :url="readmeUrl"
+                    :locale="currentLocale"
+                    :summary="$t('additional:modules.tools.cosi.polygonStyler.description')"
+                />
                 <v-select
                     v-model="selectedLayerNameList"
                     class="mb-5"
@@ -359,7 +327,7 @@ export default {
                         <v-btn
                             :title="$t('additional:modules.tools.cosi.polygonStyler.removeButton')"
                             icon
-                            @click="setRendererToLayer(item.layer, item.defaultRenderer)"
+                            @click="setFeaturesDefaultStyle(item.layer, item.defaultStyle)"
                         >
                             <v-icon>mdi-delete</v-icon>
                         </v-btn>

@@ -75,9 +75,14 @@ export default {
                 selection.abv = this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? selection.id.match(/\b([A-Z0-9])/g).join("") + "-" + this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length : selection.id.match(/\b([A-Z0-9])/g).join("");
                 this.addSelection(selection);
                 this.highlightSelection(this.selections.length - 1);
+
             }
         },
-        // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
+        /**
+             * @descriptionwatcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
+             * @param {Integer} value - Index of the new active selection in this.selections
+             * @returns {void}
+             */
         activeSelection (value) {
             if (value !== null) {
                 this.activateSelection(value);
@@ -121,8 +126,16 @@ export default {
                 }
             }
         },
-        // Sets the all selections button active again if the this.selections array changes and updates the selection index
+        /**
+             * @description watcher the length (computed property) of this.selections array
+             * @param {Integer} newValue - new value after length has changed
+             * @param {Integer} oldValue - old value after length has changed
+             * @returns {void}
+             */
         selectionsLength (newValue, oldValue) {
+        // Note on the importance of selectionsLength watcher in the overall structure:
+        // `selections` is indirectly watched through the computed variable selectionsLength
+        // Sets the all selections button active again if the this.selections array changes and updates the selection index
             if ((oldValue && newValue && oldValue < newValue) || (!oldValue && newValue)) {
                 this.inputActiveSelection(newValue - 1);
             }
@@ -131,6 +144,7 @@ export default {
             }
 
             this.allSelectionsPossible = true;
+
         }
     },
     created () {
@@ -170,12 +184,21 @@ export default {
             const vectorSource = new VectorSource({
                     features: this.selections[index].selection
                 }),
-                style = this.openAddon ? new Style({fill: new Fill({color: "rgba(214, 96, 93, 0.35)"}), stroke: new Stroke({color: "#D6605D", width: 1})}) : new Style({stroke: new Stroke({color: "#A8404E", width: 3})}),
+                style = this.openAddon ? new Style({fill: new Fill({color: "rgba(214, 96, 93, 0.35)"}), stroke: new Stroke({color: "#D6605D", width: 1})}) : new Style({fill: new Fill({color: "rgba(255, 255, 255, 0)"}), stroke: new Stroke({color: "#A8404E", width: 3})}),
                 layer = new VectorLayer({
                     name: "selection_manager",
                     source: vectorSource,
                     style: style
                 });
+
+            this.$watch("$store.state.Tools.Print.active", (newVal) => {
+                if (newVal) {
+                    layer.setStyle(() => new Style({fill: new Fill({color: "rgba(255, 255, 255, 0)"}), stroke: new Stroke({color: "#A8404E", width: 6})}));
+                }
+                else {
+                    layer.setStyle(() => style);
+                }
+            });
 
             layer.setZIndex(9999);
             this.map.addLayer(layer);
@@ -270,7 +293,6 @@ export default {
              * @returns {void}
              */
         async setStoredLayersActive (storedLayers) {
-
             //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
                 const layerId = layer.getProperties().id,
@@ -289,7 +311,6 @@ export default {
                     model.set("isSelected", true);
                 }
             });
-
             // a bug in the loaderOverlay.hide() is not working, even if it's fired with a timeOut
             // so here's a very! uncanny workaround to make it work in this case
             await this.$nextTick();
@@ -579,6 +600,8 @@ export default {
                             v-for="(selection, i) in selectionsToMerge"
                             :key="i"
                             class="cache_selection"
+                            role="button"
+                            tabindex="0"
                             @click="inputActiveSelection(i)"
                             @keyup="inputActiveSelection(i)"
                             @mouseover="hoverSelection(i, 'rgba(47, 162, 255, 0.3)')"
@@ -616,13 +639,18 @@ export default {
                                         extended: extendedOptions.includes(i),
                                         hoverHighlight: selectionsToMerge.includes(i)
                                     }"
+                                    role="button"
+                                    tabindex="0"
+                                    :title="selection.id"
                                     @mouseover="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
                                     @focus="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
                                     @mouseleave="resetHovers"
                                     @focusout="resetHovers"
                                 >
                                     <span class="hint">{{ selection.abv }}</span>
-                                    <p>{{ selection.id }}</p>
+                                    <p class="selection_name">
+                                        {{ selection.id }}
+                                    </p>
                                     <ul
                                         class="function_buttons"
                                     >
@@ -890,9 +918,6 @@ export default {
                         border-bottom:1px solid #aaa;
                     }
 
-                    li.grouplevel {
-                    }
-
                     ul.selections {
                         li.selectionlevel {
                             display:flex;
@@ -985,6 +1010,12 @@ export default {
                                 line-height:20px;
                                 margin:5px 6px 5px 0px;
                                 border:1px solid #888;
+                            }
+
+                            p.selection_name {
+                                max-width:250px;
+                                white-space: nowrap;
+                                overflow:hidden;
                             }
 
                             p {

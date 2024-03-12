@@ -79,6 +79,8 @@ export default {
         </div>
         <a
             class="dipas-cockpit-proceedingLink"
+            role="button"
+            tabindex="0"
             @click="onClick(attributes.link)"
             @keyup.enter="onClick(attributes.link)"
         >
@@ -97,6 +99,8 @@ export default {
                 v-for="document in attributes.documentation"
                 :key="document.name"
                 class="dipas-cockpit-document"
+                role="button"
+                tabindex="0"
                 @click="onClick(document.url)"
                 @keyup.enter="onClick(document.url)"
             >

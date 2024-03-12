@@ -1,99 +1,78 @@
-import axios from "axios";
-import {Config} from "../../../../config";
+import apiEndpointService from "../../../apiEndpointService";
 
 const actions = {
-    /* Adresses the WhatALocation API and compares to data points
+    /* Addresses the WhatALocation API and compares to data points
      * @param {Object} commit Commit Object,
      * @param {Object} compareData Object which holds the data to compare
      * @returns {Promise<void>} sets the data in store
      */
     getDataToCompare: async ({commit}, compareData) => {
-        const
-            options = {
-                "Authorization": `Bearer ${Config.whatalocationApi.auth_token}`
-            };
 
-        if (compareData.character === "Verweildauer") {
-            let date = compareData.dates[0];
-
+        // Handle "dwell times"
+        if (compareData.character === "dwellTime") {
             commit("setLoader", true);
-            const
-                urlA = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/dwell-times/?group_by[date]=&location_id=${compareData.location_id}&group_by[DwellTime]&format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseA = await axios.get(urlA, {headers: options});
 
-            commit(`setDwellTime${date.dateName}`, responseA.data);
-            date = compareData.dates[1];
-            // eslint-disable-next-line
             const
-                urlB = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/dwell-times/?group_by[date]=&location_id=${compareData.location_id}&group_by[DwellTime]&format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseB = await axios.get(urlB, {headers: options});
+                responseA = await apiEndpointService.receiveDwellTimes(compareData.location_id, compareData.dates[0].date),
+                responseB = await apiEndpointService.receiveDwellTimes(compareData.location_id, compareData.dates[1].date);
 
+            commit(`setDwellTime${compareData.dates[0].dateName}`, responseA.data);
+            commit(`setDwellTime${compareData.dates[1].dateName}`, responseB.data);
             commit("setLoader", false);
-            commit(`setDwellTime${date.dateName}`, responseB.data);
-
         }
 
-        if (compareData.character === "Individuelle Besucher") {
-            let date = compareData.dates[0];
-
+        // Handle activities
+        if (compareData.character === "activities") {
             commit("setLoader", true);
+
             const
-                urlA = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/daily-aggregated/?group_by[date]=&location_id=${compareData.location_id}&group_by[ReiseArt]&format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseA = await axios.get(urlA, {headers: options});
+                responseA = await apiEndpointService.receiveActivities(compareData.location_id, compareData.dates[0].date),
+                responseB = await apiEndpointService.receiveActivities(compareData.location_id, compareData.dates[1].date);
 
-            commit(`setIndividualVisitors${date.dateName}`, responseA.data);
-
-            date = compareData.dates[1];
-            // eslint-disable-next-line
-            const
-                urlB = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/daily-aggregated/?group_by[date]=&location_id=${compareData.location_id}&group_by[ReiseArt]&format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseB = await axios.get(urlB, {headers: options});
-
+            commit(`setActivities${compareData.dates[0].dateName}`, responseA.data);
+            commit(`setActivities${compareData.dates[1].dateName}`, responseB.data);
             commit("setLoader", false);
-            commit(`setIndividualVisitors${date.dateName}`, responseB.data);
-        }
-        if (compareData.character === "Altersgruppen") {
-            let date = compareData.dates[0];
-
-            commit("setLoader", true);
-            const
-                urlA = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/ages/?&group_by[date]=&location_id=${compareData.location_id}&group_by[age_group]$format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseA = await axios.get(urlA, {headers: options});
-
-            commit(`setAgeGroups${date.dateName}`, responseA.data);
-
-            date = compareData.dates[1];
-            // eslint-disable-next-line
-            const
-                urlB = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/ages/?&group_by[date]=&location_id=${compareData.location_id}&group_by[age_group]$format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseB = await axios.get(urlB, {headers: options});
-
-            commit("setLoader", false);
-            commit(`setAgeGroups${date.dateName}`, responseB.data);
         }
 
+        // Handle "age groups"
+        if (compareData.character === "ageGroup") {
+            commit("setLoader", true);
 
-        if (compareData.character === "Besuchergruppen") {
-            let date = compareData.dates[0];
-
-            commit("setLoader", false);
             const
-                urlA = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/visitor-types/?group_by[date]=&location_id=${compareData.location_id}&group_by[VisitorType]&format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseA = await axios.get(urlA, {headers: options});
+                responseA = await apiEndpointService.receiveAgeGroups(compareData.location_id, compareData.dates[0].date),
+                responseB = await apiEndpointService.receiveAgeGroups(compareData.location_id, compareData.dates[1].date);
 
-            commit(`setVisitorTypes${date.dateName}`, responseA.data);
-
-            date = compareData.dates[1];
-            // eslint-disable-next-line
-            const
-                urlB = `${Config.whatalocationApi.host}${Config.whatalocationApi.basepath}/visitor-types/?group_by[date]=&location_id=${compareData.location_id}&group_by[VisitorType]&format=agg&aggregate[Avg]=num_visitors&pulse=activate&interval=300&transportation=pedestrian&date=${date.date}`,
-                responseB = await axios.get(urlB, {headers: options});
-
+            commit(`setAgeGroups${compareData.dates[0].dateName}`, responseA.data);
+            commit(`setAgeGroups${compareData.dates[1].dateName}`, responseB.data);
             commit("setLoader", false);
-            commit(`setVisitorTypes${date.dateName}`, responseB.data);
+        }
+
+        // Handle "visitor types"
+        if (compareData.character === "visitorTypes") {
+            commit("setLoader", true);
+
+            const
+                responseA = await apiEndpointService.receiveVisitorTypes(compareData.location_id, compareData.dates[0].date),
+                responseB = await apiEndpointService.receiveVisitorTypes(compareData.location_id, compareData.dates[1].date);
+
+            commit(`setVisitorTypes${compareData.dates[0].dateName}`, responseA.data);
+            commit(`setVisitorTypes${compareData.dates[1].dateName}`, responseB.data);
+            commit("setLoader", false);
+        }
+
+        // Handle "hourly data for a day"
+        if (compareData.character === "daily") {
+            commit("setLoader", true);
+
+            const
+                responseA = await apiEndpointService.receiveVisitorsDaily(compareData.location_id, compareData.dates[0].date),
+                responseB = await apiEndpointService.receiveVisitorsDaily(compareData.location_id, compareData.dates[1].date);
+
+            commit(`setActivitiesDaily${compareData.dates[0].dateName}`, responseA.data);
+            commit(`setActivitiesDaily${compareData.dates[1].dateName}`, responseB.data);
+            commit("setLoader", false);
         }
     }
-
 };
 
 export default actions;

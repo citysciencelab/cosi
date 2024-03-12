@@ -21,7 +21,7 @@ Vue.use(Vuetify);
 localVue.use(Vuex);
 
 
-// global.requestAnimationFrame = (fn) => fn();
+global.requestAnimationFrame = (fn) => fn();
 
 describe("addons/cosi/AreaSelector/components/AreaSelector.vue", () => {
     let vuetify, store;
@@ -83,6 +83,12 @@ describe("addons/cosi/AreaSelector/components/AreaSelector.vue", () => {
                             mutations: {
                                 setActive: sinon.stub(),
                                 setGeometry: sinon.stub()
+                            }
+                        },
+                        Filter: {
+                            namespaced: true,
+                            mutations: {
+                                setFilterGeometry: sinon.stub()
                             }
                         }
                     }

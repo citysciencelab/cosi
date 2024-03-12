@@ -39,7 +39,13 @@ describe("addons/dipas/components/DipasTheme.vue", () => {
             modules: {
                 DipasTheme
             },
-            getters: isTable ? gettersTable : getters
+            getters: isTable ? gettersTable : getters,
+            state: {
+                Maps: {
+                    center: [12345, 6789],
+                    zoom: 3
+                }
+            }
         });
         wrapper = shallowMount(DipasTheme, {
             store,
@@ -180,23 +186,23 @@ describe("addons/dipas/components/DipasTheme.vue", () => {
             expect(ret).to.equal("/drupal/de/node/5");
         });
 
-        it("should show path to dipas frontend contribution when table = true", function () {
+        it("should show path to dipas frontend contribution when table = false", function () {
             Object.defineProperty(document, "referrer", {value: "https://localhost:9001/portalconfigs/dipas/#/projektinfo", configurable: true});
 
             createWrapper(false);
 
-            const path = "https://localhost:9001/portalconfigs/dipas/#/contribution/5",
+            const path = "https://localhost:9001/portalconfigs/dipas/#/contribution/5?Map/layerIds=undefined&visibility=undefined&transparency=undefined&Map/center=[12345,6789]&Map/zoomLevel=3",
                 ret = wrapper.vm.modifyContributionLink(wrapper.vm.feature.getMappedProperties().link, wrapper.vm.feature.getMappedProperties().nid);
 
             expect(ret).to.equal(path);
         });
 
-        it("should show path to dipas frontend contribution when table = true and filter = visible", function () {
+        it("should show path to dipas frontend contribution when table = false and filter = visible", function () {
             Object.defineProperty(document, "referrer", {value: "https://localhost:9001/portalconfigs/dipas/#/projektinfo?filter=open&test=true", configurable: true});
 
             createWrapper(false);
 
-            const path = "https://localhost:9001/portalconfigs/dipas/#/contribution/5",
+            const path = "https://localhost:9001/portalconfigs/dipas/#/contribution/5?Map/layerIds=undefined&visibility=undefined&transparency=undefined&Map/center=[12345,6789]&Map/zoomLevel=3",
                 ret = wrapper.vm.modifyContributionLink(wrapper.vm.feature.getMappedProperties().link, wrapper.vm.feature.getMappedProperties().nid);
 
             expect(ret).to.equal(path);

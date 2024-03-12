@@ -1,5 +1,5 @@
-import CompareDashboard from "../../../components/Tabs/CompareDashboard.vue";
-import {shallowMount, createLocalVue} from "@vue/test-utils";
+import TabCompareDashboard from "../../../components/Tabs/TabCompareDashboard.vue";
+import {config, shallowMount, createLocalVue} from "@vue/test-utils";
 import {expect} from "chai";
 import Vuex from "vuex";
 
@@ -7,7 +7,13 @@ const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
-describe("compare dashboard tab component", () => {
+config.mocks.$t = key => key;
+
+/**
+ * Run only these tests via command:
+ * npm run test:vue:watch -- --grep="addons/vpiDashboard/test/ compare dashboard tab component"
+ */
+describe("addons/vpiDashboard/test/ compare dashboard tab component", () => {
     let wrapper = null;
 
     before(() => {
@@ -35,10 +41,10 @@ describe("compare dashboard tab component", () => {
                         getVisitorTypesLocationB () {
                             return {};
                         },
-                        getIndividualVisitorsLocationA () {
+                        getActivitiesLocationA () {
                             return {};
                         },
-                        getIndividualVisitorsLocationB () {
+                        getActivitiesLocationB () {
                             return {};
                         },
                         getAllLocationsArray () {
@@ -64,7 +70,7 @@ describe("compare dashboard tab component", () => {
                         getVisitorTypesToCompare () {
                             return {};
                         },
-                        getIndividualVisitorsToCompare () {
+                        getActivitiesToCompare () {
                             return {};
                         }
                     }
@@ -73,7 +79,7 @@ describe("compare dashboard tab component", () => {
         });
 
         wrapper = shallowMount(
-            CompareDashboard, {
+            TabCompareDashboard, {
                 localVue,
                 store}
         );

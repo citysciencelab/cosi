@@ -23,19 +23,9 @@ export default {
         }
     },
     watch: {
-        currentTabIndex (newVal, oldVal) {
-
-            if (!this.tabItemsComputed[newVal].showLocationSelectMenu && this.tabItemsComputed[oldVal].showLocationSelectMenu) {
-                highlightSelectedLocationOnMap(undefined, this.selectedLocationId);
-            }
-
-            if (this.tabItemsComputed[newVal].showLocationSelectMenu && !this.tabItemsComputed[oldVal].showLocationSelectMenu) {
-                highlightSelectedLocationOnMap(this.selectedLocationId, "clear");
-            }
-
-            if (!this.tabItemsComputed[newVal].showLocationSelectMenu && !this.tabItemsComputed[oldVal].showLocationSelectMenu) {
-                highlightSelectedLocationOnMap(undefined, "clear");
-            }
+        currentTabIndex () {
+            highlightSelectedLocationOnMap(this.selectedLocationId, "clear");
+            this.$store.commit("Tools/VpiDashboard/setSelectLocationBInMap", false);
         }
     },
     methods: {
@@ -70,6 +60,8 @@ export default {
                 <a
                     class="nav-link"
                     :class="{ active: tab.selected }"
+                    role="button"
+                    tabindex="0"
                     @click="selectTab(tab.index)"
                     @keydown="selectTab(tab.index)"
                 >{{ tab.name }}</a>

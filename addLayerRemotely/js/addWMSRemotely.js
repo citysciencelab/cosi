@@ -23,7 +23,7 @@ export default function importLayers (url, layersToLoad, folderName, zoomTo) {
     Radio.trigger("Util", "showLoader");
     axios({
         timeout: 40000,
-        url: url + "?request=GetCapabilities&service=WMS"
+        url: `${url}${url.includes("?") ? "&" : "?"}request=GetCapabilities&service=WMS`
     })
         .then(response => response.data)
         .then((data) => {

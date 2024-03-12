@@ -21,7 +21,7 @@ const state = {
     width: 0.45,
     // ResidentialSimulation specific state
     timelinePrefix: "jahr_",
-    groupsList: ["Bevölkerung", "Bevölkerung Prognose", "Arbeitslose", "Sozialversicherungspflichtige", "SGB II Leistungen", "Verkehr"],
+    groupsList: ["Bevölkerung", "Bevölkerung unter x Jahren", "Bevölkerung ab x Jahren", "Bevölkerung x bis x Jahren", "Bevölkerung x bis unter 18 Jahren", "Bevölkerung Prognose", "Arbeitslose", "Sozialversicherungspflichtige", "SGB II Leistungen", "Verkehr"],
     basePopulationProp: "Bevölkerung insgesamt",
     drawingLayer: null,
     defaults: {
@@ -51,19 +51,19 @@ const state = {
             scaleLabels: ["Anteil", "Alterskohorten"],
             labels: [
                 "Bevölkerung unter 6 Jahren",
-                "Bevölkerung 6 bis unter 10 Jahren",
-                "Bevölkerung 10 bis unter 15 Jahren",
-                "Bevölkerung 15 bis unter 21 Jahren",
-                "Bevölkerung 21 bis unter 45 Jahren",
-                "Bevölkerung 45 bis unter 65 Jahren",
+                "Bevölkerung 6 bis 9 Jahren",
+                "Bevölkerung 10 bis 14 Jahren",
+                "Bevölkerung 15 bis 20 Jahren",
+                "Bevölkerung 21 bis 44 Jahren",
+                "Bevölkerung 45 bis 64 Jahren",
                 "Bevölkerung ab 65 Jahren"
             ],
             type: "BarChart"
         }
     ],
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/residentialsimulation.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/wohnquartiereanlegen.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/011residentialsimulation.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/011wohnquartiereanlegen.md"
     }
 };
 

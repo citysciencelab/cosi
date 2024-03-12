@@ -23,7 +23,7 @@ async function fetchMatrix (sources, destinations, profile, serviceId, fallbackI
         const originalRequest = error.config,
             bkg_url = getServiceUrl(serviceId);
 
-        if (originalRequest.url.indexOf(bkg_url) === 0 && error.response.status !== 200 && !originalRequest._retry) {
+        if (!(error.response?.status === 200) && originalRequest.url.indexOf(bkg_url) === 0 && !originalRequest._retry) {
             originalRequest._retry = true;
             const uri = originalRequest.url.replace(bkg_url, getServiceUrl(fallbackId));
 

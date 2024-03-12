@@ -3,16 +3,17 @@
     "tools": {
       "vpidashboard": {
         "name": "VPI Dashboard",
+        "toggleGridLayer": "Show / hide mobile cells grid",
         "tabitems": {
-          "individuals": "Unique Visitors",
+          "activities": "Activities",
           "gender": "Gender",
           "age": "Age",
           "dwelltime": "Dwell Time",
           "types": "Visitor Types",
           "distance": "Distance",
-          "compare": "Compare Locations",
+          "compare": "Locations Comparison",
           "info": "Informations",
-          "compare_dates": "Compare Dates"
+          "compare_dates": "Time Stamp Comparison"
         },
         "time": {
           "months": [
@@ -41,10 +42,10 @@
         },
         "details": "Details",
         "unique": {
-          "allData": "All data",
-          "uniqueVisitors": "Unique visitors",
-          "dailyOverview": "Average of daily unique visitors",
-          "monthlyOverview": "Average of monthly unique visitors",
+          "allData": "Visitors totally since 2019",
+          "uniqueVisitors": "Activities",
+          "dailyOverview": "Average of daily activities in {{ month }} in {{ year }}",
+          "monthlyOverview": "Number of monthly activities in {{ year }}",
           "hourly": "Visitors on a defined day (hourly)",
           "timeRange": "Visitors on a defined day range (daily)",
           "selectDate": "Please choose a date:",
@@ -52,14 +53,15 @@
           "noValidDate": "No valid date / date range chosen",
           "numberVisitorsHour": "Number of visitors per hour",
           "numberVisitorsDay": "Number of visitors per day",
-          "chartTitleDay": "Data from {{dateValue}}",
+          "chartTitleDay": "Data from {{dayName}}, {{dateValue}}",
           "chartTitleDayRange": "Data from {{dateValueFrom}} to {{dateValueTo}}",
-          "avgVisitorsYear": "Ø unique daily visitors in the year",
-          "avgVisitorsDay": "Ø unique daily visitors on a",
-          "avgVisitorsMonth": "Ø unique daily visitors per month",
+          "avgVisitorsYear": "Total visits per year",
+          "avgVisitorsDay": "Ø visitors in {{ month }} {{ year }} on a",
+          "avgVisitorsMonth": "Number of visitors per month in {{ year }}",
           "selectDataBase": "Choose base data for the graphic:",
           "date": "Date",
-          "resetDate": "choose another date"
+          "resetDate": "choose another date",
+          "noData": "(no data available)"
         },
         "gfi": {
           "street": "Location",
@@ -87,39 +89,67 @@
         "compare": {
           "location": "Location",
           "date": "Date",
+          "hour": "Hour",
           "compare": "Compare",
           "character": "Character",
           "location_comparison": "Location Comparison",
           "date_a": "Base date",
           "date_b": "Compare date",
-          "date_comparison": "Date comparison"
+          "date_comparison": "Date comparison",
+          "selectLocationBinMap": "Activate in order to select location B on map",
+          "deselectLocationBinMap": "Deactivate in order to select location A on map",
+          "noData": "For your selection currently no data is available. Please change characteristic or date!",
+          "chartsubtitle": {
+            "dwelltime": "Ø weekly dwell time per visitor in {{month}} {{year}}",
+            "agegroup": "Ø weekly visitors per age group in {{month}} {{year}}",
+            "visitortypes": "Ø weekly visitors in {{month}} {{year}}"
+          }
         },
         "tab": {
+          "noData": "(no data yet available)",
           "dwelltime": {
-            "chartTitle": "Dwell time in minutes"
+            "chartTitle": "Dwell time in % per year",
+            "lineBarChartTitle": "Ø weekly dwell time per visitor per month in year {{year}}"
           },
           "visitorTypes": {
-            "chartTitle": "Visitor Types",
+            "chartTitle": "Ø weekly visitors per month",
             "chartLabels": {
-              "residents": "Residents",
+              "residents": "Hamburger",
               "commuters": "Commuters",
               "tourists_day": "Day tourists",
               "tourists_overnight": "Overnight tourists"
             },
             "cardLabels": {
-              "residentsPerDay": "Ø Residents per Tag",
-              "commutersPerDay": "Ø Commuters per Tag",
-              "touristsPerDay": "Ø Tourists per Tag"
-            }
+              "residentsPerWeek": "Ø Hamburger per week",
+              "commutersPerWeek": "Ø Commuters per week",
+              "touristsPerWeek": "Ø Tourists per week (*)"
+            },
+            "footnote": "(*) Tourists contain day tourists and overnight tourists."
           },
           "ageGroup": {
-            "chartTitle": "Age groups by year and by year and month",
+            "chartTitle": "Age group in % per year (*)",
             "pieChartTitle": "Age groups by year",
-            "lineBarChartTitle": "Age groups by year and month"
+            "lineBarChartTitle": "Ø weekly visitors per age group and month in year {{year}}",
+            "footnote": "(*) People under 18 years are not displayed. The age group of 18-19 contains data leaks. Therefore the dataset will not be included."
+          },
+          "compareDates": {
+            "dropdown": {
+              "activities": "Visitors of a location on two different days",
+              "daily_hours": "Visitors of a location on two different days (hourly)",
+              "ageGroup": "Age groups",
+              "dwellTime": "Dwell Time",
+              "visitorTypes": "Visitor Types"
+            },
+            "chartsubtitle": {
+              "dwelltime": "Ø weekly dwell time per visitor in {{month1}} {{year1}} and {{month2}} {{year2}}",
+              "agegroup": "Ø weekly visitors per age group in {{month1}} {{year1}} and {{month2}} {{year2}}",
+              "visitortypes": "Ø weekly visitors in {{month1}} {{year1}} and {{month2}} {{year2}}"
+            }
           }
         },
         "locationSelectMenu": {
-            "menuPlaceholder": "Choose a location"
+            "menuPlaceholder": "Choose a location",
+            "label": "Location"
         }
       }
     }

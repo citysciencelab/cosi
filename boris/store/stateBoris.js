@@ -26,9 +26,13 @@
  * @property {Boolean} isProcessFromParametricUrl - true if paremetric URL is being used
  * @property {Object} paramUrlParams - parameters that are used to center map and select relevant options to display data
  * @property {String} buttonValue - html value of button that indicates which further information are displayed
- * @property {Object} buildingDesigns - list of building designs that are options for the Conversion to Individual Property
- * @property {Object} positionsToStreet - list of positions to streets that are options for the Conversion to Individual Property
+ * @property {Object} buildingDesigns - list of building designs that are options for the conversion to individual property
+ * @property {Object} positionsToStreet - list of positions to streets that are options for the conversion to individual property
+ * @property {String} selectedBuildingDesign - is the selected option of building designs
+ * @property {String} selectedPositionToStreet - is the selected option of positions to street
  * @property {String} selectedOption - is the selected option of building designs or positions to street
+ * @property {String} selectedBuildingDesign - is the selected option of building designs
+ * @property {String} selectedPositionToStreet - is the selected option of positions to street
  * @property {String} wpsId - the id of the used web processing service
  * @property {String} fmwProcess - the FME process triggered via the WPS
  */
@@ -60,9 +64,17 @@ const state = {
     isProcessFromParametricUrl: false,
     paramUrlParams: {},
     buttonValue: "info",
-    buildingDesigns: ["eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)", "rm Reihenmittelhaus", "rm Reihenmittelhäuser", "re Reihenendhaus", "g geschlossene Bauweise", "a abweichende Bauweise (Gartenhofhaus)"],
-    positionsToStreet: ["F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück", "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"],
-    selectedOption: "",
+    buildingDesigns: [
+        "eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)",
+        "rm Reihenmittelhaus", "re Reihenendhaus", "g geschlossene Bauweise",
+        "a abweichende Bauweise (Gartenhofhaus)"
+    ],
+    positionsToStreet: [
+        "F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück",
+        "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"
+    ],
+    selectedBuildDesign: "",
+    selectedPositionToStreet: "F Frontlage",
     wpsId: "1001",
     fmwProcess: "BRWConvert.fmw"
 };

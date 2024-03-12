@@ -15,9 +15,9 @@ const sortArrays = {
             return (Number(min) + Number(max)) / 2;
         };
 
-        arr.sort((a, b) => numericalOrder(a) - numericalOrder(b));
+        arr?.sort((a, b) => numericalOrder(a) - numericalOrder(b));
 
-        return arr;
+        return arr ? arr : [];
     },
     /**
      * Sorts the age groups data array
@@ -35,9 +35,9 @@ const sortArrays = {
             return (Number(min) + Number(max)) / 2;
         };
 
-        arr.sort((a, b) => numericalOrder(a) - numericalOrder(b));
+        arr?.sort((a, b) => numericalOrder(a) - numericalOrder(b));
         // eslint-disable-next-line
-        arr = arr.map((range) => range.replace(/[[\]]/g, "")); // Remove brackets
+        arr = arr ? arr.map((range) => range.replace(/[[\]]/g, "")) : []; // Remove brackets
 
         return arr;
     }

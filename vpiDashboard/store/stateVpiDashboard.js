@@ -1,22 +1,24 @@
 import tabVisitorTypesState from "./tab/visitor-types/state";
 import tabCompareDatesState from "./tab/compare/dates/state";
 import tabCompareLocationsState from "./tab/compare/locations/state";
+import tabAgeGroupsState from "./tab/age-groups/state";
+import tabDwellTimeState from "./tab/dwell-time/state";
 
 const state = {
     id: "vpiDashboard",
     active: false,
     name: "translate#additional:modules.tools.vpiDashboard.title",
     icon: "bi-graph-up",
-    renderToWindow: true,
+    renderToWindow: false,
     resizableWindow: true,
     isVisibleInMenu: true,
     deactivateGFI: false,
-    frequencyData: undefined,
+    mobileCellsGeoJSON: "",
     chartData: "overview",
     allDataClicked: true,
-    averageVisitorsPerMonth: [],
+    sumVisitorsPerMonth: [],
     averageVisitorsPerDay: [],
-    individualVisitorsPerYear: "",
+    activitiesPerYear: "",
     allLocationsGeoJson: undefined,
     allLocationsArray: [],
     barChartDailyData: [],
@@ -26,20 +28,13 @@ const state = {
     barChartData: {},
     lineChartData: {},
     showLoader: false,
-    dwellTimesComplete: [],
-    dwellTimesPerTime: {},
-    dwellTimesPerDate: {},
-    allAgeGroupsData: [],
-    allAgeGroupsMonthlyData: [],
-    allAgeGroupsMonthlyDataLine: [],
-    ageGroupsYearlyData: [],
-    ageGroupxLabels: [],
-    allAgeGroupsYears: [],
-    ageGroupPieChartLabels: ["20-29", "30-39", "40-49", "50-59", "60-69", ">69"],
     selectedLocationId: "",
+    activityData: {},
     ...tabVisitorTypesState,
     ...tabCompareDatesState,
-    ...tabCompareLocationsState
+    ...tabCompareLocationsState,
+    ...tabAgeGroupsState,
+    ...tabDwellTimeState
 };
 
 export default state;

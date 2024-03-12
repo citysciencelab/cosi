@@ -10,6 +10,8 @@
  * @property {Boolean} [resizableWindow=false] - If True, window is resizable (config-param).
  * @property {object} toolBridgeIn: {settings: {}, type: "", outputCallback: ()=>{}} accepts settings from toolBridge (must have a *watcher*)
  * @property {object} toolBridgeOut: {}  pass current settings to toolBridge (must have a *getter*)
+ * @property {String} prefixExportFilename - The prefix of exported file name.
+ * @property {Object} columnHeader - The column header object
  */
 const state = {
     active: false,
@@ -22,14 +24,19 @@ const state = {
     resizableWindow: true,
     excludedPropsForExport: ["visualized", "expanded", "years", "groupIndex"],
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/dashboard_en.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/dashboard.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/016statistischedatenuebersicht.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/016statistischedatenuebersicht.md"
     },
     statsFeatureFilter: [],
     calculations: [],
+    reportTemplateMode: null,
     // these two variables are required to make this addon compatible with the toolBridge addon (for details see toolBridge documentation)
     toolBridgeIn: {settings: {}, type: "", outputCallback: null}, // accepts settings from toolBridge - must have a *watcher*
-    toolBridgeOut: {} // pass current settings to toolBridge - must have a *getter*
+    toolBridgeOut: {}, // pass current settings to toolBridge - must have a *getter*,
+    prefixExportFilename: "CoSI",
+    columnHeader: {},
+    ignoreColumnsByExport: false,
+    exportGrouped: false
 };
 
 export default state;

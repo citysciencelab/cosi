@@ -424,10 +424,10 @@ const actions = {
             "zEntwicklungszustand": feature.get("entwicklungszustand"), // Mandatory attribute for WPS
             "zBeitragszustand": feature.get("beitragszustand"), // Mandatory attribute for WPS
             "zNutzung": feature.get("nutzung_kombiniert"), // Mandatory attribute for WPS
-            "zBauweise": feature.get("anbauart") !== "" ? feature.get("anbauart") : null,
+            "zBauweise": state.selectedBuildDesign !== "" ? state.selectedBuildDesign : null,
             "zGeschossfl_zahl": feature.get("geschossfl_zahl") !== "" ? feature.get("geschossfl_zahl") : null,
             "zGrdstk_flaeche": feature.get("grdstk_flaeche") !== "" ? feature.get("grdstk_flaeche") : null,
-            "zStrassenLage": feature.get("nutzung_kombiniert") === "EFH Ein- und Zweifamilienhäuser" ? "F Frontlage" : null
+            "zStrassenLage": feature.get("nutzung_kombiniert") === "EFH Ein- und Zweifamilienhäuser" ? state.selectedPositionToStreet : null
         });
 
         commit("setSelectedBrwFeature", feature);

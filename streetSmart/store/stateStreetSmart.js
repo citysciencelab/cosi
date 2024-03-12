@@ -30,6 +30,7 @@ const state = {
     isVisibleInMenu: true,
     deactivateGFI: false,
     initialWidth: 500,
+    supportedMapModes: ["2D"],
     serviceId: "streetsmart",
     streetsmartAPIVersion: "22.2",
     reactVersion: "16.12.0",

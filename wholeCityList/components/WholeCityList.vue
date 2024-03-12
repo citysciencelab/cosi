@@ -150,6 +150,8 @@ export default {
             catch (error) {
                 console.error(error);
             }
+
+            tableHeaders[0].click();
         },
         /**
          * Listens to updated selectedLayerList
@@ -467,6 +469,8 @@ export default {
                                                 class="link-style"
                                             >
                                                 <span
+                                                    role="button"
+                                                    tabindex="0"
                                                     @click="openModel(true, linkPrefix, linkHrefKey, splitKey, splitValue)"
                                                     @keydown="openModel(true, linkPrefix, linkHrefKey, splitKey, splitValue)"
                                                 >

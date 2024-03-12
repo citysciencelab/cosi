@@ -158,12 +158,12 @@
     "path":"gfiThemes/wholeCity",
     "type": "gfiTheme"
   },
+  "vpi": {
+       "path": "gfiThemes/vpi",
+       "type": "gfiTheme"
+  },
   "AccessibilityAnalysis": {
     "path": "cosi/AccessibilityAnalysis",
-    "type": "tool"
-  },
-  "AccessibilityAnalysisService": {
-    "path": "cosi/AccessibilityAnalysis/service",
     "type": "tool"
   },
   "DistanceScoreService": {
@@ -212,6 +212,10 @@
     "type": "tool"
   },
   "wholeCityList": {
+    "type": "tool"
+  },
+  "TemplateAdmin": {
+    "path": "cosi/TemplateAdmin",
     "type": "tool"
   }
 }

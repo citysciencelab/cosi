@@ -17,8 +17,8 @@ import {
 import Vuetify from "vuetify";
 import Vue from "vue";
 import Tool from "../../../../../../src/modules/tools/ToolTemplate.vue";
-import {Worker} from "../../../service/isochronesWorker";
-import {readFeatures} from "../../../components/util";
+import {Worker} from "../../../utils/isochronesWorker";
+import GeoJSON from "ol/format/GeoJSON";
 
 global.Worker = Worker;
 
@@ -36,8 +36,7 @@ before(() => {
 
 describe("AccessibilityAnalysis.vue", () => {
     // eslint-disable-next-line no-unused-vars
-    let component, store, clearStub, sandbox, sourceStub, addSingleAlertStub, cleanupStub, vuetify, progressStub, createIsochronesStub,
-        coordiantes = [0, 0];
+    let component, store, clearStub, sandbox, sourceStub, addSingleAlertStub, cleanupStub, vuetify, createIsochronesStub, features;
 
     const mockConfigJson = {
             Portalconfig: {
@@ -54,7 +53,21 @@ describe("AccessibilityAnalysis.vue", () => {
             }
         },
 
+        featuresMock = [{
+            style_: null,
+            getProperties: sinon.stub().returns({
+                id: "label"
+            }),
+            getGeometry: sinon.stub().returns({
+                getType: () => "Point",
+                getCoordinates: () => [0, 0]
+            })
+        }],
+
         layersMock = [{
+            getSource: () => ({
+                getFeatures: sinon.stub().returns(features)
+            }),
             get: (id) => {
                 if (id === "name") {
                     return "LayerName";
@@ -62,25 +75,21 @@ describe("AccessibilityAnalysis.vue", () => {
                 if (id === "id") {
                     return "LayerId";
                 }
-                if (id === "layer") {
-                    return {
-                        getSource: () => ({
-                            getFeatures: sinon.stub().returns([{
-                                style_: null,
-                                getProperties: sinon.stub().returns({
-                                    id: "label"
-                                }),
-                                getGeometry: sinon.stub().returns({
-                                    getType: () => "Point",
-                                    getCoordinates: () => [...coordiantes]
-                                })
-                            }])
-                        })
-                    };
-                }
                 return null;
             }
         }];
+
+    before(() => {
+        global.ShadowRoot = () => "";
+        mapCollection.clear();
+        const map = {
+            id: "ol",
+            mode: "2D",
+            addEventListener: () => sinon.stub()
+        };
+
+        mapCollection.addMap(map, "2D");
+    });
 
     beforeEach(() => {
         vuetify = new Vuetify();
@@ -95,8 +104,9 @@ describe("AccessibilityAnalysis.vue", () => {
         };
         addSingleAlertStub = sinon.stub();
         cleanupStub = sinon.stub();
-        progressStub = sinon.stub();
         createIsochronesStub = sinon.stub();
+        features = [...featuresMock];
+        AccessibilityAnalysis.actions.getIsochrones = () => createIsochronesStub();
 
         store = new Vuex.Store({
             namespaces: true,
@@ -108,21 +118,9 @@ describe("AccessibilityAnalysis.vue", () => {
                         FeaturesList: {
                             namespaced: true,
                             getters: {
-                                isFeatureDisabled: () => sinon.stub(),
+                                isFeatureDisabled: () => sinon.stub().returns(false),
                                 isFeatureActive: () => sinon.stub().returns(true),
-                                activeVectorLayerList: () => sinon.stub()
-                            }
-                        },
-                        AccessibilityAnalysisService: {
-                            namespaced: true,
-                            actions: {
-                                // eslint-disable-next-line no-unused-vars
-                                async getIsochrones ({getters, commit}, params) {
-                                    // return createIsochrones(params, progressStub);
-                                    return createIsochronesStub();
-                                }
-                            },
-                            getters: {
+                                activeVectorLayerList: sinon.stub().returns(layersMock),
                                 progress: () => sinon.stub()
                             }
                         },
@@ -160,6 +158,9 @@ describe("AccessibilityAnalysis.vue", () => {
                             namespaced: true,
                             actions: {
                                 addNewSelection: () => sinon.stub()
+                            },
+                            getters: {
+                                activeSelection: sinon.stub()
                             }
                         }
                     }
@@ -269,7 +270,7 @@ describe("AccessibilityAnalysis.vue", () => {
             createIsochronesStub.throws(error);
         }
         else {
-            createIsochronesStub.returns(readFeatures(data));
+            createIsochronesStub.returns(new GeoJSON().readFeatures(data));
         }
 
         await component.vm.$nextTick();
@@ -297,25 +298,6 @@ describe("AccessibilityAnalysis.vue", () => {
             });
     });
 
-    it("trigger button with wrong input", async () => {
-        const wrapper = await mount(undefined, {error: {response: {data: {error: {code: 3002}}}}});
-
-        wrapper.vm.setCoordinate("10.155828082155567, b");
-        wrapper.vm.setTransportType("Auto");
-        wrapper.vm.setScaleUnit("time");
-        wrapper.vm.setDistance(10);
-
-        await wrapper.vm.createIsochrones();
-
-        sinon.assert.callCount(addSingleAlertStub, 1);
-        expect(addSingleAlertStub.firstCall.args[1]).to.eql(
-            {
-                content: "<strong>additional:modules.tools.cosi.accessibilityAnalysis.showErrorInvalidInput</strong>",
-                category: "Fehler",
-                displayClass: "error"
-            });
-    });
-
     it("trigger button with user input and point selected", async () => {
         const wrapper = await mount([]);
 
@@ -324,43 +306,46 @@ describe("AccessibilityAnalysis.vue", () => {
         wrapper.vm.setScaleUnit("time");
         wrapper.vm.setDistance("10");
         sourceStub.addFeatures.reset();
-        await wrapper.vm.createIsochrones();
+        await wrapper.vm.createAnalysisSet();
 
+        expect(wrapper.vm.isochroneFeatures).to.not.be.empty;
         clearStub.reset();
         expect(wrapper.vm.hide).to.be.false;
-        await wrapper.find("#clear").trigger("click");
+        wrapper.find("#clear").trigger("click");
+        await wrapper.vm.$nextTick();
         expect(wrapper.vm.hide).to.be.true;
-
-        expect(wrapper.vm.askUpdate).to.be.false;
-        wrapper.vm.$root.$emit("updateFeature");
-        expect(wrapper.vm.askUpdate).to.be.false;
     });
 
-    it.skip("trigger button with user input and region selected", async () => {
+    it("trigger button with user input and region selected", async () => {
         const wrapper = await mount(layersMock);
 
         wrapper.vm.setMode("region");
-        wrapper.vm.setTransportType("Auto");
+        wrapper.vm.setTransportType("driving-car");
         wrapper.vm.setScaleUnit("time");
         wrapper.vm.setDistance("10");
-        wrapper.vm.setSelectedFacilityNames("familyName");
-        await wrapper.vm.createIsochrones();
+        wrapper.vm.setSelectedFacilityNames(["LayerName"]);
+        await wrapper.vm.createAnalysisSet();
 
-        expect(wrapper.vm.currentCoordinates).not.to.be.empty;
+        expect(wrapper.vm.isochroneFeatures).to.not.be.empty;
+        clearStub.reset();
 
         // check no update on equal coordinates
         expect(wrapper.vm.askUpdate).to.be.false;
-        wrapper.vm.$root.$emit("updateFeaturesList");
-        expect(wrapper.vm.askUpdate).to.be.false;
-
-        coordiantes = [1, 1];
         wrapper.vm.tryUpdateIsochrones();
-        // wrapper.vm.$root.$emit("updateFeaturesList");
-        expect(wrapper.vm.askUpdate).to.be.true;
-
-        await wrapper.find("#create-isochrones").trigger("click");
-        await wrapper.vm.$nextTick();
         expect(wrapper.vm.askUpdate).to.be.false;
+
+        features.push({
+            style_: null,
+            getProperties: sinon.stub().returns({
+                id: "label"
+            }),
+            getGeometry: sinon.stub().returns({
+                getType: () => "Point",
+                getCoordinates: () => [1, 1]
+            })
+        });
+        wrapper.vm.tryUpdateIsochrones();
+        expect(wrapper.vm.askUpdate).to.be.true;
     });
 });
 

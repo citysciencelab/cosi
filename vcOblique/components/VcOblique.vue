@@ -30,7 +30,8 @@ export default {
             "name",
             "obliqueViewerURL",
             "renderToWindow",
-            "resizableWindow"
+            "resizableWindow",
+            "dataYear"
         ]),
         ...mapGetters("Maps", ["clickCoordinate", "initialCenter"]),
         ...mapGetters({
@@ -76,6 +77,19 @@ export default {
             if (model) {
                 model.set("isActive", false);
             }
+        },
+        /**
+         * translates the given key, checkes if the key exists and throws a console warning if not
+         * @param {String} key the translation-key to lookup
+         * @param {Object} [options=null] for interpolation, formating and plurals
+         * @returns {String} the translation or the key itself on error
+         */
+        translate (key, options = null) {
+            if (key === "additional:" + this.$t(key)) {
+                console.warn("the key " + JSON.stringify(key) + " is unknown to the additional translation");
+            }
+
+            return this.$t(key, options);
         }
     }
 };
@@ -84,7 +98,7 @@ export default {
 
 <template lang="html">
     <ToolTemplate
-        :title="$t(name)"
+        :title="`${translate(name)} ${dataYear}`"
         :icon="icon"
         :active="active"
         :render-to-window="renderToWindow"

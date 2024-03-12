@@ -142,6 +142,7 @@ export default {
                     <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
                     <div
                         class="drop-area"
+                        role="presentation"
                         @drop.prevent="onDrop"
                         @dragover.prevent
                         @dragenter.prevent="onDZDragenter"

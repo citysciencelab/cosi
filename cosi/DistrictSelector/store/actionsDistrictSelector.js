@@ -37,8 +37,7 @@ const actions = {
                             featureTypes: [districtLevel.stats.layers[j].featureType],
                             srsName: rootGetters["Maps/projectionCode"],
                             propertyNames: districtLevel.propertyNameList[j],
-                            // a little temporary hack. will be removed once the attribute "text" has been renamed to "verwaltungseinheit"
-                            filter: districtLevel.stats.layers[j].featureType === "bevoelkerungsprognosen_gesamt_hh" ? equalTo("text", districtName) : equalTo(districtLevel.stats.keyOfAttrName, districtName)
+                            filter: equalTo(districtLevel.stats.keyOfAttrName, districtName)
                         }),
                         olFeatures = wfsFormat.readFeatures(statFeatures);
 
@@ -66,7 +65,7 @@ const actions = {
                 }),
                 // reference districts
                 refDistricts = referenceLevel.districts.filter(district => {
-                    return refNames.includes(district.getName());
+                    return refNames.includes(mapDistrictNames(district.getName(), referenceLevel));
                 });
 
             dispatch("loadStatFeatures", {
@@ -76,13 +75,11 @@ const actions = {
             });
             LoaderOverlay.hide();
         }
-
         else {
             dispatch("updateDistricts");
             dispatch("Alerting/cleanup", null, {root: true});
             LoaderOverlay.hide();
         }
-
     },
 
     setDistrictsByName ({getters, commit}, {districtNames, fromExternal = true, zoomToExtent = true}) {

@@ -1,6 +1,6 @@
 const state = {
-    visitorTypesByDate: [],
-    visitorTypesByTypeAndYear: {}
+    visitorTypesByTypeAndYear: {},
+    visitorTypesByYearAndTypeComplete: {}
 };
 
 export default state;

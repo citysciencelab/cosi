@@ -107,17 +107,6 @@ const getters = {
      */
     selectedStatFeatures: (state, {selectedDistricts}) => {
         return selectedDistricts.map(district => district.statFeatures).flat();
-    },
-
-    /**
-     * Returns the selected districts' labels (analogous to districtNames in state).
-     * @param {Object} state - The DistrictSelector state.
-     * @param {Object} getters - The DistrictSelector getters.
-     * @param {Object} getters.selectedDistricts - The selected districts.
-     * @returns {Object} The selected district labels.
-     */
-    selectedDistrictLabels: (state, {selectedDistricts}) => {
-        return selectedDistricts.map(district => district.getLabel());
     }
 };
 

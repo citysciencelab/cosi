@@ -423,4 +423,159 @@ describe("addons/cosi/Dashboard/components/Dashboard.vue", () => {
             expect(spyUpdateDistricts.callCount).to.equal(1);
         });
     });
+
+    describe("Methods", () => {
+        describe("getSelectedDistrictsLabels", async () => {
+            await factory.initialize(shallowMount);
+
+            const selectedLabels = wrapper.vm.getSelectedDistrictsLabels(selectedDistrictLevel.districts);
+
+            expect(selectedLabels).to.deep.equal(["Wolkenkuckucksheim (Statgebiet)"]);
+        });
+
+        describe("handleOrientationColumn", () => {
+            it("should not add a column for orientation values if no orientation values available", async () => {
+                await factory.initialize(shallowMount);
+
+                wrapper.vm.handleOrientationColumn(false, []);
+                expect(wrapper.vm.aggregateColumns.length).to.be.equal(2);
+            });
+
+            it("should not add a columns for orientation if it already exists", async () => {
+                await factory.initialize(shallowMount);
+
+                wrapper.vm.aggregateColumns.push({value: "orientationValue"});
+                wrapper.vm.handleOrientationColumn(true, wrapper.vm.aggregateColumns);
+                expect(wrapper.vm.aggregateColumns.length).to.be.equal(3);
+            });
+
+            it("should add a column for orientation values", async () => {
+                await factory.initialize(shallowMount);
+
+                wrapper.vm.handleOrientationColumn(true, [1, 2]);
+                expect(wrapper.vm.aggregateColumns.length).to.be.equal(3);
+            });
+
+        });
+
+        describe("getColumnHeader", async () => {
+            it("should return the default value", async () => {
+                await factory.initialize(shallowMount);
+
+                expect(wrapper.vm.getColumnHeader("value")).to.be.equal("value");
+            });
+
+            it("should return the default value if the value is not existed as key", async () => {
+                store = new Vuex.Store({
+                    namespaced: true,
+                    modules: {
+                        Language: {
+                            namespaced: true,
+                            getters: {
+                                currentLocale: () => "en-US"
+                            }
+                        },
+                        Tools: {
+                            namespaced: true,
+                            modules: {
+                                Dashboard: {
+                                    namespaced: true,
+                                    state: {
+                                        columnHeader: {
+                                            "value1": "label1"
+                                        }
+                                    },
+                                    getters: {
+                                        active: () => true,
+                                        name: () => "test",
+                                        icon: () => "bi-speedometer",
+                                        renderToWindow: () => false,
+                                        resizableWindow: () => true,
+                                        isVisibleInMenu: () => true,
+                                        deactivateGFI: () => true,
+                                        columnHeader: (state) => state.columnHeader,
+                                        excludedPropsForExport: () => sinon.stub(),
+                                        readmeUrl: () => "",
+                                        statsFeatureFilter: () => [],
+                                        calculations: () => [],
+                                        reportTemplateMode: () => null,
+                                        toolBridgeIn: () => sinon.stub(),
+                                        toolBridgeOut: () => sinon.stub(),
+                                        prefixExportFilename: () => ""
+                                    }
+                                },
+                                ColorCodeMap: {
+                                    namespaced: true,
+                                    state: {
+                                        selectedYear: 2020,
+                                        playState: false,
+                                        selectedFeature: "",
+                                        visualizationState: false
+                                    },
+                                    getters: {
+                                        selectedYear: s => s.selectedYear,
+                                        playState: s => s.playState,
+                                        selectedFeature: s => s.selectedFeature,
+                                        visualizationState: s => s.visualizationState
+                                    },
+                                    mutations: {
+                                        setSelectedYear (s, p) {
+                                            s.selectedYear = p;
+                                        },
+                                        setPlayState (s, p) {
+                                            s.playState = p;
+                                        },
+                                        setSelectedFeature (s, p) {
+                                            s.selectedFeature = p;
+                                        },
+                                        setVisualizationState (s, p) {
+                                            s.visualizationState = p;
+                                        }
+                                    }
+                                },
+                                DistrictSelector: {
+                                    namespaced: true,
+                                    state: {
+                                        loadend: false
+                                    },
+                                    getters: {
+                                        selectedDistrictLevel: () => selectedDistrictLevel,
+                                        selectedDistrictNames: selectedDistrictNamesStub,
+                                        selectedDistrictLabels: selectedDistrictLabelsStub,
+                                        keyOfAttrNameStats: () => "statgebiet",
+                                        mapping: () => mapping,
+                                        loadend: s => s.loadend
+                                    },
+                                    mutations: {
+                                        addCategoryToMapping: sinon.stub(),
+                                        setLoadend (s, p) {
+                                            s.loadend = p;
+                                        }
+                                    },
+                                    actions: {
+                                        updateDistricts: sinon.stub()
+                                    }
+                                },
+                                ChartGenerator: {
+                                    namespaced: true,
+                                    actions: {
+                                        channelGraphData: sinon.stub()
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    getters: {
+                        isDefaultStyle: () => true,
+                        uiStyle: () => true,
+                        mobile: () => sinon.stub()
+                    }
+                });
+
+                await factory.initialize(shallowMount);
+
+                expect(wrapper.vm.getColumnHeader("value1")).to.be.equal("label1");
+            });
+        });
+    });
 });

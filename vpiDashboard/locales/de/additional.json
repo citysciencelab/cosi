@@ -3,16 +3,17 @@
     "tools": {
       "vpidashboard": {
         "name": "VPI Dashboard",
+        "toggleGridLayer": "Mobilfunkzellengitter anzeigen/ausblenden",
         "tabitems": {
-          "individuals": "Individuelle Besucher",
+          "activities": "Aktivitäten",
           "gender": "Geschlecht",
           "age": "Altersgruppe",
           "dwelltime": "Verweildauer",
           "types": "Besuchertypen",
           "distance": "Entfernung",
-          "compare": "Vergleich Standorte",
+          "compare": "Standorte Vergleichen",
           "info": "Informationen",
-          "compare_dates": "Vergleich Daten"
+          "compare_dates": "Zeitpunkte Vergleichen"
         },
         "time": {
           "months": [
@@ -41,10 +42,10 @@
         },
         "details": "Details",
         "unique": {
-          "allData": "Alle Daten",
-          "uniqueVisitors": "Individuelle Besucher",
-          "dailyOverview": "Durchschnittliche tägliche individuelle Besucher",
-          "monthlyOverview": "Durchschnittliche monatliche individuelle Besucher",
+          "allData": "Besucher Insgesamt seit 2019",
+          "uniqueVisitors": "Aktivitäten",
+          "dailyOverview": "Durchschnittliche tägliche Aktivitäten im {{ month }} im Jahr {{ year }}",
+          "monthlyOverview": "Anzahl der monatlichen Besucher im Jahr {{ year }}",
           "hourly": "Besucher eines bestimmten Tages (stündlich)",
           "timeRange": "Besucher einer bestimmten Zeitspanne (täglich)",
           "selectDate": "Bitte ein Datum wählen:",
@@ -52,14 +53,15 @@
           "noValidDate": "Kein gültiger Zeitpunkt / Zeitraum ausgewählt",
           "numberVisitorsHour": "Anzahl Besucher pro Stunde",
           "numberVisitorsDay": "Anzahl Besucher pro Tag",
-          "chartTitleDay": "Daten vom {{dateValue}}",
+          "chartTitleDay": "Daten von {{dayName}}, den {{dateValue}}",
           "chartTitleDayRange": "Daten vom {{dateValueFrom}} bis zum {{dateValueTo}}",
-          "avgVisitorsYear": "Ø Individuelle tägliche Besucher im Jahr",
-          "avgVisitorsDay": "Ø Individuelle tägliche Besucher an einem",
-          "avgVisitorsMonth": "Ø Individuelle tägliche Besucher pro Monat",
+          "avgVisitorsYear": "Besucher pro Jahr",
+          "avgVisitorsDay": "Ø Besucher im {{ month }} {{ year }} an einem",
+          "avgVisitorsMonth": "Anzahl der Besucher pro Monat im Jahr {{ year }}",
           "selectDataBase": "Datengrundlage für Grafik auswählen:",
           "date": "Datum",
-          "resetDate": "anderes Datum wählen"
+          "resetDate": "anderes Datum wählen",
+          "noData": "(keine Daten verfügbar)"
         },
         "gfi": {
           "street": "Standort",
@@ -87,39 +89,67 @@
         "compare": {
           "location": "Ort",
           "date": "Datum",
-          "compare": "Vergleiche",
+          "hour": "Stunde",
+          "compare": "Vergleichen",
           "character": "Merkmal",
           "location_comparison": "Standortvergleich",
           "date_a": "Basisdatum",
           "date_b": "Vergleichsdatum",
-          "date_comparison": "Vergleich Datumswerte"
+          "date_comparison": "Vergleich Datumswerte",
+          "selectLocationBinMap": "Anklicken um Standort B aus der Karte auszuwählen",
+          "deselectLocationBinMap": "Deaktivieren um Standort A aus der Karte auszuwählen",
+          "noData": "Für Ihre Auswahl sind aktuell keine Daten vorhanden. Bitte verändern Sie Merkmal oder Datum!",
+          "chartsubtitle": {
+            "dwelltime": "Ø wöchentliche Verweildauer je Besucher im {{month}} {{year}}",
+            "agegroup": "Ø wöchentliche Besucher je Altersgruppe im {{month}} {{year}}",
+            "visitortypes": "Ø wöchentliche Besucher im {{month}} {{year}}"
+          }
         },
         "tab": {
+          "noData": "(Daten noch nicht verfügbar)",
           "dwelltime": {
-            "chartTitle": "Verweildauer in Minuten"
+            "chartTitle": "Verweildauer in % pro Jahr",
+            "lineBarChartTitle": "Ø wöchentliche Verweildauer je Besucher pro Monat im Jahr {{year}}"
           },
           "visitorTypes": {
-            "chartTitle": "Besuchertypen",
+            "chartTitle": "Ø wöchentliche Besucher pro Monat",
             "chartLabels": {
-              "residents": "Einwohner",
+              "residents": "Hamburger",
               "commuters": "Pendler",
               "tourists_day": "Tagestouristen",
               "tourists_overnight": "Übernachtungstouristen"
             },
             "cardLabels": {
-              "commutersPerDay": "Ø Pendler pro Tag",
-              "residentsPerDay": "Ø Einwohner pro Tag",
-              "touristsPerDay": "Ø Touristen pro Tag"
-            }
+              "commutersPerWeek": "Ø Pendler pro Woche",
+              "residentsPerWeek": "Ø Hamburger pro Woche",
+              "touristsPerWeek": "Ø Touristen pro Woche (*)"
+            },
+            "footnote": "(*) Touristen beinhalten Tages- und Übernachtungstouristen."
           },
           "ageGroup": {
-            "chartTitle": "Altersgruppen pro Jahr und pro Jahr und Monat",
+            "chartTitle": "Altersgruppe in % pro Jahr (*)",
             "pieChartTitle": "Altersgruppen pro Jahr",
-            "lineBarChartTitle": "Altersgruppen pro Jahr und Monat"
+            "lineBarChartTitle": "Ø wöchentliche Besucher je Altersgruppe pro Monat im Jahr {{year}}",
+            "footnote": "(*) Unter 18 Jährige werden nicht erfasst. In der Altersgruppe der 18-19Jährigen bestehen Datenlücken, weshalb der Datensatz nicht berücksichtigt wurde."
+          },
+          "compareDates": {
+            "dropdown": {
+              "activities": "Besucher eines Standorts an zwei verschiedenen Tagen",
+              "daily_hours": "Besucher eines Standorts an zwei verschiedenen Tagen (stündlich)",
+              "ageGroup": "Altersgruppen",
+              "dwellTime": "Verweildauer",
+              "visitorTypes": "Besuchertypen"
+            },
+            "chartsubtitle": {
+              "dwelltime": "Ø wöchentliche Verweildauer je Besucher im {{month1}} {{year1}} und {{month2}} {{year2}}",
+              "agegroup": "Ø wöchentliche Besucher je Altersgruppe im {{month1}} {{year1}} und {{month2}} {{year2}}",
+              "visitortypes": "Ø wöchentliche Besucher im {{month1}} {{year1}} und {{month2}} {{year2}}"
+            }
           }
         },
         "locationSelectMenu": {
-            "menuPlaceholder": "Standort auswählen"
+            "menuPlaceholder": "Standort auswählen",
+            "label": "Standort"
         }
       }
     }

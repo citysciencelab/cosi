@@ -2,8 +2,11 @@ import TabsComponent from "../../components/DashboardTabs.vue";
 import {shallowMount} from "@vue/test-utils";
 import {expect} from "chai";
 
-
-describe("Tabs component", () => {
+/**
+ * Run only these tests via command:
+ * npm run test:vue:watch -- --grep="addons/vpiDashboard/test/ Tabs component"
+ */
+describe("addons/vpiDashboard/test/ Tabs component", () => {
     let wrapper = null;
 
     beforeEach(() => {

@@ -1,6 +1,6 @@
 /**
  * User type definition
- * @typedef {object} ColorCodeMapState
+ * @typedef {object} selectionmanagerState
  * @property {boolean} active if true, VueAddon will rendered
  * @property {string} id id of the VueAddon component
  * @property {string} name displayed as title (config-param)
@@ -25,10 +25,10 @@ const state = {
     activeSelection: null,
     acceptSelection: null, // other tools can commit to this variable. Then, a new selection is added and set as active.
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/colorcodemap.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/kartenvisualisierung.md",
-        "en": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/colorcodemap.md",
-        "de": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/kartenvisualisierung.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/022selectionmanager.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/022auswahlmanager.md",
+        "en": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/022selectionmanager.md",
+        "de": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/022auswahlmanager.md"
     }
 };
 

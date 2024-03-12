@@ -1,12 +1,19 @@
-import CompareDatesDashboard from "../../../components/Tabs/CompareDatesDashboard.vue";
+import TabCompareDatesDashboard from "../../../components/Tabs/TabCompareDatesDashboard.vue";
 import sortArrays from "../../../utils/sortArrays";
-import {shallowMount, createLocalVue} from "@vue/test-utils";
+import {config, shallowMount, createLocalVue} from "@vue/test-utils";
 import {expect} from "chai";
 import Vuex from "vuex";
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
-describe("compare date dashboard tab component", () => {
+
+config.mocks.$t = key => key;
+
+/**
+ * Run only these tests via command:
+ * npm run test:vue:watch -- --grep="addons/vpiDashboard/test/ compare date dashboard tab component"
+ */
+describe("addons/vpiDashboard/test/ compare date dashboard tab component", () => {
     let wrapper = null;
 
     before(() => {
@@ -34,10 +41,10 @@ describe("compare date dashboard tab component", () => {
                         getVisitorTypesDateB () {
                             return {};
                         },
-                        getIndividualVisitorsDateA () {
+                        getActivitiesDateA () {
                             return {};
                         },
-                        getIndividualVisitorsDateB () {
+                        getActivitiesDateB () {
                             return {};
                         },
                         getAllLocationsArray () {
@@ -63,7 +70,7 @@ describe("compare date dashboard tab component", () => {
         });
 
         wrapper = shallowMount(
-            CompareDatesDashboard, {
+            TabCompareDatesDashboard, {
                 localVue,
                 store}
         );
@@ -82,7 +89,11 @@ describe("compare date dashboard tab component", () => {
     });
 });
 
-describe("sortAgeGroupArray", () => {
+/**
+ * Run only these tests via command:
+ * npm run test:vue:watch -- --grep="addons/vpiDashboard/test/ sortAgeGroupArray"
+ */
+describe("addons/vpiDashboard/test/ sortAgeGroupArray", () => {
     // const sortArray = sortArrays.sortAgeGroupsArray(); // Replace with the correct path to your sortArray file
 
     it("should sort the array with numerical order and eliminate brackets", () => {
@@ -95,7 +106,11 @@ describe("sortAgeGroupArray", () => {
     });
 });
 
-describe("sortDwellTimeArray", () => {
+/**
+ * Run only these tests via command:
+ * npm run test:vue:watch -- --grep="addons/vpiDashboard/test/ sortDwellTimeArray"
+ */
+describe("addons/vpiDashboard/test/ sortDwellTimeArray", () => {
     // const sortArray = sortArrays.sortAgeGroupsArray(); // Replace with the correct path to your sortArray file
 
     it("should sort the array with numerical order and eliminate brackets", () => {

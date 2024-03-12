@@ -1,12 +1,14 @@
 const state = {
-    individualVisitorsDateA: undefined,
-    individualVisitorsDateB: undefined,
+    activitiesDateA: undefined,
+    activitiesDateB: undefined,
     ageGroupsDateA: undefined,
     ageGroupsDateB: undefined,
     dwellTimeDateA: undefined,
     dwellTimeDateB: undefined,
     visitorTypesDateA: undefined,
-    visitorTypesDateB: undefined
+    visitorTypesDateB: undefined,
+    activitiesDailyDateA: undefined,
+    activitiesDailyDateB: undefined
 };
 
 export default state;

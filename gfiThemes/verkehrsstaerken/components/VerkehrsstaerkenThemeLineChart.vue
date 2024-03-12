@@ -31,6 +31,11 @@ export default {
             scaleGridLinesColor: "rgba(0, 0, 0, 1)"
         };
     },
+    computed: {
+        hasHGVsPerWeek: function () {
+            return this.dataset.filter(data => Object.prototype.hasOwnProperty.call(data, "Schwerverkehrsanteil am DTVw")).length > 0;
+        }
+    },
     watch: {
         dataset () {
             this.drawChart();
@@ -104,31 +109,37 @@ export default {
          * @returns {Object} The chart data.
          */
         createChartData: function (dataset, category) {
-            const preparedDataset = this.prepareDataset(dataset, category);
+            const preparedDataset = this.prepareDataset(dataset, category),
+                hasConstructionSiteInfluence = dataset.filter(data => Object.prototype.hasOwnProperty.call(data, "Baustelleneinfluss")).length > 0,
+                chartData = {
+                    labels: preparedDataset.labels,
+                    datasets: [{
+                        borderColor: this.chartColorCircle,
+                        fill: false,
+                        lineTension: 0,
+                        label: this.createDatasetLabel(category),
+                        data: preparedDataset.data,
+                        pointBorderColor: preparedDataset.color,
+                        pointBackgroundColor: preparedDataset.color,
+                        pointRadius: preparedDataset.radius,
+                        pointStyle: preparedDataset.pointStyle
+                    }]
+                };
 
-            return {
-                labels: preparedDataset.labels,
-                datasets: [{
-                    borderColor: this.chartColorCircle,
-                    fill: false,
-                    lineTension: 0,
-                    label: this.createDatasetLabel(category),
-                    data: preparedDataset.data,
-                    pointBorderColor: preparedDataset.color,
-                    pointBackgroundColor: preparedDataset.color,
-                    pointRadius: preparedDataset.radius,
-                    pointStyle: preparedDataset.pointStyle
-                },
-                {
-                    borderColor: this.chartColorRect,
-                    fill: false,
-                    label: this.$t("additional:modules.tools.gfi.themes.verkehrsstaerken.withConstructionSiteInfluence"),
-                    pointBorderColor: this.chartColorRect,
-                    pointBackgroundColor: this.chartColorRect,
-                    pointRadius: this.chartRadiusRect,
-                    pointStyle: this.chartPointStyleRect
-                }]
-            };
+            if (hasConstructionSiteInfluence) {
+                chartData.datasets.push(
+                    {
+                        borderColor: this.chartColorRect,
+                        fill: false,
+                        label: this.$t("additional:modules.tools.gfi.themes.verkehrsstaerken.withConstructionSiteInfluence"),
+                        pointBorderColor: this.chartColorRect,
+                        pointBackgroundColor: this.chartColorRect,
+                        pointRadius: this.chartRadiusRect,
+                        pointStyle: this.chartPointStyleRect
+                    });
+            }
+
+            return chartData;
         },
 
         /**
@@ -332,6 +343,7 @@ export default {
                 {{ $t("additional:modules.tools.gfi.themes.verkehrsstaerken.DTVw") }}
             </button>
             <button
+                v-if="hasHGVsPerWeek"
                 id="Schwerverkehrsanteil am DTVw"
                 type="button"
                 class="btn btn-outline-secondary"

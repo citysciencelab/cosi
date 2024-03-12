@@ -15,7 +15,7 @@ function transformFeatures (features, source, destination) {
         return false;
     }
 
-    features.forEach(function (feature) {
+    features.forEach(feature => {
         const geometry = feature.getGeometry();
 
         if (geometry) {

@@ -207,6 +207,31 @@ describe("ADDONS: addons/boris/components/BorisComponent.vue", () => {
             expect(store.state.Tools.BorisComponent.buttonValue).to.equals("info");
             expect(Boris.actions.matchPolygonFeatureWithLanduse.calledOnce).to.equal(true);
         });
+        it("selectedLanduse shall change selectedBuildDesign to 'EFH Ein- und Zweifamilienhäuser'", () => {
+            const oldValue = "BH Bürohäuser",
+                newValue = "EFH Ein- und Zweifamilienhäuser";
+
+            store.state.Tools.BorisComponent.active = true;
+            store.state.Tools.BorisComponent.buttonValue = "liste";
+            wrapper = shallowMount(BorisComponent, {store, localVue});
+            wrapper.vm.$options.watch.selectedLanduse.call(wrapper.vm, newValue, oldValue);
+
+            expect(store.state.Tools.BorisComponent.buttonValue).to.equals("info");
+            expect(store.state.Tools.BorisComponent.selectedBuildDesign).to.equals("eh Einzelhaus (freistehend)");
+            expect(Boris.actions.matchPolygonFeatureWithLanduse.calledOnce).to.equal(true);
+        });
+        it("selectedLanduse shall change selectedBuildDesign to ''", () => {
+            const oldValue = "EFH Ein- und Zweifamilienhäuser",
+                newValue = "MFH Mehrfamilienhäuser";
+
+            store.state.Tools.BorisComponent.active = true;
+            store.state.Tools.BorisComponent.buttonValue = "liste";
+            wrapper = shallowMount(BorisComponent, {store, localVue});
+            wrapper.vm.$options.watch.selectedLanduse.call(wrapper.vm, newValue, oldValue);
+
+            expect(store.state.Tools.BorisComponent.selectedBuildDesign).to.equals("");
+            expect(Boris.actions.matchPolygonFeatureWithLanduse.calledOnce).to.equal(true);
+        });
     });
     describe("selectedBrwFeature watcher", () => {
         it("selectedBrwFeature: should change buttonValue to 'info'", () => {
@@ -249,15 +274,28 @@ describe("ADDONS: addons/boris/components/BorisComponent.vue", () => {
         });
     });
     describe("handle input and option change methods", () => {
-        it("handleOptionChange", () => {
+        it("handle option change: handleBuildingDesignOptionChange", () => {
             const event = {target: {value: store.state.Tools.BorisComponent.buildingDesigns[1]}, get: () => "value"},
                 subject = "zBauweise";
 
             store.state.Tools.BorisComponent.active = true;
             wrapper = shallowMount(BorisComponent, {store, localVue});
-            wrapper.vm.handleOptionChange(event, subject);
+            wrapper.vm.handleBuildingDesignOptionChange(event, subject);
 
-            expect(store.state.Tools.BorisComponent.selectedOption).to.equal(store.state.Tools.BorisComponent.buildingDesigns[1]);
+            expect(store.state.Tools.BorisComponent.selectedBuildDesign).to.equal(store.state.Tools.BorisComponent.buildingDesigns[1]);
+            expect(Boris.actions.updateSelectedBrwFeature.calledOnce).to.equal(true);
+            expect(Boris.actions.sendWpsConvertRequest.calledOnce).to.equal(true);
+
+        });
+        it("handle option change: handlePositionToStreetOptionChange", () => {
+            const event = {target: {value: store.state.Tools.BorisComponent.positionsToStreet[1]}, get: () => "value"},
+                subject = "zStrassenLage";
+
+            store.state.Tools.BorisComponent.active = true;
+            wrapper = shallowMount(BorisComponent, {store, localVue});
+            wrapper.vm.handlePositionToStreetOptionChange(event, subject);
+
+            expect(store.state.Tools.BorisComponent.selectedPositionToStreet).to.equal(store.state.Tools.BorisComponent.positionsToStreet[1]);
             expect(Boris.actions.updateSelectedBrwFeature.calledOnce).to.equal(true);
             expect(Boris.actions.sendWpsConvertRequest.calledOnce).to.equal(true);
 

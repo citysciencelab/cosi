@@ -1,0 +1,41 @@
+{
+  "modules": {
+    "tools": {
+      "cosi": {
+        "templateAdmin": {
+          "title": "Template Admin",
+          "description": "Create templates for subject-specific analyses. You can configure geodata, statistical data and initial tools in a template. You can also add orientation values to statistical data, which are displayed in the dashboard. Once created, you can export your template and upload it in the \"Templates\" tool.",
+          "button": {
+              "addTemplate": "Add Template",
+              "editTemplate": "Edit Template",
+              "uploadTemplate": "Import Template",
+              "downloadTemplate": "Download Template",
+              "showMore": "show more...",
+              "showLess": "show less..."
+          },
+          "label": {
+            "selectTemplate": "Select Template",
+            "name": "Name",
+            "description": "Description",
+            "addGeoData": "Add Geo Data",
+            "addStatisticalData": "Add statistical data",
+            "addTools": "Add starting Tool",
+            "placeholder": "Select Option",
+            "existingAreas": "existing areas with SozErhVO",
+            "supportedFormats": "supported Formats: JSON"
+          },
+          "errors": {
+            "wrongFormat": "The file is not in the correct format.",
+            "templateName": "A template with the name: ",
+            "isLoaded": "is already loaded."
+          },
+          "required": "Required",
+          "hintName": "Please specify a name for the template.",
+          "hintStatisticData": "Please add statistical data.",
+          "hintNumber": "only contain numbers: 0-9"
+
+        }
+      }
+    }
+  }
+}

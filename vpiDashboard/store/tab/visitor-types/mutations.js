@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 const mutations = {
     /**
      * Sets the visitor types, selected from WhatALocation data.
@@ -10,52 +8,46 @@ const mutations = {
     setVisitorTypes (state, payload) {
         const
             visitorTypesByTypeAndYearComplete = {},
-            visitorTypesByTypeAndYear = {},
-            visitorTypesByDate = {};
-
-        // Group by date
-        payload.forEach(item => {
-
-            // Visitor sum as integer
-            item.sum_num_visitors = Math.floor(item.sum_num_visitors);
-
-            // Grouped by date
-            if (!visitorTypesByDate[item.date]) {
-                visitorTypesByDate[item.date] = [];
-            }
-            visitorTypesByDate[item.date].push(item);
-        });
+            visitorTypesByTypeAndYear = {};
 
         // Prepare "grouped by visitor type and year"
         payload.forEach(item => {
 
-            const year = dayjs(item.date).format("YYYY");
-            let type = item.VisitorType;
+            // get the age groups by year and month
+            const [yearOfEntry, monthOfEntry] = item.date.split("-");
 
-            // Visitor sum as integer
-            item.sum_num_visitors = Math.floor(item.sum_num_visitors);
+            item.sum_num_visitors_origin = item.sum_num_visitors;
+            item.sum_num_visitors = Math.ceil(item.sum_num_visitors / 100) * 100;
 
-            // These types are both consolidated as tourists
-            if (["Tagestouristen", "Übernachtungstouristen"].includes(type)) {
-                type = "Touristen";
+            if (!visitorTypesByTypeAndYearComplete[yearOfEntry]) {
+                visitorTypesByTypeAndYearComplete[yearOfEntry] = {};
             }
 
-            if (!visitorTypesByTypeAndYearComplete[type]) {
-                visitorTypesByTypeAndYearComplete[type] = {};
+            if (!visitorTypesByTypeAndYearComplete[yearOfEntry][item.VisitorType]) {
+                visitorTypesByTypeAndYearComplete[yearOfEntry][item.VisitorType] = [
+                    {index: "01", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "02", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "03", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "04", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "05", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "06", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "07", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "08", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "09", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "10", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "11", sum: "n/a", sumOrig: "n/a", label: item.VisitorType},
+                    {index: "12", sum: "n/a", sumOrig: "n/a", label: item.VisitorType}
+                ];
             }
 
-            if (!visitorTypesByTypeAndYearComplete[type][year]) {
-                visitorTypesByTypeAndYearComplete[type][year] = [];
-            }
-
-            visitorTypesByTypeAndYearComplete[type][year].push(item);
-
+            visitorTypesByTypeAndYearComplete[yearOfEntry][item.VisitorType].find(x=> x.index === monthOfEntry).sum = item.sum_num_visitors;
+            visitorTypesByTypeAndYearComplete[yearOfEntry][item.VisitorType].find(x=> x.index === monthOfEntry).sumOrig = item.sum_num_visitors_origin;
         });
 
         // Sum "grouped by visitor type and year" (daily)
         // Example: {"Touristen": {"2021": 12344, "2022": 4321}, "Pendler": { ... }}
-        Object.keys(visitorTypesByTypeAndYearComplete).forEach(type => {
-            Object.keys(visitorTypesByTypeAndYearComplete[type]).forEach(year => {
+        Object.keys(visitorTypesByTypeAndYearComplete).forEach(year => {
+            Object.keys(visitorTypesByTypeAndYearComplete[year]).forEach(type => {
 
                 if (!visitorTypesByTypeAndYear[type]) {
                     visitorTypesByTypeAndYear[type] = {};
@@ -63,15 +55,31 @@ const mutations = {
                 if (!visitorTypesByTypeAndYear[type][year]) {
                     visitorTypesByTypeAndYear[type][year] = 0;
                 }
-                const sum = visitorTypesByTypeAndYearComplete[type][year].reduce((acc, value) => {
-                    return acc + value.sum_num_visitors;
-                }, 0);
+                // combine Tagestouristen and Übernachtungstouristen to "Touristen" for display in the data cards
+                if (["Tagestouristen", "Übernachtungstouristen"].includes(type)) {
+                    if (!visitorTypesByTypeAndYear.Touristen) {
+                        visitorTypesByTypeAndYear.Touristen = {};
+                    }
+                    if (!visitorTypesByTypeAndYear.Touristen[year]) {
+                        visitorTypesByTypeAndYear.Touristen[year] = 0;
+                    }
+                }
+                const sum = visitorTypesByTypeAndYearComplete[year][type].reduce((acc, value) => {
+                        return value.sumOrig === "n/a" ? acc : acc + value.sumOrig;
+                    }, 0),
+                    filledDates = visitorTypesByTypeAndYearComplete[year][type].filter((val) => val.sum !== "n/a"),
+                    numberOfDatasets = filledDates.length;
 
-                visitorTypesByTypeAndYear[type][year] = Math.round(sum / 365);
+                visitorTypesByTypeAndYear[type][year] = Math.ceil(sum / numberOfDatasets);
+
+                // sum Tagestouristen and Übernachtungstouristen to "Touristen"
+                if (["Tagestouristen", "Übernachtungstouristen"].includes(type)) {
+                    visitorTypesByTypeAndYear.Touristen[year] += Math.ceil(sum / numberOfDatasets);
+                }
             });
         });
 
-        state.visitorTypesByDate = visitorTypesByDate;
+        state.visitorTypesByYearAndTypeComplete = visitorTypesByTypeAndYearComplete;
         state.visitorTypesByTypeAndYear = visitorTypesByTypeAndYear;
     }
 

@@ -31,13 +31,33 @@ export default {
             type: Boolean,
             required: false,
             default: false
+        },
+        subsetYear: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        subsetMonth: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        updateIndex: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        startValueIndex: {
+            type: Number,
+            required: false,
+            default: 0
         }
     },
     data () {
         return {
             currentMonthIndex: 0,
             currentDayIndex: 0,
-            currentYearIndex: 0
+            currentYearIndex: this.startValueIndex
         };
     },
     computed: {
@@ -46,9 +66,9 @@ export default {
         ...mapState(
             "Tools/VpiDashboard",
             [
-                "averageVisitorsPerMonth",
+                "sumVisitorsPerMonth",
                 "averageVisitorsPerDay",
-                "individualVisitorsPerYear",
+                "activitiesPerYear",
                 "visitorTypesByTypeAndYear"
             ]),
         /**
@@ -56,29 +76,29 @@ export default {
          * @returns {String} the average or yearly number of visitors for the current parameters
          */
         statisticSet () {
-            if (this.detail === "monthly" && this.averageVisitorsPerMonth.length > 0) {
-                return this.averageVisitorsPerMonth[this.currentMonthIndex].avg.toLocaleString(this.currentLocale);
+            if (this.detail === "monthly" && Object.keys(this.sumVisitorsPerMonth).length > 0 && Object.keys(this.sumVisitorsPerMonth[this.subsetYear]).length > 0) {
+                return this.sumVisitorsPerMonth[this.subsetYear][this.currentMonthIndex].sum.toLocaleString(this.currentLocale);
             }
-            if (this.detail === "daily" && this.averageVisitorsPerDay.length > 0) {
-                return this.averageVisitorsPerDay[this.currentDayIndex].avg.toLocaleString(this.currentLocale);
+            if (this.detail === "daily" && Object.keys(this.averageVisitorsPerDay).length > 0 && Object.keys(this.averageVisitorsPerDay[this.subsetYear]).length > 0 && Object.keys(this.averageVisitorsPerDay[this.subsetYear][this.subsetMonth]).length > 0) {
+                return this.averageVisitorsPerDay[this.subsetYear][this.subsetMonth][this.currentDayIndex].avg.toLocaleString(this.currentLocale);
             }
-            if (this.detail === "individualVisitors" && this.individualVisitorsPerYear !== "") {
-                const selectedYearData = this.individualVisitorsPerYear.filter((element) => {
-                    return element.date__year === this.currentYearIndex + 2019;
+            if (this.detail === "activities" && this.activitiesPerYear !== "") {
+                const selectedYearData = this.activitiesPerYear.filter((element) => {
+                    return Number(element.date__year) === this.currentYearIndex + 2019;
                 });
 
                 return selectedYearData[0].avg.toLocaleString(this.currentLocale);
             }
 
             // Cards for Tab "Visitor Types"
-            if (this.detail === "visitorTypeCommutersPerDay") {
-                return this.visitorTypesByTypeAndYear.Pendler[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+            if (this.detail === "visitorTypeCommutersPerWeek" && this.visitorTypesByTypeAndYear?.Pendler) {
+                return this.visitorTypesByTypeAndYear.Pendler[this.currentYearIndex + 2019]?.toLocaleString(this.currentLocale) ?? "n/a";
             }
-            if (this.detail === "visitorTypeResidentsPerDay") {
-                return this.visitorTypesByTypeAndYear.Einwohner[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+            if (this.detail === "visitorTypeResidentsPerWeek" && this.visitorTypesByTypeAndYear?.Einwohner) {
+                return this.visitorTypesByTypeAndYear.Einwohner[this.currentYearIndex + 2019]?.toLocaleString(this.currentLocale) ?? "n/a";
             }
-            if (this.detail === "visitorTypeTouristsPerDay") {
-                return this.visitorTypesByTypeAndYear.Touristen[this.currentYearIndex + 2019].toLocaleString(this.currentLocale);
+            if (this.detail === "visitorTypeTouristsPerWeek" && this.visitorTypesByTypeAndYear?.Touristen) {
+                return this.visitorTypesByTypeAndYear.Touristen[this.currentYearIndex + 2019]?.toLocaleString(this.currentLocale) ?? "n/a";
             }
 
             return null;
@@ -94,22 +114,45 @@ export default {
             if (this.detail === "daily") {
                 return this.translate("additional:modules.tools.vpidashboard.time.days", {returnObjects: true});
             }
-            if (this.detail === "individualVisitors") {
-                return [2019, 2020, 2021, 2022, 2023];
+            if (this.detail === "activities") {
+                const thisYear = new Date().getFullYear(),
+                    list = [];
+                let firstYear = 2019;
+
+                while (firstYear <= thisYear) {
+                    list.push(firstYear);
+                    firstYear++;
+                }
+
+                return list;
             }
 
             // Cards for Tab "Visitor Types"
-            if (this.detail === "visitorTypeCommutersPerDay") {
+            if (this.detail === "visitorTypeCommutersPerWeek" && this.visitorTypesByTypeAndYear?.Pendler) {
                 return Object.keys(this.visitorTypesByTypeAndYear.Pendler);
             }
-            if (this.detail === "visitorTypeResidentsPerDay") {
+            if (this.detail === "visitorTypeResidentsPerWeek" && this.visitorTypesByTypeAndYear?.Einwohner) {
                 return Object.keys(this.visitorTypesByTypeAndYear.Einwohner);
             }
-            if (this.detail === "visitorTypeTouristsPerDay") {
+            if (this.detail === "visitorTypeTouristsPerWeek" && this.visitorTypesByTypeAndYear?.Touristen) {
                 return Object.keys(this.visitorTypesByTypeAndYear.Touristen);
             }
 
             return null;
+        }
+    },
+    watch: {
+        updateIndex (newValue, oldValue) {
+            if (newValue !== oldValue) {
+                if (
+                    (this.detail === "visitorTypeCommutersPerWeek" ||
+                    this.detail === "visitorTypeResidentsPerWeek" ||
+                    this.detail === "visitorTypeTouristsPerWeek") &&
+                    this.newValue !== this.currentYearIndex
+                ) {
+                    this.changeIndex(newValue);
+                }
+            }
         }
     },
     methods: {
@@ -126,70 +169,28 @@ export default {
             if (this.detail === "daily") {
                 this.currentDayIndex = index;
             }
-            if (this.detail === "individualVisitors") {
+            if (this.detail === "activities") {
                 this.currentYearIndex = index;
             }
 
             // Cards for Tab "Visitor Types"
             if (
-                this.detail === "visitorTypeCommutersPerDay" ||
-                this.detail === "visitorTypeResidentsPerDay" ||
-                this.detail === "visitorTypeTouristsPerDay"
+                this.detail === "visitorTypeCommutersPerWeek" ||
+                this.detail === "visitorTypeResidentsPerWeek" ||
+                this.detail === "visitorTypeTouristsPerWeek"
             ) {
                 this.currentYearIndex = index;
             }
+
+            this.$emit("indexChanged", index);
         },
         /**
          * calls a store function to change the used chart data base and initiates change in chart and button style
          * @param {String} chartoverview selected chart to be shown
-         * @param {String} title the title of the chart to identify the card and button
          * @returns {void}
          */
-        showChart (chartoverview, title) {
+        showChart (chartoverview) {
             this.changeChart(chartoverview);
-            this.changeChartStyle(title);
-            this.changeButtonStyles(title);
-        },
-        /**
-         * changes the button style if the "details" button on a card has been pressed
-         * @param {String} title the title of the chart to identify the buttonId
-         * @returns {void}
-         */
-        changeButtonStyles (title) {
-            const detailButtonId = "button" + title,
-
-                detailButtons = document.querySelectorAll(".detailButton"),
-                allDataButton = document.getElementById("all-data-button");
-
-            allDataButton.classList.remove("btn-primary");
-            allDataButton.classList.add("btn-secondary");
-
-            detailButtons.forEach(detailButton => {
-                if (detailButton.id === detailButtonId) {
-                    detailButton.classList.remove("btn-secondary");
-                    detailButton.classList.add("buttonClicked");
-                }
-                else {
-                    detailButton.classList.remove("buttonClicked");
-                    detailButton.classList.add("btn-secondary");
-                }
-            });
-        },
-        /**
-         * changes the chart style if the "details" button on a card has been pressed
-         * @param {String} title the title of the chart to identify the cardId
-         * @returns {void}
-         */
-        changeChartStyle (title) {
-            const cardId = "card" + title,
-                cards = document.querySelectorAll(".statistic-card");
-
-            cards.forEach(card => {
-                card.classList.remove("blue-card");
-                if (card.id === cardId) {
-                    card.classList.toggle("blue-card");
-                }
-            });
         },
         /**
          * translates the given key, checkes if the key exists and throws a console warning if not
@@ -211,12 +212,13 @@ export default {
 <template>
     <div
         :id="`card` + title"
-        class="card statistic-card"
+        class="vpicard statistic-card"
     >
         <h4>{{ title }}</h4>
         <div v-if="navigation">
             <DataCardPaginator
                 :paginator-data="paginatorData"
+                :start-value-index="startValueIndex"
                 @pager="changeIndex"
             />
         </div>
@@ -233,7 +235,7 @@ export default {
                 v-if="showDetailsButton"
                 :id="`button` + title"
                 class="btn-secondary detailButton"
-                @click="showChart(`${detail}overview`, title)"
+                @click="showChart(`${detail}overview`)"
             >
                 {{ translate("additional:modules.tools.vpidashboard.details") }}
             </button>
@@ -242,7 +244,7 @@ export default {
 </template>
 
 <style lang="scss">
-.card {
+.vpicard {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -255,14 +257,14 @@ export default {
     border: none;
 }
 
-.card h4 {
+.vpicard h4 {
     font-size: 0.7rem;
     text-align: center;
     margin-bottom: 0;
 
 }
 
-.card .card-buttons {
+.vpicard .card-buttons {
     width: 100%;
     display: flex;
     justify-content: center;

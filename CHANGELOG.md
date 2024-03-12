@@ -9,14 +9,41 @@
 ### Added
 
 ### Changed
-- The version of node was updated, must be `>= 16.13.2 <= 16.20.0`
-- The version of npm was updated, must be `>= 8.1.2 <= 8.19.4`
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+---
+
+## v2.43.0 - 2024-03-06
+
+### Changed
+- StreetSmart: if started as control, it is not available in 3D mode.
+
+---
+## v2.42.0 - 2024-02-07
+
+### Fixed
+- SchoolRoutePlanning: Fixed showing the route with OL 8.2.0.
+
+---
+## v2.41.2 - 2024-01-18
+### Fixed
+- Boris: In the Calculation tab, the building position is only displayed for EFH
+
+---
+## v2.39.0 - 2023-11-01
+### Added
+- The new addon [statisticDashboard](https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/statisticDashboard/) A tool to display statistical data. Further details: [statisticDashboard documentation](https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/statisticDashboard/doc/config.json.md)
+
+---
+## v2.34.0 - 2023-06-07
+### Changed
+- The version of node was updated, must be `>= 16.13.2 <= 16.20.0`
+- The version of npm was updated, must be `>= 8.1.2 <= 8.19.4`
 
 ---
 ## v2.32.0 - 2023-04-05

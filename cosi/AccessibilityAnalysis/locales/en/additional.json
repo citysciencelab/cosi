@@ -14,7 +14,9 @@
                     },
                     "pointOfReference": "Point of reference: click on the map",
                     "setByFeature": "Select facilities as location (use perimeter of polygons)",
+                    "setByFeatureOutline": "Use perimeter of polygons",
                     "setByFeatureInfo": "Uses the vertices of polygons for the calculation. Caution: Can lead to errors with extremely complex surfaces.",
+                    "addMultiplePoints": "Add multiple points for analysis (on/off)",
                     "topic": "Topic",
                     "directions": "Calculated directions",
                     "transportType": "Type of transportation",
@@ -24,7 +26,8 @@
                         "cycling-regular": "Bicycle",
                         "cycling-electric": "Bicycle (electric)",
                         "foot-walking": "Walking",
-                        "wheelchair": "Wheelchair"
+                        "wheelchair": "Wheelchair",
+                        "public-transport": "Public Transit"
                     },
                     "scaleUnit": "Unit of distance",
                     "scaleUnits": {

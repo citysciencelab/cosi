@@ -19,8 +19,17 @@ export default {
         FloorComponent
     },
     computed: {
-        ...mapGetters("Tools/BorisComponent", ["active", "id", "icon", "renderToWindow", "resizableWindow", "initialWidth", "initialWidthMobile", "keepOpen", "filteredLayerList", "isAreaLayer", "isStripesLayer", "textIds", "selectedPolygon", "selectedLayerName", "selectedLanduse", "selectedBrwFeature", "convertedBrw", "buttonValue", "buildingDesigns", "positionsToStreet", "selectedOption", "isProcessFromParametricUrl", "paramUrlParams"]),
-        ...mapGetters("Tools/Print", ["printFileReady", "fileDownloadUrl", "filename", "printStarted", "progressWidth"]),
+        ...mapGetters("Tools/BorisComponent", [
+            "active", "id", "icon", "renderToWindow", "resizableWindow", "initialWidth",
+            "initialWidthMobile", "keepOpen", "filteredLayerList", "isAreaLayer",
+            "isStripesLayer", "textIds", "selectedPolygon", "selectedLayerName",
+            "selectedLanduse", "selectedBrwFeature", "convertedBrw", "buttonValue",
+            "buildingDesigns", "positionsToStreet", "isProcessFromParametricUrl",
+            "paramUrlParams", "selectedBuildDesign", "selectedPositionToStreet"
+        ]),
+        ...mapGetters("Tools/Print", [
+            "printFileReady", "fileDownloadUrl", "filename", "printStarted", "progressWidth"
+        ]),
         /**
          * Gets a list of layers without the stripes-layers
          * @return {Array} filteredListWithoutStripes which is used to select by date
@@ -89,14 +98,19 @@ export default {
                         newValue === "GR Grünland" ||
                         newValue === "EGA Erwerbsgartenanbaufläche" ||
                         newValue === "F forstwirtschaftliche Fläche" ||
-                        newValue === "LAD Läden (eingeschossig)"
-                    ) {
+                        newValue === "LAD Läden (eingeschossig)") {
                         if (oldValue === "MFH Mehrfamilienhäuser" ||
                             oldValue === "GH Geschäftshäuser (mehrgeschossig, Wertanteil Erdgeschoss)" ||
                             oldValue === "BH Bürohäuser") {
                             this.setButtonValue("info");
                         }
                     }
+                }
+                if (newValue === "EFH Ein- und Zweifamilienhäuser") {
+                    this.setSelectedBuildDesign("eh Einzelhaus (freistehend)");
+                }
+                else {
+                    this.setSelectedBuildDesign("");
                 }
                 this.matchPolygonFeatureWithLanduse({feature: this.selectedPolygon, selectedLanduse: newValue});
             }
@@ -128,8 +142,8 @@ export default {
             }
         },
         selectedLayerName () {
-            this.setBuildingDesigns(["eh Einzelhaus (freistehend)", "dh Doppelhaushälfte", " dd Doppelhaus (ganzes Doppelhaus)", "rm Reihenmittelhaus", "rm Reihenmittelhäuser", "re Reihenendhaus", "g geschlossene Bauweise", "a abweichende Bauweise (Gartenhofhaus)"]);
-            this.setPositionsToStreet(["F Frontlage", "E Ecklage", "P Pfeifenstielgrundstück", "H Hinterlage (in 2. Reihe durch Wegerecht erschlossen)"]);
+            this.setBuildingDesigns(this.buildingDesigns);
+            this.setPositionsToStreet(this.positionsToStreet);
         }
     },
     created () {
@@ -179,15 +193,28 @@ export default {
             }
         },
         /**
-         * Handles option-change for individual property conversion
+         * Handles option-change of the building design for the individual property conversion
          * @param {String} event the selected option
          * @param {String} subject contains subject information for the select: building design oder position to street
          * @returns {void}
          */
-        handleOptionChange (event, subject) {
+        handleBuildingDesignOptionChange (event, subject) {
             const eventValue = event.target.value;
 
-            this.setSelectedOption(eventValue);
+            this.setSelectedBuildDesign(eventValue);
+            this.updateSelectedBrwFeature({converted: subject, brw: eventValue});
+            this.sendWpsConvertRequest({state: this});
+        },
+        /**
+         * Handles option-change of positon to street for the individual property conversion
+         * @param {String} event the selected option
+         * @param {String} subject contains subject information for the select: building design oder position to street
+         * @returns {void}
+         */
+        handlePositionToStreetOptionChange (event, subject) {
+            const eventValue = event.target.value;
+
+            this.setSelectedPositionToStreet(eventValue);
             this.updateSelectedBrwFeature({converted: subject, brw: eventValue});
             this.sendWpsConvertRequest({state: this});
         },
@@ -284,6 +311,7 @@ export default {
                     </label>
                     <span
                         class="bootstrap-icon bi-question-circle-fill"
+                        role="button"
                         tabindex="0"
                         @click="toggleInfoText('1')"
                         @keydown.enter="toggleInfoText('1')"
@@ -342,30 +370,30 @@ export default {
                         class="d-flex mb-2"
                     >
                         <button
-                            class="btn btn-primary bi-info-circle-fill col me-1"
-                            :class="(buttonValue === 'info') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-info-circle-fill col me-1"
+                            :class="(buttonValue === 'info') ? 'btn btn-primary' : 'btn btn-default'"
                             value="info"
                             :title="$t('additional:modules.tools.boris.detailInformation.title')"
                             @click="setButtonValue($event.target.value)"
                         />
                         <button
-                            class="btn btn-primary bi-geo-alt-fill col me-1"
-                            :class="(buttonValue === 'lage') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-geo-alt-fill col me-1"
+                            :class="(buttonValue === 'lage') ? 'btn btn-primary' : 'btn btn-default'"
                             value="lage"
                             :title="$t('additional:modules.tools.boris.locationDescription.title')"
                             @click="setButtonValue($event.target.value)"
                         />
                         <button
-                            class="btn btn-primary bi-currency-euro col "
-                            :class="(buttonValue === 'euro') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-currency-euro col "
+                            :class="(buttonValue === 'euro') ? 'btn btn-primary' : 'btn btn-default'"
                             value="euro"
                             :title="$t('additional:modules.tools.boris.landCalculation.title')"
                             @click="setButtonValue($event.target.value)"
                         />
                         <button
                             v-if="selectedBrwFeature.get('schichtwert')"
-                            class="btn btn-primary bi-list-ul col ms-1"
-                            :class="(buttonValue === 'liste') ? 'btn btn-primary btn active' : 'btn btn-primary'"
+                            class="bi-list-ul col ms-1"
+                            :class="(buttonValue === 'liste') ? 'btn btn-primary' : 'btn btn-default'"
                             value="liste"
                             :title="$t('additional:modules.tools.boris.floorValues.title')"
                             @click="setButtonValue($event.target.value)"
@@ -404,9 +432,10 @@ export default {
                                     :text-id="2"
                                     :text="$t('additional:modules.tools.boris.landCalculation.buildingDesignsInfo')"
                                     :toggle-info-text="toggleInfoText"
-                                    :handle-change="handleOptionChange"
+                                    :handle-change="handleBuildingDesignOptionChange"
                                     :subject="'zBauweise'"
                                     :type="'select'"
+                                    :selected-option="selectedBuildDesign"
                                 />
                             </div>
                             <div
@@ -420,9 +449,10 @@ export default {
                                     :text-id="3"
                                     :text="$t('additional:modules.tools.boris.landCalculation.positionToStreetInfo')"
                                     :toggle-info-text="toggleInfoText"
-                                    :handle-change="handleOptionChange"
+                                    :handle-change="handlePositionToStreetOptionChange"
                                     :subject="'zStrassenLage'"
                                     :type="'select'"
+                                    :selected-option="selectedPositionToStreet"
                                 />
                             </div>
                             <div
@@ -461,6 +491,7 @@ export default {
                                 <span>{{ $t('additional:modules.tools.boris.landCalculation.calculatedLandValue') }}</span>
                                 <span
                                     class="bootstrap-icon bi-question-circle-fill"
+                                    role="button"
                                     tabindex="0"
                                     @click="toggleInfoText('6')"
                                     @keydown.enter="toggleInfoText('6')"

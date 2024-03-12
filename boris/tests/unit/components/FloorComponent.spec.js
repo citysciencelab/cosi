@@ -51,7 +51,8 @@ describe("ADDONS: addons/boris/components/FloorComponent.vue", () => {
             title: "title",
             feature: {
             },
-            label: "subtitle"
+            label: "subtitle",
+            landuse: "MFH Mehrfamilienhäuser"
         };
         wrapper = shallowMount(FloorComponent, {
             store,

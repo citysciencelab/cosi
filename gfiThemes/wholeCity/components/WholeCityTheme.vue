@@ -212,6 +212,8 @@ export default {
                                 :key="splitKey"
                             >
                                 <span
+                                    role="button"
+                                    tabindex="0"
                                     @click="openModel(true, linkPrefix, linkHrefKey, splitKey, splitValue)"
                                     @keydown="openModel(true, linkPrefix, linkHrefKey, splitKey, splitValue)"
                                 >

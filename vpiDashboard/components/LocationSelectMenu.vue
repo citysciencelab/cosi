@@ -23,17 +23,33 @@ export default {
     },
     watch: {
         selectedLocation (location, prevLocation) {
-            this.$store.commit("Tools/VpiDashboard/setSelectedLocationId", location.id);
+            const locationID = location.id,
+                source = "dropdown";
 
+            this.$store.commit("Tools/VpiDashboard/setSelectedLocationId", {locationID, source});
             highlightSelectedLocationOnMap(location.id, prevLocation.id);
+        },
+        selectedLocationId (location) {
+            this.selectedLocation = this.allLocationsArray.find(l => {
+                return l.id === location;
+            });
         }
     },
     async created () {
-        this.selectedLocation = this.allLocationsArray[0];
-        this.$store.commit("Tools/VpiDashboard/setSelectedLocationId", this.selectedLocation.id);
+        const jungfernstiegLocation = this.allLocationsArray.find((element) => element.street.startsWith("Jungfernstieg")),
+            source = "dropdown";
+        let locationID = "";
+
+        this.selectedLocation = jungfernstiegLocation
+            ? jungfernstiegLocation
+            : this.allLocationsArray[0];
+
+        locationID = this.selectedLocation.id;
+
+        this.$store.commit("Tools/VpiDashboard/setSelectedLocationId", {locationID, source});
     },
     methods: {
-        ...mapActions("Tools/VpiDashboard", ["getIndividualVisitors"]),
+        ...mapActions("Tools/VpiDashboard", ["getActivities"]),
         /**
          * translates the given key, checkes if the key exists and throws a console warning if not
          * @param {String} key the key to translate
@@ -52,8 +68,14 @@ export default {
 </script>
 
 <template>
-    <div class="headline mb-2">
+    <div class="locationselectmenu headline mb-2">
+        <label
+            for="locationSelect"
+        >
+            {{ translate('additional:modules.tools.vpidashboard.locationSelectMenu.label') }}
+        </label>
         <Multiselect
+            id="locationSelect"
             v-model="selectedLocation"
             :placeholder="translate('additional:modules.tools.vpidashboard.locationSelectMenu.menuPlaceholder')"
             label="street"
@@ -62,3 +84,16 @@ export default {
         />
     </div>
 </template>
+
+<style scoped>
+    .locationselectmenu {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    .locationselectmenu > label {
+        font-size: 16px;
+    }
+</style>

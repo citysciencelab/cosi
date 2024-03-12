@@ -3,7 +3,8 @@
         "tools": {
             "cosi": {
                 "reportTemplates": {
-                    "title": "Report Template"
+                    "title": "Report Template",
+                    "chooseTemplate": "Template wählen"
                 }
             }
         }

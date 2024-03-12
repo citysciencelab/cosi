@@ -1,11 +1,14 @@
 import testAction from "../../../../../../test/unittests/VueTestUtils";
 import actions from "../../../../store/actions/actionsSchoolRoutePlanningSchoolWay";
+import {expect} from "chai";
+import sinon from "sinon";
 
 const {
     selectSchool,
     prepareWayToSchoolRequest,
     parseResponseWayToSchool,
-    parseRouteElements
+    parseRouteElements,
+    parseRoute
 } = actions;
 
 before(() => {
@@ -356,6 +359,32 @@ describe("addons/schoolRoutePlanning/store/actions/actionsSchoolRoutePlanningSch
                 {type: "setRouteLength", payload: "100m"},
                 {type: "parseRoute", payload: ["The edges"], dispatch: true}
             ], {}, done);
+        });
+    });
+    describe("parseRoute", () => {
+        it("parseRoute", () => {
+            const payload = [
+                    {
+                        attributes: {
+                            id: "1"
+                        },
+                        id: "R2D2",
+                        length: "25",
+                        wkt: "LINESTRING(571953.8954285234 5933896.703379773,571937.8260000004 5933915.695)"
+                    },
+                    {
+                        attributes: {
+                            id: "2"
+                        },
+                        id: "C3PO",
+                        length: "24",
+                        wkt: "LINESTRING(571937.8260000004 5933915.695,571925.1399999997 5933956.300000001,571913.9179999996 5933979.132999999)"
+                    }
+                ],
+                commit = sinon.spy();
+
+            parseRoute({commit}, payload);
+            expect(commit.calledOnce).to.be.true;
         });
     });
 });

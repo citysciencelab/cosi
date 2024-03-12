@@ -1,0 +1,40 @@
+{
+  "modules": {
+    "tools": {
+      "cosi": {
+        "templateAdmin": {
+          "title": "Vorlagen Admin",
+          "description": "Erstellen Sie beliebige Vorlagen für fachspezifische Analysen. In eine Vorlage können Sie Geodaten, Statistische Daten und erste Werkzeuge konfigurieren. Statistische Daten können Sie zudem mit Orientierungswerten versehen, die Ihnen im Dashboard angezeigt werden. Nach der Erstellung können Sie ihre Vorlage exportieren und  im Werkzeug „Vorlagen“ hoch laden.",
+          "button": {
+            "addTemplate": "Vorlage erstellen",
+            "editTemplate": "Vorlage bearbeiten",
+            "uploadTemplate": "Vorlage importieren",
+            "downloadTemplate": "Exportieren",
+            "showMore": "mehr anzeigen...",
+            "showLess": "weniger anzeigen..."
+          },
+          "label": {
+            "selectTemplate": "Vorlage auswählen",
+            "name": "Name",
+            "description": "Beschreibung",
+            "addGeoData": "Geodaten hinzufügen",
+            "addStatisticalData": "Statistische Daten hinzufügen",
+            "addTools": "Starter Werkzeug hinzufügen",
+            "placeholder": "Daten auswählen",
+            "existingAreas": "Bestehende Gebiete mit SozErhVO",
+            "supportedFormats": "unterstützes Datei-Format: JSON"
+          },
+          "errors": {
+            "wrongFormat": "Die Datei hat nicht das richtige Format.",
+            "templateName": "Eine Vorlage mit dem Namen: ",
+            "isLoaded": "ist bereits geladen."
+          },
+          "required": "Pflichtfelder",
+          "hintName": "Bitte geben Sie einen Namen für die Vorlage an.",
+          "hintStatisticData": "Bitte fügen Sie statistische Daten hinzu.",
+          "hintNumber": "nur Zahlen: 0-9"
+        }
+      }
+    }
+  }
+}

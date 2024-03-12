@@ -675,6 +675,7 @@ export default {
                         <div class="col-6 col-sm-6 tooltipWrapper">
                             <div
                                 class="form-check form-check-inline"
+                                role="presentation"
                                 @mouseover="tooltipOutActive = true"
                                 @focusin="tooltipOutActive = true"
                                 @mouseout="tooltipOutActive = false"
@@ -705,6 +706,7 @@ export default {
                         <div class="col-6 col-sm-6 tooltipWrapper">
                             <div
                                 class="form-check form-check-inline"
+                                role="presentation"
                                 @mouseover="tooltipInActive = true"
                                 @focusin="tooltipInActive = true"
                                 @mouseout="tooltipInActive = false"

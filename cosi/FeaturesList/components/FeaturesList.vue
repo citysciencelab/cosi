@@ -15,7 +15,6 @@ import FeaturesListToolbar from "./FeaturesListToolbar.vue";
 import {prepareTableExport, prepareDetailsExport, composeFilename} from "../utils/prepareExport";
 import exportXlsx from "../../utils/exportXlsx";
 import {isEqual} from "../../utils/array/isEqual";
-import rawLayerList from "@masterportal/masterportalapi/src/rawLayerList";
 import getColorFromNumber from "../../utils/getColorFromNumber";
 import chartMethods from "../utils/charts";
 import FeaturesScore from "./FeaturesListScore.vue";
@@ -57,7 +56,8 @@ export default {
                 "Ein-/ Ausblenden",
                 "layerId",
                 "feature",
-                "key"
+                "key",
+                "gfiAttributes"
             ],
             featureColumns: [
                 {
@@ -343,9 +343,10 @@ export default {
          * Reads the active vector layers, constructs the list of table items and writes them to the store.
          * Finds the containing district from districtSelector for each feature
          * @todo connect to other features and statistics to build location score
+         * @param {string} senderName name of component trying to update the featuresList (optional, passed to updateFeaturesList event)
          * @returns {void}
          */
-        updateFeaturesList () {
+        updateFeaturesList (senderName) {
             if (this.groupActiveLayer.length > 0) {
                 this.items = this.activeVectorLayerList.reduce((list, vectorLayer) => {
 
@@ -385,6 +386,8 @@ export default {
             else {
                 this.items = [];
             }
+            this.$root.$emit("featureListUpdatedBy-" + (senderName ? senderName : "Unknown"));
+
         },
 
         checkDisabledFeatures (layer) {
@@ -504,7 +507,7 @@ export default {
                 exportData = withDetails ? prepareDetailsExport(data, this.filterProps) : prepareTableExport(data),
                 filename = composeFilename(this.$t("additional:modules.tools.cosi.featuresList.exportFilename"));
 
-            exportXlsx(exportData, filename, {exclude: this.excludedPropsForExport});
+            exportXlsx([], exportData, filename, {exclude: this.excludedPropsForExport});
         },
 
         /**
@@ -618,21 +621,20 @@ export default {
         },
 
         showDistanceScoreFeatures () {
-            if (this.distScoreLayer === null || this.selected.length === 0) {
-                return;
-            }
-            if (!this.selected[0].score) {
+            if (this.distScoreLayer === null || this.selected.length === 0 || !this.selected[0].score) {
+                if (this.distScoreLayer) {
+                    this.distScoreLayer.getSource().clear();
+                }
                 return;
             }
 
-            const test = Object.keys(this.selected[0].score.distance),
+            const test = Object.keys(this.selected[0].score.distance.facilities),
                 colorMap = test.reduce((acc, layerId, index) => (
                     {...acc, [layerId]: getColorFromNumber(index, test.length)}), {});
 
-            this.distScoreLayer.getSource().clear();
             this.selected.forEach(item => {
                 if (item.score.distance) {
-                    for (const [layerId, entry] of Object.entries(item.score.distance)) {
+                    for (const [layerId, entry] of Object.entries(item.score.distance.facilities)) {
                         if (entry.feature) {
                             const feature = new Feature({geometry: entry.feature.getGeometry()});
 
@@ -643,7 +645,7 @@ export default {
                                     fill: new Fill({color: colorMap[layerId]})
                                 }),
                                 text: new Text({
-                                    text: rawLayerList.getLayerWhere({id: layerId})?.name,
+                                    text: entry.layerName,
                                     placement: "point",
                                     offsetY: -10,
                                     offsetX: 10,
@@ -721,6 +723,8 @@ export default {
             <div
                 v-if="isTimeSeriesAnalyseShow"
                 class="toggle"
+                role="button"
+                tabindex="0"
                 @click="toggleTool"
                 @keydown="toggleTool"
             >
@@ -819,8 +823,11 @@ export default {
                                         <div
                                             :key="col.value"
                                             class="text-right"
+                                            role="button"
+                                            tabindex="0"
                                             :class="col.hasAction ? 'number-action' : ''"
                                             @click="col.hasAction ? showDistanceScoreForItem(item) : null"
+                                            @keydown="col.hasAction ? showDistanceScoreForItem(item) : null"
                                         >
                                             <div>
                                                 {{ parseFloat(item[col.value]).toLocaleString(currentLocale) }}

@@ -4,16 +4,29 @@
             "cosi": {
                 "templateManager": {
                     "title": "Templates",
-                    "loadFromTemplate": "Load templates",
+                    "importTemplate": "Import Template",
+                    "loadFromTemplate": "Load Template",
                     "infoLoadFromTemplates": "Load basic thematic configurations for specific types of analyses. You can find the data which will be loaded in the templates' overview. Some templates include the selection of areas, some require you to select areas yourself in beforehand.",
-                    "noInfo": "No description available.",
-                    "created": "Created",
-                    "info": "Description",
-                    "layers": "Topics",
-                    "districtLevel": "District Level",
-                    "selectedDistricts": "Selected Districts",
+                    "noInfo": "Not available.",
+                    "label": {
+                      "selectTemplate": "Select Template",
+                      "created": "Created",
+                      "name": "Name",
+                      "description": "Description",
+                      "layers": "Topics",
+                      "districtLevel": "District Level",
+                      "selectedDistricts": "Selected Districts",
+                      "categories": "Statistical Data",
+                      "addTools": "Starting Tool",
+                      "calculations": "Calculations"
+                    },
                     "activeTool": "Active Tool",
-                    "categories": "Statistical Data"
+                    "errors": {
+                      "default": "File could not be loaded.",
+                      "invalid": "File could not be read.",
+                      "wrongFileFormat": "The file is not in the correct format.",
+                      "attErr": " {{attribute}} node does not exist."
+                    }
                 }
             }
         }

@@ -74,6 +74,7 @@ export async function preparePrint (getResponse) {
 
     let printJob = {};
 
+    store.dispatch("Tools/Print/retrieveCapabilites", true, {root: true});
     store.dispatch("Tools/Print/activatePrintStarted", true, {root: true});
 
     spec.setAttributes(attributes);

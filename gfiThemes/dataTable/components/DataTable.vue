@@ -8,6 +8,7 @@ import isObject from "../../../../src/utils/isObject";
 import Multiselect from "vue-multiselect";
 import localeCompare from "../../../../src/utils/localeCompare";
 import {getCenter as getCenterOfExtent} from "ol/extent";
+import getUniqueValuesByName from "../../../../src/utils/getUniqueValuesByName";
 
 export default {
     name: "DataTable",
@@ -124,6 +125,7 @@ export default {
     methods: {
         isWebLink,
         isObject,
+        getUniqueValuesByName,
         /**
          * Creates and returns the columns for the table.
          * @param {Object} gfiAttributes - The attributes to be displayed.
@@ -222,23 +224,15 @@ export default {
         },
 
         /**
-         * Gets the unique values for given column name.
+         * Gets the unique values sorted for given column name.
          * @param {String} columnName The column name.
          * @param {Object[]} originRows The rows to iterate.
-         * @returns {String[]} the unique values.
+         * @returns {String[]} the sorted unique values.
          */
-        getUniqueValuesByColumnName (columnName, originRows) {
-            if (typeof columnName !== "string" || !Array.isArray(originRows) || !originRows.length) {
-                return [];
-            }
-            const result = {};
+        getSortedUniqueValues (columnName, originRows) {
+            const uniqueValues = getUniqueValuesByName(columnName, originRows);
 
-            originRows.forEach(row => {
-                if (typeof row[columnName] !== "undefined" && !result[row[columnName]]) {
-                    result[row[columnName]] = true;
-                }
-            });
-            return Object.keys(result).sort((a, b) => localeCompare(a, b, this.currentLocale, {ignorePunctuation: true}));
+            return uniqueValues.sort((a, b) => localeCompare(a, b, this.currentLocale, {ignorePunctuation: true}));
         },
 
         /**
@@ -326,6 +320,18 @@ export default {
             }
             this.rows = this.originRows;
             this.columns = this.getColumns(this.feature.getAttributesToShow());
+        },
+
+        /**
+         * Gets the css z-index for the column header.
+         * The left column should always have a higher z-index than the right column.
+         * @param {Number} idx - The of the column.
+         * @return {Object} The style object.
+         */
+        getZIndex (idx) {
+            return {
+                "z-index": this.columns.length - idx
+            };
         }
     }
 };
@@ -350,7 +356,8 @@ export default {
                     v-for="col in columns"
                     :key="col.index"
                     class="filter-select-box-container"
-                    :class="typeof showCount !== 'undefined' ? 'more-sticky' : ''"
+                    :class="[typeof showCount !== 'undefined' ? 'more-sticky' : '']"
+                    :style="getZIndex(col.index)"
                 >
                     <span
                         v-if="isFilterable"
@@ -358,7 +365,7 @@ export default {
                     >
                         <Multiselect
                             v-model="dropdownSelected[col.name]"
-                            :options="getUniqueValuesByColumnName(col.name, originRows)"
+                            :options="getSortedUniqueValues(col.name, originRows)"
                             :multiple="true"
                             :show-labels="false"
                             open-direction="auto"
@@ -385,11 +392,13 @@ export default {
                         v-if="isSortable"
                         class="bootstrap-icon"
                         :class="getIconClassByOrder(col.order) + ' sort'"
+                        role="button"
+                        tabindex="0"
                         @click="runSorting(col)"
                         @keypress="runSorting(col)"
                     />
                 </th>
-            </thead>
+            </thead>"
             <tbody v-if="rows.length > 0">
                 <tr
                     v-for="(singleRow, index1) in rows"

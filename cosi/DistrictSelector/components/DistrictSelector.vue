@@ -97,9 +97,38 @@ export default {
                     model.set("isActive", false);
                 }
 
+                this.$watch("$store.state.Tools.Print.active", (newVal) => {
+                    if (newVal) {
+                        styleSelectedDistrictLevels(this.districtLevels, this.selectedLevelId, {
+                            fill: {
+                                color: [255, 255, 255, 0]
+                            },
+                            stroke: {
+                                color: [51, 153, 204, 1],
+                                width: 3
+                            }
+                        }, 0);
+                    }
+                    else if (this.selectedNames.length) {
+                        styleSelectedDistrictLevels(this.districtLevels, this.selectedLevelId, {
+                            fill: {
+                                color: [255, 255, 255, 0]
+                            },
+                            stroke: {
+                                color: [51, 153, 204, 1],
+                                width: 3
+                            }
+                        }, 0.6);
+                    }
+                });
+
                 // remove overlay if no districts are selected at this point
                 if (this.selectedNames.length === 0) {
                     styleSelectedDistrictLevels(this.districtLevels);
+                }
+
+                if (this.selectedNames.length && typeof this.toolToOpen === "string") {
+                    this.$store.dispatch("Tools/setToolActive", {id: this.toolToOpen, active: true});
                 }
             }
         },
@@ -121,10 +150,11 @@ export default {
 
         /**
          * @description Watches Layer visiblity changes to determine whether the addtional info layers are active
+         * @param {module:ol/layer[]} layerList - An array of visible layers.
          * @returns {void}
          */
-        getVisibleLayerList () {
-            this.checkAdditionalLayers();
+        getVisibleLayerList (layerList) {
+            this.checkAdditionalLayers(layerList);
         },
 
         /**
@@ -169,6 +199,7 @@ export default {
 
     methods: {
         ...mapMutations("Tools/DistrictSelector", Object.keys(mutations)),
+        ...mapMutations("Tools/Filter", ["setFilterGeometry"]),
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapActions("Tools/DistrictSelector", ["loadStatFeatures", "loadMapping"]),
         ...mapActions("Maps", ["addInteraction", "removeInteraction", "zoomToExtent", "resetView"]),
@@ -372,6 +403,7 @@ export default {
                 this.setExtent(extent);
                 this.setBoundingGeometry(bboxGeom);
                 setBBoxToGeom.call(this, this.areaSelectorGeom || bboxGeom);
+                this.setFilterGeometry(this.areaSelectorGeom || bboxGeom);
 
                 if (zoomToExtent) {
                     this.zoomToExtent({extent, options: {}});
@@ -388,6 +420,7 @@ export default {
                 this.resetView();
                 this.setBoundingGeometry(undefined);
                 setBBoxToGeom.call(this, this.areaSelectorGeom || undefined);
+                this.setFilterGeometry(this.areaSelectorGeom || false);
                 this.showAlert(this.$t("additional:modules.tools.cosi.districtSelector.warning"), "Warnung", "warning");
             }
         },
@@ -415,20 +448,21 @@ export default {
         /**
          * @description Checks if the additional info layers are visible on mounted.
          * @todo Refactor to vue when MP Core is updated
+         * @param {module:ol/layer[]} layerList - An array of visible layers.
          * @returns {boolean} the state of at least one of the addtional layers
          */
-        checkAdditionalLayers () {
+        checkAdditionalLayers (layerList) {
             let state, states, oldState, newState;
 
             for (const key in this.additionalInfoLayers) {
                 states = [];
 
                 for (const layerId of this.additionalInfoLayers[key]) {
-                    state = getModelByAttributes({id: layerId})?.get("isSelected");
+                    state = layerList.some(layer => typeof layer?.get === "function" && layer.get("id") === layerId);
                     states = states.includes(state) ? states : [...states, state];
                 }
 
-                if (states.length === 1) {
+                if (states.length === 1 || states.includes(true)) {
                     oldState = this.visibleInfoLayers.includes(key);
                     newState = states[0];
                     if (newState && !oldState) {
@@ -437,6 +471,9 @@ export default {
                     else if (!newState && oldState) {
                         this.visibleInfoLayers = this.visibleInfoLayers.filter(e => e !== key);
                     }
+                }
+                else {
+                    this.visibleInfoLayers = [];
                 }
             }
         },
@@ -525,6 +562,7 @@ export default {
                         @input="updateSelectedFeatures"
                     />
                     <v-text-field
+                        v-if="enableBuffer"
                         v-model="bufferVal"
                         :label="$t('additional:modules.tools.cosi.districtSelector.inputLabel')"
                         outlined

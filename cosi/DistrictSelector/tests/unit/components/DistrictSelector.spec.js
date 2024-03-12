@@ -64,7 +64,8 @@ describe("addons/cosi/DistrictSelector/components/DistrictSelector.vue", () => {
                         icon: () => "bi-image",
                         districtLevels: () => districtLevels,
                         layerList: () => layerList,
-                        additionalInfoLayers: () => additionalInfoLayers
+                        additionalInfoLayers: () => additionalInfoLayers,
+                        enableBuffer: () => true
                     }
                 });
             }
@@ -155,6 +156,39 @@ describe("addons/cosi/DistrictSelector/components/DistrictSelector.vue", () => {
 
             expect(textFieldWrapper.exists()).to.be.true;
             expect(textFieldWrapper.props("type")).to.equal("number");
+        });
+
+        it("should not find a text-field component with the type 'number'", () => {
+            const textfieldFactory = {
+                    getMount: (values = {}, isActive = true) => {
+                        return mount(DistrictSelector, {
+                            store,
+                            localVue,
+                            vuetify,
+                            data () {
+                                return {
+                                    ...values
+                                };
+                            },
+                            computed: {
+                                name: () => "Hallo",
+                                renderToWindow: () => true,
+                                resizableWindow: () => false,
+                                deactivateGFI: () => true,
+                                active: () => isActive,
+                                icon: () => "bi-image",
+                                districtLevels: () => districtLevels,
+                                layerList: () => layerList,
+                                additionalInfoLayers: () => additionalInfoLayers,
+                                enableBuffer: () => false
+                            }
+                        });
+                    }
+                },
+                wrapper = textfieldFactory.getMount(),
+                textFieldWrapper = wrapper.findComponent({name: "v-text-field"});
+
+            expect(textFieldWrapper.exists()).to.be.false;
         });
 
         it("should find a checkbox component with the value Sozialräume", () => {

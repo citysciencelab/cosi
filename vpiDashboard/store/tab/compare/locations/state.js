@@ -5,8 +5,12 @@ const state = {
     ageGroupsLocationB: undefined,
     visitorTypesLocationA: undefined,
     visitorTypesLocationB: undefined,
-    individualVisitorsLocationA: undefined,
-    individualVisitorsLocationB: undefined
+    activitiesLocationA: undefined,
+    activitiesLocationB: undefined,
+    activitiesDailyLocationA: undefined,
+    activitiesDailyLocationB: undefined,
+    selectLocationBInMap: false,
+    selectedLocationB: undefined
 };
 
 export default state;

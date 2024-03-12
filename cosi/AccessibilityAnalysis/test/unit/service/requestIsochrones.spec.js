@@ -1,7 +1,7 @@
 import {
     expect
 } from "chai";
-import requestIsochrones from "../../../service/requestIsochrones";
+import requestIsochrones from "../../../utils/requestIsochrones";
 import axios from "axios";
 
 describe("requestIsochrones", () => {

@@ -21,6 +21,8 @@ import MappingJson from "../../assets/mapping.json";
  * @property {String[]} selectedDistrictNames - All names of the selected districts.
  * @property {Object {String: String[]}} additionalInfoLayers - Additional Layers to display as guidance and information. Set as keys to display with lists of layerIds. (config-param).
  * @property {Number} [bufferValue=0] - A buffer for the extent of the selected district(s).
+ * @property {String} toolToOpen - the tool to be open after this tool is closed.
+ * @property {Boolean} enableBuffer - to decide if buffer is enabled.
  */
 const state = {
     active: false,
@@ -45,10 +47,12 @@ const state = {
     mappingPath: undefined,
     mappingInit: MappingJson,
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/districtselector.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/gebietsauswahl.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/018districtselector.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/018gebietsauswahl.md"
     },
-    remoteMetadata: {} // after data is loaded, we also pull metadata remotely and store it here.
+    remoteMetadata: {}, // after data is loaded, we also pull metadata remotely and store it here.
+    toolToOpen: undefined,
+    enableBuffer: true
 };
 
 export default state;

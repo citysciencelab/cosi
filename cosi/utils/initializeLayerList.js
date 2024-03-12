@@ -4,7 +4,7 @@ import defaults from "@masterportal/masterportalapi/src/defaults";
 /**
  *
  * @export
- * @param {Object} [layerConf=defaults.layerConf] -
+ * @param {Object} [layerConf=defaults.layerConf] - recreates the initialization of the layerList from masterportal
  * @return {Promise} -
  */
 export async function initializeLayerList (layerConf = defaults.layerConf) {
@@ -18,5 +18,4 @@ export async function initializeLayerList (layerConf = defaults.layerConf) {
             reject(err);
         }
     });
-
 }

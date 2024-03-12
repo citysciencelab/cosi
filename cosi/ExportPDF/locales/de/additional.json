@@ -4,7 +4,7 @@
             "cosi": {
                 "exportPDF": {
                     "captions": {
-                    "title": "Als PDF exportieren"
+                        "title": "Als PDF exportieren"
                     }
                 }
             }
