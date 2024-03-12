@@ -9,16 +9,16 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 
   > Um zur statistischen Datenübersicht zu gelangen, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
   
-![Abbildung 27: Statistische Datenübersicht](./016a_statistischedatenuebersicht.png)
+![Abbildung 27: Statistische Datenübersicht](/cosi/manuals/016a_statistischedatenuebersicht.png)
 *Abb. a: Statistische Datenübersicht 1*
 
-![Abbildung 29: Statistische Datenübersicht](./016b_statistischedatenuebersicht.png)
+![Abbildung 29: Statistische Datenübersicht](/cosi/manuals/016b_statistischedatenuebersicht.png)
 *Abb. b: Statistische Datenübersicht 2*
 
 
 
 1. **Gruppen ein-/ausklappen**
-   > Thematische Gruppen (vgl. [Regionalstatistische Daten](./019kartenvisualisierung.md)) über das **+** ein- und ausklappen.
+   > Thematische Gruppen (vgl. [Regionalstatistische Daten](/cosi/manuals/019kartenvisualisierung.md)) über das **+** ein- und ausklappen.
 2. **Aktionen**
    > - [Dreistrich-Menü](#dreistrich-menü) aufklappen
    > - Visualisierung ein- / ausschalten: Schaltet die Visualisierung des ausgewählten Indikators zum aktuell gewählten Jahr in der Karte ein/aus
@@ -43,10 +43,14 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 11. **Tabelle exportieren**
       > Die aktuelle Auswahl (Spalten, Zeilen, Jahre) als XLSX für Excel exportieren. Über das Auswahlfeld *alle Jahre exportieren* kann die gesamte Zeitreihe für die ausgewählten Spalten und Zeilen exportiert werden. Ist keine Spalte oder Zeile ausgewählt werden alle verwendet.
 12. **Kartenvisualisierung**
-      > Die Darstellung in der Karte entspricht der des Kontrollfeldes [Kartenanalyse regionalstatistischer Daten](./kartenvisualisierung.md).
+      > Die Darstellung in der Karte entspricht der des Kontrollfeldes [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/kartenvisualisierung.md).
 
 #### Dreistrich Menü
+<<<<<<< HEAD
 ![Abbildung 28: Statistische Datenübersicht - Dreistrich-menü](./016c_statdashboard_burgermenu.PNG)
+=======
+![Abbildung 28: Statistische Datenübersicht - Dreistrich-menü](/cosi/manuals/016c_statdashboard_burgermenu.PNG)
+>>>>>>> 55f3fe1162d5a6d32565dfe85c78baed599ca97b
 *Abb. c: Statistische Datenübersicht - Dreistrich-Menü.*
 
 1. **Visualisierung ein-/ausschalten**
@@ -70,6 +74,12 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 10. **Dividieren**
       > Analog zu **Addieren**, dividiert **A** / **B**.
 11. **Diagramme erzeugen**
+<<<<<<< HEAD
       > Erzeugt Diagramme für den ausgewählten Indikator im [Graphenvisualisierung](./008graphenvisualisierung.md) (analog zu [Kartenanalyse regionalstatistischer Daten](./019kartenvisualisierung.md)). Visualisiert alle ausgewählten Spalten (s. [Statistische Datenübersicht](./016statistischedatenuebersicht.md)).
 12. **Korrelations- / Streuungsdiagramm**
       > Visualisiert ein Streuungsdiagramm für die Felder **A** (Y-Achse) über **B** (X-Achse) per [Graphenvisualisierung](./008graphenvisualisierung.md), berechnet die Korrelation (Pearson) zwischen den Datensätzen und zeichet eine Regressionsgerade.
+=======
+      > Erzeugt Diagramme für den ausgewählten Indikator im [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md) (analog zu [Kartenanalyse regionalstatistischer Daten](/cosi/manuals/019kartenvisualisierung.md)). Visualisiert alle ausgewählten Spalten (s. [Statistische Datenübersicht](/cosi/manuals/016statistischedatenuebersicht.md)).
+12. **Korrelations- / Streuungsdiagramm**
+      > Visualisiert ein Streuungsdiagramm für die Felder **A** (Y-Achse) über **B** (X-Achse) per [Graphenvisualisierung](/cosi/manuals/008graphenvisualisierung.md), berechnet die Korrelation (Pearson) zwischen den Datensätzen und zeichet eine Regressionsgerade.
+>>>>>>> 55f3fe1162d5a6d32565dfe85c78baed599ca97b

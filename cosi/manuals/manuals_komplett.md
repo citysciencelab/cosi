@@ -36,7 +36,6 @@ ___
 - Paul Linnow, HafenCity Universität Hamburg
 - Peter Duensing, Senatskanzlei Hamburg, ITD
 - Sebastian Duden, LGV Hamburg
-- Till Wewer, Senatskanzlei Hamburg, ITD
 - Yuxiang Zhang, HafenCity Universität Hamburg  
 
 
@@ -72,7 +71,7 @@ ___
 ## Inhalt
 ___
 - CoSI: Cockpit Städtische Infrakstrukturen
-  - [Datenmodell & -Infrastruktur](#-datenmodell-und-infrastruktur)
+  - [Datenmodell und Infrastruktur](#-datenmodell-und-infrastruktur)
   - [Module](#module)
    - [Themen (Layer)](#themen-layer)
    - [Analyse] (#analyse)
@@ -103,7 +102,6 @@ ___
     - [Manuelle Flächenauswahl](#manuelleflaechenauswahl)
     - [Auswahlmanager](#auswahlmanager)
     - [Flächen stylen](#flaechen-stylen)
-    - [Report Tool](#report-tool)
 
 <div style="page-break-after: always;"></div>
 
@@ -111,24 +109,24 @@ ___
 ## Datenmodell und Infrastruktur
 ___
   
-CoSI ermöglicht ganz ähnlich wie der FHH-Atlas die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
+CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
 
 ![Vgl_FHH_Atlas](/cosi/manuals/001a_Vgl_FHH_Atlas.png)
 
-*Abb.001a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
+*Abb. a: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
 Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
 ![stat_daten-anzeige](/cosi/manuals/001b_stat_daten-anzeige.png)
 
-*Abb.001b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
+*Abb. b: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
 ![bsp-analysefunktionen](/cosi/manuals/001c_bsp-analysefunktionen.png)
 
 
-*Abb.001c: Analysefunktionen, hier Versorgungsanalyse.*
+*Abb. c: Analysefunktionen, hier Versorgungsanalyse.*
 
 Darüber hinaus erlaubt CoSI, in die Datensätze “einzugreifen”: sie zu filtern, zu durchsuchen oder für die Darstellung von Planungsszenarien im laufenden Programm zu verändern (s. Simulation).
 
@@ -184,7 +182,7 @@ Alle in CoSI und dem FHH-Atlas dargestellten Daten werden von den Bereitstellern
 Ein WMS (Web Map Service) liefert Geodaten / Karten als Rasterbilder (PNG), welche zunächst einmal ohne Hintergrundinformation in der Karte angezeigt werden. Gleichzeitig können die Legende des Datensatzes oder Informationen zu einer bestimmten Koordinate über weitere Requests abgerufen werden.
 
 ### WFS
-Der WFS (Web Feature Service) liefert im Gegensatz zum WMS keine fertige Kartenansicht, sondern ein rohes Datenobjekt, bei dem der Datensatz jedes geografischen Objekts (Punkt, Linie, Fläche, etc.) inkl. seiner Attribute (z.B. eine Schule mitsamt ihrem Schultyp, ihrer Schülerzahl, Mailadresse und Nachmittagsangebot) einzeln übermittelt wird. Die Visualisierung (das Styling) der Daten erfolgt dann anhand vorgegebener oder mitgelieferter Konfigurationen innerhalb der Applikation. Dies ist rechenintensiver für den Anwendenden und weniger kontrollierbar von Seiten des Datenbereitstellers, bietet jedoch die Möglichkeit mit den Objekten innerhalb des Portals direkt zu interagieren oder sie zu verändern.  
+Der WFS (Web Feature Service) liefert im Gegensatz zum WMS keine fertige Kartenansicht, sondern ein rohes Datenobjekt, bei dem der Datensatz jedes geografischen Objekts (Punkt, Linie, Fläche, etc.) inkl. seiner Attribute (z.B. eine Schule mitsamt ihrem Schultyp, ihrer Schülerzahl, Mailadresse und Nachmittagsangebot) einzeln übermittelt. Die Visualisierung (das Styling) der Daten erfolgt dann anhand vorgegebener oder mitgelieferter Konfigurationen innerhalb der Applikation. Dies ist rechenintensiver für den Anwendenden und weniger kontrollierbar von Seiten des Datenbereitstellers, bietet jedoch die Möglichkeit mit den Objekten innerhalb des Portals direkt zu interagieren oder sie zu verändern.  
 
 <div style="page-break-after: always;"></div>
 
@@ -196,7 +194,7 @@ CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tool
 
 ![Das CoSI Nutzer-Interface](/cosi/manuals/001d_user_interface.PNG)
 
-*Abb.001d: Das CoSI User-Interface.*
+*Abb. d: Das CoSI User-Interface.*
 
 1. **Themenbau/ Layer** (s. Themen)
 2. **Analyse**
@@ -255,7 +253,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
 
 ![Der Themenbaum](/cosi/manuals/001e_Themenbaum.PNG)
 
-*Abb.e: Der Themenbaum.*
+*Abb. e: Der Themenbaum.*
 
 Öffnen Sie mit dem Plus die Übersicht der Themenkategorie oder minimieren sie die Ansicht wieder mit dem Minus.
 
@@ -268,7 +266,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
       > Daten zur reinen "Anzeige" in der Karte, v.a. entnommen aus dem FHH Atlas (bereitgestellt als WMS).
 3. **Ausgewählte Themen**  
    > Siehe nachfolgende Abbildung.
-4. **Hilfe-Button**
+4. **Hilfsbutton**
    > Ruft diese Anleitung auf.
 5. **Kartenhintergrund**
    > Hier können Sie für den Kartenhintergrund grau oder weiß auswählen.
@@ -292,7 +290,7 @@ Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle 
 
 ![Abbildung 4: Manuelle Flächenauswahl](/cosi/manuals/001g_bspkartenansicht.PNG)
 
-*Abb.g: Beispiel für Kartenansicht.*
+*Abb. g: Beispiel für Kartenansicht.*
 
 <div style="page-break-after: always;"></div>
 
@@ -310,6 +308,7 @@ Grundsätzlich bietet diese Funktion die Möglichkeit an, durch Aufziehen eines 
 - Bei der Nutzung innerhalb des Kontexts der Erreichbarkeitsanalyse muss das Gebiet nicht händisch festgelegt werden, sondern es wird als Gebiet das errechnete Einzugsgebiet übernommen.
 
 <div style="page-break-after: always;"></div>### Erreichbarkeitsanalyse
+
 Die "Erreichbarkeitsanalyse" erreichen Sie über den Bereich "Analyse". 
 Eine Erreichbarkeitsanalyse kann auf drei Arten durchgeführt werden:  
 1. [Ab einem Referenzpunkt](#erreichbarkeit-ab-einem-Referenzpunkt)
@@ -340,7 +339,7 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 
 ![Erreichbarkeit ab einem Referenzpunkt](/cosi/manuals/003a_erreichbarkeitreferenzpunkt.png)
 
-*Abb.a: Erreichbarkeit ab einem Referenzpunkt.*
+*Abb. a: Erreichbarkeit ab einem Referenzpunkt.*
   
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -374,7 +373,7 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 
 ![Erreichbarkeit ausgewählter Einrichtungen im Gebiet](/cosi/manuals/003b_erreichbarkeitabeinrichtung.png)
 
-*Abb.b: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
+*Abb. b: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
 
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -387,7 +386,7 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 5. **Entfernung**
    > Entfernung in zuvor festgelegter Maßeinheit (Minuten oder Metern) angeben.
 6. **Tageszeit**
-   > Wenn Sie als Verkehrsmittel "Auto" ausgewählt haben, können Sie hier die Tageszeit auswählen, zu der Sie die Erreichbarkeit planen wollen. Die Funktion ist nur verfügbar, wenn "Verkehrsfluss berücksichtigen" aktiv ist. Dieser *Reisezeitindex* beschreibt die Veränderung der Reisezeiten zu verschiedenen Tageszeiten gegenüber einem normierten freien Verkehrsfluss (d.h. ein Reisezeitindex von 1,3 entspricht einer Verlängerung der Reisezeiten um 30% bzw. einer entsprechenden Verkürzung der zurückgelegten Strecke). Die Daten wurden von der Firma INRIX erhoben und beziehen sich, aggregiert für das gesamte Stadtgebiet für die Straßenklassen 2, 3 und 4 (Bundesstraßen, Kreisstraßen, Gemeindestraßen), auf das Jahr 2020. **Der Reisezeitindex bezieht sich ausschließlich auf den Kfz-Verkehr.**
+   > Wenn Sie als Verkehrsmittel "Auto" ausgewählt haben, können Sie hier die Tageszeit auswählen, zu der Sie die Erreichbarkeit planen wollen. Die Funktion ist nur verfügbar, wenn "Verkehrsfluss berücksichtigen" aktiv ist. Dieser *Reisezeitindex* beschreibt die Veränderung der Reisezeiten zu verschiedenen Tageszeiten gegenüber einem normierten freien Verkehrsfluss (d.h. ein Reisezeitindex von 1,3 entspricht einer Verlängerung der Reisezeiten bzw. einer Verkürzung der zurückgelegten Strecke um 30%). Die Daten wurden von der Firma INRIX erhoben und beziehen sich, aggregiert für das gesamte Stadtgebiet für die Straßenklassen 2, 3 und 4 (Bundesstraßen, Kreisstraßen, Gemeindestraßen), auf das Jahr 2020. **Der Reisezeitindex bezieht sich ausschließlich auf den Kfz-Verkehr.**
 7. **Verkehrsfluss berücksichtigen**
    > Wählen Sie aus, ob Sie den Verkehrsfluss berücksichtigen wollen oder nicht. 
 8. **Von Flächenaußengrenzen ermitteln**
@@ -405,7 +404,7 @@ Wenn Sie im Routing-Tool eine Route erstellt haben, können Sie die Erreichbarke
 Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
 ![Erreichbarkeit entlang einer Route](/cosi/manuals/003c_erreichbarkeitroute.png)
 
-*Abb.c: Erreichbarkeit entlang einer Route.*
+*Abb. c: Erreichbarkeit entlang einer Route.*
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet. Beachten Sie, dass Sie die Erreichbarkeit entlang einer Route nur auswählen können, wenn Sie im Vorfeld im Routing-Tool eine Route angelegt haben.
 2. **Route auswählen**
@@ -430,7 +429,7 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
 
 ![Vergleichbare Gebiete ermitteln](/cosi/manuals/004a_vergleichbaregebiete_ermitteln.PNG)
  
-*Abb.a: Vergleichbare Gebiete ermitteln.*  
+*Abb. a: Vergleichbare Gebiete ermitteln.*  
 
 1. **Statistische Datenfilter**
    > Gewünschte Parameter für den Vergleich auswählen. Es können beliebig viele Parameter hinzugefügt werden. Alle StaNord-Datensätze sind hierfür verfügbar. Anteilige Werte eignen sich jedoch besser für die Vergleichbarkeit. Gegenwärtig können eigene Berechnungen aus dem Dashboard nicht herangezogen werden.
@@ -444,7 +443,7 @@ Wählen Sie unter Filter die gewünschten Parameter für den Vergleich, sowie ei
    > Der "Datensatz hinzufügen" Button aus dem [Ergebnisverzeichnis](ergebnisverzeichnis.md).  
 
 ![Vergleichbare Gebiete ermitteln, Ergebnisse](/cosi/manuals/004b_vergleichbaregebiete_ergebnis.PNG)  
-*Abb.b: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
+*Abb. b: Vergleichbare Gebiete ermitteln, Ergebnisse.*  
 
 1. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](/cosi/manuals/ergebnisverzeichnis.md) verwaltet die unterschiedlichen Datensätze. Es erscheint, sobald Sie einen zweiten Datensatz erstellt haben.
@@ -467,7 +466,7 @@ Um Ihre gewünschten Fachdaten zu filtern, gehen Sie zunächst auf "Analyse" und
 
 ![Abbildung 1: Filter](/cosi/manuals/005_filter.PNG)
 
-*Abb.a: Filter.*  
+*Abb. a: Filter.*  
 
 1. **Ein Thema im Filter wählen**
    > Angezeigt werden die ausgewählten Themen wie im Themenbaum. Themen können jederzeit hinzugefügt werden. Dazu Themenbaum im Filter aufklappen und Thema auswählen.
@@ -490,7 +489,7 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
 
 ![Abbildung 1: Versorgungsanalyse, Einstellungen](/cosi/manuals/006a_versorgungsanalyse.PNG)
 
-*Abb.a: Versorgungsanalyse, Einstellungen.*
+*Abb. a: Versorgungsanalyse, Einstellungen.*
 
 1. **Info** 
    > Über den Button finden Sie zu dieser Anleitung.
@@ -511,7 +510,7 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
 
 ![Abbildung 2: Versorgungsanalyse, Ergebnisse](/cosi/manuals/006b_versorgungsanalyse.PNG)
 
-*Abb.b: Versorgungsanalyse, Ergebnisse.*
+*Abb. b: Versorgungsanalyse, Ergebnisse.*
 
 1. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis.md) verwaltet alle von Ihnen erstellen Datensätze und bietet bestimmte standardisierte Funktionen wie Downloads und ähnliches an.
@@ -534,18 +533,20 @@ Mit diesem Werkzeug kann das Verhältnis zweier Datensätze zueinander berechnet
          Hier wurde der Wert des Auswahlfeldes (1) durch den Wert des Auswahlfeldes (2) geteilt.
       - **Bedarfsdeckung:**  
          Die Versorgungsabdeckung in Prozent, d.h. das Verhältnis zwischen der aus Auswahlfeld (1) ermittelten Kapazität und Auswahlfeld (2) im Gebiet. Wurde kein Faktor F ausgewählt, zeigt die Spalte das direkte Verhältnis beider Felder in Prozent an.
-      - **6.1 Ergebnisverzeichnis der Ergebnistabelle**
-         Wenn in Ihrer Ergebnistabelle mehr als 10 Ergebnisse angezeigt werden, können Sie hier entsprechend die Daten durchschalten.
+
+   6.1 **Ergebnisverzeichnis der Ergebnistabelle**
+         
+      >Wenn in Ihrer Ergebnistabelle mehr als 10 Ergebnisse angezeigt werden, können Sie hier entsprechend die Daten durchschalten.
 ### DIPAS
 Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in der Karte visualisiert, nach verschiedenen Kriterien dargestellt und für alle CoSI-Werkzeuge verfügbar gemacht werden. D.h. alle Beiträge können in der [Einrichtungsübersicht](/cosi/manuals/017einrichtungsuebersicht.md) angezeigt, für [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse.md), [Erreichbarkeitsanalyse](/cosi/manuals/003erreichbarkeitsanalyse.md) und [Vergleichbare Gebiete Ermitteln](/cosi/manuals/004vergleichbaregebieteermitteln.md) verwendet und mit dem [Filter](/cosi/manuals/005filter.md) gefiltert werden. Über "Analyse" erreichen Sie "Dipas".
 
 
 ![Abbildung 1: DIPAS](/cosi/manuals/007a_dipas.PNG)
 
-*Abb.a: DIPAS Menü und Anzeige.*
+*Abb. a: DIPAS Menü und Anzeige.*
 
 1. **Beteiligungsverfahren auswählen**
-   > Für jedes Verfahren aus der DIPAS-Datenbank wird automatisch eine Registerkarte angelegt, welche durch Anklicken aufgeklappt werden kann. Ein aufgeklapptes Verfahren zeigt dessen Beschreibungstext und die Kontrollfelder für die Visualisierung. Jedem Verfahren wid dabei eine zufällige Farbe zugewiesen.
+   > Für jedes Verfahren aus der DIPAS-Datenbank wird automatisch eine Registerkarte angelegt, welche durchs Anklicken aufgeklappt werden kann. Ein aufgeklapptes Verfahren zeigt dessen Beschreibungstext und die Kontrollfelder für die Visualisierung. Jedem Verfahren wid dabei eine zufällige Farbe zugewiesen.
 2. **Indikator**
    > Das Icon in dem Indikator zeigt zum einen die Farbe an, in dem der jeweilige Datensatz visualisiert wird. Zum anderen zeigt es, ob der Datensatz gerade auf der Karte angezeigt wird.
 3. **Legende**
@@ -579,7 +580,7 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
    > **Hinweis**: Wenn Sie die Graphenvisualisierung direkt aus dem Analyse Menü öffnen, bitte unten in der Kartenvisualisierung auf das Graph Symbol klicken. 
 
 ![Abbildung 1: Graphenvisualisierung](/cosi/manuals/008_graphenvisualisierung.png)  
-*Abb.a: Graphenvisualisierung.*
+*Abb. a: Graphenvisualisierung.*
 
 1. **Diagrammtyp auswählen**
    > Häufig werden gleich unterschiedliche Graphen erstellt. Hier können Sie zwischen den verfügbaren Diagrammen für den ausgewählten Datensatz umschalten.
@@ -593,7 +594,6 @@ Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwalt
 5. **Ergebnisverzeichnis**
    > Das [Ergebnisverzeichnis](/cosi/manuals/020ergebnisverzeichnis.md) verwaltet die unterschiedlichen erstellten Graphen und erlaubt, sie als Bild oder gesammelt als zip-Datei herunterzuladen.
 ___
-## Einrichtungen anlegen
 
 # Simulation
 ### Werkzeuge des Simulationsmenüs
@@ -605,7 +605,7 @@ Sobald sie unter "Simulation" "Einrichtungen anlegen" auswählen, öffnet sich e
 #### Szenario Manager
 ![Abbildung 1: Szenario Manager](/cosi/manuals/009a_einrichtungenanlegen.PNG) 
 
-*Abb.a: Szenario Manager*  
+*Abb. a: Szenario Manager*  
 
 1. **Szenario Dropdown**
    > Zeigt bisher erstellte Szenarien an.
@@ -625,7 +625,7 @@ Szenarios.
 
 ![Abbildung 2: Einrichtungen anlegen](/cosi/manuals/009b_einrichtungenanlegen.PNG)  
 
-*Abb.b: Einrichtungen anlegen*  
+*Abb. b: Einrichtungen anlegen*  
 
 1. **Einrichtung kopieren**
    > Erlaubt das Kopieren einer vorhandenen Einrichtung. 
@@ -646,11 +646,11 @@ Szenarios.
    7.2 **Name**
       > Bezeichnung der jeweiligen Einrichtung, die erstellt werden soll.
 8. **Optionale Spalten**
-   > Können bei Bedarf ergänzt werden.
+      > Können bei Bedarf ergänzt werden.
 9. **Anlegen**
-   > Erstellt die simulierte Einrichtung
+      > Erstellt die simulierte Einrichtung
 10. **Zurücksetzen**
-   > Setzt das Szenario zurück.
+      > Setzt das Szenario zurück.
 
 #### Schrittweises Vorgehen
 Zur besseren Verständlichkeit des Werkzeugs wird im Folgenden Schritt für Schritt erläutert, wie erfolgreich eine neue Einrichtung angelegt werden kann.
@@ -676,19 +676,19 @@ Haben Sie ein aktives Szenario können Sie sowohl selbst angelegte als auch bere
 
 ![Abbildung 1: Bitte erstellen Sie ein Szenario](/cosi/manuals/010a_einrichtungenbearbeiten.PNG)
 
-*Abb.a: Bitte erstellen Sie ein Szenario.*
+*Abb. a: Bitte erstellen Sie ein Szenario.*
 
 Ein Szenario können Sie wie im [Szenario Manager](/cosi/manuals/009einrichtungenanlegen.md) beschrieben anlegen. Ist ein Szenario angelegt und Sie wählen per Mausklick eine Einrichtung an, erscheint folgendes Popup am unteren Bildschirmrand: 
 
 ![Abbildung 2: Einrichtung bearbeiten](/cosi/manuals/010b_einrichtungenbearbeiten.PNG)
 
-*Abb.b: Einrichtung bearbeiten.*
+*Abb. b: Einrichtung bearbeiten.*
 
 Wählen Sie hier den Button **BEARBEITEN** an. Daraufhin wird sich das folgende Fenster öffnen:
 
 ![Abbildung 3: Einrichtung-Bearbeiten-Fenster](/cosi/manuals/010c_einrichtungenbearbeiten.PNG)
 
-*Abb.c: Fenster für das bearbeiten der Einrichtung.*
+*Abb. c: Fenster für das bearbeiten der Einrichtung.*
 
 1. **Eingaben sperren**
    > Mit Hilfe dieses Buttons sperren Sie die Input-Felder des Fensters, so dass Sie nicht mehr bearbeitet werden können. Die Input-Felder sind standardmäßig gesperrt, so dass Sie diesen Button aktivieren müssen, ehe Sie eine vorhandene Einrichtung bearbeiten können. 
@@ -705,7 +705,7 @@ Wählen Sie hier den Button **BEARBEITEN** an. Daraufhin wird sich das folgende 
 
 ![Abbildung 4: Clusterauswahl](/cosi/manuals/010d_einrichtungenbearbeiten.PNG)
 
-*Abb.d: Clusterauswahl.*
+*Abb. d: Clusterauswahl.*
 
 1. **Das angewählte Cluster (3)**
    > Die Darstellung von Einrichtungen wird auf der Karte gebündelt, wenn zu viele Einrichtungen an einem Ort sind, wenn diese in der aktuellen Zoomstufe nicht dargestellt werden können. 
@@ -721,11 +721,11 @@ Sobald Sie über "Simulation" "Wohnungsquartiere anlegen" auswählen, öffnet si
 
 ![Abbildung a: Wohnungsbauquartiere anlegen](/cosi/manuals/011a_wohnquartiere.PNG)
 
-*Abb.a: Wohnungsbauquartiere anlegen*
+*Abb. a: Wohnungsbauquartiere anlegen*
 
 ![Abbildung b: Wohnungsbauquartiere anlegen](/cosi/manuals/011b_wohnquartiere.PNG)  
 
-*Abb.b: Wohnungsbauquartiere anlegen*
+*Abb. b: Wohnungsbauquartiere anlegen*
 
 1. **Geometrie**
    > Mithilfe des Stiftes kann ein Polygon in der Karte gezeichnet werden. 
@@ -798,7 +798,7 @@ ___
 ___
 ![Abbildung 22: Dienste](/cosi/manuals/012a_dienste.PNG)
 
-*Abb.a: Dropdown Dienste.*
+*Abb. a: Dropdown Dienste.*
 
 1. **Zeichnen/ Schreiben**
 2. **Karte drucken**
@@ -822,7 +822,7 @@ ___
 Mit diesem Werkzeug können Sie eigene Datensätze in Form von GeoJSONs hochladen und als Themenlayer einfügen, der anschließend visualisiert werden kann und dem alle weiteren Analysefunktionen von CoSI zur Verfügung stehen.   
 
 ![Abbildung 1: Dateien importieren](/cosi/manuals/013a_geodatenimport.PNG)  
-*Abb.a: Dateien importieren.*   
+*Abb. a: Dateien importieren.*   
 1. **Info**
    > Über den Button finden Sie zu dieser Anleitung.
 2. **Upload per Drag And Drop**
@@ -832,11 +832,11 @@ Mit diesem Werkzeug können Sie eigene Datensätze in Form von GeoJSONs hochlade
 4. **Projektionssystem auswählen**
    > Geodaten sind in unterschiedlichen *Projektionssystemen* kodiert. Sollten Sie nach dem Upload feststellen, dass Ihre Daten an den falschen Orten visualisiert werden, überprüfen Sie bitte, in welchem Projektionssystem Ihre Datei kodiert ist und geben Sie die Kodierung bei einem erneuten Upload in diesem Auswahlfeld an.  
   
-Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster mit Funktionen, um den Layer aus der Datei zu generieren.  
+Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welchem Sie bestimmte Funktionen haben, um den Layer aus der Datei zu generieren.  
 
 ![Abbildung 2: Geodaten Importieren, Layeroptionen festlegen](/cosi/manuals/013b_geodatenimport.PNG)  
 
-*Abb.b: Geodaten Importieren, Layeroptionen festlegen* 
+*Abb. b: Geodaten Importieren, Layeroptionen festlegen* 
 
 5. **Layername**
    > Hier können Sie den Layer frei benennen. Standardmäßig wird der Name der hochgeladenen Datei verwendet.
@@ -850,7 +850,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster mit Funkti
 #### Styling
 
 ![Abbildung 3: Geodaten Importieren, Layerstyling](/cosi/manuals/013c_geodatenimport.PNG)  
-*Abb.c: Geodaten Importieren, Layerstyling*  
+*Abb. c: Geodaten Importieren, Layerstyling*  
 
 - **6.1** Ein Icon auswählen, mit dem die jeweiligen Punkte visualisiert werden sollen. (Diese Option steht nicht zur Verfügung, wenn es sich bei denen von Ihnen hochgeladenen Geodaten um Polygone handelt).
 - **6.2** Mit dieser Checkbox legen Sie fest, ob alle Entitäten des Datensatzes mit derselben Farbe dargestellt werden sollen oder basierend auf einer ihrer Attribute farblich angepasst werden sollen. Aktivieren Sie diese Checkbox, bestimmen Sie das gewünschte Attribut bitte wie in 6.2.1 beschrieben.
@@ -860,7 +860,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster mit Funkti
 
 #### Einrichtungsdaten
 ![Abbildung 4: Geodaten Importieren, Einrichtungsdaten](/cosi/manuals/013d_geodatenimport.PNG)  
-*Abb.d: Geodaten Importieren, Einrichtungsdaten.*    
+*Abb. d: Geodaten Importieren, Einrichtungsdaten.*    
 
    - **7.1** Hier wählen Sie aus allen Attributen der Einträge Ihrer hochgeladenen Datei das Attribut aus, welches einen eindeutigen, individuellen Namen des Eintrags enthält. Dies ist für bestimmte Funktionen von CoSI relevant. Sollte ein solches Attribut nicht existieren, lassen Sie es bitte einfach frei.
    - **7.2** Hier wählen Sie aus allen Attributen der Einträge Ihrer hochgeladenen Datei ein Attribut aus, was den Typ des jeweiligen Eintrags am besten beschreibt. Handelt es sich bei Ihrem Datensatz beispielsweise um eine Reihe von unterschiedlichen Einrichtungen, könnte hier als Attribut eines gewählt werden, dass Werte wie "Kindergarten", "Krankenhaus" oder "Hotel" enthält.
@@ -869,22 +869,22 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster mit Funkti
 
 #### Filterdaten
 ![Abbildung 5: Geodaten Importieren, Filterdaten festlegen](/cosi/manuals/013e_geodatenimport.PNG)  
-*Abb.e: Geodaten Importieren, Filterdaten festlegen*  
+*Abb. e: Geodaten Importieren, Filterdaten festlegen*  
 
    - Unter CoSIs Werkzeugen finden Sie auch das Filterwerkzeug, mit denen Sie alle Datensätze nach bestimmten Kriterien filtern können. Bitte bestimmen Sie hier, welche der Attribute Ihrer Daten für den Filter verfügbar gemacht werden sollen.
    - **8.1** Mit einem Klick auf diesen Button öffnet sich ein Auswahlfeld, mit Hilfe dessen Sie ein Attribut zur weißen Liste des Filters hinzufügen können.
 
 #### Numerische Werte
 ![Abbildung 6: Geodarten Importieren, Numerische Werte festlegen](/cosi/manuals/013f_geodatenimport.PNG)  
-*Abb.f: Geodarten Importieren, Numerische Werte festlegen*  
+*Abb. f: Geodarten Importieren, Numerische Werte festlegen*  
 - Mit Hilfe des Werkzeugs [Versorgungsanalyse](/cosi/manuals/006versorgungsanalyse.md) können Sie unterschiedlichste Zahlwerte gegeneinander verrechnen. In diesem Bereich bestimmen Sie Attribute, die numerische Werte enthalten, die für die Versorgungsanalyse bereitgestellt werden sollen. Dies können alle sinnvoll quantitativ messbaren Werte sein, wie beispielswiese "Budget", "Einwohnerzahl", "Fläche" oder "Besuche pro Woche" etc.  
 
-   - **9.1** Für die bessere Visualisierung in einer späteren Tabelle können Sie hier dem numerischen Attribut einen sinnvollen Namen geben, sollte es nicht sinnvoll benannt sein. So könnten Sie beispielsweise "budget_21" in "Verfügbare Mittel 2021" umbenennen.
+   - **9.1** Für die bessere Visualisierung in einer späteren Tabelle, können Sie hier dem numerischen Wert einen sinnvollen Namen geben, sollte das Attribut nicht sinnvoll benannt sein. So könnten Sie beispielsweise "budget_21" in "Verfügbare Mittel 2021" umbenennen.
    - **9.2** Hier sehen Sie die ID des Attributs und dahinter in Klammern einen Beispielwert aus dem ersten Eintrag.
    - **9.3** Mit dieser Checkbox fügen Sie das Attribut zu den numerischen Werten hinzu. 
 ### Sitzung Speichern / Laden 
 ![Abbildung 1: Sitzung Speichern](/cosi/manuals/014_sitzungspeichern.PNG)
-*Abb.a: Sitzung speichern / laden*
+*Abb. a: Sitzung speichern / laden*
 
 
 Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informationen der aktuellen Arbeitssitzung abgespeichert werden um diese zu einem späteren Zeitpunkt wieder öffnen und weiterbearbeiten zu können. Dies umfasst:
@@ -914,10 +914,10 @@ Die Funktion ist unter "Dienste", "Sitzung speichern/laden" zu finden.
 ### Vorlagen
 ![Abbildung 1: Vorlagen](/cosi/manuals/015a_vorlagen.png)
 
-*Abb.a: Vorlagen Übersicht.*
+*Abb. a: Vorlagen Übersicht.*
 
 ![Abbildung 1: Vorlagen](/cosi/manuals/015b_vorlagen.png)
-*Abb.b: Vorlagen aufgeklappte Ansicht.*
+*Abb. b: Vorlagen aufgeklappte Ansicht.*
 
 Über den Dienst **Vorlagen** können Vorlagen zu verschieden Themenkomplexen und Arbeitsfeldern geladen werden. Diese können Fachdatenthemen, aktive Werkzeuge und eine Gebietsauswahl beinhalten. Die verfügbaren Vorlagen und ihr Inhalt werden von den Fachbehörden in Koordination mit dem CoSI-Betriebsteam gepflegt.
 
@@ -954,10 +954,10 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
   > Um zur statistischen Datenübersicht zu gelangen, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
   
 ![Abbildung 27: Statistische Datenübersicht](/cosi/manuals/016a_statistischedatenuebersicht.png)
-*Abb.: Statistische Datenübersicht 1*
+*Abb. : Statistische Datenübersicht 1*
 
 ![Abbildung 29: Statistische Datenübersicht](/cosi/manuals/016b_statistischedatenuebersicht.png)
-*Abb.: Statistische Datenübersicht 2*
+*Abb. : Statistische Datenübersicht 2*
 
 
 
@@ -991,14 +991,14 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 
 #### Dreistrich Menü
 ![Abbildung 28: Statistische Datenübersicht - Dreistrich-menü](/cosi/manuals/016c_statdashboard_burgermenu.PNG)
-*Abb.: Statistische Datenübersicht - Dreistrich-Menü.*
+*Abb. : Statistische Datenübersicht - Dreistrich-Menü.*
 
 1. **Visualisierung ein-/ausschalten**
    > Thematische Gruppen
 2. **Zeitreihe in der Karte animieren**
-   > *Funktioniert nur bei aktiver Kartenvisualisierung*
+   > *(Funktioniert nur bei aktiver Kartenvisualisierung)*
 3. **Gebietsnamen ein-/ausblenden**
-   > *Funktioniert nur bei aktiver Kartenvisualisierung*
+   > *(Funktioniert nur bei aktiver Kartenvisualisierung)*
 4. **Für Feld A auswählen**
    > Selektiert das Thema als **Feld A** für Berechnungen und Korrelation (siehe 7, 8, 9, 10, 12)
 5. **Für Feld B auswählen**
@@ -1021,7 +1021,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
    > Um zur Einrichtungsübersicht zu gelangen, muss zunächst ein beliebiger Stadtteil oder Bezirk ausgewählt werden. Als nächtes unter dem Bereich Themen die gewünschten Themen oder Fachdaten auswählen (z.B. Bildung und Wissenschaft). Im Dashboard unter Einrichtungsübersicht können Sie dann mit der Analyse Ihrer Einrichtung beginnen.
    
 ![Abbildung 1: Einrichtungsübersicht](/cosi/manuals/017a_einrichtungsuebersicht.PNG)
-*Abb.a: Einrichtungsübersicht.*
+*Abb. a: Einrichtungsübersicht.*
 
 1. **Detailansicht ein-/ausklappen**
    > Über den Pfeil können *alle* Attribute einer Einrichtung aufgeklappt werden. Die einzelnen Zeilen der Detailansicht können für den weiteren Export ausgewählt werden.
@@ -1029,7 +1029,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
    > Einrichtungen für den Export auswählen. Ausgewählte Einrichtungen werden in der Karte visuell hervorgehoben.
    *Wenn Sie die Einrichtung ausgewählt haben und unter **12** einen Fachdatensatz zur Auswertung ausgewählt haben, werden diese ebenfalls auf der Karte angezeigt. (s. Abbildung 2)*
    ![Abbildung 2: Fachdaten zur Auswertung auf der Karte](/cosi/manuals/017b_einrichtungsuebersicht.PNG)
-*Abb.b: Weitere Fachdaten auf der Karte.*
+*Abb. b: Weitere Fachdaten auf der Karte.*
 3. **Einrichtung fokussieren**
    > Durch einen Klick auf das Symbol der Einrichtung zoomt die Karte zu den gewählten Einrichtungen. Die Einrichtungen werden dann in der Karte visuell hervorgehoben.
 4. **Einrichtung ein-/ausblenden**
@@ -1047,7 +1047,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 9.  **Such- und Filterfunktionen**
       > Hier können Sie die Liste nach Themen filtern oder im Freitext die Einrichtungen durchsuchen.
 10. **Einrichtungsdiagramme erstellen**
-      > Erzeugt für alle verfügbaren Datenspalten ein Balkendiagramm mit den Werten der jeweiligen Einrichtungen und ihre Verteilung über die ausgewählten Gebiete.
+      > Erzeugt für alle verfügbaren Datenspalten ein Balkendiagramm, in dem die Werte der jeweiligen Einrichtungen und ihre Verteilung über die ausgewählten Gebiete.
       - **10.1 Layer zusammenziehen**
          > Wenn Sie diese Checkbox aktivieren, werden bei "Einrichtungsdiagramme erstellen"  Einrichtungen unterschiedlichen Typs zusammengezogen, wenn sie identische Attribute haben. *Beispiel: Wenn Sie Supermärkte und Drogerien ausgewählt haben, teilen sich beide das Attribut "Verkaufsfläche in m² und werden dementsprechend im Graphen zusammen dargestellt".*
       - **10.2 Graphenvisualisierung als PNG oder Zip**
@@ -1055,7 +1055,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 11. **Tabelle exportieren**
       > Die ausgewählten Einträge als XLSX für Excel exportieren. Über das Auswahlfeld *Detailansicht exportieren* können alle bzw. in der Detailansicht ausgewählte Attribute eines Einrichtungstyps exportiert werden. Ist keine Auswahl getroffen, werden alle Einrichtungen exportiert.
 12. **Standortbewertung: Themenauswahl**
-      > Erlaubt die Auswahl beliebiger weiterer Fachdatenthemen für eine Standortbewertung. Bei Fachdaten, welche Punkte oder Flächen in der Karte repräsentieren (i.d.R. Einrichtungen) wird der Ort des Typs gefunden, welcher jeder Einrichtung in der Tabelle am nächsten ist und die Laufdistanz in Metern angegeben. Bei der Auswahl mehrerer Themen wird ein gewichteter Mittelwert gebildet (s. 8./13.). Andere Themen, z.B. Lärmkarte, Luftqualität, etc. für die Bewertung befinden sich im Aufbau.
+      > Die gelisteten Einrichtungen oder Standorte (z.B. Seniorenheime) können bewertet werden. Bewertunskriterium ist dabei die Laufweite in Metern zur jeweils nächstgelegenen Einrichtung eines anderen Fachdatenthemas (z.B. Haltestellen). Es können auch Themen als Kriterium ausgewählt werden, die in der Karte nicht als Punkt, sondern als Fläche repräsentiert werden (z.B. Spielplätze). Bei der Auswahl mehrerer Themen wird ein gewichteter Mittelwert gebildet (s. 8./13.). Andere Themen, z.B. Lärmkarte, Luftqualität, etc. für die Bewertung befinden sich im Aufbau.
 13. **Standortbewertung: Gewichtung**
       > Erlaubt die Gewichtung der Themen für die Standortbewertung. Ein Thema mit Wert 0,5 wird somit nur halb so stark in den Mittelwert einbezogen, wie eines mit dem Wert 1.
 14. **Standortvisualisierung für alle ausgewählten**
@@ -1064,14 +1064,14 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
       > Erzeugt ein Histogramm, dass die Verteilung der ausgewählten Einrichtungen abbildet.
 ## Gebietsauswahl
 ___
-Als erster Arbeitsschritt in CoSI muss grundsätzlich eine Gebietsauswahl für das zu betrachtende Planungsgebiet getroffen werden.  Die Gebietsauswahl können sie entweder im Bezugsrahmen der Bezirke, der Stadtteile oder der statistischen Gebiete treffen. 
+Beim Starten von CoSI wird zunächst ein Bezugsrahmen festgelegt sowie ein Planungsgebiet zusammengestellt und bestätigt.
 
 Wenn Sie Ihren Bezugsrahmen ändern möchten, könnten Sie dies unter "Gebiete auswählen" tun.
 
 ![Abbildung 1: Gebietsauswahl](/cosi/manuals/018a_gebietsauswahl.png)
 
 
-*Abb.a: Das Werkzeug "Gebiet auswählen".*  
+*Abb. a: Das Werkzeug "Gebiet auswählen".*  
 
 1. **Bezugsrahmen wählen**
    > Über ein Dropdown Menü können **"Bezirke"**, **"Stadtteile"** oder **"Statistische Gebiete"** ausgewählt werden – dies legt die Verwaltungseinheit fest, für die die statistischen Daten angezeigt und Auswertungen erstellt werden sollen. Alle Funktionen sind auf den jeweiligen Gebietsebenen verfügbar. Die Zahl der verfügbaren Indikatoren kann jedoch variieren. Der Bezugsrahmen bestimmt auch die zu ladenden übergeordneten Referenzgebiete: Stadtteile für stat. Gebiete, Bezirke für Stadtteile.
@@ -1082,7 +1082,7 @@ Wenn Sie Ihren Bezugsrahmen ändern möchten, könnten Sie dies unter "Gebiete a
 3. **Puffer festlegen**
    > Es kann ein Pufferradius in Metern festgelegt werden. Für den werden ausgewählte Fachdaten um das Planungsgebiet herum angezeig. Dies berücksichtigt die Tatsache, dass das Einzugsgebiet von einer Einrichtung nicht unbedingt übereinstimmt mit den Gebietsgrenzen der Verwaltungseinheit innerhalb derer sich die Einrichtung befindet. Die Analysefunktionen werden davon nicht beeinflusst.
 4. **Auswahl bestätigen**
-   > Lädt die Daten für das ausgewählte Planungsgebiet vom Server und legt den Bereich für die anzuzeigenden Fachdaten fest. Auch eine leere Auswahl kann bestätigt werden. Dann werden keine bevölkerungsstatistischen Daten geladen und Fachdaten für den gesamten Stadtbereich angezeigt. (s. unten).
+   > Lädt die Daten für das ausgewählte Planungsgebiet vom Server und legt den Bereich für die anzuzeigenden Fachdaten fest. Auch eine leere Auswahl kann bestätigt werden. Dann werden keine Daten geladen und Fachdaten für den gesamten Stadtbereich angezeigt. (s. unten)
 5. **Auswahl zurücksetzen**
    > Setzt das aktuelle Planungsgebiet zurück. Im direkten Anschluss kann ein neues Planungsgebiet zusammengestellt und bestätigt werden.
 6. **Auswahlrechteck zeichnen**
@@ -1112,7 +1112,7 @@ Das Werkzeug kann die ausgewählten Datensätze auf der Karte visualisieren und 
 
 ![Abbildung 1: Fenster zur Kartenanalyse statistischer Daten](/cosi/manuals/019a_kartenvisualisierung.png)  
 
-*Abb.a: Fenster zur Kartenanalyse statistischer Daten.*  
+*Abb. a: Fenster zur Kartenanalyse statistischer Daten.*  
 
 1.	**Werkzeug minimieren/ maximieren**  
    > Über den Button kann das Fenster des Werkzeugs minimiert bzw. wieder maximiert werden.
@@ -1144,7 +1144,7 @@ Das Ergebnisverzeichnis unterstützt in einigen Werkzeugen die Verwaltung mehrer
 
 ![Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"](/cosi/manuals/020a_ergebnisverzeichnis.png)
 
-*Abb.a: Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"*
+*Abb. a: Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"*
   
 1. **Direktanwahl eines Datensatzes**
    > Wählen Sie direkt den Datensatz mit dem jeweiligen Index an. Sie können hier auch ablesen, wieviele Datensätze sie aktuell in dem jeweiligen Werkzeug haben.
@@ -1163,9 +1163,9 @@ Das Ergebnisverzeichnis unterstützt in einigen Werkzeugen die Verwaltung mehrer
 ### Manuelle Flächenauswahl für Fachdaten
 Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, innerhalb dessen Fachdaten angezeigt werden. Einrichtungen oder andere Fachdatenmarker, die außerhalb dieses Polygons liegen, werden ausgeblendet.
 
-![Abb.: Manuelle Flächenauswahl](/cosi/manuals/021a_manuelleflaechenauswahl.png) 
+![Abb. : Manuelle Flächenauswahl](/cosi/manuals/021a_manuelleflaechenauswahl.png) 
 
-*Abb.a: Manuelle Flächenauswahl*
+*Abb. a: Manuelle Flächenauswahl*
 
 1. **Polygon zeichnen**
    > Klicken Sie auf diesen Button, um ein neues Polygon auf der Karte zu zeichnen.
@@ -1176,26 +1176,27 @@ Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, inne
 4. **Ergebnisdarstellung auf der Karte**
 ## Auswahlmanager
 
-...## Flächen Stylen
+>Hier folgt noch eine Beschreibung
+## Flächen Stylen
 
 Mit Hilfe dieser Funktion können Sie Flächen, z.B. Gebäudegrundrisse, auf der Karte datenabhängig einfärben. Aktuell geht dies mit den Datensätzen Flurstücke, Nutzung, Gebäude und Wärmebedarf. Sie finden sich unter Fachdaten-Analyse/Simulation, Umwelt.
 
 Wählen Sie dazu ein Gebiet und z.B. den Datensatz Gebäude.
 
-![Abb. 1](/cosi/manuals/023a_flächenstylen.png)
-*Abb.a: Gebietsauswahl mit Gebäuden in Standard-Darstellung*
+![Abb.  1](/cosi/manuals/023a_flächenstylen.png)
+*Abb. a: Gebietsauswahl mit Gebäuden in Standard-Darstellung*
 
 Starten Sie die Funktion Flächen Stylen im Menü Analyse.
 
-![Abb. 2](/cosi/manuals/023b_flächenstylen.png)
-*Abb.b: Flächen Stylen – Datenauswahl*
+![Abb.  2](/cosi/manuals/023b_flächenstylen.png)
+*Abb. b: Flächen Stylen – Datenauswahl*
 
 1. **Thema auswählen**
 
 > Klicken sie auf Themenauswahl und haken den gewünschten Datensatz an, hier: Gebäude.
 
-![Abb. 3](/cosi/manuals/023c_flächenstylen.png)
-*Abb.c: Flächen Stylen – Farbeinstellungen*
+![Abb.  3](/cosi/manuals/023c_flächenstylen.png)
+*Abb. c: Flächen Stylen – Farbeinstellungen*
 
 1. **Daten auswählen**
 
@@ -1205,8 +1206,8 @@ Starten Sie die Funktion Flächen Stylen im Menü Analyse.
 
 > Klicken Sie auf das Stiftsymbol, um die Farbeinstellungen zu starten oder auch, um später Farbeinstellungen zu ändern oder zu ergänzen.
 
-![Abb. 4](/cosi/manuals/023d_flächenstylen.png)
-*Abb.d: Flächen Stylen – Farbeinstellungen*
+![Abb.  4](/cosi/manuals/023d_flächenstylen.png)
+*Abb. d: Flächen Stylen – Farbeinstellungen*
 
 1. **Farben zuweisen**
 
@@ -1224,8 +1225,10 @@ Starten Sie die Funktion Flächen Stylen im Menü Analyse.
 
 >Bestätigen Sie gewollte Änderungen mit der Schaltfläche Übernehmen. Sie verlassen den Dialog und die neuen Farben werden angezeigt.
 
-![Abb. 5](/cosi/manuals/023e_flächenstylen.png)
-*Abb.e: Flächen Stylen – Farbauswahl*
+### Farbeinstellung
+
+![Abb.  5](/cosi/manuals/023e_flächenstylen.png)
+*Abb. e: Flächen Stylen – Farbauswahl*
 
 Sie haben verschiedene Möglichkeiten, die Farbe einzustellen:
 

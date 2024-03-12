@@ -3,7 +3,11 @@ Das Ergebnisverzeichnis unterstützt in einigen Werkzeugen die Verwaltung mehrer
   
 
 
+<<<<<<< HEAD
 ![Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"](./020a_ergebnisverzeichnis.png)
+=======
+![Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"](/cosi/manuals/020a_ergebnisverzeichnis.png)
+>>>>>>> 55f3fe1162d5a6d32565dfe85c78baed599ca97b
 
 *Abb. a: Ergebnisverzeichnis des Werkzeugs "Vergleichbare Gebiete ermitteln"*
   

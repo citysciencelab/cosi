@@ -5,7 +5,7 @@ Das Werkzeug zur Visualisierung regionalstatistischer Daten ermöglicht die Ausw
 Das Werkzeug kann die ausgewählten Datensätze auf der Karte visualisieren und generiert eine dynamische Legende. Des Weiteren können Datensätze für mehrere Jahre ausgewählt und auf Wunsch in hintereinander laufender Folge animiert werden.  
 
 
-![Abbildung 1: Fenster zur Kartenanalyse statistischer Daten](./019a_kartenvisualisierung.png)  
+![Abbildung 1: Fenster zur Kartenanalyse statistischer Daten](/cosi/manuals/019a_kartenvisualisierung.png)  
 
 *Abb. a: Fenster zur Kartenanalyse statistischer Daten.*  
 
